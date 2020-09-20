@@ -1,0 +1,16 @@
+# Maven
+.mvn
+*.classpath
+*.project
+*.settings
+/bin/*
+/target/*
+
+# Eclipse
+.project
+.classpath
+.settings
+
+# JetBrains IDEs
+.idea/
+*.iml
