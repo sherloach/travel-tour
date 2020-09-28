@@ -3,11 +3,11 @@
 
 	
     <decorator name="trang-chu" page="web.jsp">
-       <pattern>/trang-chu</pattern>
+       <pattern>/*</pattern>
     </decorator>
     
     <decorator name="home" page="admin.jsp">
-       <pattern>/home</pattern>
+       <pattern>/admin*</pattern>
     </decorator>
 
 </decorators>
