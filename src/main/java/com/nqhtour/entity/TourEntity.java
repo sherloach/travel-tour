@@ -9,13 +9,13 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "tour")
 public class TourEntity extends BaseEntity {
-	@Column(name = "name", columnDefinition = "NVARCHAR")
+	@Column(name = "name", columnDefinition = "NVARCHAR", length = 100)
 	private String name;
 	
 	@Column(name = "slug")
 	private String slug;
 	
-	@Column(name = "location", columnDefinition = "NVARCHAR")
+	@Column(name = "location", columnDefinition = "NVARCHAR", length = 255)
 	private String location;
 	
 	@Column(name = "duration")
@@ -33,10 +33,10 @@ public class TourEntity extends BaseEntity {
 	@Column(name = "employeeid")
 	private Long employeeID;
 
-	@Column(name = "description", columnDefinition = "NVARCHAR")
+	@Column(name = "description", columnDefinition = "NVARCHAR", length = 255)
 	private String description;
 
-	@Column(name = "summary", columnDefinition = "NVARCHAR")
+	@Column(name = "summary", columnDefinition = "NVARCHAR", length = 255)
 	private String summary;
 
 	@Column(name = "images", columnDefinition = "TEXT")

@@ -1,7 +1,14 @@
 package com.nqhtour.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -9,15 +16,16 @@ import javax.persistence.Table;
 public class UserEntity extends BaseEntity {
 	@Column(name = "username")
 	private String username;
-	
+
 	@Column(name = "password")
 	private String password;
-	
-	@Column(name = "role")
-	private String role;
-	
-	@Column(name = "status")
+
+	@Column
 	private Integer status;
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "userid"), inverseJoinColumns = @JoinColumn(name = "roleid"))
+	private List<RoleEntity> roles = new ArrayList<>();
 
 	public String getUsername() {
 		return username;
@@ -35,19 +43,19 @@ public class UserEntity extends BaseEntity {
 		this.password = password;
 	}
 
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
-	}
-
 	public Integer getStatus() {
 		return status;
 	}
 
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+
+	public List<RoleEntity> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<RoleEntity> roles) {
+		this.roles = roles;
 	}
 }

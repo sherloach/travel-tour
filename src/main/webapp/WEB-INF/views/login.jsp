@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@include file="/common/taglib.jsp"%>	
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +11,12 @@
 	<div class="limiter">
 		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
 			<div class="wrap-login100">
-				<form class="login100-form validate-form">
+				<c:if test="${param.incorrectAccount != null}">
+					<div class="alert alert-danger">	
+							Username or password incorrect
+					</div>
+				</c:if>
+				<form action="j_spring_security_check" class="login100-form validate-form">
 					<span class="login100-form-logo">
 						<i class="zmdi zmdi-landscape"></i>
 					</span>
