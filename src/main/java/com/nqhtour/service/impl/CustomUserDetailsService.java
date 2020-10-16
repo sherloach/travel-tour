@@ -17,27 +17,28 @@ import com.nqhtour.entity.RoleEntity;
 import com.nqhtour.entity.UserEntity;
 import com.nqhtour.repository.UserRepository;
 
+
+
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
+	
 	@Autowired
 	private UserRepository userRepository;
 
-	// Hàm trả về thông tin người dùng sau khi login
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		UserEntity userEntity = userRepository.findOneByUsernameAndPassword(username, SystemConstant.ACTIVE_STATUS);
+		UserEntity userEntity = userRepository.findOneByUserNameAndStatus(username, SystemConstant.ACTIVE_STATUS);
 		
 		if (userEntity == null) {
 			throw new UsernameNotFoundException("User not found");
 		}
-
 		List<GrantedAuthority> authorities = new ArrayList<>();
-		for (RoleEntity role : userEntity.getRoles()) {
+		for (RoleEntity role: userEntity.getRoles()) {
 			authorities.add(new SimpleGrantedAuthority(role.getCode()));
 		}
-		
-		MyUser myUser = new MyUser(userEntity.getUsername(), userEntity.getPassword(), true, true, true, true, authorities);
-		myUser.setFullName(userEntity.getUsername());
+		MyUser myUser = new MyUser(userEntity.getUserName(), userEntity.getPassword(), 
+							true, true, true, true, authorities);
+		myUser.setFullName(userEntity.getUserName());
 		return myUser;
 	}
 

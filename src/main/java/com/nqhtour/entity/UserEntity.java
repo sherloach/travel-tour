@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @Table(name = "`user`")
 public class UserEntity extends BaseEntity {
 	@Column(name = "username")
-	private String username;
+	private String userName;
 
 	@Column(name = "password")
 	private String password;
@@ -27,12 +27,12 @@ public class UserEntity extends BaseEntity {
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "userid"), inverseJoinColumns = @JoinColumn(name = "roleid"))
 	private List<RoleEntity> roles = new ArrayList<>();
 
-	public String getUsername() {
-		return username;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUserName(String username) {
+		this.userName = username;
 	}
 
 	public String getPassword() {
