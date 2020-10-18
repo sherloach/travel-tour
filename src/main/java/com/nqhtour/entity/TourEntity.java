@@ -1,21 +1,27 @@
 package com.nqhtour.entity;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "tour")
 public class TourEntity extends BaseEntity {
-	@Column(name = "name", columnDefinition = "NVARCHAR", length = 100)
+	@Column(name = "name", columnDefinition = "NVARCHAR")
 	private String name;
 	
 	@Column(name = "slug")
 	private String slug;
 	
-	@Column(name = "location", columnDefinition = "NVARCHAR", length = 255)
+	@Column(name = "location", columnDefinition = "NVARCHAR")
 	private String location;
 	
 	@Column(name = "duration")
@@ -25,18 +31,15 @@ public class TourEntity extends BaseEntity {
 	private Integer maxGroupSize;
 	
 	@Column(name = "price")
-	private Integer price;
+	private Long price;
 
-	@Column(name = "guideid")
-	private Long guideID;
-	
 	@Column(name = "employeeid")
 	private Long employeeID;
 
-	@Column(name = "description", columnDefinition = "NVARCHAR", length = 255)
+	@Column(name = "description", columnDefinition = "TEXT")
 	private String description;
 
-	@Column(name = "summary", columnDefinition = "NVARCHAR", length = 255)
+	@Column(name = "summary", columnDefinition = "NVARCHAR")
 	private String summary;
 
 	@Column(name = "images", columnDefinition = "TEXT")
@@ -47,6 +50,13 @@ public class TourEntity extends BaseEntity {
 	
 	@Column(name = "startdate")
 	private Timestamp startDate;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "employee_id")
+	private EmployeeEntity employee;
+
+	@ManyToMany(mappedBy = "tours")
+	private List<ClientEntity> clients = new ArrayList<>();
 
 	public String getName() {
 		return name;
@@ -88,20 +98,12 @@ public class TourEntity extends BaseEntity {
 		this.maxGroupSize = maxGroupSize;
 	}
 
-	public Integer getPrice() {
+	public Long getPrice() {
 		return price;
 	}
 
-	public void setPrice(Integer price) {
+	public void setPrice(Long price) {
 		this.price = price;
-	}
-
-	public Long getGuideID() {
-		return guideID;
-	}
-
-	public void setGuideID(Long guideID) {
-		this.guideID = guideID;
 	}
 
 	public Long getEmployeeID() {

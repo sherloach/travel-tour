@@ -3,6 +3,8 @@
     <persistence-unit name="persistence-data">
         <class>com.nqhtour.entity.TourEntity</class>
         <class>com.nqhtour.entity.UserEntity</class>
-        <class>com.nqhtour.entity.BaseEntity</class>
+        <class>com.nqhtour.entity.ClientEntity</class>
+        <class>com.nqhtour.entity.EmployeeEntity</class>
+        <class>com.nqhtour.entity.RoleEntity</class>
     </persistence-unit>
 </persistence>

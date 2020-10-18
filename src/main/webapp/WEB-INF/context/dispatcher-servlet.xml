@@ -21,7 +21,7 @@
               http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<context:component-scan
-		base-package="com.nqhtour.controller" />
+		base-package="com.nqhtour.controller, com.nqhtour.api" />
 
 	<mvc:annotation-driven />
 
