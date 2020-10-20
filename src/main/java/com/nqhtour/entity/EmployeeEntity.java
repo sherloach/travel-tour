@@ -16,7 +16,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "employee")
 public class EmployeeEntity extends BaseEntity {
-	@Column(name = "name")
+	@Column(name = "name", columnDefinition = "NVARCHAR")
 	private String name;
 
 	@Column(name = "gender")
@@ -25,7 +25,7 @@ public class EmployeeEntity extends BaseEntity {
 	@Column(name = "email")
 	private String email;
 
-	@Column(name = "address")
+	@Column(name = "address", columnDefinition = "NVARCHAR")
 	private String address;
 
 	@Column(name = "phonenumber")
