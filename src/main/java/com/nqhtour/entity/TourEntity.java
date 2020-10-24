@@ -33,9 +33,6 @@ public class TourEntity extends BaseEntity {
 	@Column(name = "price")
 	private Long price;
 
-	@Column(name = "employeeid")
-	private Long employeeID;
-
 	@Column(name = "description", columnDefinition = "TEXT")
 	private String description;
 
@@ -104,14 +101,6 @@ public class TourEntity extends BaseEntity {
 
 	public void setPrice(Long price) {
 		this.price = price;
-	}
-
-	public Long getEmployeeID() {
-		return employeeID;
-	}
-
-	public void setEmployeeID(Long employeeID) {
-		this.employeeID = employeeID;
 	}
 
 	public String getDescription() {

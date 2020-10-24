@@ -28,8 +28,14 @@ public class EmployeeEntity extends BaseEntity {
 	@Column(name = "address")
 	private String address;
 
+	@Column(name = "birthday", columnDefinition = "DATE")
+	private String birthday;
+
 	@Column(name = "phonenumber")
 	private String phoneNumber;
+
+	@Column(name = "avatar", columnDefinition = "TEXT")
+	private String avatar;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "userid")
@@ -86,12 +92,20 @@ public class EmployeeEntity extends BaseEntity {
 		this.user = user;
 	}
 
-	public List<TourEntity> getTours() {
+	public List<TourEntity> getTour() {
 		return tour;
 	}
 
-	public void setTours(List<TourEntity> tour) {
+	public void setTour(List<TourEntity> tour) {
 		this.tour = tour;
+	}
+
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
 	}
 }
 
