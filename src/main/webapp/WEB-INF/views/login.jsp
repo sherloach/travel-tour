@@ -9,7 +9,7 @@
 </head>
 <body>
 	<div class="limiter">
-		<div class="container-login100" style="background-image: url('images/bg-01.jpg');">
+		<div class="container-login100" style="background-image: url('../template/login/images/bg-01.jpg');">
 			<div class="wrap-login100">
 				<c:if test="${param.incorrectAccount != null}">
 					<div class="alert alert-danger">	

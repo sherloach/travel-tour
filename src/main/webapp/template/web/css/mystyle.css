@@ -1,0 +1,93 @@
+.my-header {
+  background-image: url(../img/landing.jpg);
+	display: flex;
+	flex-direction: column;
+  height: 100vh;
+	margin-bottom: 10rem;
+}
+
+.my-nav {
+	display: flex;
+	flex-direction: row;
+  padding: 0 5rem;
+  height: 7rem;
+}
+
+.header--logo img {
+	height: 7rem important;
+}
+
+.landing {
+	display: flex;
+	flex-direction: column;
+  width: auto;
+}
+
+.hero-text-box {
+	padding-bottom: 10rem;
+  width: auto;
+  position: absolute;
+  top: 33%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.hero-text-box p {
+	font-size: 4rem;
+	font-weight: bold;
+	color: #f3f3ff;
+}
+
+.header__logo {
+    margin-top: 13px;
+    flex: 1 0 0;
+}
+
+.landing-img {
+	position: absolute;
+	top: 40%;
+	left: 13%;
+	margin-left: auto;
+	margin-right: auto;
+	z-index: 1000;
+}
+
+.logo-landing {
+	display: block;
+	float: left;
+	padding: 20px;
+	z-index: 1000;
+}
+
+.logo-landing img {
+	border-radius: 7px;
+  height: 450px;
+  width: 450px;
+  background-size: cover;
+  background-position: center;
+}
+
+.row {
+  max-width: 1140px;
+  margin: 15rem auto; /*top,bottom: 0; left,right: auto */
+}
+
+.pre-main {
+	display: flex;
+	flex-direction: row;
+}
+
+.pre-main-logo {
+	flex: 1;
+}
+
+.pre-main-text {
+	flex: 2;
+}
+
+.pre-main-text p {
+	font-size: 2.3rem;
+	font-weight: 600;
+}
+

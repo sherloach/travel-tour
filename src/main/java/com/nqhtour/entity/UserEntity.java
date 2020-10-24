@@ -5,10 +5,6 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -21,7 +17,10 @@ public class UserEntity extends BaseEntity {
 	@Column(name = "password")
 	private String password;
 
-	@Column
+	@Column(name = "role")
+	private String role;
+
+	@Column(name = "status")
 	private Integer status;
 
 	@OneToMany(mappedBy = "user")
@@ -29,10 +28,10 @@ public class UserEntity extends BaseEntity {
 
 	@OneToMany(mappedBy = "user")
 	private List<EmployeeEntity> employee = new ArrayList<>();
-
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-	private List<RoleEntity> roles = new ArrayList<>();
+//
+//	@ManyToMany(fetch = FetchType.LAZY)
+//	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+//	private List<RoleEntity> roles = new ArrayList<>();
 
 	public String getUserName() {
 		return userName;
@@ -58,12 +57,12 @@ public class UserEntity extends BaseEntity {
 		this.status = status;
 	}
 
-	public List<RoleEntity> getRoles() {
-		return roles;
+	public String getRole() {
+		return role;
 	}
 
-	public void setRoles(List<RoleEntity> roles) {
-		this.roles = roles;
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	public List<ClientEntity> getClients() {

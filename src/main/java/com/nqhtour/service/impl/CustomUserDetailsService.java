@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import com.nqhtour.constant.SystemConstant;
 import com.nqhtour.dto.MyUser;
-import com.nqhtour.entity.RoleEntity;
 import com.nqhtour.entity.UserEntity;
 import com.nqhtour.repository.UserRepository;
 
@@ -33,9 +32,10 @@ public class CustomUserDetailsService implements UserDetailsService {
 			throw new UsernameNotFoundException("User not found");
 		}
 		List<GrantedAuthority> authorities = new ArrayList<>();
-		for (RoleEntity role: userEntity.getRoles()) {
-			authorities.add(new SimpleGrantedAuthority(role.getCode()));
-		}
+//		for (RoleEntity role: userEntity.getRoles()) {
+//			authorities.add(new SimpleGrantedAuthority(role.getCode()));
+//		}
+		authorities.add(new SimpleGrantedAuthority(userEntity.getRole()));
 		MyUser myUser = new MyUser(userEntity.getUserName(), userEntity.getPassword(), 
 							true, true, true, true, authorities);
 		myUser.setFullName(userEntity.getUserName());

@@ -32,7 +32,6 @@ body {
   font-weight: 300;
   font-family: 'Lato', sans-serif;
   color: #777;
-  padding: 3rem;
   min-height: 100vh;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -45,7 +44,7 @@ body {
 
 .main {
   background-color: #f7f7f7;
-  padding: 8rem 6rem;
+  padding: 15rem 6rem;
   -webkit-box-flex: 1;
   -ms-flex: 1;
   flex: 1;
@@ -301,7 +300,7 @@ body {
 .header {
   background-color: #444;
   padding: 0 5rem;
-  height: 8rem;
+  height: 7rem;
   position: relative;
   z-index: 100;
   display: -webkit-box;
@@ -323,7 +322,7 @@ body {
   }
 }
 .header__logo img {
-  height: 3.5rem;
+  height: 4rem;
 }
 @media only screen and (max-width: 62.5em) {
   .header__logo {
@@ -873,8 +872,8 @@ body {
 }
 .nav--tours {
   -webkit-box-flex: 0;
-  -ms-flex: 0 1 40%;
-  flex: 0 1 40%;
+  -ms-flex: 0 1 46%;
+  flex: 0 1 45%;
 }
 @media only screen and (max-width: 62.5em) {
   .nav--tours {
@@ -888,8 +887,8 @@ body {
 }
 .nav--user {
   -webkit-box-flex: 0;
-  -ms-flex: 0 1 40%;
-  flex: 0 1 40%;
+  -ms-flex: 0 1 45%;
+  flex: 0 1 45%;
   -webkit-box-pack: end;
   -ms-flex-pack: end;
   justify-content: flex-end;

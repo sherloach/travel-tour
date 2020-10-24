@@ -13,9 +13,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "client")
+@Table(name = "`client`")
 public class ClientEntity extends BaseEntity {
-	@Column(name = "name", columnDefinition = "NVARCHAR")
+	@Column(name = "name")
 	private String name;
 
 	@Column(name = "gender")
@@ -24,14 +24,14 @@ public class ClientEntity extends BaseEntity {
 	@Column(name = "email")
 	private String email;
 
-	@Column(name = "address", columnDefinition = "NVARCHAR")
+	@Column(name = "address")
 	private String address;
 
 	@Column(name = "phonenumber")
 	private String phoneNumber;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "userid")
 	private UserEntity user;
 
 	@ManyToMany(fetch = FetchType.LAZY)

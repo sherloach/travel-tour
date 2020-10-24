@@ -13,15 +13,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tour")
+@Table(name = "`tour`")
 public class TourEntity extends BaseEntity {
-	@Column(name = "name", columnDefinition = "NVARCHAR")
+	@Column(name = "name")
 	private String name;
 	
-	@Column(name = "slug")
-	private String slug;
+	@Column(name = "tourID")
+	private String tourID;
 	
-	@Column(name = "location", columnDefinition = "NVARCHAR")
+	@Column(name = "location")
 	private String location;
 	
 	@Column(name = "duration")
@@ -39,7 +39,7 @@ public class TourEntity extends BaseEntity {
 	@Column(name = "description", columnDefinition = "TEXT")
 	private String description;
 
-	@Column(name = "summary", columnDefinition = "NVARCHAR")
+	@Column(name = "summary")
 	private String summary;
 
 	@Column(name = "images", columnDefinition = "TEXT")
@@ -67,11 +67,11 @@ public class TourEntity extends BaseEntity {
 	}
 
 	public String getSlug() {
-		return slug;
+		return tourID;
 	}
 
-	public void setSlug(String slug) {
-		this.slug = slug;
+	public void setSlug(String tourID) {
+		this.tourID = tourID;
 	}
 
 	public String getLocation() {

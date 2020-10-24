@@ -1,0 +1,32 @@
+.btn-primary {
+  background-color: #2ecc71 !important;
+}
+
+.badge-primary {
+  background-color: #2ecc71 !important;
+}
+
+.blue-text {
+  color: #27ae60 !important;
+}
+
+.blue.accent-3 {
+  background-color: #2ecc71 !important;
+}
+
+a {
+  color: #27ae60 !important;
+}
+
+.paper-nav-toggle i {
+  color: #1b5e20 !important;
+  background: #1b5e20 !important;
+}
+
+.paper-nav-toggle i::after, .paper-nav-toggle i::before {
+  background: #1b5e20 !important;
+}
+
+.offcanvas .sidebar-menu > li.active::after {
+  background: #27ae60;
+}

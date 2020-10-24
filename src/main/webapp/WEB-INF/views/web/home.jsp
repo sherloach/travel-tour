@@ -13,7 +13,57 @@
 </head>
 
 <body>
-	<!-- <section class="overview"> -->
+	<header class="my-header">
+		<!-- nav -->
+		<div class="my-nav">
+			<nav class="nav nav--tours">
+				<a href="#" class="nav__el">All tours</a>
+				<form class="nav__search">
+					<button class="nav__search-btn">
+						<svg>
+							<use xlink:href="img/icons.svg#icon-search"></use>
+						</svg>
+					</button>
+					<input
+						type="text"
+						placeholder="Search tours" class="nav__search-input" /> </form> </nav>
+			<div class="header__logo">
+				<img src="/template/web/img/logo-white.png" alt="Natours logo" />
+			</div>
+			<nav class="nav nav--user">
+				<!--<a href="#" class="nav__el">My bookings</a>
+				<a href="#" class="nav__el">
+					<img src="img/user.jpg" alt="User photo" class="nav__user-img" />
+					<span>QuangHoa</span>
+				</a>-->
+
+				<button class="nav__el">Log in</button>
+				<button class="nav__el nav__el--cta">Sign up</button>
+			</nav>
+		</div>
+
+		<!-- Landing -->
+		<div class="landing">
+			<div class="hero-text-box">
+				<p>BOOK A TICKET AND JUST LEAVE.<br>CHOICES YOU MAKE.</p>
+			</div>
+			<div class="landing-img">
+				<div class="slick-lide logo-landing"><img src="/template/web/img/landing1.jpg"></div>
+				<div class="slick-lide logo-landing"><img src="/template/web/img/landing2.jpg"></img></div>
+			</div>
+		</div>
+    </header>
+
+		<div class="row pre-main">
+			<div class="pre-main-logo">
+				<p>logo</p>
+			</div>
+			<div class="pre-main-text">
+				<p>WE PROVIDE A NICE TOURS VIETNAM AND ASIA. WITH MORE THAN 15 YEARS EXPERIENCE IN THE TRAVEL INDUSTRY, NQHTOUR IS A POPULAR TRAVEL IN VIETNAM AND AROUND THE GLOBE. YOU ARE MORE COMFORTABLE WITH PRIVATE CAR AND GUIDES AS WELL AS SUPPORT SERVICE 24 HOURS PER DAY.</p>
+			</div>
+		</div>
+
+    <!-- <section class="overview"> -->
     <main class="main">
       <div class="card-container">
         <div class="card">

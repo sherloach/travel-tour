@@ -7,37 +7,52 @@
 	<meta charset="UTF-8">
 	<title>Admin Home</title>
 
-	<!-- Custom fonts for this template-->
-	<link href="<c:url value='/template/admin/vendor/fontawesome-free/css/all.min.css'/>" rel="stylesheet" type="text/css">
+	<!-- Icons -->
+	<link href="<c:url value='/template/admin/assets/img/basic/favicon.ico'/>" rel="stylesheet" type="image/x-icon">
 
-	<!-- Page level plugin CSS-->
-	<link href="<c:url value='/template/admin/vendor/datatables/dataTables.bootstrap4.css'/>" rel="stylesheet" type="text/css">
+	<!-- CSS-->
+	<link href="<c:url value='/template/admin/assets/css/app.css'/>" rel="stylesheet" type="text/css">
 
 	<!-- Custom styles for this template-->
-	<link href="<c:url value='/template/admin/css/sb-admin.css'/>" rel="stylesheet" type="text/css">
+	<link href="<c:url value='/template/admin/assets/css/mystyle.css'/>" rel="stylesheet" type="text/css">
+
+	<style>
+        .loader {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #F5F8FA;
+            z-index: 9998;
+            text-align: center;
+        }
+
+        .plane-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+        }
+    </style>
+    <!-- Js -->
+    <!--
+    --- Head Part - Use Jquery anywhere at page.
+    --- http://writing.colin-gourlay.com/safely-using-ready-before-including-jquery/
+    -->
+    <script>(function(w,d,u){w.readyQ=[];w.bindReadyQ=[];function p(x,y){if(x=="ready"){w.bindReadyQ.push(y);}else{w.readyQ.push(x);}};var a={ready:p,bind:p};w.$=w.jQuery=function(f){if(f===d||f===u){return a}else{p(f)}}})(window,document)</script>
 </head>
-<body id="page-top">
+<body class="light">
 	<%@ include file="/common/admin/header.jsp" %>
 
 	<dec:body/>	
 	
-	<!-- Bootstrap core JavaScript-->
-	<script src="<c:url value='/template/admin/vendor/jquery/jquery.min.js'/>"></script>
-	<script src="<c:url value='/template/admin/vendor/bootstrap/js/bootstrap.bundle.min.js'/>"></script>
+	<!--/#app -->
+	<script src="<c:url value='/template/admin/assets/js/app.js'/>"></script>
 
-	<!-- Core plugin JavaScript-->
-	<script src="<c:url value='/template/admin/vendor/jquery-easing/jquery.easing.min.js'/>"></script>
-
-	<!-- Page level plugin JavaScript-->
-	<script src="<c:url value='/template/admin/vendor/chart.js/Chart.min.js'/>"></script>
-	<script src="<c:url value='/template/admin/vendor/datatables/jquery.dataTables.js'/>"></script>
-	<script src="<c:url value='/template/admin/vendor/datatables/dataTables.bootstrap4.js'/>"></script>
-
-	<!-- Custom scripts for all pages-->
-	<script src="<c:url value='/template/admin/js/sb-admin.min.js'/>"></script>
-
-	<!-- Demo scripts for this page-->
-	<script src="<c:url value='/template/admin/js/demo/datatables-demo.js'/>"></script>
-	<script src="<c:url value='/template/admin/js/demo/chart-area-demo.js'/>"></script>
+	<!--
+	--- Footer Part - Use Jquery anywhere at page.
+	--- http://writing.colin-gourlay.com/safely-using-ready-before-including-jquery/
+	-->
+	<script>(function($,d){$.each(readyQ,function(i,f){$(f)});$.each(bindReadyQ,function(i,f){$(d).bind("ready",f)})})(jQuery,document)</script>
 </body>
 </html>
