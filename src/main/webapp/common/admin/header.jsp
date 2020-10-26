@@ -101,7 +101,7 @@
             <div class="user-panel p-3 light mb-2">
                 <div>
                     <div class="float-left image">
-                        <img class="user_avatar" src="assets/img/dummy/u2.png" alt="User Image">
+                        <img class="user_avatar" src="#" alt="User Image">
                     </div>
                     <div class="float-left info">
                         <h6 class="font-weight-light mt-2 mb-1"><%=SecurityUtils.getPrincipal().getFullName()%></h6>
@@ -185,7 +185,7 @@
         <!-- User Account-->
         <li class="dropdown custom-dropdown user user-menu ">
             <a href="#" class="nav-link" data-toggle="dropdown">
-                <img src="assets/img/dummy/u8.png" class="user-image" alt="User Image">
+                <img src="#" class="user-image" alt="User Image">
                 <i class="icon-more_vert "></i>
             </a>
             <div class="dropdown-menu p-4 dropdown-menu-right">

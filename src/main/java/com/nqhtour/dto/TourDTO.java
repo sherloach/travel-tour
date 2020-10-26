@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class TourDTO extends AbstractDTO<TourDTO> {
 	private String name;
-	private String slug;
+	private String tourID;
 	private String location;
 	private Integer duration;
 	private Integer maxGroupSize;
@@ -23,11 +23,11 @@ public class TourDTO extends AbstractDTO<TourDTO> {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getSlug() {
-		return slug;
+	public String getTourID() {
+		return tourID;
 	}
-	public void setSlug(String slug) {
-		this.slug = slug;
+	public void setTourID(String slug) {
+		this.tourID = slug;
 	}
 	public String getLocation() {
 		return location;

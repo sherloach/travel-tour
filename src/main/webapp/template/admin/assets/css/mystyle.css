@@ -30,3 +30,10 @@ a {
 .offcanvas .sidebar-menu > li.active::after {
   background: #27ae60;
 }
+
+.page-item.active .page-link {
+    z-index: 1;
+    color: #fff !important;
+    background-color: #2ecc71;
+    border-color: #2ecc71;
+}

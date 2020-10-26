@@ -63,11 +63,11 @@ public class TourEntity extends BaseEntity {
 		this.name = name;
 	}
 
-	public String getSlug() {
+	public String getTourID() {
 		return tourID;
 	}
 
-	public void setSlug(String tourID) {
+	public void setTourID(String tourID) {
 		this.tourID = tourID;
 	}
 
@@ -129,6 +129,22 @@ public class TourEntity extends BaseEntity {
 
 	public String getImageCover() {
 		return imageCover;
+	}
+
+	public EmployeeEntity getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(EmployeeEntity employee) {
+		this.employee = employee;
+	}
+
+	public List<ClientEntity> getClients() {
+		return clients;
+	}
+
+	public void setClients(List<ClientEntity> clients) {
+		this.clients = clients;
 	}
 
 	public void setImageCover(String imageCover) {
