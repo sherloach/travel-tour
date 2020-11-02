@@ -6,7 +6,7 @@
        <pattern>/*</pattern>
     </decorator>
 
-	<decorator name="home" page="web-home.jsp">
+	<decorator name="home" page="webhome.jsp">
        <pattern>/trang-chu</pattern>
     </decorator>
     

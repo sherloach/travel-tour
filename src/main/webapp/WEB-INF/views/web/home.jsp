@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-<!DOCTYPE html>
-
+<%@ page import="com.nqhtour.util.SecurityUtils"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>  
+<!DOCTYPE html> 
 <html>
 
 <head>
@@ -37,8 +37,14 @@
 					<span>QuangHoa</span>
 				</a>-->
 
-				<button class="nav__el">Log in</button>
-				<button class="nav__el nav__el--cta">Sign up</button>
+				<security:authorize access = "isAnonymous()">
+					<a href="<c:url value='/login'/>" class="nav__el">Log in</a>
+					<a href="<c:url value='#'/>" class="nav__el nav__el--cta">Sign up</a>
+				</security:authorize>
+				<security:authorize access = "isAuthenticated()">
+					<a href="<c:url value='#'/>" class="nav__el">Welcome, <%=SecurityUtils.getPrincipal().getFullName()%></a>
+					<a href="<c:url value='/logout'/>" class="nav__el nav__el--cta">Log out</a>
+				</security:authorize>
 			</nav>
 		</div>
 

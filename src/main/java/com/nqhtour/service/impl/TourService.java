@@ -19,9 +19,9 @@ public class TourService implements ITourService {
 	private TourRepository tourRepository;
 	
 	@Override
-	public List<TourDTO> findAll() {
+	public List<TourDTO> findAll(Pageable pageable) {
 		List<TourDTO> models = new ArrayList<>();
-		List<TourEntity> entities = tourRepository.findAll();
+		List<TourEntity> entities = tourRepository.findAll(pageable).getContent();
 		for (TourEntity item : entities) {
 			TourDTO tourDTO = new TourDTO();
 			tourDTO.setName(item.getName());
@@ -45,5 +45,4 @@ public class TourService implements ITourService {
 	public int getTotalItem() {
 		return (int) tourRepository.count();
 	}
-
 }

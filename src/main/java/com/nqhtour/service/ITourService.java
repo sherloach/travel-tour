@@ -6,7 +6,8 @@ import org.springframework.data.domain.Pageable;
 
 import com.nqhtour.dto.TourDTO;
 
+
 public interface ITourService {
-	List<TourDTO> findAll();
+	List<TourDTO> findAll(Pageable pageable);
 	int getTotalItem();
 }

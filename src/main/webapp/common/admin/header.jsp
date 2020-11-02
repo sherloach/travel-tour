@@ -130,10 +130,11 @@
                 <span class="badge r-3 badge-primary pull-right">4</span>
             </a>
                 <ul class="treeview-menu">
-                    <li><a href="panel-page-products.html"><i class="icon icon-circle-o"></i>All Tours</a>
+                    <li><a href="<c:url value='/admin/tour/list?page=1&limit=2'/>"><i class="icon icon-circle-o">
+						</i>All Tours</a>
                     </li>
-                    <li><a href="panel-page-products-create.html"><i class="icon icon-add"></i>Add
-                        New </a>
+                    <li><a href="<c:url value='/admin/tour/edit'/>"><i class="icon icon-add">
+						</i>Add New </a>
                     </li>
                 </ul>
             </li>

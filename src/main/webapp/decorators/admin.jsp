@@ -17,12 +17,8 @@
 	<link href="<c:url value='/template/admin/assets/css/mystyle.css'/>" rel="stylesheet" type="text/css">
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-	<!-- For Pagination -->
-	<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css"> -->
-	<!--  <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script> -->
-    <!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"></script> -->
-
+	
+	<script src="<c:url value='/ckeditor/ckeditor.js' />"></script>
 	<style>
         .loader {
             position: fixed;
