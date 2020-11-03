@@ -18,7 +18,7 @@
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	
-	<script src="<c:url value='/ckeditor/ckeditor.js' />"></script>
+	<%-- <script src="<c:url value='/ckeditor/ckeditor.js' />"></script> --%>
 	<style>
         .loader {
             position: fixed;
@@ -46,13 +46,12 @@
 </head>
 <body class="light">
 	<%@ include file="/common/admin/header.jsp" %>
-
+	
 	<dec:body/>	
-	
-	
+
 	<!--/#app -->
 	<script src="<c:url value='/template/admin/assets/js/app.js'/>"></script>
-	<script src="<c:url value='/template/paging/jquery.twbsPagination.js'/>" type="text/javascript"></script>
+	<script src="<c:url value='/template/paging/jquery.twbsPagination.js'/>" type="text/javascript"></script>	
 
 	<!--
 	--- Footer Part - Use Jquery anywhere at page.
