@@ -32,9 +32,18 @@ public class TourController {
 		return mav;
 	}
 
+	// Add and Edit Tours
 	@RequestMapping(value = "/admin/tour/edit", method = RequestMethod.GET)
-	public ModelAndView editTour() {
+	public ModelAndView editTour(@RequestParam(value = "id", required = false) Long id) {
 		ModelAndView mav = new ModelAndView("admin/tour/edit");
+		TourDTO model = new TourDTO();
+
+		// Add new tour
+		if (id != null) {
+			model = tourService.findById(id);
+		}
+		mav.addObject("model", model);
+
 		return mav;
 	}
 }

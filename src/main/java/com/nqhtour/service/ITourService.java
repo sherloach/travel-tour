@@ -10,4 +10,5 @@ import com.nqhtour.dto.TourDTO;
 public interface ITourService {
 	List<TourDTO> findAll(Pageable pageable);
 	int getTotalItem();
+	TourDTO findById(long id);
 }

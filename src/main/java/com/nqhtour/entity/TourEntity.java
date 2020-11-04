@@ -1,6 +1,5 @@
 package com.nqhtour.entity;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +45,7 @@ public class TourEntity extends BaseEntity {
 	private String imageCover;
 	
 	@Column(name = "startdate")
-	private Timestamp startDate;
+	private String startDate;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "employee_id")
@@ -151,11 +150,11 @@ public class TourEntity extends BaseEntity {
 		this.imageCover = imageCover;
 	}
 
-	public Timestamp getStartDate() {
+	public String getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Timestamp startDate) {
+	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
 }

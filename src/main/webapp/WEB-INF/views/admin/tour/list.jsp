@@ -43,18 +43,17 @@
 												<c:forEach var="item" items="${model.listResult}">
 													<tr class="no-b">
 														<td class="w-10"><img src="#" alt=""></td>
-														<td>
-															<h6>${item.name}</h6>
-															<small class="text-muted">Mobile Phones</small>
-														</td>
+														<td> <h6>${item.name}</h6><small class="text-muted">Mobile Phones</small> </td>
 														<td>$${item.price}</td>
 														<td><span class="badge badge-success">Published</span></td>
-														<td><span><i class="icon icon-data_usage"></i>
-																${item.duration} days</span><br> <span><i
-																class="icon icon-timer"></i> ${item.startDate}</span></td>
-														<td><a
-															class="btn-fab btn-fab-sm btn-primary shadow text-white"><i
-																class="icon-pencil"></i></a></td>
+														<td><span><i class="icon icon-data_usage"></i> ${item.duration} days</span><br>
+															<span><i class="icon icon-timer"></i> ${item.startDate}</span> </td>
+
+														<!-- Update Tour -->
+														<c:url var="updateTourURL" value="/admin/tour/edit">
+															<c:param name="id" value="${item.id}"/>
+														</c:url>
+														<td><a href='${updateTourURL}' class="btn-fab btn-fab-sm btn-primary shadow text-white"><i class="icon-pencil"></i></a> </td>
 													</tr>
 												</c:forEach>
 												<tr class="no-b">

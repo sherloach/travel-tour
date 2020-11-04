@@ -1,7 +1,5 @@
 package com.nqhtour.dto;
 
-import java.sql.Timestamp;
-
 public class TourDTO extends AbstractDTO<TourDTO> {
 	private String name;
 	private String tourID;
@@ -15,7 +13,7 @@ public class TourDTO extends AbstractDTO<TourDTO> {
 	private String summary;
 	private String images;
 	private String imageCover;
-	private Timestamp startDate;
+	private String startDate;
 	
 	public String getName() {
 		return name;
@@ -83,10 +81,10 @@ public class TourDTO extends AbstractDTO<TourDTO> {
 	public void setImageCover(String imageCover) {
 		this.imageCover = imageCover;
 	}
-	public Timestamp getStartDate() {
+	public String getStartDate() {
 		return startDate;
 	}
-	public void setStartDate(Timestamp startDate) {
+	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
 }

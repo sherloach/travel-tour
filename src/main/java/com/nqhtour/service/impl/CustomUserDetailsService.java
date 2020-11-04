@@ -38,6 +38,8 @@ public class CustomUserDetailsService implements UserDetailsService {
 		authorities.add(new SimpleGrantedAuthority(userEntity.getRole()));
 		MyUser myUser = new MyUser(userEntity.getUserName(), userEntity.getPassword(), 
 							true, true, true, true, authorities);
+
+		// Set tên sẽ hiển thị ra giao diện
 		myUser.setFullName(userEntity.getUserName());
 		return myUser;
 	}

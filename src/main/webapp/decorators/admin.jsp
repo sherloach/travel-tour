@@ -50,9 +50,9 @@
 	<dec:body/>	
 
 	<!--/#app -->
+	
 	<script src="<c:url value='/template/admin/assets/js/app.js'/>"></script>
 	<script src="<c:url value='/template/paging/jquery.twbsPagination.js'/>" type="text/javascript"></script>	
-
 	<!--
 	--- Footer Part - Use Jquery anywhere at page.
 	--- http://writing.colin-gourlay.com/safely-using-ready-before-including-jquery/

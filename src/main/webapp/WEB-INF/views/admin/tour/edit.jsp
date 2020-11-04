@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/common/taglib.jsp"%>
+<c:url var="tourURL" value="/admin/tour/list"/>
+<c:url var="tourAPI" value="/api/tour"/>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,20 +40,20 @@
     </header>
     <div class="container-fluid animatedParent animateOnce my-3">
 		<div class="animated fadeInUpShort">
-			<form id="formSubmit" role="form" novalidate>
+			<form:form id="formSubmit" role="form" modelAttribute="model">
 				<div class="row">
 					<div class="col-md-8 ">
 						<div class="row">
 							<div class="col-md-6 mb-3">
-								<label for="validationCustom01">Tour Name</label>
-								<input type="text" class="form-control" id="name" name="name" required>
+								<label>Tour Name</label>
+								<form:input cssClass="form-control" path="name" required="required"/>
 								<div class="invalid-feedback">
 									Please provide a valid name.
 								</div>
 							</div>
 							<div class="col-md-6 mb-3">
-								<label for="validationCustom02">Location</label>
-								<input type="text" class="form-control" id="tourID" name="tourID" required>
+								<label>Location</label>
+								<form:input cssClass="form-control" path="location" required="required"/>
 								<div class="invalid-feedback">
 									Please provide a valid location.
 								</div>
@@ -58,24 +61,23 @@
 						</div>
 						<div class="row">
 							<div class="col-md-6 mb-3">
-								<label for="validationCustom01">Start Date</label>
-								<input type="text" class="date-time-picker form-control" id="startDate" name="startDate"
-									   autocomplete="off" required>
+								<label>Start Date</label>
+								<form:input cssClass="date-time-picker form-control" path="startDate"
+									   autocomplete="false" required="required"/>
 								<div class="invalid-feedback">
 									Please choose a date.
 								</div>
 							</div>
 							<div class="col-md-3 mb-3">
-								<label for="validationCustom04">Price</label>
-								<input type="text" class="form-control" id="price" name="price" placeholder="$ 250"
-									   required>
+								<label>Price</label>
+								<form:input cssClass="form-control" path="price" required="required"/>
 								<div class="invalid-feedback">
 									Please provide a valid price.
 								</div>
 							</div>
 							<div class="col-md-3 mb-3">
-								<label for="sku">Max Group Size</label>
-								<input type="text" class="form-control" id="maxGroupSize" name="maxGroupSize" required>
+								<label>Max Group Size</label>
+								<form:input cssClass="form-control" path="maxGroupSize" required="required"/>
 								<div class="invalid-feedback">
 									Please provide a valid number.
 								</div>
@@ -83,18 +85,19 @@
 						</div>
 						<div class="row">
 							<div class="col-md-9 mb-3">
-								<label for="validationCustom01">Summary</label>
-								<input type="text" class="form-control" id="summary" name="summary" required>
+								<label>Summary</label>
+								<form:input cssClass="form-control" path="summary" required="required"/>
 							</div>
 							<div class="col-md-3 mb-3">
-							<label for="category">Duration</label>
+								<label for="category">Duration</label>
+								<form:input cssClass="form-control" path="duration" required="required"/>
 								<!--<input type="text" class="form-control"  placeholder="Mobile Phones" required>-->
-								<select id="duration" name="duration" class="custom-select form-control" required>
+<!-- 								<select id="duration" name="duration" class="custom-select form-control" required>
 									<option value="">Select Product Category</option>
 									<option value="1">Mobile Phone</option>
 									<option value="2">Laptop & Computers</option>
 									<option value="3">Accessories</option>
-								</select>
+								</select> -->
 								<div class="invalid-feedback">
 									Please provide a valid duration.
 								</div>
@@ -102,8 +105,8 @@
 						</div>
 						<div class="form-group">
 							<label for="description">Description</label>
-							<textarea class="form-control p-t-40" id="description" name="description"
-									  placeholder="Write Something..." rows="10" required></textarea>
+							<form:textarea cssClass="form-control p-t-40"  path="description"
+									  placeholder="Write Something..." rows="10" required="required"></form:textarea>
 							<div class="invalid-feedback">
 								Please provide a tour details.
 							</div>
@@ -120,6 +123,10 @@
 							</div>
 						</div> -->
 					</div>
+
+					<!-- Cần phải có ID để xử lý thêm, sửa -->
+					<form:hidden path="id" id="tourID"/>
+
 					<div class="col-md-3">
 						<div class="card mt-4">
 							<h6 class="card-header white">Publish</h6>
@@ -137,10 +144,11 @@
 						</div>
 					</div>
 				</div>
-			</form>
+			</form:form>
 		</div>
 	</div>
 	</div>
+
 	<script>
 		// Example starter JavaScript for disabling form submissions if there are invalid fields
 		(function () {
@@ -163,13 +171,105 @@
 						editorElement.parentNode.classList.add("is-valid");
 					}
 					
-					// 
+					// THÊM / SỬA
 					event.preventDefault();
+					var data = {};
 					var formData = $('#formSubmit').serializeArray();
-					console.log(formData);
+					$.each(formData, function (i, v) {
+						data[""+v.name+""] = v.value;
+		            });
+
+					var id = $('#tourID').val();
+					
+					if (id == "") {
+						addTour(data);
+					} else {
+						updateTour(data);
+					}
+
+					function addTour(data) {
+						$.ajax({
+							url: '${tourAPI}',
+				            type: 'POST',
+				            contentType: 'application/json',
+				            data: JSON.stringify(data),
+				            dataType: 'json',
+				            success: function (result) {
+				            	window.location.href = "${tourURL}?page=1&limit=2";
+				            },
+				            error: function (error) {
+				            	window.location.href = "${tourURL}?page=1&limit=2";
+				            }
+				        });
+					}
+
+					function updateTour(data) {
+						$.ajax({
+				            url: '${tourAPI}',
+				            type: 'PUT',
+				            contentType: 'application/json',
+				            data: JSON.stringify(data),
+				            dataType: 'json',
+				            success: function (result) {
+				                window.location.href = "${tourURL}?page=1&limit=2";
+				            },
+				            error: function (error) {
+								window.location.href = "${tourURL}?page=1&limit=2";
+				            }
+				        });
+					}
 				}, false);
 			}, false);
 		}());
+		
+		/* $('#btnAddOrUpdateTour').click(function (e) {
+			event.preventDefault();
+			var data = {};
+			var formData = $('#formSubmit').serializeArray();
+			$.each(formData, function (i, v) {
+				data[""+v.name+""] = v.value;
+            });
+			var id = $('#tourID').val();
+			
+			if (id == "") {
+				addTour(data);
+			} else {
+				updateTour(data);
+			}
+
+			function addTour(data) {
+				$.ajax({
+					url: '${tourAPI}',
+		            type: 'POST',
+		            contentType: 'application/json',
+		            data: JSON.stringify(data),
+		            dataType: 'json',
+		            success: function (result) {
+		            	window.location.href = "${tourURL}?page=1&limit=2";
+		            },
+		            error: function (error) {
+		            	window.location.href = "${tourURL}?page=1&limit=2";
+		            }
+		        });
+			}
+		});
+		
+
+		function updateTour(data) {
+			$.ajax({
+	            url: '${tourAPI}',
+	            type: 'PUT',
+	            contentType: 'application/json',
+	            data: JSON.stringify(data),
+	            dataType: 'json',
+	            success: function (result) {
+	                window.location.href = "${tourURL}?page=1&limit=2";
+	            },
+	            error: function (error) {
+					window.location.href = "${tourURL}?page=1&limit=2";
+	            }
+	        });
+		} */
 	</script>
 </body>
 </html>
