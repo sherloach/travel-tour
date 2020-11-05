@@ -1,16 +1,10 @@
 package com.nqhtour.entity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -41,8 +35,8 @@ public class EmployeeEntity extends BaseEntity {
 	@JoinColumn(name = "userid")
 	private UserEntity user;
 
-	@OneToMany(mappedBy = "employee")
-	private List<TourEntity> tour = new ArrayList<>();
+//	@OneToMany(mappedBy = "employee")
+//	private List<TourEntity> tour = new ArrayList<>();
 
 	public String getName() {
 		return name;
@@ -92,13 +86,13 @@ public class EmployeeEntity extends BaseEntity {
 		this.user = user;
 	}
 
-	public List<TourEntity> getTour() {
-		return tour;
-	}
-
-	public void setTour(List<TourEntity> tour) {
-		this.tour = tour;
-	}
+//	public List<TourEntity> getTour() {
+//		return tour;
+//	}
+//
+//	public void setTour(List<TourEntity> tour) {
+//		this.tour = tour;
+//	}
 
 	public String getAvatar() {
 		return avatar;

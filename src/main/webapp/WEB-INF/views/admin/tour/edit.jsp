@@ -48,14 +48,14 @@
 								<label>Tour Name</label>
 								<form:input cssClass="form-control" path="name" required="required"/>
 								<div class="invalid-feedback">
-									Please provide a valid name.
+									Please provide a name.
 								</div>
 							</div>
 							<div class="col-md-6 mb-3">
 								<label>Location</label>
 								<form:input cssClass="form-control" path="location" required="required"/>
 								<div class="invalid-feedback">
-									Please provide a valid location.
+									Please provide a location.
 								</div>
 							</div>
 						</div>
@@ -87,6 +87,9 @@
 							<div class="col-md-9 mb-3">
 								<label>Summary</label>
 								<form:input cssClass="form-control" path="summary" required="required"/>
+								<div class="invalid-feedback">
+									Please provide a summary.
+								</div>
 							</div>
 							<div class="col-md-3 mb-3">
 								<label for="category">Duration</label>
@@ -157,10 +160,8 @@
 				var form = document.getElementById("formSubmit");
 				var btnPublish = document.getElementById("btnAddOrUpdateTour");
 				btnPublish.addEventListener("click", function (event) {
-					if (form.checkValidity() == false) {
-						event.preventDefault();
-						event.stopPropagation();
-					}
+					event.preventDefault(); // Huỷ bỏ event nếu nó có thể huỷ mà không dừng sự lan rộng (propagation) của event tới phần khác.
+
 					form.classList.add("was-validated");
 					var editorElement = document.getElementById("description");
 					if (editorElement.value == '') {
@@ -171,54 +172,59 @@
 						editorElement.parentNode.classList.add("is-valid");
 					}
 					
-					// THÊM / SỬA
-					event.preventDefault();
-					var data = {};
-					var formData = $('#formSubmit').serializeArray();
-					$.each(formData, function (i, v) {
-						data[""+v.name+""] = v.value;
-		            });
+					if (form.checkValidity() == true) { // Returns true if an input element contains valid data.
+						event.stopPropagation(); // Ngăn chặn sự lan rộng của sự kiện hiện tại tới thằng khác.
 
-					var id = $('#tourID').val();
-					
-					if (id == "") {
-						addTour(data);
-					} else {
-						updateTour(data);
-					}
+						// TODO: fix validation
+						// THÊM / SỬA
+						event.preventDefault();
+						var data = {};
+						var formData = $('#formSubmit').serializeArray();
+						$.each(formData, function (i, v) {
+							data[""+v.name+""] = v.value;
+			            });
 
-					function addTour(data) {
-						$.ajax({
-							url: '${tourAPI}',
-				            type: 'POST',
-				            contentType: 'application/json',
-				            data: JSON.stringify(data),
-				            dataType: 'json',
-				            success: function (result) {
-				            	window.location.href = "${tourURL}?page=1&limit=2";
-				            },
-				            error: function (error) {
-				            	window.location.href = "${tourURL}?page=1&limit=2";
-				            }
-				        });
-					}
-
-					function updateTour(data) {
-						$.ajax({
-				            url: '${tourAPI}',
-				            type: 'PUT',
-				            contentType: 'application/json',
-				            data: JSON.stringify(data),
-				            dataType: 'json',
-				            success: function (result) {
-				                window.location.href = "${tourURL}?page=1&limit=2";
-				            },
-				            error: function (error) {
-								window.location.href = "${tourURL}?page=1&limit=2";
-				            }
-				        });
+						var id = $('#tourID').val();
+						
+						if (id == "") {
+							addTour(data);
+						} else {
+							updateTour(data);
+						}
 					}
 				}, false);
+
+				function addTour(data) {
+					$.ajax({
+						url: '${tourAPI}',
+			            type: 'POST',
+			            contentType: 'application/json',
+			            data: JSON.stringify(data),
+			            dataType: 'json',
+			            success: function (result) {
+			            	window.location.href = "${tourURL}?page=1&limit=2";
+			            },
+			            error: function (error) {
+			            	window.location.href = "${tourURL}?page=1&limit=2";
+			            }
+			        });
+				}
+
+				function updateTour(data) {
+					$.ajax({
+			            url: '${tourAPI}',
+			            type: 'PUT',
+			            contentType: 'application/json',
+			            data: JSON.stringify(data),
+			            dataType: 'json',
+			            success: function (result) {
+			                window.location.href = "${tourURL}?page=1&limit=2";
+			            },
+			            error: function (error) {
+							window.location.href = "${tourURL}?page=1&limit=2";
+			            }
+			        });
+				}
 			}, false);
 		}());
 		

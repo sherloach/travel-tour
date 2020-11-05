@@ -11,6 +11,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.data.annotation.CreatedBy;
+
 @Entity
 @Table(name = "`tour`")
 public class TourEntity extends BaseEntity {
@@ -47,15 +49,23 @@ public class TourEntity extends BaseEntity {
 	@Column(name = "startdate")
 	private String startDate;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "employee_id")
-	private EmployeeEntity employee;
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "employee_id")
+//	private EmployeeEntity employee;
+
+	@Column(name = "createdBy")
+	@CreatedBy
+	private String createdBy;
 
 	@ManyToMany(mappedBy = "tours")
 	private List<ClientEntity> clients = new ArrayList<>();
 
 	public String getName() {
 		return name;
+	}
+
+	public String getCreatedBy() {
+		return createdBy;
 	}
 
 	public void setName(String name) {
@@ -130,13 +140,13 @@ public class TourEntity extends BaseEntity {
 		return imageCover;
 	}
 
-	public EmployeeEntity getEmployee() {
-		return employee;
-	}
-
-	public void setEmployee(EmployeeEntity employee) {
-		this.employee = employee;
-	}
+//	public EmployeeEntity getEmployee() {
+//		return employee;
+//	}
+//
+//	public void setEmployee(EmployeeEntity employee) {
+//		this.employee = employee;
+//	}
 
 	public List<ClientEntity> getClients() {
 		return clients;

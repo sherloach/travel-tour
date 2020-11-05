@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.nqhtour.controller.admin.TourController;
 import com.nqhtour.converter.TourConverter;
@@ -46,5 +47,17 @@ public class TourService implements ITourService {
 	public TourDTO findById(long id) {
 		TourEntity entity = tourRepository.findOne(id);
 		return tourConverter.toDTO(entity);
+	}
+
+	@Override
+	@Transactional // Auto transaction
+	public TourDTO insert(TourDTO dto) {
+		return null;
+	}
+
+	@Override
+	@Transactional
+	public TourDTO update(TourDTO updateTour) {
+		return null;
 	}
 }

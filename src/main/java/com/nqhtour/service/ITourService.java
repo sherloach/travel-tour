@@ -11,4 +11,6 @@ public interface ITourService {
 	List<TourDTO> findAll(Pageable pageable);
 	int getTotalItem();
 	TourDTO findById(long id);
+	TourDTO insert(TourDTO dto);
+	TourDTO update(TourDTO updateTour);
 }

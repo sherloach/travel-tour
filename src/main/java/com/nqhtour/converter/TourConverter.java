@@ -17,7 +17,7 @@ public class TourConverter {
 		result.setDescription(entity.getDescription());
 		result.setSummary(entity.getSummary());
 		result.setDuration(entity.getDuration());
-		result.setEmployeeID(entity.getEmployee().getId());
+		//result.setEmployeeID(entity.getEmployee().getId());
 		result.setLocation(entity.getLocation());
 		result.setMaxGroupSize(entity.getMaxGroupSize());
 		result.setPrice(entity.getPrice());
