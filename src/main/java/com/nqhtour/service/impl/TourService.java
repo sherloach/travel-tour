@@ -50,14 +50,15 @@ public class TourService implements ITourService {
 	}
 
 	@Override
-	@Transactional // Auto transaction
-	public TourDTO insert(TourDTO dto) {
-		return null;
-	}
-
-	@Override
-	@Transactional
-	public TourDTO update(TourDTO updateTour) {
-		return null;
+	public TourDTO save(TourDTO dto) {
+		TourEntity tourEntity = new TourEntity();
+		if (dto.getId() != null) {
+			TourEntity oldTour = tourRepository.findOne(dto.getId());
+			tourEntity = tourConverter.toEntity(oldTour, dto);
+		} else {
+			tourEntity = tourConverter.toEntity(dto);
+		}
+		
+		return tourConverter.toDTO(tourRepository.save(tourEntity));
 	}
 }

@@ -63,7 +63,7 @@
 							<div class="col-md-6 mb-3">
 								<label>Start Date</label>
 								<form:input cssClass="date-time-picker form-control" path="startDate"
-									   autocomplete="false" required="required"/>
+									  autocomplete="off" required="required"/>
 								<div class="invalid-feedback">
 									Please choose a date.
 								</div>

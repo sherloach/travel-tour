@@ -41,4 +41,18 @@ public class TourConverter {
 		return result;
 	}
 
+	// For update
+	public TourEntity toEntity(TourEntity oldTour, TourDTO dto) {
+		oldTour.setName(dto.getName());
+		oldTour.setTourID(dto.getTourID());
+		oldTour.setDescription(dto.getDescription());
+		oldTour.setSummary(dto.getSummary());
+		oldTour.setDuration(dto.getDuration());
+		oldTour.setLocation(dto.getLocation());
+		oldTour.setMaxGroupSize(dto.getMaxGroupSize());
+		oldTour.setPrice(dto.getPrice());
+		oldTour.setStartDate(dto.getStartDate());
+		
+		return oldTour;
+	}
 }
