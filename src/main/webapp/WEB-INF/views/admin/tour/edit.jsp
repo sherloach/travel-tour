@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/common/taglib.jsp"%>
-<c:url var="tourURL" value="/admin/tour/list"/>
-<c:url var="tourAPI" value="/api/tour"/>
+<c:url var="listTourURL" value="/admin/tour/list"/>
+<c:url var="tourURL" value="/api/tour"/>
+<c:url var="editTourURL" value="/admin/tour/edit"/>
 
 <!DOCTYPE html>
 <html>
@@ -38,6 +39,11 @@
             </div>
         </div>
     </header>
+    <c:if test="${not empty message}">
+		<div role="alert" class="alert alert-${alert}">
+			  <strong>${message}</strong>
+		</div>
+	</c:if>
     <div class="container-fluid animatedParent animateOnce my-3">
 		<div class="animated fadeInUpShort">
 			<form:form id="formSubmit" role="form" modelAttribute="model">
@@ -196,32 +202,32 @@
 
 				function addTour(data) {
 					$.ajax({
-						url: '${tourAPI}',
+						url: '${tourURL}',
 			            type: 'POST',
 			            contentType: 'application/json',
 			            data: JSON.stringify(data),
 			            dataType: 'json',
 			            success: function (result) {
-			            	window.location.href = "${tourURL}?page=1&limit=2";
+			            	window.location.href = "${editTourURL}?id=" + result.id + "&message=insert_success";
 			            },
 			            error: function (error) {
-			            	window.location.href = "${tourURL}?page=1&limit=2";
+			            	window.location.href = "${tourURL}?page=1&limit=2&message=error_system";
 			            }
 			        });
 				}
 
 				function updateTour(data) {
 					$.ajax({
-			            url: '${tourAPI}',
+			            url: '${tourURL}',
 			            type: 'PUT',
 			            contentType: 'application/json',
 			            data: JSON.stringify(data),
 			            dataType: 'json',
 			            success: function (result) {
-			                window.location.href = "${tourURL}?page=1&limit=2";
+			                window.location.href = "${editTourURL}?id=" + result.id + "&message=update_success";
 			            },
 			            error: function (error) {
-							window.location.href = "${tourURL}?page=1&limit=2";
+							window.location.href = "${tourURL}?page=1&limit=2&message=error_system";
 			            }
 			        });
 				}

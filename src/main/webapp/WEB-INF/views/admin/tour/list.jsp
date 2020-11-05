@@ -30,6 +30,11 @@
 				</div>
 			</div>
 		</header>
+		<c:if test="${not empty message}">
+			<div role="alert" class="alert alert-${alert}">
+				  ${message}
+			</div>
+		</c:if>
 		<form action="<c:url value='/admin/tour/list'/>" id="formSubmit" method="get">
 			<div class="container-fluid animatedParent animateOnce my-3">
 				<div class="animated fadeInUpShort">
@@ -98,7 +103,7 @@
 				startPage: currentPage,
 				onPageClick : function(event, page) { // page là trang tiếp theo
 					if (currentPage != page) {
-	            		$('#limit').val(2);
+	            		$('#limit').val(6);
 						$('#page').val(page);
 						$('#formSubmit').submit();
 					}

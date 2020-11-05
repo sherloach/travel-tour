@@ -142,7 +142,7 @@
 				</a>
 					<ul class="treeview-menu">
 						<li><a
-							href="<c:url value='/admin/tour/list?page=1&limit=2'/>"><i
+							href="<c:url value='/admin/tour/list?page=1&limit=6'/>"><i
 								class="icon icon-circle-o"> </i>All Tours</a></li>
 						<li><a href="<c:url value='/admin/tour/edit'/>"><i
 								class="icon icon-add"> </i>Add New </a></li>
