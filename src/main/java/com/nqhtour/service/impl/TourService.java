@@ -14,6 +14,7 @@ import com.nqhtour.dto.TourDTO;
 import com.nqhtour.entity.TourEntity;
 import com.nqhtour.repository.TourRepository;
 import com.nqhtour.service.ITourService;
+import com.nqhtour.util.StringUtil;
 
 @Service
 public class TourService implements ITourService {
@@ -59,6 +60,7 @@ public class TourService implements ITourService {
 			tourEntity = tourConverter.toEntity(dto);
 		}
 		
+		tourEntity.setTourID(StringUtil.createSlug(tourEntity.getName()));
 		return tourConverter.toDTO(tourRepository.save(tourEntity));
 	}
 }

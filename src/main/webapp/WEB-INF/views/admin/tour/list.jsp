@@ -43,7 +43,7 @@
 												<c:forEach var="item" items="${model.listResult}">
 													<tr class="no-b">
 														<td class="w-10"><img src="#" alt=""></td>
-														<td> <h6>${item.name}</h6><small class="text-muted">Mobile Phones</small> </td>
+														<td> <h6>${item.name}</h6><small class="text-muted">Du Lịch Trong Nước</small> </td>
 														<td>$${item.price}</td>
 														<td><span class="badge badge-success">Published</span></td>
 														<td><span><i class="icon icon-data_usage"></i> ${item.duration} days</span><br>
