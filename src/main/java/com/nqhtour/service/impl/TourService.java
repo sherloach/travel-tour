@@ -63,4 +63,9 @@ public class TourService implements ITourService {
 		tourEntity.setTourID(StringUtil.createSlug(tourEntity.getName()));
 		return tourConverter.toDTO(tourRepository.save(tourEntity));
 	}
+
+	@Override
+	public void delete(long id) {
+		tourRepository.delete(id);
+	}
 }

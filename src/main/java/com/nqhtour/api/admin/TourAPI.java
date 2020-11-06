@@ -26,8 +26,8 @@ public class TourAPI {
 	}
 
 	@DeleteMapping("/api/tour")
-	public void deleteTour(@RequestBody long[] ids) {
-		System.out.print(ids[0] + ids[1] + ids[2]);
+	public void deleteTour(@RequestBody long id) {
+		tourService.delete(id);
 	}
 
 }

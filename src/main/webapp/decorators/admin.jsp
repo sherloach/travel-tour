@@ -19,6 +19,10 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	
 	<%-- <script src="<c:url value='/ckeditor/ckeditor.js' />"></script> --%>
+	<!-- sweetalert -->
+    <script src="<c:url value='/template/admin/sweetalert/sweetalert2.min.js' />"></script>
+    <link rel="stylesheet" href="<c:url value='/template/admin/sweetalert/sweetalert2.min.css' />" />
+
 	<style>
         .loader {
             position: fixed;

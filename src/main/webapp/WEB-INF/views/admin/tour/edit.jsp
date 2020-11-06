@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/common/taglib.jsp"%>
 <c:url var="listTourURL" value="/admin/tour/list"/>
-<c:url var="tourURL" value="/api/tour"/>
+<c:url var="tourAPI" value="/api/tour"/>
 <c:url var="editTourURL" value="/admin/tour/edit"/>
 
 <!DOCTYPE html>
@@ -202,7 +202,7 @@
 
 				function addTour(data) {
 					$.ajax({
-						url: '${tourURL}',
+						url: '${tourAPI}',
 			            type: 'POST',
 			            contentType: 'application/json',
 			            data: JSON.stringify(data),
@@ -211,14 +211,14 @@
 			            	window.location.href = "${editTourURL}?id=" + result.id + "&message=insert_success";
 			            },
 			            error: function (error) {
-			            	window.location.href = "${tourURL}?page=1&limit=2&message=error_system";
+			            	window.location.href = "${listTourURL}?page=1&limit=6&message=error_system";
 			            }
 			        });
 				}
 
 				function updateTour(data) {
 					$.ajax({
-			            url: '${tourURL}',
+			            url: '${tourAPI}',
 			            type: 'PUT',
 			            contentType: 'application/json',
 			            data: JSON.stringify(data),
@@ -227,7 +227,7 @@
 			                window.location.href = "${editTourURL}?id=" + result.id + "&message=update_success";
 			            },
 			            error: function (error) {
-							window.location.href = "${tourURL}?page=1&limit=2&message=error_system";
+							window.location.href = "${listTourURL}?page=1&limit=6&message=error_system";
 			            }
 			        });
 				}

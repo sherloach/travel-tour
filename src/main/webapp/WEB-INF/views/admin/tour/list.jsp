@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/common/taglib.jsp"%>
+<c:url var="tourAPI" value="/api/tour"/>
+<c:url var="tourURL" value="/admin/tour/list"/>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +35,7 @@
 		</header>
 		<c:if test="${not empty message}">
 			<div role="alert" class="alert alert-${alert}">
-				  ${message}
+				  <strong>${message}</strong>
 			</div>
 		</c:if>
 		<form action="<c:url value='/admin/tour/list'/>" id="formSubmit" method="get">
@@ -58,7 +61,11 @@
 														<c:url var="updateTourURL" value="/admin/tour/edit">
 															<c:param name="id" value="${item.id}"/>
 														</c:url>
-														<td><a href='${updateTourURL}' class="btn-fab btn-fab-sm btn-primary shadow text-white"><i class="icon-pencil"></i></a> </td>
+														<td>
+															<a href='${updateTourURL}' class="my-btn-tour btn-fab btn-fab-sm btn-primary shadow text-white"><i class="icon-pencil"></i></a>
+															<a href='#' onclick="warningBeforeDelete(${item.id})" class="my-btn-tour my-btn-tour-delete btn-fab btn-fab-sm btn-primary shadow text-white"><i class="icon-trash-can"></i></a>
+														</td>
+														
 													</tr>
 												</c:forEach>
 												<tr class="no-b">
@@ -110,6 +117,42 @@
 				}
 			});
 		});
+
+		function warningBeforeDelete(tourID) {
+			swal({
+			  title: "Are you sure?",
+			  text: "You will not be able to recover this tour!",
+			  type: "warning",
+			  showCancelButton: true,
+			  confirmButtonClass: "btn-success",
+			  cancelButtonClass: "btn-danger",
+			  confirmButtonText: "Delete",
+			  cancelButtonText: "Cancel",
+			}).then(function(isConfirm) {
+			  if (isConfirm.dismiss !== 'cancel') {
+					//var ids = $('tbody input[type=checkbox]:checked').map(function () {
+			        //   return $(this).val();
+			        //}).get();
+					//var id = $(this).data("value");
+					deleteTour(tourID);
+			  }
+			});
+		}
+
+		function deleteTour(data) {
+	        $.ajax({
+	            url: '${tourAPI}',
+	            type: 'DELETE',
+	            contentType: 'application/json',
+	            data: JSON.stringify(data),
+	            success: function (result) {
+	                window.location.href = "${tourURL}?page=1&limit=6&message=delete_success";
+	            },
+	            error: function (error) {
+	            	window.location.href = "${tourURL}?page=1&limit=2&message=error_system";
+	            }
+	        });
+	    }
 	</script>
 
 </body>
