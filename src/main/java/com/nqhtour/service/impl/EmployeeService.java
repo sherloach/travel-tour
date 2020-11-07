@@ -66,24 +66,30 @@ public class EmployeeService implements IEmployeeService {
 	@Override
 	public EmployeeDTO save(EmployeeDTO dto) {
 		EmployeeEntity entity = new EmployeeEntity();
+
+		// Set user data
+		UserDTO userDTO = new UserDTO();
+		userDTO.setUsername(dto.getEmail());
+		userDTO.setPassword(dto.getPassword());
+		userDTO.setRole(dto.getRole());
+		userDTO.setStatus(1);
+		
+		UserEntity userEntity = null;
 		if (dto.getId() != null) {
+			UserEntity oldUser = userRepository.findOne(dto.getUserID());
 			EmployeeEntity oldEmpl = employeeRepository.findOne(dto.getId());
+			
+			UserEntity userUpdate = userConverter.toEntity(oldUser, userDTO);
+			userEntity = userRepository.save(userUpdate);
 			entity = employeeConverter.toEntity(oldEmpl, dto);
 		} else {
-			UserDTO userDTO = new UserDTO();
-			userDTO.setUsername(dto.getEmail());
-			userDTO.setPassword(dto.getPassword());
-			userDTO.setRole(dto.getRole());
-			userDTO.setStatus(1);
-			//Long userID = userService.save(userDTO);
-			
-			UserEntity userEntity = userRepository.save(userConverter.toEntity(userDTO));
+			userEntity = userRepository.save(userConverter.toEntity(userDTO));
 			
 			//dto.setUserID(userID);
 			entity = employeeConverter.toEntity(dto);
-			entity.setUser(userEntity);
 		}
 
+		entity.setUser(userEntity);
 		return employeeConverter.toDTO(employeeRepository.save(entity));
 	}
 

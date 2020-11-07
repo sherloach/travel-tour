@@ -47,13 +47,13 @@ public class EmployeeController {
 		return mav;
 	}
 	
-	// Add and Edit Tours
+	// Add and Edit Employee
 	@RequestMapping(value = "/admin/empl/edit", method = RequestMethod.GET)
 	public ModelAndView editUser(@RequestParam(value = "id", required = false) Long id, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("admin/user/edit");
 		EmployeeDTO model = new EmployeeDTO();
 
-		// Add new tour
+		// Add new empl
 		if (id != null) {
 			model = emplService.findById(id);
 		}

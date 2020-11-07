@@ -29,4 +29,13 @@ public class UserConverter {
 		return result;
 	}
 	
+	// For update
+	public UserEntity toEntity(UserEntity oldUser, UserDTO dto) {
+		oldUser.setUserName(dto.getUsername());
+		oldUser.setPassword(dto.getPassword());
+		oldUser.setRole(dto.getRole());
+		oldUser.setStatus(dto.getStatus());
+		
+		return oldUser;
+	}
 }

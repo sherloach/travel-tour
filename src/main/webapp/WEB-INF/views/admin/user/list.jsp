@@ -33,7 +33,7 @@
 							aria-controls="v-pills-sellers"><i
 								class="icon  icon-local_shipping"></i> Sellers</a></li>
 						<li class="float-right"><a class="nav-link"
-							href="panel-page-users-create.html"><i
+							href="<c:url value='/admin/empl/edit'/>"><i
 								class="icon icon-plus-circle"></i> Add New User</a></li>
 					</ul>
 				</div>
@@ -102,9 +102,12 @@
 																<span class="r-3 badge badge-success">${item.role}</span>
 															</c:if>
 														</td>
-														<td><a href="panel-page-profile.html"><i
-																class="icon-eye mr-3"></i></a> <a
-															href="panel-page-profile.html"><i class="icon-pencil"></i></a>
+														<!-- Update User -->
+														<c:url var="updateEmplURL" value="/admin/empl/edit">
+															<c:param name="id" value="${item.id}"/>
+														</c:url>
+														<td><a href="${updateEmplURL}"><i class="icon-pencil mr-3"></i></a>
+															<a href="panel-page-profile.html"><i class="icon-trash-can4"></i></a>
 														</td>
 													</tr>
 												</c:forEach>

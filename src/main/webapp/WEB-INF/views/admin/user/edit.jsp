@@ -24,7 +24,7 @@
             <div class="row justify-content-between">
                 <ul class="nav nav-material nav-material-white responsive-tab" id="v-pills-tab" role="tablist">
                     <li>
-                        <a class="nav-link" href="<c:url value='/admin/user/list?page=1&limit=6'/>"><i class="icon icon-home2"></i>All Users</a>
+                        <a class="nav-link" href="<c:url value='/admin/empl/list?page=1&limit=6'/>"><i class="icon icon-home2"></i>All Users</a>
                     </li>
                     <li>
                         <a class="nav-link active"  href="panel-page-users-create.html" ><i class="icon icon-plus-circle"></i> Add New User</a>
@@ -93,8 +93,8 @@
                                     </div>
 
                                     <div class="form-group col-6 m-0">
-                                        <label class="col-form-label s-12"><i class="icon-phone mr-2"></i>Password</label>
-                                        <form:input path="password" cssClass="form-control r-0 light s-12 " type="text" required="required"/>
+                                        <label class="col-form-label s-12"><i class="icon-key4 mr-2"></i>Password</label>
+                                        <form:password showPassword="true" path="password" cssClass="form-control r-0 light s-12 " required="required"/>
                                     </div>
                                 </div>
                                 <div class="form-row">
@@ -125,7 +125,8 @@
                             </div>
                             <hr>
                             <!-- Cần phải có ID để xử lý thêm, sửa -->
-							<form:hidden path="id" id="userID"/>
+							<form:hidden path="id" id="emplID"/>
+							<form:hidden path="userID" id="userID"/>
                             <div class="card-body">
                                 <button type="button" id="btnAddOrUpdateUser" class="btn btn-primary btn-lg"><i class="icon-save mr-2"></i>Save Data</button>
                             </div>
@@ -168,7 +169,7 @@
 						data[""+v.name+""] = v.value;
 					});
 
-					var id = $('#userID').val();
+					var id = $('#emplID').val();
 					
 					if (id == "") {
 						addUser(data);
