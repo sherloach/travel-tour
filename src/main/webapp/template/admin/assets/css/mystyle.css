@@ -49,3 +49,15 @@ a {
 .my-btn-tour-delete i {
 	font-size: 14px !important;
 }
+
+.my-user-list {
+	text-align: center;
+}
+
+.my-user-list-table td {
+	text-align: center;
+}
+
+.my-user-list-table td:first-child {
+	text-align: left;
+}
