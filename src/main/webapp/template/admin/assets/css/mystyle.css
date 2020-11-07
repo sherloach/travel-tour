@@ -61,3 +61,7 @@ a {
 .my-user-list-table td:first-child {
 	text-align: left;
 }
+
+.custom-control-label::after, .custom-control-label::before {
+    top: 0.1rem!important;
+}

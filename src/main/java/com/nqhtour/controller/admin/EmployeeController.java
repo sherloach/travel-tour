@@ -25,7 +25,7 @@ public class EmployeeController {
 	@Autowired
 	private MessageUtil messageUtil;
 	
-	@RequestMapping(value = "/admin/user/list", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin/empl/list", method = RequestMethod.GET)
 	public ModelAndView showList(@RequestParam("page") int page, @RequestParam("limit") int limit, HttpServletRequest request) {
 		EmployeeDTO model = new EmployeeDTO();
 		model.setPage(page);
@@ -44,6 +44,26 @@ public class EmployeeController {
 		}
 		mav.addObject("model", model);
 		
+		return mav;
+	}
+	
+	// Add and Edit Tours
+	@RequestMapping(value = "/admin/empl/edit", method = RequestMethod.GET)
+	public ModelAndView editUser(@RequestParam(value = "id", required = false) Long id, HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView("admin/user/edit");
+		EmployeeDTO model = new EmployeeDTO();
+
+		// Add new tour
+		if (id != null) {
+			model = emplService.findById(id);
+		}
+		if (request.getParameter("message") != null) {
+			Map<String, String> message = messageUtil.getMessage(request.getParameter("message"));
+			mav.addObject("message", message.get("message"));
+			mav.addObject("alert", message.get("alert"));
+		}
+		mav.addObject("model", model);
+
 		return mav;
 	}
 }

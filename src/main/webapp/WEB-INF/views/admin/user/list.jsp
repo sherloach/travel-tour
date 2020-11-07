@@ -21,7 +21,7 @@
 					<ul class="nav nav-material nav-material-white responsive-tab"
 						id="v-pills-tab" role="tablist">
 						<li><a class="nav-link active" id="v-pills-all-tab"
-							data-toggle="pill" href="#v-pills-all" role="tab"
+							data-toggle="pill" href="<c:url value='/admin/empl/list?page=1&limit=6'/>" role="tab"
 							aria-controls="v-pills-all"><i class="icon icon-home2"></i>All
 								Users</a></li>
 						<li><a class="nav-link" id="v-pills-buyers-tab"
@@ -40,15 +40,15 @@
 			</div>
 		</header>
 
-		<div class="container-fluid animatedParent animateOnce">
-			<div class="tab-content my-3" id="v-pills-tabContent">
-				<div class="tab-pane animated fadeInUpShort show active"
-					id="v-pills-all" role="tabpanel" aria-labelledby="v-pills-all-tab">
-					<div class="row my-3">
-						<div class="col-md-12">
-							<div class="card r-0 shadow">
-								<div class="table-responsive">
-									<form>
+		<form action="<c:url value='/admin/user/list'/>" id="formSubmit" method="get">
+			<div class="container-fluid animatedParent animateOnce">
+				<div class="tab-content my-3" id="v-pills-tabContent">
+					<div class="tab-pane animated fadeInUpShort show active"
+						id="v-pills-all" role="tabpanel" aria-labelledby="v-pills-all-tab">
+						<div class="row my-3">
+							<div class="col-md-12">
+								<div class="card r-0 shadow">
+									<div class="table-responsive">
 										<table class="table table-striped table-hover my-user-list-table r-0">
 											<thead>
 												<tr class="no-b my-user-list">
@@ -110,19 +110,43 @@
 												</c:forEach>
 											</tbody>
 										</table>
-									</form>
+									</div>
 								</div>
 							</div>
 						</div>
+						<nav aria-label="Page navigation">
+							<ul class="pagination" id="pagination"></ul>
+							<input type="hidden" value="" id="page" name="page"/>
+							<input type="hidden" value="" id="limit" name="limit"/>	
+						</nav>
 					</div>
 				</div>
 			</div>
-		</div>
+		</form>
 
 		<!--Add New Message Fab Button-->
 		<a href="panel-page-users-create.html"
 			class="btn-fab btn-fab-md fab-right fab-right-bottom-fixed shadow btn-primary"><i
 			class="icon-add"></i></a>
 	</div>
+
+	<script type="text/javascript">
+		var totalPages = ${model.totalPage};
+		var currentPage = ${model.page};
+		$(function() {
+			window.pagObj = $('#pagination').twbsPagination({
+				totalPages : totalPages,
+				visiblePages : 10,
+				startPage: currentPage,
+				onPageClick : function(event, page) { // page là trang tiếp theo
+					if (currentPage != page) {
+	            		$('#limit').val(6);
+						$('#page').val(page);
+						$('#formSubmit').submit();
+					}
+				}
+			});
+		});
+	</script>
 </body>
 </html>

@@ -28,7 +28,7 @@ public class UserService implements IUserService {
 	public Long save(UserDTO dto) {
 		UserEntity userEntity = userConverter.toEntity(dto);
 		
-		return userConverter.toDTO(userRepository.save(userEntity)).getId();
+		return userRepository.save(userEntity).getId();
 	}
 
 	@Override

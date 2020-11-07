@@ -151,9 +151,9 @@
 						class="icon icon-account_box light-green-text s-18"></i>Users<i
 						class="icon icon-angle-left s-18 pull-right"></i></a>
 				<ul class="treeview-menu">
-					<li><a href="<c:url value='/admin/user/list?page=1&limit=6'/>"><i
+					<li><a href="<c:url value='/admin/empl/list?page=1&limit=6'/>"><i
 							class="icon icon-circle-o"></i>All Users</a></li>
-					<li><a href="panel-page-users-create.html"><i
+					<li><a href="<c:url value='/admin/empl/edit'/>"><i
 							class="icon icon-add"></i>Add User</a></li>
 					<li><a href="panel-page-profile.html"><i
 							class="icon icon-user"></i>User Profile </a></li>

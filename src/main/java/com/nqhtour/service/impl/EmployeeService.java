@@ -8,10 +8,13 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.nqhtour.converter.EmployeeConverter;
+import com.nqhtour.converter.UserConverter;
 import com.nqhtour.dto.EmployeeDTO;
 import com.nqhtour.dto.UserDTO;
 import com.nqhtour.entity.EmployeeEntity;
+import com.nqhtour.entity.UserEntity;
 import com.nqhtour.repository.EmployeeRepository;
+import com.nqhtour.repository.UserRepository;
 import com.nqhtour.service.IEmployeeService;
 
 @Service
@@ -25,6 +28,12 @@ public class EmployeeService implements IEmployeeService {
 	
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	UserRepository userRepository;
+	
+	@Autowired
+	UserConverter userConverter;
 
 	@Override
 	public List<EmployeeDTO> findAll(Pageable pageable) {
@@ -62,13 +71,17 @@ public class EmployeeService implements IEmployeeService {
 			entity = employeeConverter.toEntity(oldEmpl, dto);
 		} else {
 			UserDTO userDTO = new UserDTO();
-			userDTO.setUsername(dto.getUsername());
+			userDTO.setUsername(dto.getEmail());
 			userDTO.setPassword(dto.getPassword());
+			userDTO.setRole(dto.getRole());
 			userDTO.setStatus(1);
-			Long userID = userService.save(userDTO);
+			//Long userID = userService.save(userDTO);
 			
-			dto.setUserID(userID);
+			UserEntity userEntity = userRepository.save(userConverter.toEntity(userDTO));
+			
+			//dto.setUserID(userID);
 			entity = employeeConverter.toEntity(dto);
+			entity.setUser(userEntity);
 		}
 
 		return employeeConverter.toDTO(employeeRepository.save(entity));
