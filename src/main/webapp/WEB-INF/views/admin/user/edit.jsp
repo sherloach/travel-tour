@@ -59,12 +59,12 @@
 												<br>
 												<div class="custom-control custom-radio custom-control-inline">
 													<%-- <form:input type="radio" path="male" name="gender" class="custom-control-input"/> --%>
-													<form:radiobutton path="gender" value="true" label="Nam"/>
+													<form:radiobutton path="gender" value="true" label="Male"/>
 													<!-- <label class="custom-control-label m-0" for="male">Male</label> -->
 												</div>
 												<div class="custom-control custom-radio custom-control-inline">
 													<!-- <input type="radio" id="female" name="gender" class="custom-control-input"> -->
-													<form:radiobutton path="gender" value="false" label="Nữ"/>
+													<form:radiobutton path="gender" value="false" label="Female"/>
 													<!-- <label class="custom-control-label m-0" for="female">Female</label> -->
 												</div>
                                             </div>
