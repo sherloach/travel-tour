@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/common/taglib.jsp"%>
+<c:url var="emplAPI" value="/api/empl"/>
+<c:url var="emplURL" value="/admin/empl/list"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,6 +42,11 @@
 			</div>
 		</header>
 
+		<c:if test="${not empty message}">
+			<div role="alert" class="alert alert-${alert}">
+				  <strong>${message}</strong>
+			</div>
+		</c:if>
 		<form action="<c:url value='/admin/user/list'/>" id="formSubmit" method="get">
 			<div class="container-fluid animatedParent animateOnce">
 				<div class="tab-content my-3" id="v-pills-tabContent">
@@ -91,7 +98,7 @@
 															</c:if>
 															<c:if test="${item.status == 0}">
 																<span class="icon icon-circle s-12  mr-2 text-danger"></span>
-																Suspended
+																Leave
 															</c:if>
 														</td>
 														<td>
@@ -107,7 +114,7 @@
 															<c:param name="id" value="${item.id}"/>
 														</c:url>
 														<td><a href="${updateEmplURL}"><i class="icon-pencil mr-3"></i></a>
-															<a href="panel-page-profile.html"><i class="icon-trash-can4"></i></a>
+															<a href="#" onclick="warningBeforeDelete(${item.userID})"><i class="icon-trash-can4"></i></a>
 														</td>
 													</tr>
 												</c:forEach>
@@ -150,6 +157,38 @@
 				}
 			});
 		});
+
+		function warningBeforeDelete(userID) {
+			swal({
+			  title: "Are you sure?",
+			  text: "You will not be able to recover this tour!",
+			  type: "warning",
+			  showCancelButton: true,
+			  confirmButtonClass: "btn-success",
+			  cancelButtonClass: "btn-danger",
+			  confirmButtonText: "Delete",
+			  cancelButtonText: "Cancel",
+			}).then(function(isConfirm) {
+			  if (isConfirm.dismiss !== 'cancel') {
+					deleteTour(userID);
+			  }
+			});
+		}
+
+		function deleteTour(data) {
+	        $.ajax({
+	            url: '${emplAPI}',
+	            type: 'DELETE',
+	            contentType: 'application/json',
+	            data: JSON.stringify(data),
+	            success: function (result) {
+	                window.location.href = "${emplURL}?page=1&limit=6&message=delete_success";
+	            },
+	            error: function (error) {
+	            	window.location.href = "${emplURL}?page=1&limit=2&message=error_system";
+	            }
+	        });
+	    }
 	</script>
 </body>
 </html>

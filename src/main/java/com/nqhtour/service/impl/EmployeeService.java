@@ -95,7 +95,11 @@ public class EmployeeService implements IEmployeeService {
 
 	@Override
 	public void delete(long id) {
-		employeeRepository.delete(id);
+		UserEntity userDelete = userRepository.findOne(id);
+
+		// Set status to 0
+		userDelete.setStatus(0);
+		userRepository.save(userDelete);
 	}
 
 }
