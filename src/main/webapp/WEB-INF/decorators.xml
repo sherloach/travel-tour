@@ -18,4 +18,8 @@
         <pattern>/login</pattern>
     </decorator>
 
+	<decorator name="signup" page="signup.jsp">
+        <pattern>/signup</pattern>
+    </decorator>
+
 </decorators>

@@ -41,7 +41,7 @@
 
 				<security:authorize access = "isAnonymous()">
 					<a href="<c:url value='/login'/>" class="nav__el">Log in</a>
-					<a href="<c:url value='#'/>" class="nav__el nav__el--cta">Sign up</a>
+					<a href="<c:url value='/signup'/>" class="nav__el nav__el--cta">Sign up</a>
 				</security:authorize>
 				<security:authorize access = "isAuthenticated()">
 					<a href="<c:url value='#'/>" class="nav__el">Welcome, <%=SecurityUtils.getPrincipal().getFullName()%></a>

@@ -1,0 +1,7 @@
+label.error {
+    position: absolute;
+    left: 0;
+    top: 40px;
+    color: red;
+    font-size: small;
+}

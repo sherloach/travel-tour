@@ -26,6 +26,12 @@ public class HomeController {
 		return mav;
 	}
 
+	@RequestMapping(value = "/signup", method = RequestMethod.GET)
+	public ModelAndView signupPage() {
+		ModelAndView mav = new ModelAndView("/web/signup");
+		return mav;
+	}
+
 	// logout() do Spring security cung cap, se remove doi tuong dang dang nhap vao he thong
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) {
