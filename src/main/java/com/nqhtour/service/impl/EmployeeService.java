@@ -78,8 +78,8 @@ public class EmployeeService implements IEmployeeService {
 		if (dto.getId() != null) {
 			UserEntity oldUser = userRepository.findOne(dto.getUserID());
 			EmployeeEntity oldEmpl = employeeRepository.findOne(dto.getId());
-			
 			UserEntity userUpdate = userConverter.toEntity(oldUser, userDTO);
+
 			userEntity = userRepository.save(userUpdate);
 			entity = employeeConverter.toEntity(oldEmpl, dto);
 		} else {

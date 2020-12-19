@@ -53,7 +53,7 @@ public class EmployeeController {
 		ModelAndView mav = new ModelAndView("admin/user/edit");
 		EmployeeDTO model = new EmployeeDTO();
 
-		// Add new empl
+		// Add new employee
 		if (id != null) {
 			model = emplService.findById(id);
 		}

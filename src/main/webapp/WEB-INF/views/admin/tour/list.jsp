@@ -23,7 +23,7 @@
 				<div class="row">
 					<ul class="nav responsive-tab nav-material nav-material-white">
 						<li><a class="nav-link active"
-							href="<c:url value='/admin/tour/list?page=1&limit=2'/>"><i class="icon icon-list"></i>All Tours</a></li>
+							href="<c:url value='/admin/tour/list?page=1&limit=6'/>"><i class="icon icon-list"></i>All Tours</a></li>
 						<li><a class="nav-link"
 							href="<c:url value='/admin/tour/edit'/>">
 							<i class="icon icon-plus-circle"></i> Add New Tours</a></li>

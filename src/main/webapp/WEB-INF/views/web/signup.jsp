@@ -9,11 +9,6 @@
 <title>Sign Up</title>
 </head>
 <body>
-	<c:if test="${not empty message}">
-		<div role="alert" class="alert alert-${alert}">
-			  <strong>${message}</strong>
-		</div>
-	</c:if>
 	<div class="page-wrapper bg-blue p-t-100 p-b-100 font-robo" style="background: #27ae60 ">
         <div class="wrapper wrapper--w680">
             <div class="card card-1">
@@ -62,6 +57,11 @@
                             <button id="btnRegister" class="btn btn--radius btn--green" type="button">Submit</button>
                         </div>
                     </form>
+					<c:if test="${not empty message}">
+						<div role="alert" class="alert alert-${alert}">
+							  <strong>${message}</strong>
+						</div>
+					</c:if>
                 </div>
             </div>
         </div>
@@ -151,11 +151,11 @@
 					data: JSON.stringify(data),
 					dataType: 'json',
 					success: function (result) {
-						window.location.href = "signup&message=insert_success";
+						window.location.href = "signup?message=create_success";
 					},
 					error: function (error) {
 						console.log(error);
-						window.location.href = "signup&message=error_system";
+						window.location.href = "signup?message=error_system";
 					}
 				});
 			}

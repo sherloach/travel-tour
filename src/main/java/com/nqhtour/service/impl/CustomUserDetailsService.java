@@ -16,8 +16,6 @@ import com.nqhtour.dto.MyUser;
 import com.nqhtour.entity.UserEntity;
 import com.nqhtour.repository.UserRepository;
 
-
-
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 	

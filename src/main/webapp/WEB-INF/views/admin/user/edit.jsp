@@ -170,7 +170,6 @@
 					});
 
 					var id = $('#emplID').val();
-					
 					if (id == "") {
 						addUser(data);
 					} else {

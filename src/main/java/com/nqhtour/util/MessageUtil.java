@@ -21,6 +21,9 @@ public class MessageUtil {
 		} else if (message.equals("error_system")) {
 			result.put("message", "Error system!");
 			result.put("alert", "danger");
+		} else if (message.equals("create_success")) {
+			result.put("message", "Create account success!");
+			result.put("alert", "danger");
 		}
 		return result;
 	}

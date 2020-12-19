@@ -36,10 +36,10 @@ public class HomeController {
 
 	// TODO: fix redirect when submit, bcrypt password
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
-	public ModelAndView signupPage(@RequestParam(value = "message", required = false) String mess) {
+	public ModelAndView signupPage(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("/web/signup");
-		if (!mess.isEmpty()) {
-			Map<String, String> message = messageUtil.getMessage(mess);
+		if (request.getParameter("message") != null) {
+			Map<String, String> message = messageUtil.getMessage(request.getParameter("message"));
 			mav.addObject("message", message.get("message"));
 			mav.addObject("alert", message.get("alert"));
 		}
