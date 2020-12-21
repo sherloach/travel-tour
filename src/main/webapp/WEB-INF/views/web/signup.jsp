@@ -115,7 +115,8 @@
 					},
 					email: {
 						required: "Vui lòng nhập địa chỉ email!",
-						email: "Email không hợp lệ"
+						email: "Email không hợp lệ",
+						uniqueEmail: "That email is already taken."
 					},
 					phoneNumber: {
 						required: "Vui lòng nhập số điện thoại!"
@@ -155,7 +156,7 @@
 					},
 					error: function (error) {
 						console.log(error);
-						window.location.href = "signup?message=error_system";
+						window.location.href = "signup?message=create_failed";
 					}
 				});
 			}

@@ -15,6 +15,7 @@
 
 	<!-- Custom styles for this template-->
 	<link href="<c:url value='/template/admin/assets/css/mystyle.css'/>" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" media="all" href="<c:url value='/template/signup/css/mystyle.css'/>">
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	

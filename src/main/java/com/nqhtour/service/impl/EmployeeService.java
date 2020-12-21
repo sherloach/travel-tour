@@ -5,8 +5,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.nqhtour.constant.SystemConstant;
 import com.nqhtour.converter.EmployeeConverter;
 import com.nqhtour.converter.UserConverter;
 import com.nqhtour.dto.EmployeeDTO;
@@ -34,6 +36,9 @@ public class EmployeeService implements IEmployeeService {
 	
 	@Autowired
 	UserConverter userConverter;
+
+	@Autowired
+	PasswordEncoder passwordEncode;
 
 	@Override
 	public List<EmployeeDTO> findAll(Pageable pageable) {
@@ -70,11 +75,18 @@ public class EmployeeService implements IEmployeeService {
 		// Set user data
 		UserDTO userDTO = new UserDTO();
 		userDTO.setUsername(dto.getEmail());
-		userDTO.setPassword(dto.getPassword());
+		userDTO.setPassword(passwordEncode.encode(dto.getPassword()));
 		userDTO.setRole(dto.getRole());
 		userDTO.setStatus(1);
 		
 		UserEntity userEntity = null;
+		
+		// Check email user exist or not?
+		userEntity = userRepository.findOneByUserNameAndStatus(userDTO.getUsername(), SystemConstant.ACTIVE_STATUS);
+		if (userEntity != null) {
+			throw new ArrayIndexOutOfBoundsException();
+		}
+
 		if (dto.getId() != null) {
 			UserEntity oldUser = userRepository.findOne(dto.getUserID());
 			EmployeeEntity oldEmpl = employeeRepository.findOne(dto.getId());

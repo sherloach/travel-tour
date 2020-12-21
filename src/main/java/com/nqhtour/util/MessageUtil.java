@@ -23,6 +23,9 @@ public class MessageUtil {
 			result.put("alert", "danger");
 		} else if (message.equals("create_success")) {
 			result.put("message", "Create account success!");
+			result.put("alert", "success");
+		} else if (message.equals("create_failed")) {
+			result.put("message", "That Email is taken. Try another!");
 			result.put("alert", "danger");
 		}
 		return result;

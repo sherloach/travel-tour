@@ -6,8 +6,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Add User</title>
+	<meta charset="UTF-8">
+	<title>Add User</title>
+	<style>
+		.error {
+		  width  : 100%;
+		  padding: 0;
+
+		  font-size: 80%;
+		  color: white;
+		  background-color: #900;
+		  border-radius: 0 0 5px 5px;
+
+		  box-sizing: border-box;
+		}
+
+		.error.active {
+		  padding: 0.3em;
+		}
+		
+		.my-error {
+		  border-color: #ed5564 !important;
+		  padding-right: calc(1.5em + .75rem);
+		  background-image: url(data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23ED5564' viewBox='-2 -2 7 7'%3e%3cpath stroke='%23ED5564' d='M0 0l3 3m0-3L0 3'/%3e%3ccircle r='.5'/%3e%3ccircle cx='3' r='.5'/%3e%3ccircle cy='3' r='.5'/%3e%3ccircle cx='3' cy='3' r='.5'/%3e%3c/svg%3E) !important;
+		  background-repeat: no-repeat;
+		  background-position: center right calc(.375em + .1875rem);
+		  background-size: calc(.75em + .375rem) calc(.75em + .375rem) !important;
+		}
+	</style>
 </head>
 <body>
 	<div class="page has-sidebar-left height-full">
@@ -89,7 +115,8 @@
                                 <div class="form-row mt-1">
                                     <div class="form-group col-6 m-0">
                                         <label class="col-form-label s-12"><i class="icon-envelope-o mr-2"></i>Email</label>
-                                        <form:input path="email" placeholder="user@email.com" cssClass="form-control r-0 light s-12 " type="text" required="required"/>
+                                        <form:input path="email" onfocusout="" placeholder="user@email.com" cssClass="form-control r-0 light s-12 " type="email" required="required"/>
+                                        <span class="error" aria-live="polite"></span>
                                     </div>
 
                                     <div class="form-group col-6 m-0">
@@ -115,7 +142,7 @@
                                     <div class="form-group col-5 m-0">
                                         <label class="my-1 mr-2">Select a role</label>
                                         <form:select path="role" cssClass="custom-select my-1 mr-sm-2 form-control r-0 light s-12" required="required">
-											<form:option value="NONE" label="Choose..."/>
+											<form:option value="" label="Choose..."/>
 											<form:option value="ADMIN" label="Admin"/>
 											<form:option value="EMPLOYEE" label="Employee"/>
 										</form:select>
@@ -139,44 +166,40 @@
 </div>
 
 <script type="text/javascript">
+	var form = document.getElementById("formSubmit");
 	(function () {
 		"use strict";
 		window.addEventListener("load", function () {
-			var form = document.getElementById("formSubmit");
 			var btnPublish = document.getElementById("btnAddOrUpdateUser");
 			btnPublish.addEventListener("click", function (event) {
 				event.preventDefault(); // Huỷ bỏ event nếu nó có thể huỷ mà không dừng sự lan rộng (propagation) của event tới phần khác.
 
 				form.classList.add("was-validated");
-				/* var editorElement = document.getElementById("description");
-				if (editorElement.value == '') {
-					editorElement.parentNode.classList.add("is-invalid");
-					editorElement.parentNode.classList.remove("is-valid");
-				} else {
-					editorElement.parentNode.classList.remove("is-invalid");
-					editorElement.parentNode.classList.add("is-valid");
-				} */
 				
-				if (form.checkValidity() == true) { // Returns true if an input element contains valid data.
-					event.stopPropagation(); // Ngăn chặn sự lan rộng của sự kiện hiện tại tới thằng khác.
+				if (email.validity.valid) {
+					if (form.checkValidity() == true) { // Returns true if an input element contains valid data.
+						event.stopPropagation(); // Ngăn chặn sự lan rộng của sự kiện hiện tại tới thằng khác.
+						var editorElement = document.getElementById("email");
 
-					// TODO: fix validation
-					// THÊM / SỬA
-					event.preventDefault();
-					var data = {};
-					var formData = $('#formSubmit').serializeArray();
-					$.each(formData, function (i, v) {
-						data[""+v.name+""] = v.value;
-					});
+						// TODO: fix validation
+						// THÊM / SỬA
+						event.preventDefault();
+						var data = {};
+						var formData = $('#formSubmit').serializeArray();
+						$.each(formData, function (i, v) {
+							data[""+v.name+""] = v.value;
+						});
 
-					var id = $('#emplID').val();
-					if (id == "") {
-						addUser(data);
-					} else {
-						updateUser(data);
+						var id = $('#emplID').val();
+						if (id == "") {
+							addUser(data);
+						} else {
+							updateUser(data);
+						}
 					}
 				}
 			}, false);
+
 
 			function addUser(data) {
 				$.ajax({
@@ -189,7 +212,7 @@
 						window.location.href = "${editUserURL}?id=" + result.id + "&message=insert_success";
 					},
 					error: function (error) {
-						window.location.href = "${listUserURL}?page=1&limit=6&message=error_system";
+						window.location.href = "${editUserURL}?message=create_failed";
 					}
 				});
 			}
@@ -211,6 +234,36 @@
 			}
 		}, false);
 	}());
+
+	function checkUserEmail() {
+		var email = $("#email").val();
+		if (email != '') {
+			const emailInput = document.getElementById('email');
+			const emailError = document.querySelector('#email + span.error');
+			$.ajax({
+				url: '${userAPI}/checkemail',
+				type: 'POST',
+				contentType: 'text/plain',
+				data: email,
+				dataType: 'json',
+				success: function (result) {
+					//var emailInput = document.getElementById("email");
+					if (result) {
+						console.log("ton tai")
+						emailInput.classList.add("my-error");
+						//emailInput.classList.remove("is-valid");
+						emailError.textContent = 'Đã tồn tại email này!';
+					} else {
+						console.log("chua ton tai")
+						emailInput.classList.remove("my-error");
+						//emailInput.classList.add("is-valid");
+						emailError.textContent = ''; // Reset the content of the message
+						emailError.className = 'error'; // Reset the visual state of the message
+					}
+				}
+			});
+		}
+	}
 </script>
 
 </body>

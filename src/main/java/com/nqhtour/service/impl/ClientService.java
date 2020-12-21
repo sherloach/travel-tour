@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.nqhtour.constant.SystemConstant;
 import com.nqhtour.converter.ClientConverter;
 import com.nqhtour.converter.UserConverter;
 import com.nqhtour.dto.ClientDTO;
@@ -46,6 +47,12 @@ public class ClientService implements IClientService {
 		userDTO.setStatus(1);
 
 		UserEntity userEntity = null;
+		// Check email user exist or not?
+		userEntity = userRepository.findOneByUserNameAndStatus(userDTO.getUsername(), SystemConstant.ACTIVE_STATUS);
+		if (userEntity != null) {
+			throw new ArrayIndexOutOfBoundsException();
+		}
+
 		if (dto.getId() != null) {
 			UserEntity oldUser = userRepository.findOne(dto.getUserID());
 			ClientEntity oldClient = clientRepository.findOne(dto.getId());
