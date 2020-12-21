@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -15,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.nqhtour.dto.TourDTO;
+import com.nqhtour.service.impl.TourService;
 import com.nqhtour.util.MessageUtil;
 
 @Controller(value="web")
@@ -22,9 +26,20 @@ public class HomeController {
 	@Autowired
 	private MessageUtil messageUtil;
 	
+	@Autowired
+	private TourService tourService;
+	
 	@RequestMapping(value = "/trang-chu", method = RequestMethod.GET)
 	public ModelAndView homePage() {
 		ModelAndView mav = new ModelAndView("/web/home");
+		TourDTO model = new TourDTO();
+
+		// TODO: show tours that have not been sold out yet:
+		// 		 - Write a tours finding func that maxGroupSize equals People
+		Pageable pageable = new PageRequest(0, 6);
+		model.setListResult(tourService.findAll(pageable));
+		mav.addObject("model", model);
+
 		return mav;
 	}
 
