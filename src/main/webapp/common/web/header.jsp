@@ -1,4 +1,5 @@
 <%@ page import="com.nqhtour.util.SecurityUtils" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %> 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <header class="header">
       <nav class="nav nav--tours">
@@ -17,7 +18,7 @@
         </form>
       </nav>
       <div class="header__logo">
-        <img src="img/logo-white.png" alt="Natours logo" />
+        <img src="/template/web/img/logo-white.png" alt="Natours logo" />
       </div>
       <nav class="nav nav--user">
 <!--         <a href="#" class="nav__el">My bookings</a>
