@@ -1,5 +1,10 @@
 package com.nqhtour.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.nqhtour.entity.TourEntity;
+
 public class ClientDTO extends AbstractDTO<ClientDTO> {
 	private String name;
 	private Long userID;
@@ -11,6 +16,7 @@ public class ClientDTO extends AbstractDTO<ClientDTO> {
 	private String password;
 	private String role;
 	private Integer status;
+	private List<TourEntity> tours = new ArrayList<>();
 
 	public String getName() {
 		return name;
@@ -71,6 +77,12 @@ public class ClientDTO extends AbstractDTO<ClientDTO> {
 	}
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+	public List<TourEntity> getTours() {
+		return tours;
+	}
+	public void setTours(List<TourEntity> tours) {
+		this.tours = tours;
 	}
 	
 }

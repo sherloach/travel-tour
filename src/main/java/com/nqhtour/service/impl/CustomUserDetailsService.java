@@ -39,6 +39,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 		// Set tên sẽ hiển thị ra giao diện
 		myUser.setFullName(userEntity.getUserName());
+		
 		return myUser;
 	}
 

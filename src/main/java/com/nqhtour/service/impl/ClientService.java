@@ -10,8 +10,10 @@ import com.nqhtour.converter.UserConverter;
 import com.nqhtour.dto.ClientDTO;
 import com.nqhtour.dto.UserDTO;
 import com.nqhtour.entity.ClientEntity;
+import com.nqhtour.entity.TourEntity;
 import com.nqhtour.entity.UserEntity;
 import com.nqhtour.repository.ClientRepository;
+import com.nqhtour.repository.TourRepository;
 import com.nqhtour.repository.UserRepository;
 import com.nqhtour.service.IClientService;
 
@@ -28,6 +30,9 @@ public class ClientService implements IClientService {
 	
 	@Autowired
 	UserRepository userRepository;
+	
+	@Autowired
+	TourRepository tourRepository;
 	
 	@Autowired
 	UserConverter userConverter;
@@ -69,6 +74,13 @@ public class ClientService implements IClientService {
 
 		entity.setUser(userEntity);
 		return clientConverter.toDTO(clientRepository.save(entity));
+	}
+
+	public void booking(Long idClient, Long idTour) {
+		ClientEntity clientEntity = clientRepository.findOne(idClient);
+		TourEntity tourEntity = tourRepository.findOne(idTour);
+		clientEntity.getTours().add(tourEntity);
+		clientRepository.save(clientEntity);
 	}
 
 	@Override

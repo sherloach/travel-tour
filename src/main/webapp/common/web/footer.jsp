@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <div class="footer">
       <div class="footer__logo">
-        <img src="img/logo-green.png" alt="Natours logo" />
+        <img src="/template/web/img/logo-green.png" alt="Natours logo" />
       </div>
       <ul class="footer__nav">
         <li><a href="#">About us</a></li>
@@ -11,6 +11,6 @@
         <li><a href="#">Contact</a></li>
       </ul>
       <p class="footer__copyright">
-        &copy; by Jonas Schmedtmann. All rights reserved.
+        &copy; by Quang Hoa. All rights reserved.
       </p>
 </div>

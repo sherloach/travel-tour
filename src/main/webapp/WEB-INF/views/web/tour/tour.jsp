@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -291,9 +291,10 @@
         <div class="cta__content">
           <h2 class="heading-secondary">What are you waiting for?</h2>
           <p class="cta__text">
-            10 days. 1 adventure. Infinite memories. Make it yours today!
+            ${model.duration} days. 1 adventure. Infinite memories. Make it yours today!
           </p>
-          <button class="btn btn--green span-all-rows">Book tour now!</button>
+          <!-- <button class="btn btn--green span-all-rows"><a href="">Book tour now!</a></button> -->
+          <a href="<c:url value='/tour/checkout?id=${model.id}'/>" class="btn btn--green span-all-rows">Book tour now!</a>
         </div>
       </div>
     </section>

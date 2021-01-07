@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.nqhtour.constant.SystemConstant;
 import com.nqhtour.dto.ClientDTO;
+import com.nqhtour.entity.ClientEntity;
 import com.nqhtour.entity.UserEntity;
+import com.nqhtour.repository.ClientRepository;
 import com.nqhtour.repository.UserRepository;
 import com.nqhtour.service.IClientService;
 
@@ -19,6 +21,9 @@ public class ClientAPI {
 	
 	@Autowired
 	private UserRepository userRepository;
+
+	@Autowired
+	private ClientRepository clientRepository;
 	
 	@PostMapping("/api/client")	
 	public ClientDTO createClient(@RequestBody ClientDTO client) {
@@ -39,5 +44,14 @@ public class ClientAPI {
 		}
 
 		return true;
+	}
+
+	@PostMapping("/api/client/booking")
+	public void booking(@RequestBody String id) {
+		String[] ids = id.split(" ");
+		ClientEntity entity = clientRepository.findOneByEmail(ids[0]);
+		Long client = entity.getId();
+		Long tour = Long.parseLong(ids[1]);
+		clientService.booking(client, tour);
 	}
 }

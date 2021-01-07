@@ -27,4 +27,13 @@ public class TourController {
 		return mav;
 	}
 
+	@RequestMapping(value = "/tour/checkout", method = RequestMethod.GET)
+	public ModelAndView checkoutTour(@RequestParam("id") Long id, HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView("web/tour/checkout");
+		TourDTO model = new TourDTO();
+		model = tourService.findById(id);
+		mav.addObject("model", model);
+		
+		return mav;
+	}
 }
