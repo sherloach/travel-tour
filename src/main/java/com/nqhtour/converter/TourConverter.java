@@ -22,6 +22,7 @@ public class TourConverter {
 		result.setMaxGroupSize(entity.getMaxGroupSize());
 		result.setPrice(entity.getPrice());
 		result.setStartDate(entity.getStartDate());
+		result.setImageCover(entity.getImageCover());
 		
 		return result;
 	}
@@ -37,6 +38,7 @@ public class TourConverter {
 		result.setMaxGroupSize(dto.getMaxGroupSize());
 		result.setPrice(dto.getPrice());
 		result.setStartDate(dto.getStartDate());
+		result.setImageCover(dto.getImageCover());
 		
 		return result;
 	}
@@ -52,6 +54,7 @@ public class TourConverter {
 		oldTour.setMaxGroupSize(dto.getMaxGroupSize());
 		oldTour.setPrice(dto.getPrice());
 		oldTour.setStartDate(dto.getStartDate());
+		oldTour.setImageCover(dto.getImageCover());
 		
 		return oldTour;
 	}

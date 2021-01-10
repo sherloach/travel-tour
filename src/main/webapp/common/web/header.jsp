@@ -3,7 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <header class="header">
       <nav class="nav nav--tours">
-        <a href="#" class="nav__el">All tours</a>
+        <a href="<c:url value='/trang-chu'/>" class="nav__el">All tours</a>
         <form class="nav__search">
           <button class="nav__search-btn">
             <svg>

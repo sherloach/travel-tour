@@ -112,6 +112,12 @@
 								</div>
 							</div>
 						</div>
+						<div class="row">
+							<div class="col-md-5 mb-3">
+								<label>Image</label>
+								<input id="uploadImage" name="file" type="file"/>
+							</div>
+						</div>
 						<div class="form-group">
 							<label for="description">Description</label>
 							<form:textarea cssClass="form-control p-t-40"  path="description"
@@ -165,6 +171,21 @@
 			window.addEventListener("load", function () {
 				var form = document.getElementById("formSubmit");
 				var btnPublish = document.getElementById("btnAddOrUpdateTour");
+
+				var data = {};
+				var fileInput = document.getElementById('uploadImage');
+				$('#uploadImage').change(function() {
+					var files = fileInput.files[0];
+					if (files) {
+						var reader = new FileReader();
+						reader.onload = function(e) {
+							data[""+"base64"+""] = e.target.result;
+							data[""+"imageCover"+""] = files.name;
+						};
+						reader.readAsDataURL(files);
+					}
+				});
+
 				btnPublish.addEventListener("click", function (event) {
 					event.preventDefault(); // Huỷ bỏ event nếu nó có thể huỷ mà không dừng sự lan rộng (propagation) của event tới phần khác.
 
@@ -184,7 +205,6 @@
 						// TODO: fix validation
 						// THÊM / SỬA
 						event.preventDefault();
-						var data = {};
 						var formData = $('#formSubmit').serializeArray();
 						$.each(formData, function (i, v) {
 							data[""+v.name+""] = v.value;

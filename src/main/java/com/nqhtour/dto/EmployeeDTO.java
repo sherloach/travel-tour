@@ -1,5 +1,7 @@
 package com.nqhtour.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class EmployeeDTO extends AbstractDTO<EmployeeDTO> {
 	private String name;
 	private Long userID;
@@ -13,6 +15,8 @@ public class EmployeeDTO extends AbstractDTO<EmployeeDTO> {
 	private String password;
 	private String role;
 	private Integer status;
+	private String image;
+	private String imagePath;
 
 	public String getName() {
 		return name;
@@ -85,6 +89,18 @@ public class EmployeeDTO extends AbstractDTO<EmployeeDTO> {
 	}
 	public void setStatus(Integer status) {
 		this.status = status;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
+	}
+	public String getImagePath() {
+		return imagePath;
+	}
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
 	}
 	
 }

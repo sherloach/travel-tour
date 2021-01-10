@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="com.nqhtour.util.SecurityUtils"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>  
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +9,7 @@
 <title>NQHTOUR</title>
 </head>
 <body>
-	<section class="section-header" style="background-image: url(/template/web/img/tours/tour-1-cover.jpg); background-size: cover; background-position: center;">
+	<section class="section-header" style="background-image: url(${pageContext.request.contextPath}/template/upload/tour/${model.imageCover}); background-size: cover; background-position: center;">
       <div class="heading-box">
         <h1 class="heading-primary">
           <span>${model.name}</span>
@@ -65,16 +67,9 @@
           </div>
 
           <div class="overview-box__group">
-            <h2 class="heading-secondary ma-bt-lg">Your tour guides</h2>
+            <h2 class="heading-secondary ma-bt-lg">BOOKING NOW...</h2>
 
             <div class="overview-box__detail">
-              <img
-                src="img/users/user-19.jpg"
-                alt="Lead guide"
-                class="overview-box__img"
-              />
-              <span class="overview-box__label">Lead guide</span>
-              <span class="overview-box__text">Steven Miller</span>
             </div>
           </div>
         </div>
@@ -294,7 +289,12 @@
             ${model.duration} days. 1 adventure. Infinite memories. Make it yours today!
           </p>
           <!-- <button class="btn btn--green span-all-rows"><a href="">Book tour now!</a></button> -->
-          <a href="<c:url value='/tour/checkout?id=${model.id}'/>" class="btn btn--green span-all-rows">Book tour now!</a>
+			<security:authorize access = "isAnonymous()">
+				<a href="<c:url value='/signup'/>" class="btn btn--green span-all-rows">Book tour now!</a>
+			</security:authorize>
+			<security:authorize access = "isAuthenticated()">
+				<a href="<c:url value='/tour/checkout?id=${model.id}'/>" class="btn btn--green span-all-rows">Book tour now!</a>
+			</security:authorize>
         </div>
       </div>
     </section>

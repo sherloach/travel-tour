@@ -101,15 +101,15 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-3 offset-md-1">
-                                        <input hidden id="file" name="file"/>
-                                        <div class="dropzone dropzone-file-area pt-4 pb-4" id="fileUpload">
-                                            <div class="dz-default dz-message">
-                                                <span>Drop A passport size image of user</span>
-                                                <div>You can also click to open file browser</div>
-                                            </div>
-                                        </div>
-                                    </div>
+										<div class="col-md-3 offset-md-1" style="margin-left: 2rem;">
+											<input id="uploadImage" name="file" type="file" <c:if test="${not empty model.avatar}">value="${model.avatar}"</c:if>/>
+											<div class="" id="fileUpload" style="border: 2px dashed #e1d8ee; border-radius: 24px; margin-top: 5px; min-height: 128px;"> 
+												<div class="dz-default dz-message">
+													<%-- <c:if test="${empty model.avatar}"><span>image of user</span></c:if> --%>
+													<img id="changeImg" alt="" src="${pageContext.request.contextPath}/template/upload/${model.avatar}" style="border-radius: 25px;">
+												</div>
+											</div>
+										</div>
                                 </div>
 
                                 <div class="form-row mt-1">
@@ -171,6 +171,23 @@
 		"use strict";
 		window.addEventListener("load", function () {
 			var btnPublish = document.getElementById("btnAddOrUpdateUser");
+			var data = {};
+
+			var fileInput = document.getElementById('uploadImage');
+			$('#uploadImage').change(function() {
+				var files = fileInput.files[0];
+				if (files) {
+					var reader = new FileReader();
+					reader.onload = function(e) {
+						data[""+"imagePath"+""] = e.target.result;
+						data[""+"avatar"+""] = files.name;
+					};
+					reader.readAsDataURL(files);
+				}
+				
+				$("#changeImg").attr("src", "${pageContext.request.contextPath}/template/upload/" + files.name);
+			});
+
 			btnPublish.addEventListener("click", function (event) {
 				event.preventDefault(); // Huỷ bỏ event nếu nó có thể huỷ mà không dừng sự lan rộng (propagation) của event tới phần khác.
 
@@ -184,13 +201,24 @@
 						// TODO: fix validation
 						// THÊM / SỬA
 						event.preventDefault();
-						var data = {};
+						
 						var formData = $('#formSubmit').serializeArray();
 						$.each(formData, function (i, v) {
 							data[""+v.name+""] = v.value;
 						});
-
 						var id = $('#emplID').val();
+						
+						/* var formData = new FormData();
+			            var Data = $('#formSubmit').serializeArray();
+			            $.each(Data, function (i, v) {
+			                formData.append(""+v.name+"", v.value);
+			            });
+						var fileInput = document.getElementById('image');
+			            var file = fileInput.files[0];
+			            formData.append('image', file);
+
+			            var id = $('#emplID').val(); */
+						
 						if (id == "") {
 							addUser(data);
 						} else {
@@ -200,6 +228,7 @@
 				}
 			}, false);
 
+			
 
 			function addUser(data) {
 				$.ajax({

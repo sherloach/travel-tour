@@ -13,6 +13,7 @@ public class TourDTO extends AbstractDTO<TourDTO> {
 	private String summary;
 	private String images;
 	private String imageCover;
+	private String base64;
 	private String startDate;
 	
 	public String getName() {
@@ -86,5 +87,11 @@ public class TourDTO extends AbstractDTO<TourDTO> {
 	}
 	public void setStartDate(String startDate) {
 		this.startDate = startDate;
+	}
+	public String getBase64() {
+		return base64;
+	}
+	public void setBase64(String base64) {
+		this.base64 = base64;
 	}
 }

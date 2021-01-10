@@ -1,7 +1,10 @@
 package com.nqhtour.service.impl;
 
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
+
+import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +18,7 @@ import com.nqhtour.entity.TourEntity;
 import com.nqhtour.repository.TourRepository;
 import com.nqhtour.service.ITourService;
 import com.nqhtour.util.StringUtil;
+import com.nqhtour.util.UploadFileUtil;
 
 @Service
 public class TourService implements ITourService {
@@ -24,6 +28,12 @@ public class TourService implements ITourService {
 
 	@Autowired
 	private TourConverter tourConverter;
+
+	@Autowired
+	private UploadFileUtil uploadFileUtil;
+	
+	@Autowired
+	private ServletContext context;
 	
 	// Khi lấy dữ liệu lên thì dữ liệu đó sẽ được gán vào Entity
 	// Và để thao tác với dữ liệu đó, thì ta sẽ convert List Entity đó sang List DTO
@@ -53,6 +63,13 @@ public class TourService implements ITourService {
 	@Override
 	public TourDTO save(TourDTO dto) {
 		TourEntity tourEntity = new TourEntity();
+
+		// convert image from base64 to bytes and write image to root dir
+		String imagePath = dto.getBase64().split(",")[1];
+		byte[] decodeBase64 = Base64.getDecoder().decode(imagePath.getBytes());
+		String uploadRootPath = context.getRealPath("template/upload/tour");
+		uploadFileUtil.writeOrUpdate(decodeBase64, uploadRootPath, dto.getImageCover());
+
 		if (dto.getId() != null) {
 			TourEntity oldTour = tourRepository.findOne(dto.getId());
 			tourEntity = tourConverter.toEntity(oldTour, dto);

@@ -8,7 +8,7 @@
 <title>NQHTOUR | Payment</title>
 </head>
 <body>
-	<div class="row-pm">
+	<div class="row-pm" style="margin-top: 5rem; margin-bottom: 5rem;">
 	  <div class="col-50-pm">
 		<div class="container-pm" style="font-size:large">
 		  <form action="/action_page.php">
@@ -51,6 +51,7 @@
 	  <div class="col-25-pm">
 		<div class="container-pm" style="font-size:large">
 		  <h4>Tour <span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b>1</b></span></h4>
+		  <img src="${pageContext.request.contextPath}/template/upload/tour/${model.imageCover}" alt="" style="height: 300px; border-radius: 15px; opacity: 0.8;">
 		  <p>${model.name}<span class="price">${model.duration} days</span></p>
 		  <hr>
 		  <p>Total <span class="price" style="color:black"><b>$${model.price}</b></span></p>

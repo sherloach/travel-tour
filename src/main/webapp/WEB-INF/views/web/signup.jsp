@@ -59,7 +59,7 @@
                     </form>
 					<c:if test="${not empty message}">
 						<div role="alert" class="alert alert-${alert}">
-							  <strong>${message}</strong>
+							  <strong style="color: red">${message}</strong>
 						</div>
 					</c:if>
                 </div>
@@ -71,11 +71,11 @@
 		$(function() {
 			$.validator.addMethod("hoTenPattern", function (value, element) {
 				return this.optional(element) || /^[a-zA-Z_ÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂưăạảấầẩẫậắằẳẵặẹẻẽềềểỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵýỷỹ\s]+$/.test(value);
-			}, "Hãy nhập họ tên ít nhất 8 ký tự chỉ gồm chữ cái!");
+			}, "Name length must bigger than 8!");
 
 			$.validator.addMethod("soDienThoaiPattern", function (value, element) {
 				return this.optional(element) || /(09|03|07|01)+([0-9]{8})\b/.test(value);
-			}, "Số điện thoại không hợp lệ!");
+			}, "Invalid phone number!");
 
 			$("#register-form").validate({
 				rules: {
@@ -103,23 +103,23 @@
 
 				messages: {
 					name: {
-						required: "Vui lòng nhập họ tên!"
+						required: "Enter name!"
 					},
 					password: {
-						required: "Vui lòng nhập mật khẩu",
-						minlength: "Mật khẩu phải bao gồm ít nhất 6 ký tự!"
+						required: "Enter password!",
+						minlength: "Password must bigger than 6!"
 					},
 					address: {
-						required: "Vui lòng nhập địa chỉ!",
-						minlength: "Địa chỉ phải bao gồm ít nhất 5 kí tự!"
+						required: "Enter address!",
+						minlength: "Address must bigger than 5!"
 					},
 					email: {
-						required: "Vui lòng nhập địa chỉ email!",
-						email: "Email không hợp lệ",
+						required: "Enter email!",
+						email: "Email invalid",
 						uniqueEmail: "That email is already taken."
 					},
 					phoneNumber: {
-						required: "Vui lòng nhập số điện thoại!"
+						required: "Enter phone number!"
 					}
 				}
 			});

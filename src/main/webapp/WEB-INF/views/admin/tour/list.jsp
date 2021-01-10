@@ -27,8 +27,6 @@
 						<li><a class="nav-link"
 							href="<c:url value='/admin/tour/edit'/>">
 							<i class="icon icon-plus-circle"></i> Add New Tours</a></li>
-						<li><a class="nav-link" href="#"><i
-								class="icon icon-trash-can"></i>Trash</a></li>
 					</ul>
 				</div>
 			</div>
@@ -50,7 +48,7 @@
 											<tbody>
 												<c:forEach var="item" items="${model.listResult}">
 													<tr class="no-b">
-														<td class="w-10"><img src="#" alt=""></td>
+														<td class="w-10"><img src="${pageContext.request.contextPath}/template/upload/tour/${item.imageCover}" alt=""></td>
 														<td> <h6>${item.name}</h6><small class="text-muted">Du Lịch Trong Nước</small> </td>
 														<td>$${item.price}</td>
 														<td><span class="badge badge-success">Published</span></td>

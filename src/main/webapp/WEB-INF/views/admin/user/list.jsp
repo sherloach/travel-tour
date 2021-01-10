@@ -26,14 +26,6 @@
 							data-toggle="pill" href="<c:url value='/admin/empl/list?page=1&limit=6'/>" role="tab"
 							aria-controls="v-pills-all"><i class="icon icon-home2"></i>All
 								Users</a></li>
-						<li><a class="nav-link" id="v-pills-buyers-tab"
-							data-toggle="pill" href="#v-pills-buyers" role="tab"
-							aria-controls="v-pills-buyers"><i class="icon icon-face"></i>
-								Buyers</a></li>
-						<li><a class="nav-link" id="v-pills-sellers-tab"
-							data-toggle="pill" href="#v-pills-sellers" role="tab"
-							aria-controls="v-pills-sellers"><i
-								class="icon  icon-local_shipping"></i> Sellers</a></li>
 						<li class="float-right"><a class="nav-link"
 							href="<c:url value='/admin/empl/edit'/>"><i
 								class="icon icon-plus-circle"></i> Add New User</a></li>
@@ -47,7 +39,7 @@
 				  <strong>${message}</strong>
 			</div>
 		</c:if>
-		<form action="<c:url value='/admin/user/list'/>" id="formSubmit" method="get">
+		<form action="<c:url value='/admin/empl/list'/>" id="formSubmit" method="get">
 			<div class="container-fluid animatedParent animateOnce">
 				<div class="tab-content my-3" id="v-pills-tabContent">
 					<div class="tab-pane animated fadeInUpShort show active"
@@ -75,8 +67,9 @@
 													<tr>
 														<td>
 															<div class="avatar avatar-md mr-3 mt-1 float-left">
-																<span
-																	class="avatar-letter avatar-letter-a  avatar-md circle"></span>
+																<span class="avatar-letter avatar-letter-a  avatar-md circle">
+																	<img class="user_avatar" src="${pageContext.request.contextPath}/template/upload/${item.avatar}" alt="User Image">
+																</span>
 															</div>
 															<div>
 																<div>
@@ -113,8 +106,11 @@
 														<c:url var="updateEmplURL" value="/admin/empl/edit">
 															<c:param name="id" value="${item.id}"/>
 														</c:url>
-														<td><a href="${updateEmplURL}"><i class="icon-pencil mr-3"></i></a>
-															<a href="#" onclick="warningBeforeDelete(${item.userID})"><i class="icon-trash-can4"></i></a>
+														<td>
+															<c:if test="${item.status != 0}">
+																<a href="${updateEmplURL}"><i class="icon-pencil mr-3"></i></a>
+																<a href="#" onclick="warningBeforeDelete(${item.userID})"><i class="icon-trash-can4"></i></a>
+															</c:if>	
 														</td>
 													</tr>
 												</c:forEach>
@@ -161,7 +157,7 @@
 		function warningBeforeDelete(userID) {
 			swal({
 			  title: "Are you sure?",
-			  text: "You will not be able to recover this tour!",
+			  text: "You will not be able to recover this user!",
 			  type: "warning",
 			  showCancelButton: true,
 			  confirmButtonClass: "btn-success",

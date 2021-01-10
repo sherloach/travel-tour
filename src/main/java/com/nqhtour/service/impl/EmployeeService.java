@@ -1,7 +1,10 @@
 package com.nqhtour.service.impl;
 
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
+
+import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -18,6 +21,7 @@ import com.nqhtour.entity.UserEntity;
 import com.nqhtour.repository.EmployeeRepository;
 import com.nqhtour.repository.UserRepository;
 import com.nqhtour.service.IEmployeeService;
+import com.nqhtour.util.UploadFileUtil;
 
 @Service
 public class EmployeeService implements IEmployeeService {
@@ -39,6 +43,12 @@ public class EmployeeService implements IEmployeeService {
 
 	@Autowired
 	PasswordEncoder passwordEncode;
+
+	@Autowired
+	private UploadFileUtil uploadFileUtil;
+	
+	@Autowired
+	private ServletContext context;
 
 	@Override
 	public List<EmployeeDTO> findAll(Pageable pageable) {
@@ -80,10 +90,16 @@ public class EmployeeService implements IEmployeeService {
 		userDTO.setStatus(1);
 		
 		UserEntity userEntity = null;
+
+		// convert image from base64 to bytes and write image to root dir
+		String imagePath = dto.getImagePath().split(",")[1];
+		byte[] decodeBase64 = Base64.getDecoder().decode(imagePath.getBytes());
+		String uploadRootPath = context.getRealPath("template/upload");
+		uploadFileUtil.writeOrUpdate(decodeBase64, uploadRootPath, dto.getAvatar());
 		
 		// Check email user exist or not?
 		userEntity = userRepository.findOneByUserNameAndStatus(userDTO.getUsername(), SystemConstant.ACTIVE_STATUS);
-		if (userEntity != null) {
+		if (userEntity != null && dto.getId() == null) {
 			throw new ArrayIndexOutOfBoundsException();
 		}
 
