@@ -54,4 +54,13 @@ public class ClientAPI {
 		Long tour = Long.parseLong(ids[1]);
 		clientService.booking(client, tour);
 	}
+
+	@PostMapping("/api/client/tour")
+	public String checkBookingExist (@RequestBody String text) {
+		String[] str = text.split(" ");
+		ClientEntity entity = clientRepository.findOneByEmail(str[0]);
+		Long idClient = entity.getId();
+		boolean exist = clientService.checkBookingExist(idClient, Long.parseLong(str[1]));
+		return String.valueOf(exist);
+	}
 }

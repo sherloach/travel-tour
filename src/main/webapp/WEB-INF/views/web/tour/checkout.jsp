@@ -67,7 +67,7 @@
 				var e = document.getElementById("emailClient");
 				var email = $("#emailClient").text();
 				var idtour = ${model.id};
-				d= email + ' ' + idtour;
+				d = email + ' ' + idtour;
 				booking(d);
 				swal("Success!", "You paid for the tour!", "success").then((value) => {
 					window.location.href = "/trang-chu";

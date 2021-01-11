@@ -83,10 +83,23 @@ public class ClientService implements IClientService {
 		clientRepository.save(clientEntity);
 	}
 
+	
+
 	@Override
 	public ClientDTO findById(long id) {
 		ClientEntity entity = clientRepository.findOne(id);
 		return clientConverter.toDTO(entity);
+	}
+
+	@Override
+	public boolean checkBookingExist(Long idClient, Long idTour) {
+		ClientEntity entity = clientRepository.findOne(idClient);
+		for (TourEntity tour : entity.getTours()) {
+			if (tour.getId().equals(idTour)) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 }

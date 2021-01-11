@@ -294,11 +294,44 @@
 			</security:authorize>
 			<security:authorize access = "hasRole('CLIENT')">
 				<%-- <c:param name="role" value="<%=SecurityUtils.getAuthorities()%>"/> --%>
-				<%-- <c:if test="${role.contains("CLIENT")}"><a href="<c:url value='/tour/checkout?id=${model.id}'/>" class="btn btn--green span-all-rows">Book tour now!</a></c:if>  --%>
-				<a href="<c:url value='/tour/checkout?id=${model.id}'/>" class="btn btn--green span-all-rows">Book tour now!</a>
+				<%-- <c:if test="${role.contains("CLIENT")}"><a href="<c:url value='/tour/checkout?id=${model.id}'/>" class="btn btn--gr<%-- een span-all-rows">Book tour now!</a></c:if>  --%>
+				<%-- <a href="<c:url value='/tour/checkout?id=${model.id}'/>" class="btn btn--green span-all-rows">Book tour now!</a> --%>
+				<button id="btn-apply" class="btn btn--green span-all-rows">Book tour now!</button>
 			</security:authorize>
         </div>
       </div>
     </section>
+    
+    <security:authorize access = "isAuthenticated()">
+			<p hidden id="emailClient"><%=SecurityUtils.getPrincipal().getFullName()%></p>
+	</security:authorize>
+
+	<script>
+		var btnApply = document.getElementById("btn-apply");
+		btnApply.addEventListener("click", function (event) {
+			var email = $("#emailClient").text();
+			var data = email + " " + ${model.id};
+			check(data);
+		});
+		
+		function check(d) {
+			$.ajax({
+				url: '/api/client/tour',
+				type: 'POST',
+				contentType: 'text/plain',
+				data: d,
+				success: function (result) {
+					if (result == "true") {
+						window.location.href = "/tour/checkout?id=" + ${model.id};
+					} else if (result == "false") {
+						swal("Warning!", "You paid for this tour!", "warning");
+					}
+				},
+				error: function (error) {
+					window.location.href = "/trang-chu";
+				}
+			});
+		}
+	</script>
 </body>
 </html>
