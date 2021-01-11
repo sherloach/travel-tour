@@ -68,8 +68,8 @@
 						<div class="row">
 							<div class="col-md-6 mb-3">
 								<label>Start Date</label>
-								<form:input cssClass="date-time-picker form-control" path="startDate"
-									  autocomplete="off" required="required"/>
+								<form:input cssClass="date-time-picker form-control" path="startDate" data-options="{&quot;minDate&quot;:&quot;-1970/01/01&quot;, &quot;maxDate&quot;:&quot;+1990/01/10&quot;}"
+									  autocomplete="off" readonly="true" required="required"/>
 								<div class="invalid-feedback">
 									Please choose a date.
 								</div>
@@ -169,6 +169,16 @@
 		(function () {
 			"use strict";
 			window.addEventListener("load", function () {
+				$("#price").attr({
+				    "type" : "number",
+				});
+				$("#maxGroupSize").attr({
+				    "type" : "number",
+				});
+				$("#duration").attr({
+				    "type" : "number",
+				});
+				
 				var form = document.getElementById("formSubmit");
 				var btnPublish = document.getElementById("btnAddOrUpdateTour");
 

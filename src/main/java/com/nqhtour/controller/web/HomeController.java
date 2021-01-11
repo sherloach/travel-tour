@@ -36,7 +36,7 @@ public class HomeController {
 
 		// TODO: show tours that have not been sold out yet:
 		// 		 - Write a tours finding func that maxGroupSize equals People
-		Pageable pageable = new PageRequest(0, 6);
+		Pageable pageable = new PageRequest(0, 9);
 		model.setListResult(tourService.findAll(pageable));
 		mav.addObject("model", model);
 

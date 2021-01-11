@@ -97,7 +97,8 @@
                                             <div class="form-group col-6 m-0">
                                                 <label class="col-form-label s-12"><i class="icon-calendar mr-2"></i>DATE OF BIRTH</label>
                                                 <form:input path="birthday" placeholder="Select Date of Birth" cssClass="form-control r-0 light s-12 date-time-picker"
-                                                data-options="{&quot;timepicker&quot;:false, &quot;format&quot;:&quot;Y-m-d&quot;}" type="text" required="required"/>
+                                                data-options="{&quot;timepicker&quot;:false, &quot;format&quot;:&quot;Y-m-d&quot;, &quot;minDate&quot;:&quot;-1999/01/10&quot;, &quot;maxDate&quot;:&quot;+1953/01/10&quot;}" type="text" required="required" readonly="true" autocomplete="off"/>
+                                            <!-- , &quot;minDate&quot;:&quot;-1970/01/02&quot; -->
                                             </div>
                                         </div>
                                     </div>
@@ -106,7 +107,7 @@
 											<div class="" id="fileUpload" style="border: 2px dashed #e1d8ee; border-radius: 24px; margin-top: 5px; min-height: 128px;"> 
 												<div class="dz-default dz-message">
 													<%-- <c:if test="${empty model.avatar}"><span>image of user</span></c:if> --%>
-													<img id="changeImg" alt="" src="${pageContext.request.contextPath}/template/upload/${model.avatar}" style="border-radius: 25px;">
+													<img id="changeImg" alt="" src="<c:if test="${not empty model.avatar}">${pageContext.request.contextPath}/template/upload/${model.avatar}</c:if>" style="border-radius: 25px;">
 												</div>
 											</div>
 										</div>
@@ -167,6 +168,7 @@
 
 <script type="text/javascript">
 	var form = document.getElementById("formSubmit");
+	
 	(function () {
 		"use strict";
 		window.addEventListener("load", function () {

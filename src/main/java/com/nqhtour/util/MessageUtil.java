@@ -27,6 +27,9 @@ public class MessageUtil {
 		} else if (message.equals("create_failed")) {
 			result.put("message", "That Email is taken. Try another!");
 			result.put("alert", "danger");
+		} else if (message.equals("delete_people_failed")) {
+			result.put("message", "Can't delete tours with reservation!");
+			result.put("alert", "danger");
 		}
 		return result;
 	}

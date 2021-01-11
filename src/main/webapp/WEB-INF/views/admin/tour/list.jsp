@@ -63,7 +63,6 @@
 															<a href='${updateTourURL}' class="my-btn-tour btn-fab btn-fab-sm btn-primary shadow text-white"><i class="icon-pencil"></i></a>
 															<a href='#' onclick="warningBeforeDelete(${item.id})" class="my-btn-tour my-btn-tour-delete btn-fab btn-fab-sm btn-primary shadow text-white"><i class="icon-trash-can"></i></a>
 														</td>
-														
 													</tr>
 												</c:forEach>
 											</tbody>
@@ -132,7 +131,7 @@
 	                window.location.href = "${tourURL}?page=1&limit=6&message=delete_success";
 	            },
 	            error: function (error) {
-	            	window.location.href = "${tourURL}?page=1&limit=2&message=error_system";
+	            	window.location.href = "${tourURL}?page=1&limit=6&message=delete_people_failed";
 	            }
 	        });
 	    }
