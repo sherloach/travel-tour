@@ -290,9 +290,11 @@
           </p>
           <!-- <button class="btn btn--green span-all-rows"><a href="">Book tour now!</a></button> -->
 			<security:authorize access = "isAnonymous()">
-				<a href="<c:url value='/signup'/>" class="btn btn--green span-all-rows">Book tour now!</a>
+				<a href="<c:url value='/login'/>" class="btn btn--green span-all-rows">Book tour now!</a>
 			</security:authorize>
-			<security:authorize access = "isAuthenticated()">
+			<security:authorize access = "hasRole('CLIENT')">
+				<%-- <c:param name="role" value="<%=SecurityUtils.getAuthorities()%>"/> --%>
+				<%-- <c:if test="${role.contains("CLIENT")}"><a href="<c:url value='/tour/checkout?id=${model.id}'/>" class="btn btn--green span-all-rows">Book tour now!</a></c:if>  --%>
 				<a href="<c:url value='/tour/checkout?id=${model.id}'/>" class="btn btn--green span-all-rows">Book tour now!</a>
 			</security:authorize>
         </div>

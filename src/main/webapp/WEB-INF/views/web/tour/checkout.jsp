@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.nqhtour.util.SecurityUtils"%>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,8 +28,6 @@
 				<input type="text" class="input-pm" id="cname" name="cardname" placeholder="John More Doe">
 				<label for="ccnum">Credit card number</label>
 				<input type="text" class="input-pm" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
-				<label for="expmonth">Exp Month</label>
-				<input type="text" class="input-pm" id="expmonth" name="expmonth" placeholder="September">
 				<div class="row-pm">
 				  <div class="col-50-pm">
 					<label for="expyear">Exp Year</label>
@@ -54,7 +53,8 @@
 		  <img src="${pageContext.request.contextPath}/template/upload/tour/${model.imageCover}" alt="" style="height: 300px; border-radius: 15px; opacity: 0.8;">
 		  <p>${model.name}<span class="price">${model.duration} days</span></p>
 		  <hr>
-		  <p>Total <span class="price" style="color:black"><b>$${model.price}</b></span></p>
+		  <!-- <p>Total <span class="price" style="color:black"><b>$${model.price}</b></span></p> -->
+		  <p>Total <span class="price" style="color:black"><b>$<fmt:formatNumber value="${model.price}" type="currency" currencySymbol=""/></b></span></p>
 		</div>
 	  </div>
 	</div>

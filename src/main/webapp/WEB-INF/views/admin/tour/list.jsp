@@ -2,7 +2,7 @@
 <%@include file="/common/taglib.jsp"%>
 <c:url var="tourAPI" value="/api/tour"/>
 <c:url var="tourURL" value="/admin/tour/list"/>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,7 +50,7 @@
 													<tr class="no-b">
 														<td class="w-10"><img src="${pageContext.request.contextPath}/template/upload/tour/${item.imageCover}" alt=""></td>
 														<td> <h6>${item.name}</h6><small class="text-muted">Du Lịch Trong Nước</small> </td>
-														<td>$${item.price}</td>
+														<td>$<fmt:formatNumber value="${item.price}" type="currency" currencySymbol=""/></td>
 														<td><span class="badge badge-success">Published</span></td>
 														<td><span><i class="icon icon-data_usage"></i> ${item.duration} days</span><br>
 															<span><i class="icon icon-timer"></i> ${item.startDate}</span> </td>
@@ -66,21 +66,6 @@
 														
 													</tr>
 												</c:forEach>
-												<tr class="no-b">
-													<td class="w-10"><img src="#" alt=""></td>
-													<td>
-														<h6>Apple Product</h6> <small class="text-muted">Mobile
-															Phones</small>
-													</td>
-													<td>$250</td>
-													<td><span class="badge badge-success">Published</span></td>
-													<td><span><i class="icon icon-data_usage"></i>
-															5 days ago</span><br> <span><i
-															class="icon icon-timer"></i> 5 September, 2017</span></td>
-													<td><a
-														class="btn-fab btn-fab-sm btn-primary shadow text-white"><i
-															class="icon-pencil"></i></a></td>
-												</tr>
 											</tbody>
 										</table>
 									</div>
