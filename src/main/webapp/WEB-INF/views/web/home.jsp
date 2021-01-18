@@ -54,7 +54,7 @@
 		<!-- Landing -->
 		<div class="landing">
 			<div class="hero-text-box">
-				<p>BOOK A TICKET AND JUST LEAVE.<br>CHOICES YOU MAKE.</p>
+				<p style="font-size: 3.5rem;">BOOK A TICKET AND JUST LEAVE.<br>CHOICES YOU MAKE.</p>
 			</div>
 			<div class="landing-img">
 				<div class="slick-lide logo-landing"><img src="/template/web/img/landing1.jpg"></div>

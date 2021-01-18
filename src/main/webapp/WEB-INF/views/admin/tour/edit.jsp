@@ -25,7 +25,7 @@
             <div class="row">
                 <ul class="nav responsive-tab nav-material nav-material-white">
                     <li><a class="nav-link"
-							href="<c:url value='/admin/tour/list?page=1&limit=2'/>">
+							href="<c:url value='/admin/tour/list?page=1&limit=6'/>">
 							<i class="icon icon-list"></i>All Tours</a>
 					</li>
 					<li><a class="nav-link active"
