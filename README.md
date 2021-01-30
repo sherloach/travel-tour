@@ -6,6 +6,7 @@ Web quản lý tour du lịch :hospital:
 `MySQL`
 `Tomcat`
 `Maven`
+`Intelij`
 
 ## ToDo
 - Tạo tài khoản user.
