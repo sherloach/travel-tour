@@ -58,7 +58,7 @@
 			</div>
 			<div class="landing-img">
 				<div class="slick-lide logo-landing"><img src="/template/web/img/landing1.jpg"></div>
-				<div class="slick-lide logo-landing"><img src="/template/web/img/landing2.jpg"></img></div>
+				<div class="slick-lide logo-landing"><img src="/template/web/img/landing2.jpg"></div>
 			</div>
 		</div>
     </header>

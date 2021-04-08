@@ -5,6 +5,12 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -14,7 +20,6 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.nqhtour.dto.TourDTO;
@@ -29,7 +34,7 @@ public class HomeController {
 	@Autowired
 	private TourService tourService;
 	
-	@RequestMapping(value = "/trang-chu", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/trang-chu", method = RequestMethod.GET)
 	public ModelAndView homePage() {
 		ModelAndView mav = new ModelAndView("/web/home");
 		TourDTO model = new TourDTO();
@@ -41,6 +46,46 @@ public class HomeController {
 		mav.addObject("model", model);
 
 		return mav;
+	}*/
+
+	@RequestMapping(value = "/trang-chu", method = RequestMethod.GET)
+	public ModelAndView homePage() throws Exception {
+		ModelAndView mav = new ModelAndView("/web/home");
+		DefaultHttpClient httpClient = new DefaultHttpClient();
+		try
+		{
+			//Define a HttpGet request; You can choose between HttpPost, HttpDelete or HttpPut also.
+			//Choice depends on type of method you will be invoking.
+			HttpGet getRequest = new HttpGet("http://localhost:8080/api/tour");
+
+			//Set the API media type in http accept header
+			getRequest.addHeader("accept", "application/json");
+
+			//Send the request; It will immediately return the response in HttpResponse object
+			HttpResponse response = httpClient.execute(getRequest);
+
+			//verify the valid error code first
+			int statusCode = response.getStatusLine().getStatusCode();
+			if (statusCode != 200)
+			{
+				throw new RuntimeException("Failed with HTTP error code : " + statusCode);
+			}
+
+			// Now pull back the response object
+			HttpEntity httpEntity = response.getEntity();
+			String apiOutput = EntityUtils.toString(httpEntity);
+
+			ObjectMapper mapper = new ObjectMapper();
+			TourDTO model = mapper.readValue(apiOutput, TourDTO.class);
+
+			mav.addObject("model", model);
+		}
+		finally
+		{
+			//Important: Close the connect
+			httpClient.getConnectionManager().shutdown();
+			return mav;
+		}
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
