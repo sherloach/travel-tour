@@ -56,7 +56,7 @@ public class HomeController {
 		{
 			//Define a HttpGet request; You can choose between HttpPost, HttpDelete or HttpPut also.
 			//Choice depends on type of method you will be invoking.
-			HttpGet getRequest = new HttpGet("http://localhost:8080/api/tour");
+			HttpGet getRequest = new HttpGet("http://localhost:8080/api/tours");
 
 			//Set the API media type in http accept header
 			getRequest.addHeader("accept", "application/json");
