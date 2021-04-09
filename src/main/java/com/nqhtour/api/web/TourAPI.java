@@ -18,10 +18,10 @@ public class TourAPI {
     @Autowired
     private ITourService tourService;
 
-    @GetMapping("/api/tours")
-    public TourDTO readTours() {
+    @GetMapping("/api/tours/{page}/{limit}")
+    public TourDTO readTours(@PathVariable int page, @PathVariable int limit) {
         TourDTO model = new TourDTO();
-        Pageable pageable = new PageRequest(0, 9);
+        Pageable pageable = new PageRequest(page - 1, limit);
         model.setListResult(tourService.findAll(pageable));
         return model;
         //return tourService.findAll(pageable);
@@ -29,9 +29,12 @@ public class TourAPI {
 
     @GetMapping("/api/tours/{id}")
     public TourDTO readTour(@PathVariable Long id) {
-        TourDTO model = new TourDTO();
-        model = tourService.findById(id);
+        TourDTO model = tourService.findById(id);
         return model;
     }
 
+    @GetMapping("/api/tours/count")
+    public int readTotalTour() {
+        return tourService.getTotalItem();
+    }
 }

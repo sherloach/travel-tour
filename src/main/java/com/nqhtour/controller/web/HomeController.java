@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.nqhtour.api.HttpAPI;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -30,25 +31,22 @@ import com.nqhtour.util.MessageUtil;
 public class HomeController {
 	@Autowired
 	private MessageUtil messageUtil;
-	
+
 	@Autowired
-	private TourService tourService;
+	private HttpAPI httpAPI;
 	
-	/*@RequestMapping(value = "/trang-chu", method = RequestMethod.GET)
+	@RequestMapping(value = "/trang-chu", method = RequestMethod.GET)
 	public ModelAndView homePage() {
 		ModelAndView mav = new ModelAndView("/web/home");
-		TourDTO model = new TourDTO();
+		TourDTO model = httpAPI.getTourDTO("http://localhost:8080/api/tours/1/9");
 
 		// TODO: show tours that have not been sold out yet:
 		// 		 - Write a tours finding func that maxGroupSize equals People
-		Pageable pageable = new PageRequest(0, 9);
-		model.setListResult(tourService.findAll(pageable));
 		mav.addObject("model", model);
-
 		return mav;
-	}*/
+	}
 
-	@RequestMapping(value = "/trang-chu", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/trang-chu", method = RequestMethod.GET)
 	public ModelAndView homePage() throws Exception {
 		ModelAndView mav = new ModelAndView("/web/home");
 		DefaultHttpClient httpClient = new DefaultHttpClient();
@@ -56,7 +54,7 @@ public class HomeController {
 		{
 			//Define a HttpGet request; You can choose between HttpPost, HttpDelete or HttpPut also.
 			//Choice depends on type of method you will be invoking.
-			HttpGet getRequest = new HttpGet("http://localhost:8080/api/tours");
+			HttpGet getRequest = new HttpGet("http://localhost:8080/api/tours/1/9");
 
 			//Set the API media type in http accept header
 			getRequest.addHeader("accept", "application/json");
@@ -86,7 +84,7 @@ public class HomeController {
 			httpClient.getConnectionManager().shutdown();
 			return mav;
 		}
-	}
+	}*/
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView loginPage() {
