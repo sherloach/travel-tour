@@ -21,8 +21,6 @@ import com.nqhtour.util.MessageUtil;
 
 @Controller(value = "UserControllerOfAdmin")
 public class EmployeeController {
-	@Autowired
-	private EmployeeService emplService;
 
 	@Autowired
 	private HttpAPI httpAPI;
@@ -33,13 +31,20 @@ public class EmployeeController {
 	@RequestMapping(value = "/admin/empl/list", method = RequestMethod.GET)
 	public ModelAndView showList(@RequestParam("page") int page, @RequestParam("limit") int limit,
 			HttpServletRequest request) {
-		EmployeeDTO model = new EmployeeDTO();
+		/*EmployeeDTO model = new EmployeeDTO();
 		model.setPage(page);
 		model.setLimit(limit);
 
 		Pageable pageable = new PageRequest(page - 1, limit);
 		model.setListResult(emplService.findAll(pageable));
 		model.setTotalItem(emplService.getTotalItem());
+		model.setTotalPage((int) Math.ceil((double) model.getTotalItem() / model.getLimit()));*/
+
+		String api = "http://localhost:8080/api/empl/" + page + "/" + limit;
+		EmployeeDTO model = httpAPI.getEmplDTO(api);
+		model.setPage(page);
+		model.setLimit(limit);
+		model.setTotalItem(httpAPI.getTotal("http://localhost:8080/api/empl/count"));
 		model.setTotalPage((int) Math.ceil((double) model.getTotalItem() / model.getLimit()));
 
 		ModelAndView mav = new ModelAndView("/admin/user/list");
@@ -49,7 +54,6 @@ public class EmployeeController {
 			mav.addObject("alert", message.get("alert"));
 		}
 		mav.addObject("model", model);
-
 		return mav;
 	}
 
@@ -62,7 +66,7 @@ public class EmployeeController {
 
 		// Add new employee
 		if (id != null) {
-			model = emplService.findById(id);
+			model = httpAPI.getEmplDTO("http://localhost:8080/api/empl/" + id);
 		}
 		if (request.getParameter("message") != null) {
 			Map<String, String> message = messageUtil.getMessage(request.getParameter("message"));
@@ -70,7 +74,6 @@ public class EmployeeController {
 			mav.addObject("alert", message.get("alert"));
 		}
 		mav.addObject("model", model);
-
 		return mav;
 	}
 }

@@ -55,6 +55,20 @@ public class HttpAPI {
         }
     }
 
+    public int getTotal(String api) {
+        DefaultHttpClient httpClient = new DefaultHttpClient();
+        String apiOutput = "";
+        try {
+            apiOutput = getContentAPI(api, httpClient);
+        }
+        finally
+        {
+            // Important: Close the connect
+            httpClient.getConnectionManager().shutdown();
+            return Integer.parseInt(apiOutput);
+        }
+    }
+
     public TourDTO getTourDTO(String api) {
         TourDTO model = new TourDTO();
         DefaultHttpClient httpClient = new DefaultHttpClient();

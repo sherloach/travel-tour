@@ -24,7 +24,6 @@ public class TourAPI {
         Pageable pageable = new PageRequest(page - 1, limit);
         model.setListResult(tourService.findAll(pageable));
         return model;
-        //return tourService.findAll(pageable);
     }
 
     @GetMapping("/api/tours/{id}")
