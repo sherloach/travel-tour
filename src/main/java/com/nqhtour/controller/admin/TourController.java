@@ -4,6 +4,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.nqhtour.api.HttpAPI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -19,29 +20,37 @@ import com.nqhtour.util.MessageUtil;
 
 @Controller(value = "TourControllerOfAdmin")
 public class TourController {
+
 	@Autowired
-	private ITourService tourService;
-	
+	private HttpAPI httpAPI;
+
 	@Autowired
 	private MessageUtil messageUtil;
 
 	@RequestMapping(value = "/admin/tour/list", method = RequestMethod.GET)
 	public ModelAndView showList(@RequestParam("page") int page, @RequestParam("limit") int limit, HttpServletRequest request) {
-		TourDTO model = new TourDTO();
+		/*TourDTO model = new TourDTO();
 		model.setPage(page);
 		model.setLimit(limit);
-		ModelAndView mav = new ModelAndView("/admin/tour/list");
 		Pageable pageable = new PageRequest(page - 1, limit);
 		model.setListResult(tourService.findAll(pageable));
 		model.setTotalItem(tourService.getTotalItem());
+		model.setTotalPage((int) Math.ceil((double) model.getTotalItem() / model.getLimit()));*/
+
+		String api = "http://localhost:8080/api/tours/" + page + "/" + limit;
+		TourDTO model = httpAPI.getTourDTO(api);
+		model.setPage(page);
+		model.setLimit(limit);
+		model.setTotalItem(httpAPI.getTotal("http://localhost:8080/api/tours/count"));
 		model.setTotalPage((int) Math.ceil((double) model.getTotalItem() / model.getLimit()));
+
+		ModelAndView mav = new ModelAndView("/admin/tour/list");
 		if (request.getParameter("message") != null) {
 			Map<String, String> message = messageUtil.getMessage(request.getParameter("message"));
 			mav.addObject("message", message.get("message"));
 			mav.addObject("alert", message.get("alert"));
 		}
 		mav.addObject("model", model);
-
 		return mav;
 	}
 
@@ -53,7 +62,7 @@ public class TourController {
 
 		// Add new tour
 		if (id != null) {
-			model = tourService.findById(id);
+			model = httpAPI.getTourDTO("http://localhost:8080/api/tours/" + id);
 		}
 		if (request.getParameter("message") != null) {
 			Map<String, String> message = messageUtil.getMessage(request.getParameter("message"));
