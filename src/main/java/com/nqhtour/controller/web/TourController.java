@@ -15,8 +15,6 @@ import com.nqhtour.service.ITourService;
 
 @Controller(value = "TourControllerOfWeb")
 public class TourController {
-	@Autowired
-	private ITourService tourService;
 
 	@Autowired
 	private HttpAPI httpAPI;

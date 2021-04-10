@@ -1,10 +1,7 @@
 package com.nqhtour.api.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.nqhtour.constant.SystemConstant;
 import com.nqhtour.dto.ClientDTO;
@@ -24,6 +21,12 @@ public class ClientAPI {
 
 	@Autowired
 	private ClientRepository clientRepository;
+
+	@GetMapping("/api/client/{id}")
+	private ClientDTO readClient(@PathVariable Long id) {
+		ClientDTO model = clientService.findById(id);
+		return model;
+	}
 	
 	@PostMapping("/api/client")	
 	public ClientDTO createClient(@RequestBody ClientDTO client) {

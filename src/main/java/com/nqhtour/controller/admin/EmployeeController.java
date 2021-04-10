@@ -4,6 +4,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.nqhtour.api.HttpAPI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -22,6 +23,9 @@ import com.nqhtour.util.MessageUtil;
 public class EmployeeController {
 	@Autowired
 	private EmployeeService emplService;
+
+	@Autowired
+	private HttpAPI httpAPI;
 
 	@Autowired
 	private MessageUtil messageUtil;
