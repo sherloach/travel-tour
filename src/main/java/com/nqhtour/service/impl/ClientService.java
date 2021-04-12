@@ -76,11 +76,11 @@ public class ClientService implements IClientService {
 		return clientConverter.toDTO(clientRepository.save(entity));
 	}
 
-	public void booking(Long idClient, Long idTour) {
+	public boolean booking(Long idClient, TourEntity tourEntity) {
 		ClientEntity clientEntity = clientRepository.findOne(idClient);
-		TourEntity tourEntity = tourRepository.findOne(idTour);
 		clientEntity.getTours().add(tourEntity);
 		clientRepository.save(clientEntity);
+		return true;
 	}
 
 	@Override

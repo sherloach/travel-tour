@@ -312,7 +312,7 @@
 			var email = $("#emailClient").text();
 			//var data = email + " " + ${model.id};
 			// TODO: change this code using JSON
-            var data = "{ \"email\": " + "\"" + email + "\"" + ", \"clientId\": " + ${model.id} + " }";
+            var data = "{ \"email\": " + "\"" + email + "\"" + ", \"tourId\": " + ${model.id} + " }";
 			check(data);
 		});
 		

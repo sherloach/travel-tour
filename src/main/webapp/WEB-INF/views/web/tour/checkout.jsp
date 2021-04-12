@@ -79,8 +79,10 @@
 					contentType: 'text/plain',
 					data: d,
 					dataType: 'json',
-					success: function () {
-						console.log("Payment success!");
+					success: function (result) {
+						if (result == "true") {
+							console.log("Payment success!");
+						}
 					}
 				});
 			}

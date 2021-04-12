@@ -1,6 +1,10 @@
 package com.nqhtour.api.web;
 
 
+import com.nqhtour.dto.TourDTO;
+import com.nqhtour.entity.TourEntity;
+import com.nqhtour.repository.TourRepository;
+import com.nqhtour.service.impl.TourService;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.util.JSONPObject;
@@ -28,6 +32,9 @@ public class ClientAPI {
 
 	@Autowired
 	private ClientRepository clientRepository;
+
+	@Autowired
+	private TourRepository tourRepository;
 
 	@GetMapping("/api/client/{id}")
 	private ClientDTO readClient(@PathVariable Long id) {
@@ -57,35 +64,49 @@ public class ClientAPI {
 	}
 
 	@PostMapping("/api/client/booking")
-	public void booking(@RequestBody String data) throws IOException {
+	public String booking(@RequestBody String data) throws IOException {
 		JsonNode parent = new ObjectMapper().readTree(data);
 		String email = parent.get("email").asText();
 		String tourId = parent.get("tourId").asText();
 
 		ClientEntity entity = clientRepository.findOneByEmail(email);
-		Long client = entity.getId();
-		Long tour = Long.parseLong(tourId);
-		clientService.booking(client, tour);
-	}
+		if (entity == null) {
+			return "This email does not match any Client account!";
+		}
 
-	/*@PostMapping("/api/client/tour")
-	public String checkBookingExist (@RequestBody String text) {
-		String[] str = text.split(" ");
-		ClientEntity entity = clientRepository.findOneByEmail(str[0]);
+		TourEntity tourEntity = tourRepository.findOne(Long.parseLong(tourId));
+		if (tourEntity == null) {
+			return "This Tour ID is not valid!";
+		}
+
 		Long idClient = entity.getId();
-		boolean exist = clientService.checkBookingExist(idClient, Long.parseLong(str[1]));
-		return String.valueOf(exist);
-	}*/
+		// Check ìf Client has booked this tour before or not?
+		boolean exist = clientService.checkBookingExist(idClient, Long.parseLong(tourId));
+		if (exist) {
+			return String.valueOf(clientService.booking(idClient, tourEntity));
+		} else {
+			return "Client paid for this tour!";
+		}
+	}
 
 	@PostMapping("/api/client/tour")
 	public String checkBookingExist (@RequestBody String data) throws IOException {
 		JsonNode parent = new ObjectMapper().readTree(data);
 		String email = parent.get("email").asText();
-		String clientId = parent.get("clientId").asText();
+		String tourId = parent.get("tourId").asText();
 
 		ClientEntity entity = clientRepository.findOneByEmail(email);
+		if (entity == null) {
+			return "This email does not match any Client account!";
+		}
+
+		TourEntity tourEntity = tourRepository.findOne(Long.parseLong(tourId));
+		if (tourEntity == null) {
+			return "This Tour ID is not valid!";
+		}
+
 		Long idClient = entity.getId();
-		boolean exist = clientService.checkBookingExist(idClient, Long.parseLong(clientId));
+		boolean exist = clientService.checkBookingExist(idClient, Long.parseLong(tourId));
 		return String.valueOf(exist);
 	}
 }
