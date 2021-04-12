@@ -83,8 +83,6 @@ public class ClientService implements IClientService {
 		clientRepository.save(clientEntity);
 	}
 
-	
-
 	@Override
 	public ClientDTO findById(long id) {
 		ClientEntity entity = clientRepository.findOne(id);

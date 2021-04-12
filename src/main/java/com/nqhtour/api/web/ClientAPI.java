@@ -1,5 +1,10 @@
 package com.nqhtour.api.web;
 
+
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.util.JSONPObject;
+import org.codehaus.jackson.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,6 +15,8 @@ import com.nqhtour.entity.UserEntity;
 import com.nqhtour.repository.ClientRepository;
 import com.nqhtour.repository.UserRepository;
 import com.nqhtour.service.IClientService;
+
+import java.io.IOException;
 
 @RestController(value = "ClientAPIOfWeb")
 public class ClientAPI {
@@ -50,20 +57,35 @@ public class ClientAPI {
 	}
 
 	@PostMapping("/api/client/booking")
-	public void booking(@RequestBody String id) {
-		String[] ids = id.split(" ");
-		ClientEntity entity = clientRepository.findOneByEmail(ids[0]);
+	public void booking(@RequestBody String data) throws IOException {
+		JsonNode parent = new ObjectMapper().readTree(data);
+		String email = parent.get("email").asText();
+		String tourId = parent.get("tourId").asText();
+
+		ClientEntity entity = clientRepository.findOneByEmail(email);
 		Long client = entity.getId();
-		Long tour = Long.parseLong(ids[1]);
+		Long tour = Long.parseLong(tourId);
 		clientService.booking(client, tour);
 	}
 
-	@PostMapping("/api/client/tour")
+	/*@PostMapping("/api/client/tour")
 	public String checkBookingExist (@RequestBody String text) {
 		String[] str = text.split(" ");
 		ClientEntity entity = clientRepository.findOneByEmail(str[0]);
 		Long idClient = entity.getId();
 		boolean exist = clientService.checkBookingExist(idClient, Long.parseLong(str[1]));
+		return String.valueOf(exist);
+	}*/
+
+	@PostMapping("/api/client/tour")
+	public String checkBookingExist (@RequestBody String data) throws IOException {
+		JsonNode parent = new ObjectMapper().readTree(data);
+		String email = parent.get("email").asText();
+		String clientId = parent.get("clientId").asText();
+
+		ClientEntity entity = clientRepository.findOneByEmail(email);
+		Long idClient = entity.getId();
+		boolean exist = clientService.checkBookingExist(idClient, Long.parseLong(clientId));
 		return String.valueOf(exist);
 	}
 }

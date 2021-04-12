@@ -1,8 +1,5 @@
 package com.nqhtour.api.admin;
 
-
-import javax.servlet.ServletContext;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -13,7 +10,6 @@ import com.nqhtour.dto.EmployeeDTO;
 import com.nqhtour.entity.UserEntity;
 import com.nqhtour.repository.UserRepository;
 import com.nqhtour.service.IEmployeeService;
-import com.nqhtour.util.UploadFileUtil;
 
 @RestController(value = "EmplAPIOfAdmin")
 public class EmployeeAPI {

@@ -310,11 +310,13 @@
 		var btnApply = document.getElementById("btn-apply");
 		btnApply.addEventListener("click", function (event) {
 			var email = $("#emailClient").text();
-			var data = email + " " + ${model.id};
+			//var data = email + " " + ${model.id};
+			// TODO: change this code using JSON
+            var data = "{ \"email\": " + "\"" + email + "\"" + ", \"clientId\": " + ${model.id} + " }";
 			check(data);
 		});
 		
-		function check(d) {
+		/*function check(d) {
 			$.ajax({
 				url: '/api/client/tour',
 				type: 'POST',
@@ -331,7 +333,26 @@
 					window.location.href = "/trang-chu";
 				}
 			});
-		}
+		}*/
+
+        function check(d) {
+          $.ajax({
+            url: '/api/client/tour',
+            type: 'POST',
+            contentType: 'text/plain',
+            data: d,
+            success: function (result) {
+              if (result == "true") {
+                window.location.href = "/tour/checkout?id=" + ${model.id};
+              } else if (result == "false") {
+                swal("Warning!", "You paid for this tour!", "warning");
+              }
+            },
+            error: function (error) {
+              window.location.href = "/trang-chu";
+            }
+          });
+        }
 	</script>
 </body>
 </html>

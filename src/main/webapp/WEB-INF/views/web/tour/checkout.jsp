@@ -63,12 +63,10 @@
 		(function () {
 			$('#btn-payment').click(function (e) {
 				e.preventDefault();
-				var d= '';
-				var e = document.getElementById("emailClient");
+				//var e = document.getElementById("emailClient");
 				var email = $("#emailClient").text();
-				var idtour = ${model.id};
-				d = email + ' ' + idtour;
-				booking(d);
+				var data = "{ \"email\": " + "\"" + email + "\"" + ", \"tourId\": " + ${model.id} + " }";
+				booking(data);
 				swal("Success!", "You paid for the tour!", "success").then((value) => {
 					window.location.href = "/trang-chu";
 				});
