@@ -5,6 +5,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import com.nqhtour.api.HttpAPI;
+import com.nqhtour.util.ServerName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -28,6 +29,9 @@ public class EmployeeController {
 	@Autowired
 	private MessageUtil messageUtil;
 
+	@Autowired
+	private ServerName serverName;
+
 	@RequestMapping(value = "/admin/empl/list", method = RequestMethod.GET)
 	public ModelAndView showList(@RequestParam("page") int page, @RequestParam("limit") int limit,
 			HttpServletRequest request) {
@@ -40,11 +44,11 @@ public class EmployeeController {
 		model.setTotalItem(emplService.getTotalItem());
 		model.setTotalPage((int) Math.ceil((double) model.getTotalItem() / model.getLimit()));*/
 
-		String api = "http://localhost:8080/api/empl/" + page + "/" + limit;
+		String api = serverName.herokuUrl + "/api/empl/" + page + "/" + limit;
 		EmployeeDTO model = httpAPI.getEmplDTO(api);
 		model.setPage(page);
 		model.setLimit(limit);
-		model.setTotalItem(httpAPI.getTotal("http://localhost:8080/api/empl/count"));
+		model.setTotalItem(httpAPI.getTotal(serverName.herokuUrl + "/api/empl/count"));
 		model.setTotalPage((int) Math.ceil((double) model.getTotalItem() / model.getLimit()));
 
 		ModelAndView mav = new ModelAndView("/admin/user/list");
@@ -66,7 +70,7 @@ public class EmployeeController {
 
 		// Add new employee
 		if (id != null) {
-			model = httpAPI.getEmplDTO("http://localhost:8080/api/empl/" + id);
+			model = httpAPI.getEmplDTO(serverName.herokuUrl + "/api/empl/" + id);
 		}
 		if (request.getParameter("message") != null) {
 			Map<String, String> message = messageUtil.getMessage(request.getParameter("message"));

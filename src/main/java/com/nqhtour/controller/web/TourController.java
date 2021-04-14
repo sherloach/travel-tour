@@ -3,6 +3,7 @@ package com.nqhtour.controller.web;
 import javax.servlet.http.HttpServletRequest;
 
 import com.nqhtour.api.HttpAPI;
+import com.nqhtour.util.ServerName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,10 +20,13 @@ public class TourController {
 	@Autowired
 	private HttpAPI httpAPI;
 
+	@Autowired
+	private ServerName serverName;
+
 	@RequestMapping(value = "/tour", method = RequestMethod.GET)
 	public ModelAndView showTour(@RequestParam("id") Long id, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("web/tour/tour");
-		TourDTO model = httpAPI.getTourDTO("http://localhost:8080/api/tours/" + id);
+		TourDTO model = httpAPI.getTourDTO(serverName.herokuUrl + "/api/tours/" + id);
 		mav.addObject("model", model);
 
 		return mav;
@@ -31,7 +35,7 @@ public class TourController {
 	@RequestMapping(value = "/tour/checkout", method = RequestMethod.GET)
 	public ModelAndView checkoutTour(@RequestParam("id") Long id, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("web/tour/checkout");
-		TourDTO model = httpAPI.getTourDTO("http://localhost:8080/api/tours/" + id);
+		TourDTO model = httpAPI.getTourDTO(serverName.herokuUrl + "/api/tours/" + id);
 		mav.addObject("model", model);
 		
 		return mav;

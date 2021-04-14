@@ -2,11 +2,13 @@ package com.nqhtour.controller.web;
 
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nqhtour.api.HttpAPI;
+import com.nqhtour.util.ServerName;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -34,11 +36,15 @@ public class HomeController {
 
 	@Autowired
 	private HttpAPI httpAPI;
+
+	@Autowired
+	private ServerName serverName;
 	
 	@RequestMapping(value = "/trang-chu", method = RequestMethod.GET)
 	public ModelAndView homePage() {
 		ModelAndView mav = new ModelAndView("/web/home");
-		TourDTO model = httpAPI.getTourDTO("http://localhost:8080/api/tours/1/9");
+
+		TourDTO model = httpAPI.getTourDTO(serverName.herokuUrl + "/api/tours/1/9");
 
 		// TODO: show tours that have not been sold out yet:
 		// 		 - Write a tours finding func that maxGroupSize equals People
