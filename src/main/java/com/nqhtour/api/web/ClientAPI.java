@@ -68,6 +68,7 @@ public class ClientAPI {
 		JsonNode parent = new ObjectMapper().readTree(data);
 		String email = parent.get("email").asText();
 		String tourId = parent.get("tourId").asText();
+		String nuTickets = parent.get("nuTickets").asText();
 
 		ClientEntity entity = clientRepository.findOneByEmail(email);
 		if (entity == null) {
@@ -79,11 +80,13 @@ public class ClientAPI {
 			return "This Tour ID is not valid!";
 		}
 
+		// TODO: validate number of tickets bigger than maxgroupsize
+
 		Long idClient = entity.getId();
 		// Check ìf Client has booked this tour before or not?
 		boolean exist = clientService.checkBookingExist(idClient, Long.parseLong(tourId));
 		if (exist) {
-			return String.valueOf(clientService.booking(idClient, tourEntity));
+			return String.valueOf(clientService.booking(idClient, tourEntity, Integer.parseInt(nuTickets)));
 		} else {
 			return "Client paid for this tour!";
 		}

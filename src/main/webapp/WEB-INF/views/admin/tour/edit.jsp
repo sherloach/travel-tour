@@ -98,7 +98,7 @@
 								</div>
 							</div>
 							<div class="col-md-3 mb-3">
-								<label for="category">Duration</label>
+								<label for="duration">Duration</label>
 								<form:input cssClass="form-control" path="duration" required="required"/>
 								<!--<input type="text" class="form-control"  placeholder="Mobile Phones" required>-->
 <!-- 								<select id="duration" name="duration" class="custom-select form-control" required>
@@ -141,6 +141,7 @@
 
 					<!-- Cần phải có ID để xử lý thêm, sửa -->
 					<form:hidden path="id" id="tourID"/>
+					<form:hidden path="currentGroupSize" id="currentGroupSize"/>
 
 					<div class="col-md-3">
 						<div class="card mt-4">

@@ -1,0 +1,20 @@
+USE travelbooking;
+
+INSERT INTO user (username, password, status, role)
+VALUES ('admin', '$2a$10$/RUbuT9KIqk6f8enaTQiLOXzhnUkiwEJRdtzdrMXXwU7dgnLKTCYG', 1, 'ADMIN');
+INSERT INTO user (username, password, status, role)
+VALUES ('nguyenvana@gmail.com', '$2a$10$/RUbuT9KIqk6f8enaTQiLOXzhnUkiwEJRdtzdrMXXwU7dgnLKTCYG', 1, 'EMPLOYEE');
+INSERT INTO user (username, password, status, role)
+VALUES ('nguyenvanb@gmail.com', '$2a$10$/RUbuT9KIqk6f8enaTQiLOXzhnUkiwEJRdtzdrMXXwU7dgnLKTCYG', 1, 'CLIENT');
+
+INSERT INTO employee (name, address, email, gender, phonenumber, userid)
+VALUES (N'Trần văn admin', N'Việt Nam', 'admin@gmail.com', 1, '0188892454', 1);
+INSERT INTO client (name, address, email, gender, phonenumber, userid)
+VALUES (N'Nguyễn Văn B', N'Việt Nam', 'nguyenvanb@gmail.com', 1, '0199292454', 3);
+INSERT INTO employee (name, address, email, gender, phonenumber, userid)
+VALUES (N'Nguyễn Văn A', N'Việt Nam', 'nguyenvana@gmail.com', 0, '0155592454', 2);
+
+INSERT INTO tour (name, tourID, description, summary, duration, location, maxgroupsize, price, startdate)
+VALUES ('Miền Tây Sông Nước', 'mien-tay-song-nuoc', 'Mang trong mình vẻ đẹp khung cảnh sông nước hữu tình và những nét đẹp văn hóa được kế thừa từ ngàn xưa, Miền Tây được quan tâm và phát triển nền dịch vụ du lịch sinh thái nghỉ dưỡng. Tham gia các tour du lịch Miền Tây tại công ty Du Lịch Việt sẽ đưa du khách đến với những cánh đồng lúa thẳng cánh cò bay, những dòng kênh xanh mát, vườn cây trĩu quả cùng những người dân chân chất thật thà,...', 'Nằm ở miền Nam về hướng Tây của đất nước hình chữ "S"', 14, 'Cần Thơ, Sóc Trăng', 10, 2000, '2021/04/30 10:33');
+INSERT INTO tour (name, tourID, description, summary, duration, location, maxgroupsize, price, startdate)
+VALUES ('Thị trấn mờ sương', 'thi-tran-mo-suong', 'Được biết đến là xứ sở sương mù với phong cảnh mộng mơ, ẩn chứa bao điều kỳ diệu của cảnh sắc thiên nhiên, con người. Đến Sapa du lịch, để chiêm ngưỡng vẻ đẹp hoang sơ của núi non hùng vĩ, những thửa ruộng bậc thang tầng tầng lớp lớp, tận hưởng bầu không khí trong lành và cảm nhận sự bình yên, giản dị của những bản làng ẩn hiện trong sương.', 'Nằm ở phía Tây Bắc của Tổ quốc, Sapa thuộc tỉnh Lào Cai', 14, 'Sapa', 10, 2000, '2021/05/27 14:00');

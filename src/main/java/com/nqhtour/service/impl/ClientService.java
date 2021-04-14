@@ -76,7 +76,10 @@ public class ClientService implements IClientService {
 		return clientConverter.toDTO(clientRepository.save(entity));
 	}
 
-	public boolean booking(Long idClient, TourEntity tourEntity) {
+	public boolean booking(Long idClient, TourEntity tourEntity, int nuTickets) {
+		int currentGroupSize = tourEntity.getCurrentGroupSize() + nuTickets;
+		tourEntity.setCurrentGroupSize(currentGroupSize);
+
 		ClientEntity clientEntity = clientRepository.findOne(idClient);
 		clientEntity.getTours().add(tourEntity);
 		clientRepository.save(clientEntity);

@@ -17,12 +17,12 @@ public class TourConverter {
 		result.setDescription(entity.getDescription());
 		result.setSummary(entity.getSummary());
 		result.setDuration(entity.getDuration());
-		//result.setEmployeeID(entity.getEmployee().getId());
 		result.setLocation(entity.getLocation());
 		result.setMaxGroupSize(entity.getMaxGroupSize());
 		result.setPrice(entity.getPrice());
 		result.setStartDate(entity.getStartDate());
 		result.setImageCover(entity.getImageCover());
+		result.setCurrentGroupSize(entity.getCurrentGroupSize());
 		
 		return result;
 	}
@@ -39,6 +39,7 @@ public class TourConverter {
 		result.setPrice(dto.getPrice());
 		result.setStartDate(dto.getStartDate());
 		result.setImageCover(dto.getImageCover());
+		result.setCurrentGroupSize(dto.getCurrentGroupSize());
 		
 		return result;
 	}
@@ -55,6 +56,7 @@ public class TourConverter {
 		oldTour.setPrice(dto.getPrice());
 		oldTour.setStartDate(dto.getStartDate());
 		oldTour.setImageCover(dto.getImageCover());
+		oldTour.setCurrentGroupSize(dto.getCurrentGroupSize());
 		
 		return oldTour;
 	}

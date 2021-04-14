@@ -6,10 +6,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.data.annotation.CreatedBy;
@@ -33,7 +30,10 @@ public class TourEntity extends BaseEntity {
 
 	@Column(name = "maxgroupsize")
 	private Integer maxGroupSize;
-	
+
+	@Column(name = "currentgroupsize")
+	private Integer currentGroupSize;
+
 	@Column(name = "price")
 	private Long price;
 
@@ -169,5 +169,13 @@ public class TourEntity extends BaseEntity {
 
 	public void setStartDate(String startDate) {
 		this.startDate = startDate;
+	}
+
+	public Integer getCurrentGroupSize() {
+		return currentGroupSize;
+	}
+
+	public void setCurrentGroupSize(Integer currentGroupSize) {
+		this.currentGroupSize = currentGroupSize;
 	}
 }

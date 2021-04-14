@@ -17,7 +17,7 @@
 			<div class="row-pm">
 			  <div class="col-50-pm">
 				<h3>Payment</h3>
-				<label for="fname">Accepted Cards</label>
+				<label>Accepted Cards</label>
 				<div class="icon-container-pm">
 				  <i class="fa fa-cc-visa" style="color:navy;"></i>
 				  <i class="fa fa-cc-amex" style="color:blue;"></i>
@@ -38,6 +38,8 @@
 					<input type="text" class="input-pm" id="cvv" name="cvv" placeholder="352">
 				  </div>
 				</div>
+			  	<label>Tickets</label>
+			  	<input type="number" class="input-pm" id="nuticket" name="nuticket">
 			  </div>
 			</div>
 			<security:authorize access = "isAuthenticated()">
@@ -65,7 +67,9 @@
 				e.preventDefault();
 				//var e = document.getElementById("emailClient");
 				var email = $("#emailClient").text();
-				var data = "{ \"email\": " + "\"" + email + "\"" + ", \"tourId\": " + ${model.id} + " }";
+				var nuTickets = $("#nuticket").val();
+				//var data = "{ \"email\": " + "\"" + email + "\"" + ", \"tourId\": " + ${model.id} + " }";
+				var data = "{ \"email\": " + "\"" + email + "\"" + ", \"tourId\": " + ${model.id} + ", \"nuTickets\": " + nuTickets + " }";
 				booking(data);
 				swal("Success!", "You paid for the tour!", "success").then((value) => {
 					window.location.href = "/trang-chu";

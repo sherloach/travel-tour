@@ -7,5 +7,5 @@ public interface IClientService {
 	ClientDTO findById(long id);
 	ClientDTO save(ClientDTO dto);
 	boolean checkBookingExist(Long idClient, Long idTour);
-	boolean booking(Long idClient, TourEntity tourEntity);
+	boolean booking(Long idClient, TourEntity tourEntity, int nuTickets);
 }

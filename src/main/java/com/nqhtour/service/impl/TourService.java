@@ -74,6 +74,7 @@ public class TourService implements ITourService {
 			TourEntity oldTour = tourRepository.findOne(dto.getId());
 			tourEntity = tourConverter.toEntity(oldTour, dto);
 		} else {
+			dto.setCurrentGroupSize(0);
 			tourEntity = tourConverter.toEntity(dto);
 		}
 		

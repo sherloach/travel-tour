@@ -6,8 +6,8 @@ public class TourDTO extends AbstractDTO<TourDTO> {
 	private String location;
 	private Integer duration;
 	private Integer maxGroupSize;
+	private Integer currentGroupSize;
 	private Long price;
-	//private Long guideID;
 	private Long employeeID;
 	private String description;
 	private String summary;
@@ -15,7 +15,15 @@ public class TourDTO extends AbstractDTO<TourDTO> {
 	private String imageCover;
 	private String base64;
 	private String startDate;
-	
+
+	public Integer getCurrentGroupSize() {
+		return currentGroupSize;
+	}
+
+	public void setCurrentGroupSize(Integer curentGroupSize) {
+		this.currentGroupSize = curentGroupSize;
+	}
+
 	public String getName() {
 		return name;
 	}

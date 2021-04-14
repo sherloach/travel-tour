@@ -47,7 +47,7 @@ public class JPAConfig {
 		return new PersistenceExceptionTranslationPostProcessor();
 	}
 	
-	/*@Bean
+	@Bean
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
@@ -55,11 +55,12 @@ public class JPAConfig {
 		dataSource.setUsername("root");
 		dataSource.setPassword("123456");
 		return dataSource;
-	}*/
+	}
 
 
 	// Using ClearDB MySQL
-	@Bean
+	// mysql://ba0d9139f6c175:2bb0cbf8@us-cdbr-east-03.cleardb.com/heroku_fe0c60f61a9e0e6?reconnect=true
+	/*@Bean
 	public DataSource dataSource() throws URISyntaxException {
 		URI dbUri = new URI(System.getenv("CLEARDB_DATABASE_URL"));
 
@@ -73,7 +74,7 @@ public class JPAConfig {
 		basicDataSource.setPassword(password);
 
 		return basicDataSource;
-	}
+	}*/
 
 	Properties additionalProperties() {
 		Properties properties = new Properties();
