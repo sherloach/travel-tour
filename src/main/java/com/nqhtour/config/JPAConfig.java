@@ -1,9 +1,13 @@
 package com.nqhtour.config;
 
+
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Properties;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
+
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,7 +25,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 public class JPAConfig {
 	@Bean
-	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+	public LocalContainerEntityManagerFactoryBean entityManagerFactory() throws URISyntaxException {
 		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
 		em.setDataSource(dataSource());
 		em.setPersistenceUnitName("persistence-data");
@@ -43,7 +47,7 @@ public class JPAConfig {
 		return new PersistenceExceptionTranslationPostProcessor();
 	}
 	
-	@Bean
+	/*@Bean
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
@@ -51,6 +55,24 @@ public class JPAConfig {
 		dataSource.setUsername("root");
 		dataSource.setPassword("123456");
 		return dataSource;
+	}*/
+
+
+	// Using ClearDB MySQL
+	@Bean
+	public DataSource dataSource() throws URISyntaxException {
+		URI dbUri = new URI(System.getenv("CLEARDB_DATABASE_URL"));
+
+		String username = dbUri.getUserInfo().split(":")[0];
+		String password = dbUri.getUserInfo().split(":")[1];
+		String dbUrl = "jdbc:mysql://" + dbUri.getHost() + dbUri.getPath();
+
+		DriverManagerDataSource basicDataSource = new DriverManagerDataSource();
+		basicDataSource.setUrl(dbUrl);
+		basicDataSource.setUsername(username);
+		basicDataSource.setPassword(password);
+
+		return basicDataSource;
 	}
 
 	Properties additionalProperties() {
