@@ -26,7 +26,16 @@ public class TourController {
 	@RequestMapping(value = "/tour", method = RequestMethod.GET)
 	public ModelAndView showTour(@RequestParam("id") Long id, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("web/tour/tour");
-		TourDTO model = httpAPI.getTourDTO(serverName.herokuUrl + "/api/tours/" + id);
+		TourDTO model = httpAPI.getTourDTO(serverName.localUrl + "/api/tours/" + id);
+		mav.addObject("model", model);
+
+		return mav;
+	}
+
+	@RequestMapping(value = "/tour/repayment", method = RequestMethod.GET)
+	public ModelAndView showRepaymentTour(@RequestParam("id") Long id, HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView("web/tour/repayment");
+		TourDTO model = httpAPI.getTourDTO(serverName.localUrl + "/api/tours/" + id);
 		mav.addObject("model", model);
 
 		return mav;
@@ -35,7 +44,7 @@ public class TourController {
 	@RequestMapping(value = "/tour/checkout", method = RequestMethod.GET)
 	public ModelAndView checkoutTour(@RequestParam("id") Long id, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("web/tour/checkout");
-		TourDTO model = httpAPI.getTourDTO(serverName.herokuUrl + "/api/tours/" + id);
+		TourDTO model = httpAPI.getTourDTO(serverName.localUrl + "/api/tours/" + id);
 		mav.addObject("model", model);
 		
 		return mav;

@@ -62,7 +62,7 @@ public class TourService implements ITourService {
 
 	@Override
 	public TourDTO save(TourDTO dto) {
-		TourEntity tourEntity = new TourEntity();
+		TourEntity tourEntity;
 
 		// convert image from base64 to bytes and write image to root dir
 		String imagePath = dto.getBase64().split(",")[1];

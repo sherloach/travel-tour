@@ -343,7 +343,8 @@
             data: d,
             success: function (result) {
               if (result == "true") {
-                window.location.href = "/tour/checkout?id=" + ${model.id};
+                //window.location.href = "/tour/checkout?id=" + ${model.id};
+                window.location.href = "/tour/repayment?id=" + ${model.id};
               } else if (result == "false") {
                 swal("Warning!", "You paid for this tour!", "warning");
               }

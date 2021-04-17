@@ -77,8 +77,10 @@ public class ClientService implements IClientService {
 	}
 
 	public boolean booking(Long idClient, TourEntity tourEntity, int nuTickets) {
+		// Update current tickets available
 		int currentGroupSize = tourEntity.getCurrentGroupSize() + nuTickets;
 		tourEntity.setCurrentGroupSize(currentGroupSize);
+		tourRepository.save(tourEntity);
 
 		ClientEntity clientEntity = clientRepository.findOne(idClient);
 		clientEntity.getTours().add(tourEntity);
