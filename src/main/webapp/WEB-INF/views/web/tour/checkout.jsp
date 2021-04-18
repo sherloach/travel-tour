@@ -39,7 +39,7 @@
 				  </div>
 				</div>
 			  	<label>Tickets</label>
-			  	<input type="number" class="input-pm" id="nuticket" name="nuticket">
+			  	<p>${nutickets} vé</p>
 			  </div>
 			</div>
 			<security:authorize access = "isAuthenticated()">
@@ -67,7 +67,7 @@
 				e.preventDefault();
 				//var e = document.getElementById("emailClient");
 				var email = $("#emailClient").text();
-				var nuTickets = $("#nuticket").val();
+				var nuTickets = ${nutickets};
 				//var data = "{ \"email\": " + "\"" + email + "\"" + ", \"tourId\": " + ${model.id} + " }";
 				var data = "{ \"email\": " + "\"" + email + "\"" + ", \"tourId\": " + ${model.id} + ", \"nuTickets\": " + nuTickets + " }";
 				booking(data);

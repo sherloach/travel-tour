@@ -293,10 +293,10 @@
 				<a href="<c:url value='/login'/>" class="btn btn--green span-all-rows">Book tour now!</a>
 			</security:authorize>
 			<security:authorize access = "hasRole('CLIENT')">
-				<%-- <c:param name="role" value="<%=SecurityUtils.getAuthorities()%>"/> --%>
 				<%-- <c:if test="${role.contains("CLIENT")}"><a href="<c:url value='/tour/checkout?id=${model.id}'/>" class="btn btn--gr<%-- een span-all-rows">Book tour now!</a></c:if>  --%>
 				<%-- <a href="<c:url value='/tour/checkout?id=${model.id}'/>" class="btn btn--green span-all-rows">Book tour now!</a> --%>
-				<button id="btn-apply" class="btn btn--green span-all-rows">Book tour now!</button>
+                <c:if test="${model.maxGroupSize == model.currentGroupSize}"><button id="" class="btn btn--green span-all-rows">Sold Out!</button></c:if>
+                <c:if test="${model.currentGroupSize < model.maxGroupSize}"><button id="btn-apply" class="btn btn--green span-all-rows">Book tour now!</button></c:if>
 			</security:authorize>
         </div>
       </div>

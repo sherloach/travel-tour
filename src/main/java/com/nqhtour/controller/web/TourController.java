@@ -38,14 +38,18 @@ public class TourController {
 		TourDTO model = httpAPI.getTourDTO(serverName.localUrl + "/api/tours/" + id);
 		mav.addObject("model", model);
 
+		// TODO: 1. thêm param idClient để ràng buộc khi người dùng nhập trực tiếp url vào browser, khi nào sẽ vượt qua được hàm check
+		//		2. hết vé thì không book được
+
 		return mav;
 	}
 
 	@RequestMapping(value = "/tour/checkout", method = RequestMethod.GET)
-	public ModelAndView checkoutTour(@RequestParam("id") Long id, HttpServletRequest request) {
+	public ModelAndView checkoutTour(@RequestParam("id") Long id, @RequestParam("nuTickets") Long nuTickets) {
 		ModelAndView mav = new ModelAndView("web/tour/checkout");
 		TourDTO model = httpAPI.getTourDTO(serverName.localUrl + "/api/tours/" + id);
 		mav.addObject("model", model);
+		mav.addObject("nutickets", nuTickets);
 		
 		return mav;
 	}
