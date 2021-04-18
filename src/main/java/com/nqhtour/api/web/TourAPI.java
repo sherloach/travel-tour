@@ -1,7 +1,10 @@
 package com.nqhtour.api.web;
 
 import com.nqhtour.dto.TourDTO;
+import com.nqhtour.repository.TourRepository;
 import com.nqhtour.service.ITourService;
+import com.nqhtour.specification.SearchCriteria;
+import com.nqhtour.specification.TourSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -32,5 +35,13 @@ public class TourAPI {
     @GetMapping("/api/tours/count")
     public int readTotalTour() {
         return tourService.getTotalItem();
+    }
+
+    @GetMapping("/api/tours/search/{name}")
+    public TourDTO searchTours(@PathVariable String name) {
+        TourDTO model = new TourDTO();
+        TourSpecification tourSpecification = new TourSpecification(new SearchCriteria("tourID", ":", name));
+        model.setListResult(tourService.findAll(tourSpecification));
+        return model;
     }
 }

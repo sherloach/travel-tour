@@ -34,12 +34,14 @@ public class TourController {
 
 	@RequestMapping(value = "/tour/repayment", method = RequestMethod.GET)
 	public ModelAndView showRepaymentTour(@RequestParam("id") Long id, HttpServletRequest request) {
-		ModelAndView mav = new ModelAndView("web/tour/repayment");
+		String repaymentView = "web/tour/repayment";
+		String errorView = "errorpage";
+		ModelAndView mav = new ModelAndView(repaymentView);
 		TourDTO model = httpAPI.getTourDTO(serverName.localUrl + "/api/tours/" + id);
 		mav.addObject("model", model);
 
 		// TODO: 1. thêm param idClient để ràng buộc khi người dùng nhập trực tiếp url vào browser, khi nào sẽ vượt qua được hàm check
-		//		2. hết vé thì không book được
+		//		2. hết vé thì không book được, nên phải xét điều kiện hết vé trong hàm này luôn
 
 		return mav;
 	}

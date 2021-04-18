@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 
+import com.nqhtour.specification.TourSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -46,6 +47,17 @@ public class TourService implements ITourService {
 			models.add(tourDTO);
 		}
 
+		return models;
+	}
+
+	@Override
+	public List<TourDTO> findAll(TourSpecification tourSpecification) {
+		List<TourDTO> models = new ArrayList<>();
+		List<TourEntity> entities = tourRepository.findAll(tourSpecification);
+		for (TourEntity item : entities) {
+			TourDTO tourDTO = tourConverter.toDTO(item);
+			models.add(tourDTO);
+		}
 		return models;
 	}
 
