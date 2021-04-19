@@ -1,5 +1,7 @@
 package com.nqhtour.service.impl;
 
+import com.nqhtour.entity.ClientTourEntity;
+import com.nqhtour.repository.ClientTourRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -33,6 +35,9 @@ public class ClientService implements IClientService {
 	
 	@Autowired
 	TourRepository tourRepository;
+
+	@Autowired
+	ClientTourRepository clientTourRepository;
 	
 	@Autowired
 	UserConverter userConverter;
@@ -82,9 +87,14 @@ public class ClientService implements IClientService {
 		tourEntity.setCurrentGroupSize(currentGroupSize);
 		tourRepository.save(tourEntity);
 
+		ClientTourEntity clientTourEntity = new ClientTourEntity();
 		ClientEntity clientEntity = clientRepository.findOne(idClient);
-		clientEntity.getTours().add(tourEntity);
-		clientRepository.save(clientEntity);
+		clientTourEntity.setClientEntity(clientEntity);
+		clientTourEntity.setTourEntity(tourEntity);
+		clientTourEntity.setNuTickets(nuTickets);
+		/*clientEntity.getTours().add(clientTourEntity);
+		clientRepository.save(clientEntity);*/
+		clientTourRepository.save(clientTourEntity);
 		return true;
 	}
 
@@ -97,8 +107,8 @@ public class ClientService implements IClientService {
 	@Override
 	public boolean checkBookingExist(Long idClient, Long idTour) {
 		ClientEntity entity = clientRepository.findOne(idClient);
-		for (TourEntity tour : entity.getTours()) {
-			if (tour.getId().equals(idTour)) {
+		for (ClientTourEntity tour : entity.getTours()) {
+			if (tour.getTourEntity().getId().equals(idTour)) {
 				return false;
 			}
 		}

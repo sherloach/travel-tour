@@ -1,13 +1,10 @@
 package com.nqhtour.entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -60,8 +57,11 @@ public class TourEntity extends BaseEntity {
 	@CreatedBy
 	private String createdBy;
 
-	@ManyToMany(mappedBy = "tours")
-	private List<ClientEntity> clients = new ArrayList<>();
+	@OneToMany(mappedBy = "clientEntity", fetch = FetchType.LAZY)
+	private List<ClientTourEntity> clients = new ArrayList<>();
+
+	/*@ManyToMany(mappedBy = "tours")
+	private List<ClientEntity> clients = new ArrayList<>();*/
 
 	public String getName() {
 		return name;
@@ -151,13 +151,13 @@ public class TourEntity extends BaseEntity {
 //		this.employee = employee;
 //	}
 
-	public List<ClientEntity> getClients() {
+	/*public List<ClientEntity> getClients() {
 		return clients;
-	}
+	}*/
 
-	public void setClients(List<ClientEntity> clients) {
+	/*public void setClients(List<ClientEntity> clients) {
 		this.clients = clients;
-	}
+	}*/
 
 	public void setImageCover(String imageCover) {
 		this.imageCover = imageCover;
@@ -177,5 +177,17 @@ public class TourEntity extends BaseEntity {
 
 	public void setCurrentGroupSize(Integer currentGroupSize) {
 		this.currentGroupSize = currentGroupSize;
+	}
+
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public List<ClientTourEntity> getClients() {
+		return clients;
+	}
+
+	public void setClients(List<ClientTourEntity> clients) {
+		this.clients = clients;
 	}
 }

@@ -1,16 +1,10 @@
 package com.nqhtour.entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "`client`")
@@ -34,9 +28,12 @@ public class ClientEntity extends BaseEntity {
 	@JoinColumn(name = "userid")
 	private UserEntity user;
 
-	@ManyToMany(fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "tourEntity", fetch = FetchType.LAZY)
+	private List<ClientTourEntity> tours = new ArrayList<>();
+
+	/*@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "booking", joinColumns = @JoinColumn(name = "client_id"), inverseJoinColumns = @JoinColumn(name = "tour_id"))
-	private List<TourEntity> tours = new ArrayList<>();
+	private List<TourEntity> tours = new ArrayList<>();*/
 
 	public String getName() {
 		return name;
@@ -86,11 +83,19 @@ public class ClientEntity extends BaseEntity {
 		this.user = user;
 	}
 
-	public List<TourEntity> getTours() {
+	/*public List<TourEntity> getTours() {
+		return tours;
+	}*/
+
+	/*public void setTours(List<TourEntity> tours) {
+		this.tours = tours;
+	}*/
+
+	public List<ClientTourEntity> getTours() {
 		return tours;
 	}
 
-	public void setTours(List<TourEntity> tours) {
+	public void setTours(List<ClientTourEntity> tours) {
 		this.tours = tours;
 	}
 }

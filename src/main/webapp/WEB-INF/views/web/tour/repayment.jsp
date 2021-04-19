@@ -30,24 +30,24 @@
                             <div class="col-50-pm">
                                 <label class="lb-repayment" style="display: block; font-size: 17px; font-weight: bold;">Tour</label>
                                 <img class="img-repayment" src="/template/web/img/flight.png" alt="Tour logo" style=" position: absolute;width: 33px;border-color: #c3c3c3;border-style: solid;border-width: thin;margin: 0px;padding: 2px;"/>
-                                <form:input cssClass="form-control" path="name" required="required" cssStyle="width: 20vw; margin-left: 33px; padding-left: 10px; padding: 7px" disabled="true"/>
+                                <form:input cssClass="form-control" path="name" required="required" cssStyle="width: 20vw; margin-left: 33px; padding-left: 10px; padding: 7px; font-size: 15px;" disabled="true"/>
                             </div>
                             <div class="col-50-pm">
                                 <label class="lb-repayment" style="display: block; font-size: 17px; font-weight: bold;">Location</label>
                                 <img class="img-repayment" src="/template/web/img/location.png" alt="Location logo"  style=" position: absolute;width: 33px;border-color: #c3c3c3;border-style: solid;border-width: thin;margin: 0px;padding: 2px;"/>
-                                <form:input cssClass="form-control" path="location" required="required" cssStyle="width: 20vw; margin-left: 33px; padding-left: 10px; padding: 7px" disabled="true"/>
+                                <form:input cssClass="form-control" path="location" required="required" cssStyle="width: 20vw; margin-left: 33px; padding-left: 10px; padding: 7px; font-size: 15px;" disabled="true"/>
                             </div>
                         </div>
                         <div class="row-pm" style="margin-bottom: 18px;">
                             <div class="col-50-pm">
                                 <label class="lb-repayment" style="display: block; font-size: 17px; font-weight: bold;">Date</label>
                                 <img class="img-repayment" src="/template/web/img/calendar.png" alt="Date logo"  style=" position: absolute;width: 33px;border-color: #c3c3c3;border-style: solid;border-width: thin;margin: 0px;padding: 2px;"/>
-                                <form:input cssClass="form-control" path="startDate" required="required" cssStyle="width: 20vw; margin-left: 33px; padding-left: 10px; padding: 7px" disabled="true"/>
+                                <form:input cssClass="form-control" path="startDate" required="required" cssStyle="width: 20vw; margin-left: 33px; padding-left: 10px; padding: 7px; font-size: 15px;" disabled="true"/>
                             </div>
                             <div class="col-50-pm">
                                 <label class="lb-repayment" style="display: block; font-size: 17px; font-weight: bold;">Duration</label>
                                 <img class="img-repayment" src="/template/web/img/night-mode.png" alt="Duration logo"  style=" position: absolute;width: 33px;border-color: #c3c3c3;border-style: solid;border-width: thin;margin: 0px;padding: 2px;"/>
-                                <form:input cssClass="form-control" path="duration" required="required" cssStyle="width: 20vw;margin-left: 33px; padding-left: 10px; padding: 7px" disabled="true"/>
+                                <form:input cssClass="form-control" path="duration" required="required" cssStyle="width: 20vw;margin-left: 33px; padding-left: 10px; padding: 7px; font-size: 15px;" disabled="true"/>
                             </div>
                         </div>
                         <div class="row-pm" style="margin-bottom: 18px;">
