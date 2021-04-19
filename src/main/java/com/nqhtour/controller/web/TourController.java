@@ -55,4 +55,14 @@ public class TourController {
 		
 		return mav;
 	}
+
+	@RequestMapping(value = "/tour/search", method = RequestMethod.GET)
+	public ModelAndView searchTour(@RequestParam("key") String key) {
+		ModelAndView mav = new ModelAndView("web/tour/search");
+		TourDTO model = httpAPI.getTourDTO(serverName.localUrl + "/api/tours/search/" + key);
+		mav.addObject("model", model);
+		mav.addObject("key", key);
+
+		return mav;
+	}
 }
