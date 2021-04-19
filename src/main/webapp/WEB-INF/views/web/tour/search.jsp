@@ -85,7 +85,7 @@
         <button id="sidebarCollapse" type="button" class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4" style="margin-left: 5px"><i class="fa fa-bars mr-2"></i><small class="text-uppercase font-weight-bold">Toggle</small></button>
 
         <!-- Demo content -->
-        <h3 class="display-4" style="margin-left: 10px; margin-bottom: 10px">Tìm kiếm: ${key}</h3>
+        <h4 class="display-4" style="margin-left: 10px; margin-bottom: 10px">Searching: ${key}</h4>
         <div class="card-container">
             <c:forEach var="item" items="${model.listResult}">
                 <div class="card">

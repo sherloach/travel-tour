@@ -14,6 +14,8 @@
             type="text"
             placeholder="Search tours"
             class="nav__search-input"
+            id="my_search_input"
+            onkeypress="keyPressSearch(event)"
           />
         </form>
       </nav>

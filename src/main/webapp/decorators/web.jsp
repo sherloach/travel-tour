@@ -28,5 +28,16 @@
 
 	<!-- Footer -->
 	<%@ include file="/common/web/footer.jsp" %>
+
+	<script>
+		function keyPressSearch(event) {
+			event.keyCode;
+			if (event.keyCode == 13 || event.which == 13) {
+				event.preventDefault();
+				var key = $('#my_search_input').val();
+				window.location.href = "/tour/search?key="+key;
+			}
+		}
+	</script>
 </body>
 </html>

@@ -29,7 +29,12 @@
 					</button>
 					<input
 						type="text"
-						placeholder="Search tours" class="nav__search-input" /> </form> </nav>
+						placeholder="Search tours"
+						class="nav__search-input"
+						id="my_search_input"
+						onkeypress="keyPressSearch(event)"/>
+				</form>
+			</nav>
 			<div class="header__logo">
 				<img src="/template/web/img/logo-white.png" alt="Natours logo" />
 			</div>
@@ -140,6 +145,17 @@
       	</c:forEach>
       </div>
     </main>
+
+	<script>
+		function keyPressSearch(event) {
+			event.keyCode;
+			if (event.keyCode == 13 || event.which == 13) {
+				event.preventDefault();
+				var key = $('#my_search_input').val();
+				window.location.href = "/tour/search?key="+key;
+			}
+		}
+	</script>
 </body>
 
 </html>
