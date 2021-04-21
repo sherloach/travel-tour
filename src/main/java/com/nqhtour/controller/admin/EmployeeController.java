@@ -44,11 +44,11 @@ public class EmployeeController {
 		model.setTotalItem(emplService.getTotalItem());
 		model.setTotalPage((int) Math.ceil((double) model.getTotalItem() / model.getLimit()));*/
 
-		String api = serverName.localUrl + "/api/empl/" + page + "/" + limit;
+		String api = serverName.herokuUrl + "/api/empl/" + page + "/" + limit;
 		EmployeeDTO model = httpAPI.getEmplDTO(api);
 		model.setPage(page);
 		model.setLimit(limit);
-		model.setTotalItem(httpAPI.getTotal(serverName.localUrl + "/api/empl/count"));
+		model.setTotalItem(httpAPI.getTotal(serverName.herokuUrl + "/api/empl/count"));
 		model.setTotalPage((int) Math.ceil((double) model.getTotalItem() / model.getLimit()));
 
 		ModelAndView mav = new ModelAndView("/admin/user/list");
@@ -70,7 +70,7 @@ public class EmployeeController {
 
 		// Add new employee
 		if (id != null) {
-			model = httpAPI.getEmplDTO(serverName.localUrl + "/api/empl/" + id);
+			model = httpAPI.getEmplDTO(serverName.herokuUrl + "/api/empl/" + id);
 		}
 		if (request.getParameter("message") != null) {
 			Map<String, String> message = messageUtil.getMessage(request.getParameter("message"));

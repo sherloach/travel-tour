@@ -41,11 +41,11 @@ public class TourController {
 		model.setTotalItem(tourService.getTotalItem());
 		model.setTotalPage((int) Math.ceil((double) model.getTotalItem() / model.getLimit()));*/
 
-		String api = serverName.localUrl + "/api/tours/" + page + "/" + limit;
+		String api = serverName.herokuUrl + "/api/tours/" + page + "/" + limit;
 		TourDTO model = httpAPI.getTourDTO(api);
 		model.setPage(page);
 		model.setLimit(limit);
-		model.setTotalItem(httpAPI.getTotal(serverName.localUrl + "/api/tours/count"));
+		model.setTotalItem(httpAPI.getTotal(serverName.herokuUrl + "/api/tours/count"));
 		model.setTotalPage((int) Math.ceil((double) model.getTotalItem() / model.getLimit()));
 
 		ModelAndView mav = new ModelAndView("/admin/tour/list");
@@ -66,7 +66,7 @@ public class TourController {
 
 		// Add new tour
 		if (id != null) {
-			model = httpAPI.getTourDTO(serverName.localUrl + "/api/tours/" + id);
+			model = httpAPI.getTourDTO(serverName.herokuUrl + "/api/tours/" + id);
 		}
 		if (request.getParameter("message") != null) {
 			Map<String, String> message = messageUtil.getMessage(request.getParameter("message"));
