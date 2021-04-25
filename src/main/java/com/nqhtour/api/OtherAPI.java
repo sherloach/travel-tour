@@ -6,6 +6,8 @@ import com.nqhtour.service.impl.ClientService;
 import com.nqhtour.service.impl.CustomUserDetailsService;
 import com.nqhtour.service.impl.UserService;
 import com.nqhtour.util.JwtUtil;
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -48,7 +50,7 @@ public class OtherAPI {
     }*/
 
     @PostMapping("/api/login")
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
+    public ResponseEntity<?> createAuthenticationToken(@RequestBody String data) throws Exception {
         /*try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword()));
         } catch (BadCredentialsException e) {
@@ -69,12 +71,15 @@ public class OtherAPI {
 
         // call ajax ở bên Login form, thực hiện check usernam and password, nếu đúng thì tạo jwt => success thì post tới /j_spring_security_check
 
+        JsonNode parent = new ObjectMapper().readTree(data);
+        String username = parent.get("username").asText();
+        String password = parent.get("password").asText();
         String result = "";
         HttpStatus httpStatus = null;
 
         try {
-            if (userService.checkAccount(authenticationRequest.getUsername(), authenticationRequest.getPassword())) {
-                UserDetails userDetails = customUserDetailsService.loadUserByUsername(authenticationRequest.getUsername());
+            if (userService.checkAccount(username, password)) {
+                UserDetails userDetails = customUserDetailsService.loadUserByUsername(username);
                 result = jwtUtil.generateToken(userDetails);
                 httpStatus = HttpStatus.OK;
             } else {
