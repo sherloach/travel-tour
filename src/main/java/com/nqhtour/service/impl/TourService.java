@@ -76,11 +76,13 @@ public class TourService implements ITourService {
 	public TourDTO save(TourDTO dto) {
 		TourEntity tourEntity;
 
-		// convert image from base64 to bytes and write image to root dir
-		String imagePath = dto.getBase64().split(",")[1];
-		byte[] decodeBase64 = Base64.getDecoder().decode(imagePath.getBytes());
-		String uploadRootPath = context.getRealPath("template/upload/tour");
-		uploadFileUtil.writeOrUpdate(decodeBase64, uploadRootPath, dto.getImageCover());
+		if (dto.getBase64() != null) {
+			// convert image from base64 to bytes and write image to root dir
+			String imagePath = dto.getBase64().split(",")[1];
+			byte[] decodeBase64 = Base64.getDecoder().decode(imagePath.getBytes());
+			String uploadRootPath = context.getRealPath("template/upload/tour");
+			uploadFileUtil.writeOrUpdate(decodeBase64, uploadRootPath, dto.getImageCover());
+		}
 
 		if (dto.getId() != null) {
 			TourEntity oldTour = tourRepository.findOne(dto.getId());
