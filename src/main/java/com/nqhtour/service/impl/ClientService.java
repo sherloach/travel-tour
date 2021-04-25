@@ -3,6 +3,7 @@ package com.nqhtour.service.impl;
 import com.nqhtour.entity.ClientTourEntity;
 import com.nqhtour.repository.ClientTourRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -61,6 +62,8 @@ public class ClientService implements IClientService {
 		userEntity = userRepository.findOneByUserNameAndStatus(userDTO.getUsername(), SystemConstant.ACTIVE_STATUS);
 		if (userEntity != null) {
 			throw new ArrayIndexOutOfBoundsException();
+			/*ClientDTO empty = null;
+			return empty;*/
 		}
 
 		if (dto.getId() != null) {

@@ -8,6 +8,7 @@ import com.nqhtour.specification.TourSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,6 +24,7 @@ public class TourAPI {
         TourDTO model = new TourDTO();
         Pageable pageable = new PageRequest(page - 1, limit);
         model.setListResult(tourService.findAll(pageable));
+        //ResponseEntity.ok(true);
         return model;
     }
 

@@ -42,6 +42,8 @@ public class HomeController {
 		return mav;
 	}
 
+	// SecurityConfigurer, JwtUtil, AuthenticationResponse, AuthenticationRequest
+
 	/*@RequestMapping(value = "/trang-chu", method = RequestMethod.GET)
 	public ModelAndView homePage() throws Exception {
 		ModelAndView mav = new ModelAndView("/web/home");

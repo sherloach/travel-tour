@@ -6,4 +6,5 @@ public interface IUserService {
 	UserDTO findById(long id);
 	Long save(UserDTO dto);
 	void delete(long id);
+	boolean checkAccount(String username, String password);
 }

@@ -1,14 +1,9 @@
 package com.nqhtour.api.web;
 
-
-import com.nqhtour.dto.TourDTO;
 import com.nqhtour.entity.TourEntity;
 import com.nqhtour.repository.TourRepository;
-import com.nqhtour.service.impl.TourService;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.util.JSONPObject;
-import org.codehaus.jackson.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

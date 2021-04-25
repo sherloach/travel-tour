@@ -51,5 +51,27 @@
 	</div>
 
 	<div id="dropDownSelect1"></div>
+
+    <%--<script>
+        function login(d) {
+            $.ajax({
+                url: '/login',
+                type: 'POST',
+                contentType: 'text/plain',
+                data: d,
+                success: function (result) {
+                    if (result == "true") {
+                        //window.location.href = "/tour/checkout?id=" + ${model.id};
+                        window.location.href = "/tour/repayment?id=" + ${model.id};
+                    } else if (result == "false") {
+                        swal("Warning!", "You paid for this tour!", "warning");
+                    }
+                },
+                error: function (error) {
+                    window.location.href = "/trang-chu";
+                }
+            });
+        }
+    </script>--%>
 </body>
 </html>

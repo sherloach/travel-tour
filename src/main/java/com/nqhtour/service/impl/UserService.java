@@ -1,6 +1,8 @@
 package com.nqhtour.service.impl;
 
+import com.nqhtour.constant.SystemConstant;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.nqhtour.converter.UserConverter;
@@ -36,4 +38,16 @@ public class UserService implements IUserService {
 		
 	}
 
+	@Override
+	public boolean checkAccount(String username, String password) {
+		UserEntity userEntity = userRepository.findOneByUserNameAndStatus(username, SystemConstant.ACTIVE_STATUS);
+		if (userEntity != null) {
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+			boolean isPasswordMatches = encoder.matches(password, userEntity.getPassword());
+			if (isPasswordMatches) {
+				return true;
+			}
+		}
+		return false;
+	}
 }
