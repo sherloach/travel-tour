@@ -97,7 +97,7 @@ public class TourService implements ITourService {
 	}
 
 	@Override
-	public void delete(long id) {
+	public void delete(Long id) {
 		tourRepository.delete(id);
 	}
 }
