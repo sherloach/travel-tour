@@ -14,5 +14,5 @@ public interface ITourService {
 	int getTotalItem();
 	TourDTO findById(long id);
 	TourDTO save(TourDTO dto);
-	void delete(Long id);
+	void delete(long id);
 }

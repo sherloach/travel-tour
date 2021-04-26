@@ -117,7 +117,7 @@
 			        //}).get();
 					//var id = $(this).data("value");
 				  	var data = "{\"tourId\": " + tourID + " }";
-					deleteTour(data);
+					deleteTour(tourID);
 			  }
 			});
 		}
