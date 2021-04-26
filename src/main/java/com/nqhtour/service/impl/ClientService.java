@@ -108,6 +108,13 @@ public class ClientService implements IClientService {
 	}
 
 	@Override
+	public ClientDTO findByEmail(String email) {
+		ClientEntity entity = clientRepository.findOneByEmail(email);
+		return clientConverter.toDTO(entity);
+	}
+
+
+	@Override
 	public boolean checkBookingExist(Long idClient, Long idTour) {
 		ClientEntity entity = clientRepository.findOne(idClient);
 		for (ClientTourEntity tour : entity.getTours()) {

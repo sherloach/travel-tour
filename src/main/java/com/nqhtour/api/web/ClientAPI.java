@@ -1,5 +1,6 @@
 package com.nqhtour.api.web;
 
+import com.mysql.cj.xdevapi.Client;
 import com.nqhtour.entity.TourEntity;
 import com.nqhtour.repository.TourRepository;
 import org.codehaus.jackson.JsonNode;
@@ -34,6 +35,12 @@ public class ClientAPI {
 	@GetMapping("/api/client/{id}")
 	private ClientDTO readClient(@PathVariable Long id) {
 		ClientDTO model = clientService.findById(id);
+		return model;
+	}
+
+	@PostMapping("/api/client/email")
+	private ClientDTO readClientByEmail(@RequestBody String email) {
+		ClientDTO model = clientService.findByEmail(email);
 		return model;
 	}
 	
