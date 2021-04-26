@@ -116,7 +116,8 @@
 			        //   return $(this).val();
 			        //}).get();
 					//var id = $(this).data("value");
-					deleteTour(tourID);
+				  	var data = "{\"tourId\": " + tourID + " }";
+					deleteTour(data);
 			  }
 			});
 		}
