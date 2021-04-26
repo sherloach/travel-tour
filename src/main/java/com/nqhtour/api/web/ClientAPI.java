@@ -39,7 +39,10 @@ public class ClientAPI {
 	}
 
 	@PostMapping("/api/client/email")
-	private ClientDTO readClientByEmail(@RequestBody String email) {
+	private ClientDTO readClientByEmail(@RequestBody String data) throws IOException {
+		JsonNode parent = new ObjectMapper().readTree(data);
+		String email = parent.get("email").asText();
+
 		ClientDTO model = clientService.findByEmail(email);
 		return model;
 	}
