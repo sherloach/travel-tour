@@ -26,7 +26,7 @@ public class TourController {
 	@RequestMapping(value = "/tour", method = RequestMethod.GET)
 	public ModelAndView showTour(@RequestParam("id") Long id, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("web/tour/tour");
-		TourDTO model = httpAPI.getTourDTO(serverName.herokuUrl + "/api/tours/" + id);
+		TourDTO model = httpAPI.getTourDTO(serverName.localUrl + "/api/tours/" + id);
 		mav.addObject("model", model);
 
 		return mav;
@@ -37,7 +37,7 @@ public class TourController {
 		String repaymentView = "web/tour/repayment";
 		String errorView = "errorpage";
 		ModelAndView mav = new ModelAndView(repaymentView);
-		TourDTO model = httpAPI.getTourDTO(serverName.herokuUrl + "/api/tours/" + id);
+		TourDTO model = httpAPI.getTourDTO(serverName.localUrl + "/api/tours/" + id);
 		mav.addObject("model", model);
 
 		// TODO: 1. thêm param idClient để ràng buộc khi người dùng nhập trực tiếp url vào browser, khi nào sẽ vượt qua được hàm check
@@ -49,7 +49,7 @@ public class TourController {
 	@RequestMapping(value = "/tour/checkout", method = RequestMethod.GET)
 	public ModelAndView checkoutTour(@RequestParam("id") Long id, @RequestParam("nuTickets") Long nuTickets) {
 		ModelAndView mav = new ModelAndView("web/tour/checkout");
-		TourDTO model = httpAPI.getTourDTO(serverName.herokuUrl + "/api/tours/" + id);
+		TourDTO model = httpAPI.getTourDTO(serverName.localUrl + "/api/tours/" + id);
 		mav.addObject("model", model);
 		mav.addObject("nutickets", nuTickets);
 		
@@ -59,7 +59,7 @@ public class TourController {
 	@RequestMapping(value = "/tour/search", method = RequestMethod.GET)
 	public ModelAndView searchTour(@RequestParam("key") String key) {
 		ModelAndView mav = new ModelAndView("web/tour/search");
-		TourDTO model = httpAPI.getTourDTO(serverName.herokuUrl + "/api/tours/search/" + key);
+		TourDTO model = httpAPI.getTourDTO(serverName.localUrl + "/api/tours/search/" + key);
 		mav.addObject("model", model);
 		mav.addObject("key", key);
 

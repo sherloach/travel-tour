@@ -25,11 +25,12 @@ public class TourAPI {
 		return tourService.save(tourUpdate);
 	}
 
-	@DeleteMapping("/api/tour")
-	public void deleteTour(@RequestBody long id) {
+	@PostMapping("/api/tour/delete")
+	public String deleteTour(@RequestBody long id) {
 		//JsonNode parent = new ObjectMapper().readTree(data);
 		//String tourID = parent.get("tourId").asText();
 		tourService.delete(id);
+		return "true";
 	}
 
 }

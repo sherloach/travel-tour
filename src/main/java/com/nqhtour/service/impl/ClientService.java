@@ -116,13 +116,20 @@ public class ClientService implements IClientService {
 
 	@Override
 	public boolean checkBookingExist(Long idClient, Long idTour) {
-		ClientEntity entity = clientRepository.findOne(idClient);
+		/*ClientEntity entity = clientRepository.findOne(idClient);
 		for (ClientTourEntity tour : entity.getTours()) {
 			if (tour.getTourEntity().getId().equals(idTour)) {
 				return false;
 			}
 		}
-		return true;
+		return true;*/
+		ClientEntity client = clientRepository.findOne(idClient);
+		TourEntity tour = tourRepository.findOne(idTour);
+		ClientTourEntity entity = clientTourRepository.findOneByClientEntityAndTourEntity(client, tour);
+		if (entity == null) {
+			return true;
+		}
+		return false;
 	}
 
 }

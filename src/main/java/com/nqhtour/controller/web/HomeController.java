@@ -34,7 +34,7 @@ public class HomeController {
 	public ModelAndView homePage() {
 		ModelAndView mav = new ModelAndView("/web/home");
 
-		TourDTO model = httpAPI.getTourDTO(serverName.herokuUrl + "/api/tours/1/9");
+		TourDTO model = httpAPI.getTourDTO(serverName.localUrl + "/api/tours/1/9");
 
 		// TODO: show tours that have not been sold out yet:
 		// 		 - Write a tours finding func that maxGroupSize equals People

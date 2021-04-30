@@ -29,12 +29,11 @@
 	<link rel="stylesheet" type="text/css" href="<c:url value='/template/login/css/util.css'/>">
 	<link rel="stylesheet" type="text/css" href="<c:url value='/template/login/css/main.css'/>">
 <!--===============================================================================================-->
+	<script src="<c:url value='/template/login/vendor/jquery/jquery-3.2.1.min.js'/>"></script>
 </head>
 <body>
 	<dec:body/>
-	
-	<!--===============================================================================================-->
-	<script src="<c:url value='/template/login/vendor/jquery/jquery-3.2.1.min.js'/>"></script>
+
 <!--===============================================================================================-->
 	<script src="<c:url value='/template/login/vendor/animsition/js/animsition.min.js'/>"></script>
 <!--===============================================================================================-->
