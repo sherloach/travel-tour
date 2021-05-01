@@ -54,9 +54,10 @@
 		  <h4>Tour <span class="price" style="color:black"><i class="fa fa-shopping-cart"></i> <b>1</b></span></h4>
 		  <img src="${pageContext.request.contextPath}/template/upload/tour/${model.imageCover}" alt="" style="height: 300px; border-radius: 15px; opacity: 0.8;">
 		  <p>${model.name}<span class="price">${model.duration} days</span></p>
+		  <p>Tickets<span class="price">x${nutickets}</span></p>
 		  <hr>
 		  <!-- <p>Total <span class="price" style="color:black"><b>$${model.price}</b></span></p> -->
-		  <p>Total <span class="price" style="color:black"><b>$<fmt:formatNumber value="${model.price}" type="currency" currencySymbol=""/></b></span></p>
+		  <p>Total <span class="price" style="color:black"><b>$<fmt:formatNumber value="${model.price * nutickets}" type="currency" currencySymbol=""/></b></span></p>
 		</div>
 	  </div>
 	</div>

@@ -15,6 +15,7 @@
             padding: 2px;
         }*/
     </style>
+
 </head>
 <body>
 <div class="re-payment-container">
@@ -54,7 +55,7 @@
                             <div class="col-50-pm">
                                 <label class="lb-repayment" style="display: block; font-size: 17px; font-weight: bold;">Tickets</label>
                                 <img class="img-repayment" src="/template/web/img/tickets.png" alt="Tickets logo"  style=" position: absolute;width: 33px;border-color: #c3c3c3;border-style: solid;border-width: thin;margin: 0px;padding: 2px;"/>
-                                <input type="number" onkeydown="return false" min="1" class="input-pm" id="nuticket" name="nuticket" style="margin-bottom: 0; width: 20vw; margin-left: 33px; padding-left: 10px; padding: 8px ">
+                                <input type="number" onkeydown="return false" required min="1" class="input-pm" id="nuticket" name="nuticket" style="margin-bottom: 0; width: 20vw; margin-left: 33px; padding-left: 10px; padding: 8px ">
                                 <p style="display: block">Hiện còn ${model.maxGroupSize - model.currentGroupSize} vé</p>
                             </div>
                             <div class="col-50-pm">
@@ -72,12 +73,31 @@
     var ticketAvailable = ${model.maxGroupSize - model.currentGroupSize};
     document.getElementById("nuticket").max = ticketAvailable;
 
+    $("#formSubmit").validate({
+        rules: {
+            nuticket: {
+                required: true
+            }
+        },
+
+        messages: {
+            nuticket: {
+                required: "Please provide a number ticket!"
+            }
+        }
+    });
+
     var btnApply = document.getElementById("btn-payment");
     btnApply.addEventListener("click", function (event) {
         // TODO: change this code using JSON
-        var idClient = ${model.id};
-        //checkout(idClient);
-        window.location.href = "/tour/checkout?id=" + ${model.id} + "&nuTickets=" + $("#nuticket").val();
+        var check = $('#formSubmit').valid();
+        if (check) {
+            var idClient = ${model.id};
+            //checkout(idClient);
+            window.location.href = "/tour/checkout?id=" + ${model.id} + "&nuTickets=" + $("#nuticket").val();
+        } else {
+            $('.error').css({ 'position' : 'initial', 'color' : 'red', '-webkit-transform': 'initial', 'max-width': 'initial', 'text-align': 'initial', 'transform': 'initial' });
+        }
     });
 
     function checkout(d) {

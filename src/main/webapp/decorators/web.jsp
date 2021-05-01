@@ -19,6 +19,7 @@
 	<!-- sweetalert -->
     <script src="<c:url value='/template/admin/sweetalert/sweetalert2.min.js' />"></script>
     <link rel="stylesheet" href="<c:url value='/template/admin/sweetalert/sweetalert2.min.css' />" />
+	<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 </head>
 <body>
 	<!-- Navigation -->
