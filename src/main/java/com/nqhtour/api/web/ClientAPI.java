@@ -16,6 +16,7 @@ import com.nqhtour.repository.ClientRepository;
 import com.nqhtour.repository.UserRepository;
 import com.nqhtour.service.IClientService;
 
+import javax.mail.MessagingException;
 import java.io.IOException;
 
 @RestController(value = "ClientAPIOfWeb")
@@ -69,7 +70,7 @@ public class ClientAPI {
 	}
 
 	@PostMapping("/api/client/booking")
-	public String booking(@RequestBody String data) throws IOException {
+	public String booking(@RequestBody String data) throws IOException, MessagingException {
 		JsonNode parent = new ObjectMapper().readTree(data);
 		String email = parent.get("email").asText();
 		String tourId = parent.get("tourId").asText();
