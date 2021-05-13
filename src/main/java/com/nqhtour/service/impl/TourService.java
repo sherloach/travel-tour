@@ -100,4 +100,26 @@ public class TourService implements ITourService {
 	public void delete(long id) {
 		tourRepository.delete(id);
 	}
+
+	@Override
+	public List<TourDTO> findHotTours() {
+		List<TourDTO> models = new ArrayList<>();
+		List<TourEntity> entities = tourRepository.findByHotTours();
+		for (TourEntity item : entities) {
+			TourDTO tourDTO = tourConverter.toDTO(item);
+			models.add(tourDTO);
+		}
+		return models;
+	}
+
+	@Override
+	public List<TourDTO> findNewTours() {
+		List<TourDTO> models = new ArrayList<>();
+		List<TourEntity> entities = tourRepository.findByNewTours();
+		for (TourEntity item : entities) {
+			TourDTO tourDTO = tourConverter.toDTO(item);
+			models.add(tourDTO);
+		}
+		return models;
+	}
 }

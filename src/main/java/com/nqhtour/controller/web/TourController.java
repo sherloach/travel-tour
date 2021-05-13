@@ -59,7 +59,8 @@ public class TourController {
 	@RequestMapping(value = "/tour/search", method = RequestMethod.GET)
 	public ModelAndView searchTour(@RequestParam("key") String key) {
 		ModelAndView mav = new ModelAndView("web/tour/search");
-		TourDTO model = httpAPI.getTourDTO(serverName.localUrl + "/api/tours/search/" + key);
+		String apiSearch = serverName.localUrl + "/api/tours/search/" + key;
+		TourDTO model = httpAPI.getTourDTO(apiSearch);
 		mav.addObject("model", model);
 		mav.addObject("key", key);
 

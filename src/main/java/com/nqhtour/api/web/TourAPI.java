@@ -41,9 +41,26 @@ public class TourAPI {
 
     @GetMapping("/api/tours/search/{name}")
     public TourDTO searchTours(@PathVariable String name) {
+        if (name.contains(" ")) {
+            name = name.replace(" ", "-");
+        }
         TourDTO model = new TourDTO();
         TourSpecification tourSpecification = new TourSpecification(new SearchCriteria("tourID", ":", name));
         model.setListResult(tourService.findAll(tourSpecification));
+        return model;
+    }
+
+    @GetMapping("/api/hot-tours")
+    public TourDTO readHotTours(){
+        TourDTO model = new TourDTO();
+        model.setListResult(tourService.findHotTours());
+        return model;
+    }
+
+    @GetMapping("/api/new-tours")
+    public TourDTO readNewTours(){
+        TourDTO model = new TourDTO();
+        model.setListResult(tourService.findNewTours());
         return model;
     }
 }

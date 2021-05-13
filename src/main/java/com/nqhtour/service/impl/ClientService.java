@@ -30,22 +30,22 @@ import javax.mail.internet.MimeMessage;
 public class ClientService implements IClientService {
 	@Autowired
 	ClientRepository clientRepository;
-	
+
 	@Autowired
 	ClientConverter clientConverter;
-	
+
 	@Autowired
 	UserService userService;
-	
+
 	@Autowired
 	UserRepository userRepository;
-	
+
 	@Autowired
 	TourRepository tourRepository;
 
 	@Autowired
 	ClientTourRepository clientTourRepository;
-	
+
 	@Autowired
 	UserConverter userConverter;
 
@@ -58,7 +58,7 @@ public class ClientService implements IClientService {
 	@Override
 	public ClientDTO save(ClientDTO dto) {
 		ClientEntity entity = new ClientEntity();
-		
+
 		// Set user data
 		UserDTO userDTO = new UserDTO();
 		userDTO.setUsername(dto.getEmail());
@@ -78,13 +78,13 @@ public class ClientService implements IClientService {
 		if (dto.getId() != null) {
 			UserEntity oldUser = userRepository.findOne(dto.getUserID());
 			ClientEntity oldClient = clientRepository.findOne(dto.getId());
-			
+
 			UserEntity userUpdate = userConverter.toEntity(oldUser, userDTO);
 			userEntity = userRepository.save(userUpdate);
 			entity = clientConverter.toEntity(oldClient, dto);
 		} else {
 			userEntity = userRepository.save(userConverter.toEntity(userDTO));
-			
+
 			//dto.setUserID(userID);
 			entity = clientConverter.toEntity(dto);
 		}

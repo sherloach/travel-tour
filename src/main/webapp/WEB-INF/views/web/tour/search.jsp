@@ -34,18 +34,6 @@
                     My Tours
                 </a>
             </li>
-            <%--<li class="nav-item">
-                <a href="#" class="nav-link text-dark font-italic">
-                    <i class="fa fa-cubes mr-3 text-primary fa-fw"></i>
-                    Services
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link text-dark font-italic">
-                    <i class="fa fa-picture-o mr-3 text-primary fa-fw"></i>
-                    Gallery
-                </a>
-            </li>--%>
         </ul>
 
         <p class="text-gray font-weight-bold text-uppercase px-3 small py-4 mb-0">USER</p>
@@ -57,36 +45,18 @@
                     My Account
                 </a>
             </li>
-            <%--<li class="nav-item">
-                <a href="#" class="nav-link text-dark font-italic">
-                    <i class="fa fa-bar-chart mr-3 text-primary fa-fw"></i>
-                    Bar charts
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link text-dark font-italic">
-                    <i class="fa fa-pie-chart mr-3 text-primary fa-fw"></i>
-                    Pie charts
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="#" class="nav-link text-dark font-italic">
-                    <i class="fa fa-line-chart mr-3 text-primary fa-fw"></i>
-                    Line charts
-                </a>
-            </li>--%>
         </ul>
     </div>
     <!-- End vertical navbar -->
 
     <!-- Page content holder -->
-    <div class="page-content p-5" id="content">
+    <div class="page-content p-5" id="content" style="margin-left: 20rem;">
         <!-- Toggle button -->
         <button id="sidebarCollapse" type="button" class="btn btn-light bg-white rounded-pill shadow-sm px-4 mb-4" style="margin-left: 5px"><i class="fa fa-bars mr-2"></i><small class="text-uppercase font-weight-bold">Toggle</small></button>
 
         <!-- Demo content -->
-        <h4 class="display-4" style="margin-left: 10px; margin-bottom: 10px">Searching: ${key}</h4>
-        <div class="card-container">
+        <h4 class="display-4" style="margin-bottom: 10px">Searching: ${key}</h4>
+        <div class="card-container" style="min-height: 40vh;">
             <c:forEach var="item" items="${model.listResult}">
                 <div class="card">
                     <div class="card__header">

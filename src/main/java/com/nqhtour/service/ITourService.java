@@ -15,4 +15,6 @@ public interface ITourService {
 	TourDTO findById(long id);
 	TourDTO save(TourDTO dto);
 	void delete(long id);
+	List<TourDTO> findHotTours();
+	List<TourDTO> findNewTours();
 }
