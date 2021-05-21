@@ -74,28 +74,6 @@ public class HttpAPI {
         DefaultHttpClient httpClient = new DefaultHttpClient();
         try
         {
-            /*
-            //Define a HttpGet request; You can choose between HttpPost, HttpDelete or HttpPut also.
-            //Choice depends on type of method you will be invoking.
-            HttpGet getRequest = new HttpGet(api);
-
-            //Set the API media type in http accept header
-            getRequest.addHeader("accept", "application/json");
-
-            //Send the request; It will immediately return the response in HttpResponse object
-            HttpResponse response = httpClient.execute(getRequest);
-
-            //verify the valid error code first
-            int statusCode = response.getStatusLine().getStatusCode();
-            if (statusCode != 200)
-            {
-                throw new RuntimeException("Failed with HTTP error code : " + statusCode);
-            }
-
-            // Now pull back the response object
-            HttpEntity httpEntity = response.getEntity();
-            String apiOutput = EntityUtils.toString(httpEntity);*/
-
             String apiOutput = getContentAPI(api, httpClient);
             ObjectMapper mapper = new ObjectMapper();
             model = mapper.readValue(apiOutput, TourDTO.class);

@@ -113,8 +113,6 @@
 							class="icon icon-circle-o"></i>All Users</a></li>
 					<li><a href="<c:url value='/admin/empl/edit'/>"><i
 							class="icon icon-add"></i>Add User</a></li>
-					<li><a href="panel-page-profile.html"><i
-							class="icon icon-user"></i>User Profile </a></li>
 				</ul></li>
 			</ul>
 		</section>

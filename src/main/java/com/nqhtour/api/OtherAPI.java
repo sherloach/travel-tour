@@ -34,21 +34,6 @@ public class OtherAPI {
     @Autowired
     public JavaMailSender emailSender;
 
-    /*@Autowired
-    public JavaMailSender emailSender;*/
-
-    /*@PostMapping("/api/login")
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
-        try {
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword()));
-        } catch (BadCredentialsException e) {
-            throw new Exception("Incorrect username and password", e);
-        }
-        final UserDetails userDetails = customUserDetailsService.loadUserByUsername(authenticationRequest.getUsername());
-        final String jwt = jwtUtil.generateToken(userDetails);
-        return ResponseEntity.ok(new AuthenticationResponse(jwt));
-    }*/
-
     @PostMapping("/api/login")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody String data) throws Exception {
         JsonNode parent = new ObjectMapper().readTree(data);

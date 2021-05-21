@@ -52,7 +52,7 @@
 
 	<div id="dropDownSelect1"></div>
 
-    <script>
+    <%--<script>
 		$('#btn-login').click(function (e) {
 			var username = $("#j_username").val();
 			var password = $("#j_password").val();
@@ -75,6 +75,6 @@
                 }
             });
         }
-    </script>
+    </script>--%>
 </body>
 </html>

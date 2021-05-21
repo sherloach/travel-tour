@@ -122,4 +122,15 @@ public class TourService implements ITourService {
 		}
 		return models;
 	}
+
+	@Override
+	public List<TourDTO> getTopTourByMoney(String month,String year){
+		List<TourDTO> models = new ArrayList<>();
+		List<TourEntity> entities = tourRepository.getByTopTourByMoney(month,year);
+		for (TourEntity item : entities) {
+			TourDTO tourDTO = tourConverter.toDTO(item);
+			models.add(tourDTO);
+		}
+		return models;
+	}
 }

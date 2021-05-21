@@ -33,14 +33,6 @@ public class TourController {
 
 	@RequestMapping(value = "/admin/tour/list", method = RequestMethod.GET)
 	public ModelAndView showList(@RequestParam("page") int page, @RequestParam("limit") int limit, HttpServletRequest request) {
-		/*TourDTO model = new TourDTO();
-		model.setPage(page);
-		model.setLimit(limit);
-		Pageable pageable = new PageRequest(page - 1, limit);
-		model.setListResult(tourService.findAll(pageable));
-		model.setTotalItem(tourService.getTotalItem());
-		model.setTotalPage((int) Math.ceil((double) model.getTotalItem() / model.getLimit()));*/
-
 		String api = serverName.localUrl + "/api/tours/" + page + "/" + limit;
 		TourDTO model = httpAPI.getTourDTO(api);
 		model.setPage(page);

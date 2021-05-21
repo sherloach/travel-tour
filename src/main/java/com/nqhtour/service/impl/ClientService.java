@@ -1,12 +1,12 @@
 package com.nqhtour.service.impl;
 
+import com.nqhtour.converter.TourConverter;
+import com.nqhtour.dto.TourDTO;
 import com.nqhtour.entity.ClientTourEntity;
 import com.nqhtour.repository.ClientTourRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +25,8 @@ import com.nqhtour.service.IClientService;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ClientService implements IClientService {
@@ -50,6 +52,9 @@ public class ClientService implements IClientService {
 	UserConverter userConverter;
 
 	@Autowired
+	private TourConverter tourConverter;
+
+	@Autowired
 	PasswordEncoder passwordEncode;
 
 	@Autowired
@@ -58,31 +63,30 @@ public class ClientService implements IClientService {
 	@Override
 	public ClientDTO save(ClientDTO dto) {
 		ClientEntity entity = new ClientEntity();
-
-		// Set user data
-		UserDTO userDTO = new UserDTO();
-		userDTO.setUsername(dto.getEmail());
-		userDTO.setPassword(passwordEncode.encode(dto.getPassword()));
-		userDTO.setRole("CLIENT");
-		userDTO.setStatus(1);
-
 		UserEntity userEntity = null;
-		// Check email user exist or not?
-		userEntity = userRepository.findOneByUserNameAndStatus(userDTO.getUsername(), SystemConstant.ACTIVE_STATUS);
-		if (userEntity != null) {
-			throw new ArrayIndexOutOfBoundsException();
-			/*ClientDTO empty = null;
-			return empty;*/
-		}
 
 		if (dto.getId() != null) {
-			UserEntity oldUser = userRepository.findOne(dto.getUserID());
+			//UserEntity oldUser = userRepository.findOne(dto.getUserID());
 			ClientEntity oldClient = clientRepository.findOne(dto.getId());
+			userEntity = userRepository.findOne(dto.getUserID());
 
-			UserEntity userUpdate = userConverter.toEntity(oldUser, userDTO);
-			userEntity = userRepository.save(userUpdate);
+			//UserEntity userUpdate = userConverter.toEntity(oldUser, userDTO);
+			//userEntity = userRepository.save(userUpdate);
 			entity = clientConverter.toEntity(oldClient, dto);
 		} else {
+			// Set user data
+			UserDTO userDTO = new UserDTO();
+			userDTO.setUsername(dto.getEmail());
+			userDTO.setPassword(passwordEncode.encode(dto.getPassword()));
+			userDTO.setRole("CLIENT");
+			userDTO.setStatus(1);
+
+
+			// Check email user exist or not?
+			userEntity = userRepository.findOneByUserNameAndStatus(userDTO.getUsername(), SystemConstant.ACTIVE_STATUS);
+			if (userEntity != null) {
+				throw new ArrayIndexOutOfBoundsException();
+			}
 			userEntity = userRepository.save(userConverter.toEntity(userDTO));
 
 			//dto.setUserID(userID);
@@ -105,7 +109,7 @@ public class ClientService implements IClientService {
 		clientTourEntity.setTourEntity(tourEntity);
 		clientTourEntity.setNuTickets(nuTickets);
 		clientTourRepository.save(clientTourEntity);
-		sendEmail(clientEntity.getEmail(), nuTickets, tourEntity);
+		//sendEmail(clientEntity.getEmail(), nuTickets, tourEntity);
 		return true;
 	}
 
@@ -988,6 +992,18 @@ public class ClientService implements IClientService {
 		return clientConverter.toDTO(entity);
 	}
 
+	@Override
+	public List<TourDTO> myTour(Long idClient) {
+		List<TourDTO> models = new ArrayList<>();
+		ClientEntity client = clientRepository.findOne(idClient);
+		List<ClientTourEntity> entity = clientTourRepository.findAllByClientEntity(client);
+		for (ClientTourEntity item : entity) {
+			TourEntity tourEntity = item.getTourEntity();
+			TourDTO tourDTO = tourConverter.toDTO(tourEntity);
+			models.add(tourDTO);
+		}
+		return models;
+	}
 
 	@Override
 	public boolean checkBookingExist(Long idClient, Long idTour) {

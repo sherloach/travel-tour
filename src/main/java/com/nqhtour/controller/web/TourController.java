@@ -59,6 +59,9 @@ public class TourController {
 	@RequestMapping(value = "/tour/search", method = RequestMethod.GET)
 	public ModelAndView searchTour(@RequestParam("key") String key) {
 		ModelAndView mav = new ModelAndView("web/tour/search");
+		if (key.contains(" ")) {
+			key = key.replace(" ", "-");
+		}
 		String apiSearch = serverName.localUrl + "/api/tours/search/" + key;
 		TourDTO model = httpAPI.getTourDTO(apiSearch);
 		mav.addObject("model", model);

@@ -48,7 +48,7 @@ public class ClientAPI {
 		return model;
 	}
 	
-	@PostMapping("/api/client")	
+	@PostMapping("/api/client")
 	public ClientDTO createClient(@RequestBody ClientDTO client) {
 		return clientService.save(client);
 	}

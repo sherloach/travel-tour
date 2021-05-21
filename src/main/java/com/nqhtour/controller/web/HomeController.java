@@ -42,48 +42,6 @@ public class HomeController {
 		return mav;
 	}
 
-	// SecurityConfigurer, JwtUtil, AuthenticationResponse, AuthenticationRequest
-
-	/*@RequestMapping(value = "/trang-chu", method = RequestMethod.GET)
-	public ModelAndView homePage() throws Exception {
-		ModelAndView mav = new ModelAndView("/web/home");
-		DefaultHttpClient httpClient = new DefaultHttpClient();
-		try
-		{
-			//Define a HttpGet request; You can choose between HttpPost, HttpDelete or HttpPut also.
-			//Choice depends on type of method you will be invoking.
-			HttpGet getRequest = new HttpGet("http://localhost:8080/api/tours/1/9");
-
-			//Set the API media type in http accept header
-			getRequest.addHeader("accept", "application/json");
-
-			//Send the request; It will immediately return the response in HttpResponse object
-			HttpResponse response = httpClient.execute(getRequest);
-
-			//verify the valid error code first
-			int statusCode = response.getStatusLine().getStatusCode();
-			if (statusCode != 200)
-			{
-				throw new RuntimeException("Failed with HTTP error code : " + statusCode);
-			}
-
-			// Now pull back the response object
-			HttpEntity httpEntity = response.getEntity();
-			String apiOutput = EntityUtils.toString(httpEntity);
-
-			ObjectMapper mapper = new ObjectMapper();
-			TourDTO model = mapper.readValue(apiOutput, TourDTO.class);
-
-			mav.addObject("model", model);
-		}
-		finally
-		{
-			//Important: Close the connect
-			httpClient.getConnectionManager().shutdown();
-			return mav;
-		}
-	}*/
-
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public ModelAndView loginPage() {
 		ModelAndView mav = new ModelAndView("/login");

@@ -61,7 +61,7 @@
 														</c:url>
 														<td>
 															<a href='${updateTourURL}' class="my-btn-tour btn-fab btn-fab-sm btn-primary shadow text-white"><i class="icon-pencil"></i></a>
-															<c:if test="${model.currentGroupSize == 0}">
+															<c:if test="${item.currentGroupSize == 0}">
 																<a href='#' onclick="warningBeforeDelete(${item.id})" class="my-btn-tour my-btn-tour-delete btn-fab btn-fab-sm btn-primary shadow text-white"><i class="icon-trash-can"></i></a>
 															</c:if>
 														</td>
@@ -119,7 +119,7 @@
 			        //}).get();
 					//var id = $(this).data("value");
 				  	var data = "{\"tourId\": " + tourID + " }";
-					deleteTour(data);
+					deleteTour(tourID);
 			  }
 			});
 		}

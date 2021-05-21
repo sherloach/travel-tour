@@ -35,15 +35,6 @@ public class EmployeeController {
 	@RequestMapping(value = "/admin/empl/list", method = RequestMethod.GET)
 	public ModelAndView showList(@RequestParam("page") int page, @RequestParam("limit") int limit,
 			HttpServletRequest request) {
-		/*EmployeeDTO model = new EmployeeDTO();
-		model.setPage(page);
-		model.setLimit(limit);
-
-		Pageable pageable = new PageRequest(page - 1, limit);
-		model.setListResult(emplService.findAll(pageable));
-		model.setTotalItem(emplService.getTotalItem());
-		model.setTotalPage((int) Math.ceil((double) model.getTotalItem() / model.getLimit()));*/
-
 		String api = serverName.localUrl + "/api/empl/" + page + "/" + limit;
 		EmployeeDTO model = httpAPI.getEmplDTO(api);
 		model.setPage(page);

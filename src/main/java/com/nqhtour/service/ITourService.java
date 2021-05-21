@@ -17,4 +17,5 @@ public interface ITourService {
 	void delete(long id);
 	List<TourDTO> findHotTours();
 	List<TourDTO> findNewTours();
+	List<TourDTO> getTopTourByMoney(String month,String year);
 }

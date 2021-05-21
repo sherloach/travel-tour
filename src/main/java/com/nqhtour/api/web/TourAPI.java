@@ -1,14 +1,12 @@
 package com.nqhtour.api.web;
 
 import com.nqhtour.dto.TourDTO;
-import com.nqhtour.repository.TourRepository;
 import com.nqhtour.service.ITourService;
 import com.nqhtour.specification.SearchCriteria;
 import com.nqhtour.specification.TourSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -61,6 +59,13 @@ public class TourAPI {
     public TourDTO readNewTours(){
         TourDTO model = new TourDTO();
         model.setListResult(tourService.findNewTours());
+        return model;
+    }
+
+    @GetMapping("/api/top-tour-by-money/{month}/{year}")
+    public TourDTO readTopTourByMoney(@PathVariable String month, @PathVariable String year){
+        TourDTO model = new TourDTO();
+        model.setListResult(tourService.getTopTourByMoney(month,year));
         return model;
     }
 }

@@ -14,4 +14,7 @@ public interface TourRepository extends JpaRepository<TourEntity, Long>, JpaSpec
 
     @Query(value = "call travelbooking.sp_new_tours()", nativeQuery = true)
     List<TourEntity> findByNewTours();
+
+    @Query(value = "call travelbooking.GetTopTourByMoney(?1,?2)", nativeQuery = true)
+    List<TourEntity> getByTopTourByMoney(String month,String year);
 }

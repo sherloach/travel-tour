@@ -40,15 +40,6 @@ public class EmployeeAPI {
 	
 	@PostMapping("/api/empl")	
 	public EmployeeDTO createEmpl(@RequestBody EmployeeDTO empl) {
-		//byte[] decodeBase64 = Base64.getDecoder().decode(empl.getImagePath().getBytes());
-		//String uploadRootPath = context.getRealPath("upload");
-		//uploadFileUtil.writeOrUpdate(decodeBase64, uploadRootPath, empl.getImage());
-		
-		/*
-		 * String[] pathnames; File f = new File(context.getRealPath("upload"));
-		 * pathnames = f.list(); for (String pathname : pathnames) { // Print the names
-		 * of files and directories System.out.println(pathname); }
-		 */
 		String imagePath = empl.getImagePath();
 		EmployeeDTO newEmployee = emplService.save(empl);
 		newEmployee.setImagePath(imagePath);
