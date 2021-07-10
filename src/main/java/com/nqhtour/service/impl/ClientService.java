@@ -1,6 +1,8 @@
 package com.nqhtour.service.impl;
 
+import com.nqhtour.converter.ClientTourConverter;
 import com.nqhtour.converter.TourConverter;
+import com.nqhtour.dto.ClientTourDTO;
 import com.nqhtour.dto.TourDTO;
 import com.nqhtour.entity.ClientTourEntity;
 import com.nqhtour.repository.ClientTourRepository;
@@ -52,7 +54,7 @@ public class ClientService implements IClientService {
 	UserConverter userConverter;
 
 	@Autowired
-	private TourConverter tourConverter;
+	private ClientTourConverter clientTourConverter;
 
 	@Autowired
 	PasswordEncoder passwordEncode;
@@ -993,27 +995,19 @@ public class ClientService implements IClientService {
 	}
 
 	@Override
-	public List<TourDTO> myTour(Long idClient) {
-		List<TourDTO> models = new ArrayList<>();
-		ClientEntity client = clientRepository.findOne(idClient);
+	public List<ClientTourDTO> myTour(String email) {
+		List<ClientTourDTO> models = new ArrayList<>();
+		ClientEntity client = clientRepository.findOneByEmail(email);
 		List<ClientTourEntity> entity = clientTourRepository.findAllByClientEntity(client);
 		for (ClientTourEntity item : entity) {
-			TourEntity tourEntity = item.getTourEntity();
-			TourDTO tourDTO = tourConverter.toDTO(tourEntity);
-			models.add(tourDTO);
+			ClientTourDTO clientTourDTO = clientTourConverter.toDTO(item);
+			models.add(clientTourDTO);
 		}
 		return models;
 	}
 
 	@Override
 	public boolean checkBookingExist(Long idClient, Long idTour) {
-		/*ClientEntity entity = clientRepository.findOne(idClient);
-		for (ClientTourEntity tour : entity.getTours()) {
-			if (tour.getTourEntity().getId().equals(idTour)) {
-				return false;
-			}
-		}
-		return true;*/
 		ClientEntity client = clientRepository.findOne(idClient);
 		TourEntity tour = tourRepository.findOne(idTour);
 		ClientTourEntity entity = clientTourRepository.findOneByClientEntityAndTourEntity(client, tour);
@@ -1021,6 +1015,15 @@ public class ClientService implements IClientService {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public void deleteTourBooking(ClientEntity client, Long idTour) {
+		TourEntity tour = tourRepository.findOne(idTour);
+		ClientTourEntity entity = clientTourRepository.findOneByClientEntityAndTourEntity(client, tour);
+		tour.setCurrentGroupSize(tour.getCurrentGroupSize() - entity.getNuTickets());
+		tourRepository.save(tour);
+		clientTourRepository.delete(entity);
 	}
 
 }

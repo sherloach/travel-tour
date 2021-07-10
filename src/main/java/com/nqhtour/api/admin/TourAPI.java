@@ -27,8 +27,6 @@ public class TourAPI {
 
 	@DeleteMapping("/api/tour")
 	public void deleteTourr(@RequestBody Long tourID) throws IOException {
-		/*JsonNode parent = new ObjectMapper().readTree(data);
-		String tourID = parent.get("tourId").asText();*/
 		tourService.delete(tourID);
 	}
 

@@ -1,6 +1,8 @@
 package com.nqhtour.api.web;
 
 import com.mysql.cj.xdevapi.Client;
+import com.nqhtour.dto.ClientTourDTO;
+import com.nqhtour.dto.TourDTO;
 import com.nqhtour.entity.TourEntity;
 import com.nqhtour.repository.TourRepository;
 import org.codehaus.jackson.JsonNode;
@@ -117,5 +119,27 @@ public class ClientAPI {
 		Long idClient = entity.getId();
 		boolean exist = clientService.checkBookingExist(idClient, Long.parseLong(tourId));
 		return String.valueOf(exist);
+	}
+
+	@PostMapping("/api/client/cancellation")
+	public String cancelBooking(@RequestBody String data) throws IOException {
+		JsonNode parent = new ObjectMapper().readTree(data);
+		String email = parent.get("email").asText();
+		String tourId = parent.get("tourId").asText();
+
+		ClientEntity entity = clientRepository.findOneByEmail(email);
+		//Long idClient = entity.getId();
+		clientService.deleteTourBooking(entity, Long.parseLong(tourId));
+
+		return "true";
+	}
+
+	@PostMapping("/api/client/mytour")
+	private ClientTourDTO myTour(@RequestBody String data) throws IOException {
+		JsonNode parent = new ObjectMapper().readTree(data);
+		String email = parent.get("email").asText();
+		ClientTourDTO model = new ClientTourDTO();
+		model.setListResult(clientService.myTour(email));
+		return model;
 	}
 }
