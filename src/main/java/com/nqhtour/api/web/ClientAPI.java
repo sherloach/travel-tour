@@ -1,8 +1,6 @@
 package com.nqhtour.api.web;
 
-import com.mysql.cj.xdevapi.Client;
 import com.nqhtour.dto.ClientTourDTO;
-import com.nqhtour.dto.TourDTO;
 import com.nqhtour.entity.TourEntity;
 import com.nqhtour.repository.TourRepository;
 import org.codehaus.jackson.JsonNode;
