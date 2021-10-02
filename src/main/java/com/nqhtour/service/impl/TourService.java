@@ -92,7 +92,7 @@ public class TourService implements ITourService {
 			tourEntity = tourConverter.toEntity(dto);
 		}
 		
-		tourEntity.setTourID(StringUtil.createSlug(tourEntity.getName()));
+		tourEntity.setSlug(StringUtil.createSlug(tourEntity.getName()));
 		return tourConverter.toDTO(tourRepository.save(tourEntity));
 	}
 
@@ -104,33 +104,33 @@ public class TourService implements ITourService {
 	@Override
 	public List<TourDTO> findHotTours() {
 		List<TourDTO> models = new ArrayList<>();
-		List<TourEntity> entities = tourRepository.findByHotTours();
-		for (TourEntity item : entities) {
-			TourDTO tourDTO = tourConverter.toDTO(item);
-			models.add(tourDTO);
-		}
+//		List<TourEntity> entities = tourRepository.findByHotTours();
+//		for (TourEntity item : entities) {
+//			TourDTO tourDTO = tourConverter.toDTO(item);
+//			models.add(tourDTO);
+//		}
 		return models;
 	}
 
 	@Override
 	public List<TourDTO> findNewTours() {
 		List<TourDTO> models = new ArrayList<>();
-		List<TourEntity> entities = tourRepository.findByNewTours();
-		for (TourEntity item : entities) {
-			TourDTO tourDTO = tourConverter.toDTO(item);
-			models.add(tourDTO);
-		}
+//		List<TourEntity> entities = tourRepository.findByNewTours();
+//		for (TourEntity item : entities) {
+//			TourDTO tourDTO = tourConverter.toDTO(item);
+//			models.add(tourDTO);
+//		}
 		return models;
 	}
 
 	@Override
 	public List<TourDTO> getTopTourByMoney(String month,String year){
 		List<TourDTO> models = new ArrayList<>();
-		List<TourEntity> entities = tourRepository.getByTopTourByMoney(month,year);
-		for (TourEntity item : entities) {
-			TourDTO tourDTO = tourConverter.toDTO(item);
-			models.add(tourDTO);
-		}
+//		List<TourEntity> entities = tourRepository.getByTopTourByMoney(month,year);
+//		for (TourEntity item : entities) {
+//			TourDTO tourDTO = tourConverter.toDTO(item);
+//			models.add(tourDTO);
+//		}
 		return models;
 	}
 }

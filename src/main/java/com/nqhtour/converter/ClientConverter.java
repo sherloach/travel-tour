@@ -15,7 +15,6 @@ public class ClientConverter {
 		result.setUserID(entity.getUser().getId());
 		result.setGender(entity.isGender());
 		result.setEmail(entity.getEmail());
-		result.setAddress(entity.getAddress());
 		result.setPhoneNumber(entity.getPhoneNumber());
 
 		result.setUsername(entity.getUser().getUserName());
@@ -31,7 +30,6 @@ public class ClientConverter {
 		result.setName(dto.getName());
 		result.setGender(dto.isGender());
 		result.setEmail(dto.getEmail());
-		result.setAddress(dto.getAddress());
 		result.setPhoneNumber(dto.getPhoneNumber());
 		
 		return result;
@@ -42,7 +40,6 @@ public class ClientConverter {
 		oldClient.setName(dto.getName());
 		oldClient.setGender(dto.isGender());
 		oldClient.setEmail(dto.getEmail());
-		oldClient.setAddress(dto.getAddress());
 		oldClient.setPhoneNumber(dto.getPhoneNumber());
 		
 		return oldClient;

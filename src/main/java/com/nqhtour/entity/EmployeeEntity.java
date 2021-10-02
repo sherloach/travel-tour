@@ -1,45 +1,64 @@
 package com.nqhtour.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "`employee`")
 public class EmployeeEntity extends BaseEntity {
-	@Column(name = "name")
+	@Column
 	private String name;
 
-	@Column(name = "gender")
+	@Column
 	private boolean gender;
 
-	@Column(name = "email")
+	@Column
 	private String email;
 
-	@Column(name = "address")
+	@Column
 	private String address;
 
-	@Column(name = "birthday", columnDefinition = "DATE")
+	@Column(columnDefinition = "DATE")
 	private String birthday;
 
-	@Column(name = "phonenumber")
+	@Column
 	private String phoneNumber;
 
-	@Column(name = "avatar", columnDefinition = "TEXT")
+	@Column(columnDefinition = "TEXT")
 	private String avatar;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "userid")
+	@JoinColumn(name = "user_id")
 	private UserEntity user;
+
+	@OneToMany(mappedBy = "guide")
+	private List<InstourEntity> tours = new ArrayList<>();
+
+	@OneToMany(mappedBy = "employee")
+	private List<BookingEntity> bookings = new ArrayList<>();
 
 //	@OneToMany(mappedBy = "employee")
 //	private List<TourEntity> tour = new ArrayList<>();
 
 	public String getName() {
 		return name;
+	}
+
+	public List<InstourEntity> getTours() {
+		return tours;
+	}
+
+	public void setTours(List<InstourEntity> tours) {
+		this.tours = tours;
+	}
+
+	public List<BookingEntity> getBookings() {
+		return bookings;
+	}
+
+	public void setBookings(List<BookingEntity> bookings) {
+		this.bookings = bookings;
 	}
 
 	public void setName(String name) {

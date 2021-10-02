@@ -9,12 +9,12 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface TourRepository extends JpaRepository<TourEntity, Long>, JpaSpecificationExecutor<TourEntity> {
-    @Query(value = "call travelbooking.sp_hot_tours()", nativeQuery = true)
-    List<TourEntity> findByHotTours();
-
-    @Query(value = "call travelbooking.sp_new_tours()", nativeQuery = true)
-    List<TourEntity> findByNewTours();
-
-    @Query(value = "call travelbooking.GetTopTourByMoney(?1,?2)", nativeQuery = true)
-    List<TourEntity> getByTopTourByMoney(String month,String year);
+//    @Query(value = "call travelbooking.sp_hot_tours()", nativeQuery = true)
+//    List<TourEntity> findByHotTours();
+//
+//    @Query(value = "call travelbooking.sp_new_tours()", nativeQuery = true)
+//    List<TourEntity> findByNewTours();
+//
+//    @Query(value = "call travelbooking.GetTopTourByMoney(?1,?2)", nativeQuery = true)
+//    List<TourEntity> getByTopTourByMoney(String month,String year);
 }

@@ -5,6 +5,11 @@
         <class>com.nqhtour.entity.ClientEntity</class>
         <class>com.nqhtour.entity.EmployeeEntity</class>
         <class>com.nqhtour.entity.TourEntity</class>
-        <class>com.nqhtour.entity.ClientTourEntity</class>
+        <class>com.nqhtour.entity.InstourEntity</class>
+        <class>com.nqhtour.entity.InvoiceEntity</class>
+        <class>com.nqhtour.entity.LocationEntity</class>
+        <class>com.nqhtour.entity.ReviewEntity</class>
+        <class>com.nqhtour.entity.RouteEntity</class>
+        <class>com.nqhtour.entity.BookingEntity</class>
     </persistence-unit>
 </persistence>

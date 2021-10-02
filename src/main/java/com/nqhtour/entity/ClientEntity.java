@@ -9,31 +9,54 @@ import javax.persistence.*;
 @Entity
 @Table(name = "`client`")
 public class ClientEntity extends BaseEntity {
-	@Column(name = "name")
+	@Column
 	private String name;
 
-	@Column(name = "gender")
+	@Column
 	private boolean gender;
 
-	@Column(name = "email")
+	@Column
 	private String email;
 
-	@Column(name = "address")
-	private String address;
-
-	@Column(name = "phonenumber")
+	@Column
 	private String phoneNumber;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "userid")
+	@JoinColumn(name = "user_id")
 	private UserEntity user;
 
-	@OneToMany(mappedBy = "tourEntity", fetch = FetchType.LAZY)
-	private List<ClientTourEntity> tours = new ArrayList<>();
+	@OneToMany(mappedBy = "client")
+	private List<BookingEntity> bookings = new ArrayList<>();
 
-	/*@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "booking", joinColumns = @JoinColumn(name = "client_id"), inverseJoinColumns = @JoinColumn(name = "tour_id"))
-	private List<TourEntity> tours = new ArrayList<>();*/
+	@OneToMany(mappedBy = "client")
+	private List<ReviewEntity> reviews = new ArrayList<>();
+
+//	@OneToMany(mappedBy = "tourEntity", fetch = FetchType.LAZY)
+//	private List<ClientTourEntity> tours = new ArrayList<>();
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public List<BookingEntity> getBookings() {
+		return bookings;
+	}
+
+	public void setBookings(List<BookingEntity> bookings) {
+		this.bookings = bookings;
+	}
+
+	public List<ReviewEntity> getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(List<ReviewEntity> reviews) {
+		this.reviews = reviews;
+	}
 
 	public String getName() {
 		return name;
@@ -59,22 +82,6 @@ public class ClientEntity extends BaseEntity {
 		this.email = email;
 	}
 
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
-
 	public UserEntity getUser() {
 		return user;
 	}
@@ -83,20 +90,12 @@ public class ClientEntity extends BaseEntity {
 		this.user = user;
 	}
 
-	/*public List<TourEntity> getTours() {
-		return tours;
-	}*/
-
-	/*public void setTours(List<TourEntity> tours) {
-		this.tours = tours;
-	}*/
-
-	public List<ClientTourEntity> getTours() {
-		return tours;
-	}
-
-	public void setTours(List<ClientTourEntity> tours) {
-		this.tours = tours;
-	}
+//	public List<ClientTourEntity> getTours() {
+//		return tours;
+//	}
+//
+//	public void setTours(List<ClientTourEntity> tours) {
+//		this.tours = tours;
+//	}
 }
 

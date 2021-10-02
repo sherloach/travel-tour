@@ -101,16 +101,16 @@ public class ClientService implements IClientService {
 
 	public boolean booking(Long idClient, TourEntity tourEntity, int nuTickets) throws MessagingException {
 		// Update current tickets available
-		int currentGroupSize = tourEntity.getCurrentGroupSize() + nuTickets;
-		tourEntity.setCurrentGroupSize(currentGroupSize);
-		tourRepository.save(tourEntity);
-
-		ClientTourEntity clientTourEntity = new ClientTourEntity();
-		ClientEntity clientEntity = clientRepository.findOne(idClient);
-		clientTourEntity.setClientEntity(clientEntity);
-		clientTourEntity.setTourEntity(tourEntity);
-		clientTourEntity.setNuTickets(nuTickets);
-		clientTourRepository.save(clientTourEntity);
+//		int currentGroupSize = tourEntity.getCurrentGroupSize() + nuTickets;
+//		tourEntity.setCurrentGroupSize(currentGroupSize);
+//		tourRepository.save(tourEntity);
+//
+//		ClientTourEntity clientTourEntity = new ClientTourEntity();
+//		ClientEntity clientEntity = clientRepository.findOne(idClient);
+//		clientTourEntity.setClientEntity(clientEntity);
+//		clientTourEntity.setTourEntity(tourEntity);
+//		clientTourEntity.setNuTickets(nuTickets);
+//		clientTourRepository.save(clientTourEntity);
 		//sendEmail(clientEntity.getEmail(), nuTickets, tourEntity);
 		return true;
 	}
@@ -122,7 +122,7 @@ public class ClientService implements IClientService {
 		boolean multipart = true;
 
 		MimeMessageHelper helper = new MimeMessageHelper(message, multipart, "utf-8");
-		String total = String.valueOf(tourEntity.getPrice() * nuTickets);
+//		String total = String.valueOf(tourEntity.getPrice() * nuTickets);
 
 		String htmlMsg = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional //EN\" \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n" +
 				"<html xmlns=\"http://www.w3.org/1999/xhtml\" xmlns:v=\"urn:schemas-microsoft-com:vml\" xmlns:o=\"urn:schemas-microsoft-com:office:office\">\n" +
@@ -523,7 +523,7 @@ public class ClientService implements IClientService {
 				"      <td style=\"overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:'Open Sans',sans-serif;\" align=\"left\">\n" +
 				"        \n" +
 				"  <div class=\"v-text-align\" style=\"color: #615e5e; line-height: 140%; text-align: right; word-wrap: break-word;\">\n" +
-				"    <p style=\"font-size: 14px; line-height: 140%;\"><span style=\"font-size: 14px; line-height: 19.6px;\">" + tourEntity.getPrice() + " VND</span></p>\n" +
+				"    <p style=\"font-size: 14px; line-height: 140%;\"><span style=\"font-size: 14px; line-height: 19.6px;\">" + "1,250,000 VND" + " VND</span></p>\n" +
 				"  </div>\n" +
 				"\n" +
 				"      </td>\n" +
@@ -680,7 +680,7 @@ public class ClientService implements IClientService {
 				"      <td style=\"overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:'Open Sans',sans-serif;\" align=\"left\">\n" +
 				"        \n" +
 				"  <div class=\"v-text-align\" style=\"color: #615e5e; line-height: 140%; text-align: right; word-wrap: break-word;\">\n" +
-				"    <p style=\"font-size: 14px; line-height: 140%;\"><strong><span style=\"font-size: 14px; line-height: 19.6px;\">" + total + " VND</span></strong></p>\n" +
+				"    <p style=\"font-size: 14px; line-height: 140%;\"><strong><span style=\"font-size: 14px; line-height: 19.6px;\">" + "temp_total" + " VND</span></strong></p>\n" +
 				"  </div>\n" +
 				"\n" +
 				"      </td>\n" +
@@ -800,7 +800,7 @@ public class ClientService implements IClientService {
 				"  <tr>\n" +
 				"    <td class=\"v-text-align\" style=\"padding-right: 0px;padding-left: 0px;\" align=\"center\">\n" +
 				"      \n" +
-				"      <img align=\"center\" border=\"0\" src=\"http://localhost:8080/template/upload/tour/" + tourEntity.getImageCover() + "\" alt=\"Image\" title=\"Image\" style=\"outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 100%;max-width: 280px;\" width=\"280\" class=\"v-src-width v-src-max-width\"/>\n" +
+				"      <img align=\"center\" border=\"0\" src=\"http://localhost:8080/template/upload/tour/" + tourEntity.getImage() + "\" alt=\"Image\" title=\"Image\" style=\"outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 100%;max-width: 280px;\" width=\"280\" class=\"v-src-width v-src-max-width\"/>\n" +
 				"      \n" +
 				"    </td>\n" +
 				"  </tr>\n" +
@@ -830,8 +830,8 @@ public class ClientService implements IClientService {
 				"<p dir=\"ltr\" style=\"font-size: 14px; line-height: 140%;\">&nbsp;</p>\n" +
 				"<p dir=\"ltr\" style=\"font-size: 14px; line-height: 140%;\">&nbsp;</p>\n" +
 				"<p dir=\"ltr\" style=\"font-size: 14px; line-height: 140%;\"><strong><span style=\"font-size: 14px; line-height: 19.6px;\">Details:</span></strong></p>\n" +
-				"<p style=\"font-size: 14px; line-height: 140%;\">" + tourEntity.getLocation() + "</p>\n" +
-				"<p style=\"font-size: 14px; line-height: 140%;\">" + tourEntity.getStartDate() + "</p>\n" +
+				"<p style=\"font-size: 14px; line-height: 140%;\">" + "templocation" + "</p>\n" +
+				"<p style=\"font-size: 14px; line-height: 140%;\">" + "tempstartdate" + "</p>\n" +
 				"<p style=\"font-size: 14px; line-height: 140%;\">" + tourEntity.getDuration() + " days</p>\n" +
 				"  </div>\n" +
 				"\n" +
@@ -1019,11 +1019,11 @@ public class ClientService implements IClientService {
 
 	@Override
 	public void deleteTourBooking(ClientEntity client, Long idTour) {
-		TourEntity tour = tourRepository.findOne(idTour);
-		ClientTourEntity entity = clientTourRepository.findOneByClientEntityAndTourEntity(client, tour);
-		tour.setCurrentGroupSize(tour.getCurrentGroupSize() - entity.getNuTickets());
-		tourRepository.save(tour);
-		clientTourRepository.delete(entity);
+//		TourEntity tour = tourRepository.findOne(idTour);
+//		ClientTourEntity entity = clientTourRepository.findOneByClientEntityAndTourEntity(client, tour);
+//		tour.setCurrentGroupSize(tour.getCurrentGroupSize() - entity.getNuTickets());
+//		tourRepository.save(tour);
+//		clientTourRepository.delete(entity);
 	}
 
 }

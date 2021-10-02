@@ -13,82 +13,78 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Table(name = "`tour`")
 @EntityListeners(AuditingEntityListener.class)
 public class TourEntity extends BaseEntity {
-	@Column(name = "name")
+	@Column
 	private String name;
-	
-	@Column(name = "tourID")
-	private String tourID;
-	
-	@Column(name = "location")
-	private String location;
-	
-	@Column(name = "duration")
+
+	@Column
+	private String slug;
+
+	@Column
 	private Integer duration;
 
-	@Column(name = "maxgroupsize")
+	@Column
 	private Integer maxGroupSize;
 
-	@Column(name = "currentgroupsize")
-	private Integer currentGroupSize;
+	@Column
+	private Float ratingsAverage;
 
-	@Column(name = "price")
-	private Long price;
+	@Column
+	private Integer ratingsQuantity;
 
-	@Column(name = "description", columnDefinition = "TEXT")
-	private String description;
-
-	@Column(name = "summary")
+	@Column
 	private String summary;
 
-	@Column(name = "images", columnDefinition = "TEXT")
-	private String images;
+	@Column
+	private String description;
 
-	@Column(name = "imagecover", columnDefinition = "TEXT")
-	private String imageCover;
-	
-	@Column(name = "startdate")
-	private String startDate;
+	@Column(columnDefinition = "TEXT")
+	private String image;
 
-//	@ManyToOne(fetch = FetchType.LAZY)
-//	@JoinColumn(name = "employee_id")
-//	private EmployeeEntity employee;
+	@Column
+	private Long adultPrice;
 
-	@Column(name = "createdBy")
+	@Column
+	private Long childrenPrice;
+
+	@Column
 	@CreatedBy
 	private String createdBy;
 
-	@OneToMany(mappedBy = "clientEntity", fetch = FetchType.LAZY)
-	private List<ClientTourEntity> clients = new ArrayList<>();
+	@ManyToOne
+	@JoinColumn(name = "route_id")
+	private RouteEntity route;
 
-	/*@ManyToMany(mappedBy = "tours")
-	private List<ClientEntity> clients = new ArrayList<>();*/
+	@OneToMany(mappedBy = "tour")
+	private List<InstourEntity> instours = new ArrayList<>();
+
+	@OneToMany(mappedBy = "tour")
+	private List<ReviewEntity> reviews = new ArrayList<>();
+
+	@OneToMany(mappedBy = "tour")
+	private List<TourLocationEntity> locations = new ArrayList<>();
+
+	public List<TourLocationEntity> getLocations() {
+		return locations;
+	}
+
+	public void setLocations(List<TourLocationEntity> locations) {
+		this.locations = locations;
+	}
 
 	public String getName() {
 		return name;
-	}
-
-	public String getCreatedBy() {
-		return createdBy;
 	}
 
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	public String getTourID() {
-		return tourID;
+	public String getSlug() {
+		return slug;
 	}
 
-	public void setTourID(String tourID) {
-		this.tourID = tourID;
-	}
-
-	public String getLocation() {
-		return location;
-	}
-
-	public void setLocation(String location) {
-		this.location = location;
+	public void setSlug(String slug) {
+		this.slug = slug;
 	}
 
 	public Integer getDuration() {
@@ -107,20 +103,20 @@ public class TourEntity extends BaseEntity {
 		this.maxGroupSize = maxGroupSize;
 	}
 
-	public Long getPrice() {
-		return price;
+	public Float getRatingsAverage() {
+		return ratingsAverage;
 	}
 
-	public void setPrice(Long price) {
-		this.price = price;
+	public void setRatingsAverage(Float ratingsAverage) {
+		this.ratingsAverage = ratingsAverage;
 	}
 
-	public String getDescription() {
-		return description;
+	public Integer getRatingsQuantity() {
+		return ratingsQuantity;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setRatingsQuantity(Integer ratingsQuantity) {
+		this.ratingsQuantity = ratingsQuantity;
 	}
 
 	public String getSummary() {
@@ -131,63 +127,67 @@ public class TourEntity extends BaseEntity {
 		this.summary = summary;
 	}
 
-	public String getImages() {
-		return images;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setImages(String images) {
-		this.images = images;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
-	public String getImageCover() {
-		return imageCover;
+	public String getImage() {
+		return image;
 	}
 
-//	public EmployeeEntity getEmployee() {
-//		return employee;
-//	}
-//
-//	public void setEmployee(EmployeeEntity employee) {
-//		this.employee = employee;
-//	}
-
-	/*public List<ClientEntity> getClients() {
-		return clients;
-	}*/
-
-	/*public void setClients(List<ClientEntity> clients) {
-		this.clients = clients;
-	}*/
-
-	public void setImageCover(String imageCover) {
-		this.imageCover = imageCover;
+	public void setImage(String image) {
+		this.image = image;
 	}
 
-	public String getStartDate() {
-		return startDate;
+	public Long getAdultPrice() {
+		return adultPrice;
 	}
 
-	public void setStartDate(String startDate) {
-		this.startDate = startDate;
+	public void setAdultPrice(Long adultPrice) {
+		this.adultPrice = adultPrice;
 	}
 
-	public Integer getCurrentGroupSize() {
-		return currentGroupSize;
+	public Long getChildrenPrice() {
+		return childrenPrice;
 	}
 
-	public void setCurrentGroupSize(Integer currentGroupSize) {
-		this.currentGroupSize = currentGroupSize;
+	public void setChildrenPrice(Long childrenPrice) {
+		this.childrenPrice = childrenPrice;
+	}
+
+	public String getCreatedBy() {
+		return createdBy;
 	}
 
 	public void setCreatedBy(String createdBy) {
 		this.createdBy = createdBy;
 	}
 
-	public List<ClientTourEntity> getClients() {
-		return clients;
+	public RouteEntity getRoute() {
+		return route;
 	}
 
-	public void setClients(List<ClientTourEntity> clients) {
-		this.clients = clients;
+	public void setRoute(RouteEntity route) {
+		this.route = route;
+	}
+
+	public List<InstourEntity> getInstours() {
+		return instours;
+	}
+
+	public void setInstours(List<InstourEntity> instours) {
+		this.instours = instours;
+	}
+
+	public List<ReviewEntity> getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(List<ReviewEntity> reviews) {
+		this.reviews = reviews;
 	}
 }
