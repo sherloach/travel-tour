@@ -1,11 +1,6 @@
 package com.nqhtour.service.impl;
 
-import com.nqhtour.converter.ClientTourConverter;
-import com.nqhtour.converter.TourConverter;
 import com.nqhtour.dto.ClientTourDTO;
-import com.nqhtour.dto.TourDTO;
-import com.nqhtour.entity.ClientTourEntity;
-import com.nqhtour.repository.ClientTourRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -48,13 +43,7 @@ public class ClientService implements IClientService {
 	TourRepository tourRepository;
 
 	@Autowired
-	ClientTourRepository clientTourRepository;
-
-	@Autowired
 	UserConverter userConverter;
-
-	@Autowired
-	private ClientTourConverter clientTourConverter;
 
 	@Autowired
 	PasswordEncoder passwordEncode;
@@ -64,16 +53,13 @@ public class ClientService implements IClientService {
 
 	@Override
 	public ClientDTO save(ClientDTO dto) {
-		ClientEntity entity = new ClientEntity();
-		UserEntity userEntity = null;
+		ClientEntity entity;
+		UserEntity userEntity;
 
 		if (dto.getId() != null) {
-			//UserEntity oldUser = userRepository.findOne(dto.getUserID());
 			ClientEntity oldClient = clientRepository.findOne(dto.getId());
 			userEntity = userRepository.findOne(dto.getUserID());
 
-			//UserEntity userUpdate = userConverter.toEntity(oldUser, userDTO);
-			//userEntity = userRepository.save(userUpdate);
 			entity = clientConverter.toEntity(oldClient, dto);
 		} else {
 			// Set user data
@@ -82,7 +68,6 @@ public class ClientService implements IClientService {
 			userDTO.setPassword(passwordEncode.encode(dto.getPassword()));
 			userDTO.setRole("CLIENT");
 			userDTO.setStatus(1);
-
 
 			// Check email user exist or not?
 			userEntity = userRepository.findOneByUserNameAndStatus(userDTO.getUsername(), SystemConstant.ACTIVE_STATUS);
@@ -998,22 +983,22 @@ public class ClientService implements IClientService {
 	public List<ClientTourDTO> myTour(String email) {
 		List<ClientTourDTO> models = new ArrayList<>();
 		ClientEntity client = clientRepository.findOneByEmail(email);
-		List<ClientTourEntity> entity = clientTourRepository.findAllByClientEntity(client);
-		for (ClientTourEntity item : entity) {
-			ClientTourDTO clientTourDTO = clientTourConverter.toDTO(item);
-			models.add(clientTourDTO);
-		}
+//		List<ClientTourEntity> entity = clientTourRepository.findAllByClientEntity(client);
+//		for (ClientTourEntity item : entity) {
+//			ClientTourDTO clientTourDTO = clientTourConverter.toDTO(item);
+//			models.add(clientTourDTO);
+//		}
 		return models;
 	}
 
 	@Override
 	public boolean checkBookingExist(Long idClient, Long idTour) {
-		ClientEntity client = clientRepository.findOne(idClient);
-		TourEntity tour = tourRepository.findOne(idTour);
-		ClientTourEntity entity = clientTourRepository.findOneByClientEntityAndTourEntity(client, tour);
-		if (entity == null) {
-			return true;
-		}
+//		ClientEntity client = clientRepository.findOne(idClient);
+//		TourEntity tour = tourRepository.findOne(idTour);
+//		ClientTourEntity entity = clientTourRepository.findOneByClientEntityAndTourEntity(client, tour);
+//		if (entity == null) {
+//			return true;
+//		}
 		return false;
 	}
 

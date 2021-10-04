@@ -50,9 +50,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="input-group">
-							<input class="input--style-1" type="text" placeholder="ADDRESS" id="address" name="address">
-                        </div>
+<%--                        <div class="input-group">--%>
+<%--							<input class="input--style-1" type="text" placeholder="ADDRESS" id="address" name="address">--%>
+<%--                        </div>--%>
                         <div class="p-t-20">
                             <button id="btnRegister" class="btn btn--radius btn--green" type="button">Submit</button>
                         </div>

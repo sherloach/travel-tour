@@ -2,6 +2,7 @@ package com.nqhtour.service;
 
 import java.util.List;
 
+import com.nqhtour.dto.TourLocationDTO;
 import com.nqhtour.specification.TourSpecification;
 import org.springframework.data.domain.Pageable;
 
@@ -14,6 +15,7 @@ public interface ITourService {
 	int getTotalItem();
 	TourDTO findById(long id);
 	TourDTO save(TourDTO dto);
+	TourLocationDTO save(TourLocationDTO dto);
 	void delete(long id);
 	List<TourDTO> findHotTours();
 	List<TourDTO> findNewTours();

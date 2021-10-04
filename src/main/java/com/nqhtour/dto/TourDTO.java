@@ -1,20 +1,105 @@
 package com.nqhtour.dto;
 
+import java.util.List;
+
 public class TourDTO extends AbstractDTO<TourDTO> {
 	private String name;
 	private String tourID;
-	private String location;
+	private String location; // d
 	private Integer duration;
 	private Integer maxGroupSize;
-	private Integer currentGroupSize;
-	private Long price;
-	private Long employeeID;
-	private String description;
+	private Integer currentGroupSize; // d
+	private Float ratingsAverage;
+	private Integer ratingsQuantity;
 	private String summary;
-	private String images;
-	private String imageCover;
+	private String description;
+	private String image;
+	private Long adultPrice;
+	private Long childrenPrice;
+	private Long price; // d
+	private String createdBy;
+	private Long employeeID; // d
+	private String images; // d
+	private String imageCover; // d
 	private String base64;
-	private String startDate;
+	private String startDate; // d
+	private Long routeId;
+	private List<InstourDTO> instours;
+	private List<TourLocationDTO> tourLocations;
+
+	public Float getRatingsAverage() {
+		return ratingsAverage;
+	}
+
+	public void setRatingsAverage(Float ratingsAverage) {
+		this.ratingsAverage = ratingsAverage;
+	}
+
+	public Integer getRatingsQuantity() {
+		return ratingsQuantity;
+	}
+
+	public void setRatingsQuantity(Integer ratingsQuantity) {
+		this.ratingsQuantity = ratingsQuantity;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public Long getAdultPrice() {
+		return adultPrice;
+	}
+
+	public void setAdultPrice(Long adultPrice) {
+		this.adultPrice = adultPrice;
+	}
+
+	public Long getChildrenPrice() {
+		return childrenPrice;
+	}
+
+	public void setChildrenPrice(Long childrenPrice) {
+		this.childrenPrice = childrenPrice;
+	}
+
+	@Override
+	public String getCreatedBy() {
+		return createdBy;
+	}
+
+	@Override
+	public void setCreatedBy(String createdBy) {
+		this.createdBy = createdBy;
+	}
+
+	public Long getRouteId() {
+		return routeId;
+	}
+
+	public void setRouteId(Long routeId) {
+		this.routeId = routeId;
+	}
+
+	public List<InstourDTO> getInstours() {
+		return instours;
+	}
+
+	public void setInstours(List<InstourDTO> instours) {
+		this.instours = instours;
+	}
+
+	public List<TourLocationDTO> getTourLocations() {
+		return tourLocations;
+	}
+
+	public void setTourLocations(List<TourLocationDTO> tourLocations) {
+		this.tourLocations = tourLocations;
+	}
 
 	public Integer getCurrentGroupSize() {
 		return currentGroupSize;

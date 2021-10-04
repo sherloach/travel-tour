@@ -6,6 +6,14 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 
+import com.nqhtour.converter.TourLocationConverter;
+import com.nqhtour.dto.TourLocationDTO;
+import com.nqhtour.entity.LocationEntity;
+import com.nqhtour.entity.RouteEntity;
+import com.nqhtour.entity.TourLocationEntity;
+import com.nqhtour.repository.LocationRepository;
+import com.nqhtour.repository.RouteRepository;
+import com.nqhtour.repository.TourLocationRepository;
 import com.nqhtour.specification.TourSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -29,6 +37,18 @@ public class TourService implements ITourService {
 
 	@Autowired
 	private TourConverter tourConverter;
+
+	@Autowired
+	private TourLocationConverter tourLocationConverter;
+
+	@Autowired
+	private RouteRepository routeRepository;
+
+	@Autowired
+	private TourLocationRepository tourLocationRepository;
+
+	@Autowired
+	private LocationRepository locationRepository;
 
 	@Autowired
 	private UploadFileUtil uploadFileUtil;
@@ -90,10 +110,27 @@ public class TourService implements ITourService {
 		} else {
 			dto.setCurrentGroupSize(0);
 			tourEntity = tourConverter.toEntity(dto);
+			tourEntity.setRatingsAverage(4.5f);
+			tourEntity.setRatingsQuantity(0);
 		}
-		
+
+		RouteEntity routeEntity = routeRepository.findOne(dto.getRouteId());
+		tourEntity.setRoute(routeEntity);
 		tourEntity.setSlug(StringUtil.createSlug(tourEntity.getName()));
 		return tourConverter.toDTO(tourRepository.save(tourEntity));
+	}
+
+	@Override
+	public TourLocationDTO save(TourLocationDTO dto) {
+		TourLocationEntity tourLocationEntity = new TourLocationEntity();
+		TourEntity tourEntity = tourRepository.findOne(dto.getTourId());
+		LocationEntity locationEntity = locationRepository.findOne(dto.getLocationId());
+		tourLocationEntity.setTour(tourEntity);
+		tourLocationEntity.setLocation(locationEntity);
+		tourLocationEntity.setDay(dto.getDay());
+		tourLocationEntity.setDescription(dto.getDescription());
+
+		return tourLocationConverter.toDTO(tourLocationRepository.save(tourLocationEntity));
 	}
 
 	@Override

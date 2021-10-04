@@ -1,7 +1,6 @@
 package com.nqhtour.api.admin;
 
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.map.ObjectMapper;
+import com.nqhtour.dto.TourLocationDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,6 +27,11 @@ public class TourAPI {
 	@DeleteMapping("/api/tour")
 	public void deleteTourr(@RequestBody Long tourID) throws IOException {
 		tourService.delete(tourID);
+	}
+
+	@PostMapping("/api/tour/location")
+	public TourLocationDTO createTourLocation(@RequestBody TourLocationDTO tourLocation) {
+		return tourService.save(tourLocation);
 	}
 
 	@PostMapping("/api/tour/delete")

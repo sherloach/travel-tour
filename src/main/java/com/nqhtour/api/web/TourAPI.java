@@ -22,7 +22,7 @@ public class TourAPI {
         TourDTO model = new TourDTO();
         Pageable pageable = new PageRequest(page - 1, limit);
         model.setListResult(tourService.findAll(pageable));
-        //ResponseEntity.ok(true);
+
         return model;
     }
 
