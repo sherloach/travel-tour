@@ -1,7 +1,11 @@
 package com.nqhtour.service.impl;
 
 import com.nqhtour.constant.SystemConstant;
+import com.nqhtour.converter.EmployeeConverter;
+import com.nqhtour.dto.EmployeeDTO;
+import com.nqhtour.entity.EmployeeEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +15,9 @@ import com.nqhtour.entity.UserEntity;
 import com.nqhtour.repository.UserRepository;
 import com.nqhtour.service.IUserService;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class UserService implements IUserService {
 
@@ -19,11 +26,26 @@ public class UserService implements IUserService {
 	
 	@Autowired
 	UserConverter userConverter;
-	
+
+	@Autowired
+	EmployeeConverter employeeConverter;
+
 	@Override
 	public UserDTO findById(long id) {
 		
 		return null;
+	}
+
+	// Get all guides in database
+	@Override
+	public List<EmployeeDTO> findAllByRole(String role) {
+		List<EmployeeDTO> listGuide = new ArrayList<>();
+		List<UserEntity> entities = userRepository.findAllByRole(role);
+		for (UserEntity user : entities) {
+			listGuide.add(employeeConverter.toDTO(user.getEmployee().get(0)));
+		}
+
+		return listGuide;
 	}
 
 	@Override

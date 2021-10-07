@@ -6,11 +6,12 @@ import java.util.List;
 
 import javax.servlet.ServletContext;
 
+import com.nqhtour.converter.InstourConverter;
+import com.nqhtour.converter.LocationConverter;
 import com.nqhtour.converter.TourLocationConverter;
+import com.nqhtour.dto.InstourDTO;
 import com.nqhtour.dto.TourLocationDTO;
-import com.nqhtour.entity.LocationEntity;
-import com.nqhtour.entity.RouteEntity;
-import com.nqhtour.entity.TourLocationEntity;
+import com.nqhtour.entity.*;
 import com.nqhtour.repository.LocationRepository;
 import com.nqhtour.repository.RouteRepository;
 import com.nqhtour.repository.TourLocationRepository;
@@ -23,7 +24,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.nqhtour.controller.admin.TourController;
 import com.nqhtour.converter.TourConverter;
 import com.nqhtour.dto.TourDTO;
-import com.nqhtour.entity.TourEntity;
 import com.nqhtour.repository.TourRepository;
 import com.nqhtour.service.ITourService;
 import com.nqhtour.util.StringUtil;
@@ -37,6 +37,12 @@ public class TourService implements ITourService {
 
 	@Autowired
 	private TourConverter tourConverter;
+
+	@Autowired
+	private InstourConverter instourConverter;
+
+	@Autowired
+	private LocationConverter locationConverter;
 
 	@Autowired
 	private TourLocationConverter tourLocationConverter;
@@ -82,14 +88,44 @@ public class TourService implements ITourService {
 	}
 
 	@Override
+	public List<TourDTO> findAllByRouteId(Long id) {
+		List<TourDTO> models = new ArrayList<>();
+		RouteEntity routeEntity = routeRepository.findOne(id);
+		List<TourEntity> entities = tourRepository.findAllByRoute(routeEntity);
+		for (TourEntity item : entities) {
+			TourDTO tourDTO = tourConverter.toDTO(item);
+			models.add(tourDTO);
+		}
+		return models;
+	}
+
+	@Override
 	public int getTotalItem() {
 		return (int) tourRepository.count();
 	}
 
 	@Override
 	public TourDTO findById(long id) {
+		TourDTO tourDTO;
 		TourEntity entity = tourRepository.findOne(id);
-		return tourConverter.toDTO(entity);
+		tourDTO = tourConverter.toDTO(entity);
+
+		List<InstourDTO> listInstour = new ArrayList<>();
+		for (InstourEntity item : entity.getInstours()) {
+			InstourDTO instourDTO = instourConverter.toDTO(item);
+			listInstour.add(instourDTO);
+		}
+		tourDTO.setInstours(listInstour);
+
+		List<TourLocationDTO> listTourLocation = new ArrayList<>();
+		for (TourLocationEntity item : entity.getLocations()) {
+			TourLocationDTO tourLocationDTO = tourLocationConverter.toDTO(item);
+			tourLocationDTO.setLocation(locationConverter.toDTO(item.getLocation()));
+			listTourLocation.add(tourLocationDTO);
+		}
+		tourDTO.setTourLocations(listTourLocation);
+
+		return tourDTO;
 	}
 
 	@Override
@@ -101,7 +137,7 @@ public class TourService implements ITourService {
 			String imagePath = dto.getBase64().split(",")[1];
 			byte[] decodeBase64 = Base64.getDecoder().decode(imagePath.getBytes());
 			String uploadRootPath = context.getRealPath("template/upload/tour");
-			uploadFileUtil.writeOrUpdate(decodeBase64, uploadRootPath, dto.getImageCover());
+			uploadFileUtil.writeOrUpdate(decodeBase64, uploadRootPath, dto.getImage());
 		}
 
 		if (dto.getId() != null) {
@@ -122,11 +158,17 @@ public class TourService implements ITourService {
 
 	@Override
 	public TourLocationDTO save(TourLocationDTO dto) {
-		TourLocationEntity tourLocationEntity = new TourLocationEntity();
+		TourLocationEntity tourLocationEntity;
 		TourEntity tourEntity = tourRepository.findOne(dto.getTourId());
 		LocationEntity locationEntity = locationRepository.findOne(dto.getLocationId());
-		tourLocationEntity.setTour(tourEntity);
-		tourLocationEntity.setLocation(locationEntity);
+		tourLocationEntity = tourLocationRepository.findOneByTourAndLocation(tourEntity, locationEntity);
+
+		if (tourLocationEntity == null) {
+			tourLocationEntity = new TourLocationEntity();
+			tourLocationEntity.setTour(tourEntity);
+			tourLocationEntity.setLocation(locationEntity);
+		}
+
 		tourLocationEntity.setDay(dto.getDay());
 		tourLocationEntity.setDescription(dto.getDescription());
 

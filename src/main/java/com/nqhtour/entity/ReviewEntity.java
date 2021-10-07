@@ -1,12 +1,14 @@
 package com.nqhtour.entity;
 
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name = "reviews")
+@EntityListeners(AuditingEntityListener.class)
 public class ReviewEntity extends BaseEntity {
     @Column
     private String review;

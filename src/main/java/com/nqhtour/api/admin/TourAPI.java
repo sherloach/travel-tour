@@ -1,5 +1,6 @@
 package com.nqhtour.api.admin;
 
+import com.nqhtour.dto.RouteDTO;
 import com.nqhtour.dto.TourLocationDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +14,13 @@ import java.io.IOException;
 public class TourAPI {
 	@Autowired
 	private ITourService tourService;
+
+	@GetMapping("/api/route/tour")
+	public TourDTO readTourOnRoute(@RequestParam("route") Long routeId) {
+		TourDTO tourDTO = new TourDTO();
+		tourDTO.setListResult(tourService.findAllByRouteId(routeId));
+		return tourDTO;
+	}
 
 	@PostMapping("/api/tour")
 	public TourDTO createTour(@RequestBody TourDTO tour) {

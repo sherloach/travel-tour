@@ -32,6 +32,17 @@ public class RouteService implements IRouteService {
     }
 
     @Override
+    public List<RouteDTO> findAll() {
+        List<RouteDTO> models = new ArrayList<>();
+        List<RouteEntity> entities = routeRepository.findAll();
+        for (RouteEntity item : entities) {
+            RouteDTO routeDTO = routeConverter.toDTO(item);
+            models.add(routeDTO);
+        }
+        return models;
+    }
+
+    @Override
     public int getTotalItem() {
         return (int) routeRepository.count();
     }

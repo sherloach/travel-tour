@@ -5,6 +5,11 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import com.nqhtour.api.HttpAPI;
+import com.nqhtour.dto.LocationDTO;
+import com.nqhtour.dto.RouteDTO;
+import com.nqhtour.dto.TourLocationDTO;
+import com.nqhtour.service.ILocationService;
+import com.nqhtour.service.IRouteService;
 import com.nqhtour.util.ServerName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -30,6 +35,15 @@ public class TourController {
 
 	@Autowired
 	private ServerName serverName;
+
+	@Autowired
+	private IRouteService routeService;
+
+	@Autowired
+	private ITourService tourService;
+
+	@Autowired
+	private ILocationService locationService;
 
 	@RequestMapping(value = "/admin/tour/list", method = RequestMethod.GET)
 	public ModelAndView showList(@RequestParam("page") int page, @RequestParam("limit") int limit, HttpServletRequest request) {
@@ -67,6 +81,22 @@ public class TourController {
 		}
 		mav.addObject("model", model);
 
+		RouteDTO routeDTO = new RouteDTO();
+		routeDTO.setListResult(routeService.findAll());
+		mav.addObject("route", routeDTO.getListResult());
+
+		return mav;
+	}
+
+	@RequestMapping(value = "/admin/tour/edit/location/edit", method = RequestMethod.GET)
+	public ModelAndView editLocationOnTour(@RequestParam(value = "id") Long id, HttpServletRequest request) {
+		ModelAndView mav = new ModelAndView("admin/tour/editLocation");
+		TourDTO tourDTO = tourService.findById(id);
+		LocationDTO locationDTO = new LocationDTO();
+		locationDTO.setListResult(locationService.findAll());
+
+		mav.addObject("model", tourDTO);
+		mav.addObject("locations", locationDTO.getListResult());
 		return mav;
 	}
 }

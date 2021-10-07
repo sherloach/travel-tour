@@ -1,6 +1,7 @@
 package com.nqhtour.entity;
 
 import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "instours")
+@EntityListeners(AuditingEntityListener.class)
 public class InstourEntity extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "tour_id")

@@ -9,7 +9,7 @@
 <title>NQHTOUR</title>
 </head>
 <body>
-	<section class="section-header" style="background-image: url(${pageContext.request.contextPath}/template/upload/tour/${model.imageCover}); background-size: cover; background-position: center;">
+	<section class="section-header" style="background-image: url(${pageContext.request.contextPath}/template/upload/tour/${model.image}); background-size: cover; background-position: center;">
       <div class="heading-box">
         <h1 class="heading-primary">
           <span>${model.name}</span>
@@ -25,7 +25,7 @@
             <svg class="heading-box__icon">
               <use xlink:href="img/icons.svg#icon-map-pin"></use>
             </svg>
-            <span class="heading-box__text">${model.location}</span>
+            <span class="heading-box__text">${model.destination}</span>
           </div>
         </div>
       </div>
@@ -41,14 +41,14 @@
                 <use xlink:href="img/icons.svg#icon-calendar"></use>
               </svg>
               <span class="overview-box__label">Next date</span>
-              <span class="overview-box__text">${model.startDate}</span>
+              <span class="overview-box__text">${model.instours[0].startDate}</span>
             </div>
             <div class="overview-box__detail">
               <svg class="overview-box__icon">
                 <use xlink:href="img/icons.svg#icon-trending-up"></use>
               </svg>
-              <span class="overview-box__label">Difficulty</span>
-              <span class="overview-box__text">Medium</span>
+              <span class="overview-box__label">Start Location</span>
+              <span class="overview-box__text">${model.startLocation}</span>
             </div>
             <div class="overview-box__detail">
               <svg class="overview-box__icon">
@@ -62,7 +62,7 @@
                 <use xlink:href="img/icons.svg#icon-star"></use>
               </svg>
               <span class="overview-box__label">Rating</span>
-              <span class="overview-box__text">4.9 / 5</span>
+              <span class="overview-box__text">${model.ratingsAverage} / 5</span>
             </div>
           </div>
 

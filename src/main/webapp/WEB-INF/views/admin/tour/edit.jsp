@@ -32,9 +32,6 @@
 							href="<c:url value='/admin/tour/edit'/>">
 							<i class="icon icon-plus-circle"></i> Add New Tours</a>
 					</li>
-                    <li>
-                        <a class="nav-link" href="#"><i class="icon icon-trash-can"></i>Trash</a>
-                    </li>
                 </ul>
             </div>
         </div>
@@ -58,57 +55,54 @@
 								</div>
 							</div>
 							<div class="col-md-6 mb-3">
-								<label>Location</label>
-								<form:input cssClass="form-control" path="location" required="required"/>
+								<label>Route</label>
+								<form:select cssClass="form-control" path="routeId" required="required">
+									<form:option value="" label="Choose..."/>
+									<c:forEach var="item" items="${route}">
+										<form:option value="${item.id}" label="${item.startLocation} - ${item.destination}"/>
+									</c:forEach>
+								</form:select>
 								<div class="invalid-feedback">
-									Please provide a location.
+									Please choose a route.
 								</div>
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-md-6 mb-3">
-								<label>Start Date</label>
-								<form:input cssClass="date-time-picker form-control" path="startDate" data-options="{&quot;minDate&quot;:&quot;-1970/01/01&quot;, &quot;maxDate&quot;:&quot;+1990/01/10&quot;}"
-									  autocomplete="off" readonly="true" required="required"/>
+							<div class="col-md-3 mb-3">
+								<label>Adult Price</label>
+								<form:input cssClass="form-control" path="adultPrice" required="required"/>
 								<div class="invalid-feedback">
-									Please choose a date.
+									Please provide a valid price.
 								</div>
 							</div>
 							<div class="col-md-3 mb-3">
-								<label>Price</label>
-								<form:input cssClass="form-control" path="price" required="required"/>
+								<label>Children Price</label>
+								<form:input cssClass="form-control" path="childrenPrice" required="required"/>
 								<div class="invalid-feedback">
 									Please provide a valid price.
 								</div>
 							</div>
 							<div class="col-md-3 mb-3">
 								<label>Max Group Size</label>
-								<form:input cssClass="form-control" path="maxGroupSize" required="required"/>
+								<form:input cssClass="form-control" path="maxGroupSize" required="required" autocomplete="false"/>
 								<div class="invalid-feedback">
 									Please provide a valid number.
 								</div>
 							</div>
+							<div class="col-md-3 mb-3">
+								<label for="duration">Duration</label>
+								<form:input cssClass="form-control" path="duration" required="required" autocomplete="false"/>
+								<div class="invalid-feedback">
+									Please provide a valid duration.
+								</div>
+							</div>
 						</div>
 						<div class="row">
-							<div class="col-md-9 mb-3">
+							<div class="col-md-12 mb-3">
 								<label>Summary</label>
 								<form:input cssClass="form-control" path="summary" required="required"/>
 								<div class="invalid-feedback">
 									Please provide a summary.
-								</div>
-							</div>
-							<div class="col-md-3 mb-3">
-								<label for="duration">Duration</label>
-								<form:input cssClass="form-control" path="duration" required="required"/>
-								<!--<input type="text" class="form-control"  placeholder="Mobile Phones" required>-->
-<!-- 								<select id="duration" name="duration" class="custom-select form-control" required>
-									<option value="">Select Product Category</option>
-									<option value="1">Mobile Phone</option>
-									<option value="2">Laptop & Computers</option>
-									<option value="3">Accessories</option>
-								</select> -->
-								<div class="invalid-feedback">
-									Please provide a valid duration.
 								</div>
 							</div>
 						</div>
@@ -116,6 +110,38 @@
 							<div class="col-md-5 mb-3">
 								<label>Image</label>
 								<input id="uploadImage" name="file" type="file"/>
+							</div>
+						</div>
+
+						<a href='/admin/tour/edit/location/edit?id=${model.id}' class="my-btn-tour my-btn-tour-delete btn-fab btn-fab-sm btn-primary shadow text-white"><i class="icon-add"></i></a>
+						<div class="animated fadeInUpShort">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="card no-b shadow">
+										<div class="card-body p-0">
+											<div class="table-responsive">
+												<table class="table table-hover">
+													<thead>
+														<tr class="no-b my-user-list">
+															<th>LOCATION</th>
+															<th>COORDINATES</th>
+															<th>DURATION</th>
+															<th>DESCRIPTION</th>
+														</tr>
+													</thead>
+													<tbody class="stepLocations">
+														<tr class="no-b">
+															<td style="text-align: center">LangBiang</td>
+															<td style="text-align: center"><span class="badge badge-success">123.333 - 123.333</span></td>
+															<td style="text-align: center"><i class="icon icon-data_usage"></i> 3 days</td>
+															<td style="text-align: center"><div style="white-space: nowrap;overflow: hidden;width: 234px;text-overflow: ellipsis;">days days days days days days days days days days days days days days days days days days days days days days days days days days days days days days days days</div></td>
+														</tr>
+													</tbody>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
 						</div>
 						<div class="form-group">
@@ -126,17 +152,6 @@
 								Please provide a tour details.
 							</div>
 						</div>
-						<!-- <div class="row">
-							<div class="col-md-3 offset-md-1">
-								<input hidden id="imageCover" name="imageCover"/>
-								<div class="dropzone dropzone-file-area" id="fileUpload">
-									<div class="dz-default dz-message">
-										<span>Drop A passport size image of user</span>
-										<div>You can also click to open file browser</div>
-									</div>
-								</div>
-							</div>
-						</div> -->
 					</div>
 
 					<!-- Cần phải có ID để xử lý thêm, sửa -->
@@ -191,7 +206,7 @@
 						var reader = new FileReader();
 						reader.onload = function(e) {
 							data[""+"base64"+""] = e.target.result;
-							data[""+"imageCover"+""] = files.name;
+							data[""+"image"+""] = files.name;
 						};
 						reader.readAsDataURL(files);
 					}

@@ -66,7 +66,7 @@ public class InstourService implements IInstourService {
         } else {
             instourEntity = instourConverter.toEntity(dto);
             instourEntity.setParticipants(0);
-            instourEntity.setStatus("OPEN");
+//            instourEntity.setStatus("OPEN");
         }
 
         instourEntity.setGuide(guide);

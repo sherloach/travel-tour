@@ -1,5 +1,6 @@
 package com.nqhtour.repository;
 
+import com.nqhtour.entity.RouteEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.nqhtour.entity.TourEntity;
@@ -9,6 +10,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface TourRepository extends JpaRepository<TourEntity, Long>, JpaSpecificationExecutor<TourEntity> {
+    List<TourEntity> findAllByRoute(RouteEntity routeEntity);
 //    @Query(value = "call travelbooking.sp_hot_tours()", nativeQuery = true)
 //    List<TourEntity> findByHotTours();
 //

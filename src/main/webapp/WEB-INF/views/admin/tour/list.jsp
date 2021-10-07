@@ -48,12 +48,11 @@
 											<tbody>
 												<c:forEach var="item" items="${model.listResult}">
 													<tr class="no-b">
-														<td class="w-10"><img src="${pageContext.request.contextPath}/template/upload/tour/${item.imageCover}" alt=""></td>
+														<td class="w-10"><img src="${pageContext.request.contextPath}/template/upload/tour/${item.image}" alt=""></td>
 														<td> <h6>${item.name}</h6><small class="text-muted">Du Lịch Trong Nước</small> </td>
-														<td><fmt:formatNumber value="${item.price}" type="currency" currencySymbol=""/> VND</td>
+														<td><fmt:formatNumber value="${item.adultPrice}" type="currency" currencySymbol=""/> VND</td>
 														<td><span class="badge badge-success">Published</span></td>
-														<td><span><i class="icon icon-data_usage"></i> ${item.duration} days</span><br>
-															<span><i class="icon icon-timer"></i> ${item.startDate}</span> </td>
+														<td><i class="icon icon-data_usage"></i> ${item.duration} days</td>
 
 														<!-- Update Tour -->
 														<c:url var="updateTourURL" value="/admin/tour/edit">
@@ -61,9 +60,9 @@
 														</c:url>
 														<td>
 															<a href='${updateTourURL}' class="my-btn-tour btn-fab btn-fab-sm btn-primary shadow text-white"><i class="icon-pencil"></i></a>
-															<c:if test="${item.currentGroupSize == 0}">
-																<a href='#' onclick="warningBeforeDelete(${item.id})" class="my-btn-tour my-btn-tour-delete btn-fab btn-fab-sm btn-primary shadow text-white"><i class="icon-trash-can"></i></a>
-															</c:if>
+<%--															<c:if test="${item.currentGroupSize == 0}">--%>
+<%--																<a href='#' onclick="warningBeforeDelete(${item.id})" class="my-btn-tour my-btn-tour-delete btn-fab btn-fab-sm btn-primary shadow text-white"><i class="icon-trash-can"></i></a>--%>
+<%--															</c:if>--%>
 														</td>
 													</tr>
 												</c:forEach>

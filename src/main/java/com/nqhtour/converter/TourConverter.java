@@ -25,6 +25,8 @@ public class TourConverter {
 		result.setChildrenPrice(entity.getChildrenPrice());
 		result.setCreatedBy(entity.getCreatedBy());
 		result.setRouteId(entity.getRoute().getId());
+		result.setStartLocation(entity.getRoute().getStartLocation());
+		result.setDestination(entity.getRoute().getDestination());
 
 		return result;
 	}

@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface IRouteService {
     List<RouteDTO> findAll(Pageable pageable);
+    List<RouteDTO> findAll();
     int getTotalItem();
     RouteDTO findById(long id);
     RouteDTO save(RouteDTO dto);

@@ -7,49 +7,41 @@
 			<div class="spinner-layer spinner-blue">
 				<div class="circle-clipper left">
 					<div class="circle"></div>
-				</div>
-				<div class="gap-patch">
-					<div class="circle"></div>
-				</div>
-				<div class="circle-clipper right">
-					<div class="circle"></div>
-				</div>
+				</div><div class="gap-patch">
+				<div class="circle"></div>
+			</div><div class="circle-clipper right">
+				<div class="circle"></div>
+			</div>
 			</div>
 
 			<div class="spinner-layer spinner-red">
 				<div class="circle-clipper left">
 					<div class="circle"></div>
-				</div>
-				<div class="gap-patch">
-					<div class="circle"></div>
-				</div>
-				<div class="circle-clipper right">
-					<div class="circle"></div>
-				</div>
+				</div><div class="gap-patch">
+				<div class="circle"></div>
+			</div><div class="circle-clipper right">
+				<div class="circle"></div>
+			</div>
 			</div>
 
 			<div class="spinner-layer spinner-yellow">
 				<div class="circle-clipper left">
 					<div class="circle"></div>
-				</div>
-				<div class="gap-patch">
-					<div class="circle"></div>
-				</div>
-				<div class="circle-clipper right">
-					<div class="circle"></div>
-				</div>
+				</div><div class="gap-patch">
+				<div class="circle"></div>
+			</div><div class="circle-clipper right">
+				<div class="circle"></div>
+			</div>
 			</div>
 
 			<div class="spinner-layer spinner-green">
 				<div class="circle-clipper left">
 					<div class="circle"></div>
-				</div>
-				<div class="gap-patch">
-					<div class="circle"></div>
-				</div>
-				<div class="circle-clipper right">
-					<div class="circle"></div>
-				</div>
+				</div><div class="gap-patch">
+				<div class="circle"></div>
+			</div><div class="circle-clipper right">
+				<div class="circle"></div>
+			</div>
 			</div>
 		</div>
 	</div>
@@ -94,6 +86,19 @@
 			</div>
 			<ul class="sidebar-menu">
 				<li class="header"><strong>MAIN NAVIGATION</strong></li>
+				<li class="treeview">
+					<a href="#">
+						<i class="icon icon icon-card_travel blue-text s-18"></i>
+						<span>Routes</span>
+						<span class="badge r-3 badge-primary pull-right">4</span>
+					</a>
+					<ul class="treeview-menu">
+						<li>
+							<a href="<c:url value='/admin/route/list?page=1&limit=6'/>">
+							<i class="icon icon-circle-o"> </i>All Routes</a>
+						</li>
+					</ul>
+				</li>
 				<li class="treeview"><a href="#"> <i
 						class="icon icon icon-card_travel blue-text s-18"></i> <span>Tours</span>
 						<span class="badge r-3 badge-primary pull-right">4</span>
