@@ -17,13 +17,13 @@
         <div class="heading-box__group">
           <div class="heading-box__detail">
             <svg class="heading-box__icon">
-              <use xlink:href="img/icons.svg#icon-clock"></use>
+              <use xlink:href="/template/web/img/icons.svg#icon-clock"></use>
             </svg>
             <span class="heading-box__text">${model.duration} days</span>
           </div>
           <div class="heading-box__detail">
             <svg class="heading-box__icon">
-              <use xlink:href="img/icons.svg#icon-map-pin"></use>
+              <use xlink:href="/template/web/img/icons.svg#icon-map-pin"></use>
             </svg>
             <span class="heading-box__text">${model.destination}</span>
           </div>
@@ -38,28 +38,28 @@
             <h2 class="heading-secondary ma-bt-lg">Quick facts</h2>
             <div class="overview-box__detail">
               <svg class="overview-box__icon">
-                <use xlink:href="img/icons.svg#icon-calendar"></use>
+                <use xlink:href="/template/web/img/icons.svg#icon-calendar"></use>
               </svg>
               <span class="overview-box__label">Next date</span>
               <span class="overview-box__text">${model.instours[0].startDate}</span>
             </div>
             <div class="overview-box__detail">
               <svg class="overview-box__icon">
-                <use xlink:href="img/icons.svg#icon-trending-up"></use>
+                <use xlink:href="/template/web/img/icons.svg#icon-map-pin"></use>
               </svg>
               <span class="overview-box__label">Start Location</span>
               <span class="overview-box__text">${model.startLocation}</span>
             </div>
             <div class="overview-box__detail">
               <svg class="overview-box__icon">
-                <use xlink:href="img/icons.svg#icon-user"></use>
+                <use xlink:href="/template/web/img/icons.svg#icon-user"></use>
               </svg>
               <span class="overview-box__label">Participants</span>
-              <span class="overview-box__text">${model.maxGroupSize} people</span>
+              <span id="maxGroupSizeTour" class="overview-box__text">${model.maxGroupSize} people</span>
             </div>
             <div class="overview-box__detail">
               <svg class="overview-box__icon">
-                <use xlink:href="img/icons.svg#icon-star"></use>
+                <use xlink:href="/template/web/img/icons.svg#icon-star"></use>
               </svg>
               <span class="overview-box__label">Rating</span>
               <span class="overview-box__text">${model.ratingsAverage} / 5</span>
@@ -67,19 +67,23 @@
           </div>
 
           <div class="overview-box__group">
-            <h2 class="heading-secondary ma-bt-lg">BOOKING NOW...</h2>
-
-            <div class="overview-box__detail">
-            </div>
+            <h2 class="heading-secondary ma-bt-lg">ABOUT ${model.name}</h2>
+            <p style="font-size: 17px">
+              ${model.description}
+            </p>
           </div>
         </div>
       </div>
 
       <div class="description-box">
-        <h2 class="heading-secondary ma-bt-lg">About ${model.name}</h2>
-        <p class="description__text">
-			${model.description}
-		</p>
+        <h2 class="heading-secondary ma-bt-lg">TOUR PROGRAM</h2>
+        <c:forEach var="item" items="${model.tourLocations}">
+          <p class="overview-box__label" style="font-size: 1.6rem">Ngày ${item.day}: ${item.location.address}</p>
+          <p style="font-size: 17px">
+              ${item.description}
+          </p>
+          <br>
+        </c:forEach>
       </div>
     </section>
 
@@ -87,24 +91,31 @@
       <div class="picture-box">
         <img
           class="picture-box__img picture-box__img--1"
-          src="img/tours/tour-5-1.jpg"
+          src="${pageContext.request.contextPath}/template/upload/tour/tour-1-2.jpg"
           alt="The Park Camper Tour 1"
         />
       </div>
       <div class="picture-box">
         <img
           class="picture-box__img picture-box__img--2"
-          src="img/tours/tour-5-2.jpg"
-          alt="The Park Camper Tour 1"
+          src="${pageContext.request.contextPath}/template/upload/tour/tour-5-2.jpg"
+          alt="The Park Camper Tour 2"
         />
       </div>
       <div class="picture-box">
         <img
           class="picture-box__img picture-box__img--3"
-          src="img/tours/tour-5-3.jpg"
-          alt="The Park Camper Tour 1"
+          src="${pageContext.request.contextPath}/template/upload/tour/tour-5-3.jpg"
+          alt="The Park Camper Tour 3"
         />
       </div>
+    </section>
+
+    <section class="section-map">
+      <div id='map' data-loclength='${model.tourLocations.size()}'></div>
+      <c:forEach var="item" items="${model.tourLocations}" varStatus="loop">
+        <input type="hidden" id="locations-${loop.index}" data-longitude="${item.location.longitude}" data-latitude="${item.location.latitude}" data-day="${item.day}" data-address="${item.location.address}">
+      </c:forEach>
     </section>
 
     <section class="section-reviews">
@@ -125,19 +136,19 @@
           </p>
           <div class="reviews__rating">
             <svg class="reviews__star reviews__star--active">
-              <use xlink:href="img/icons.svg#icon-star"></use>
+              <use xlink:href="/template/web/img/icons.svg#icon-star"></use>
             </svg>
             <svg class="reviews__star reviews__star--active">
-              <use xlink:href="img/icons.svg#icon-star"></use>
+              <use xlink:href="/template/web/img/icons.svg#icon-star"></use>
             </svg>
             <svg class="reviews__star reviews__star--active">
-              <use xlink:href="img/icons.svg#icon-star"></use>
+              <use xlink:href="/template/web/img/icons.svg#icon-star"></use>
             </svg>
             <svg class="reviews__star reviews__star--active">
-              <use xlink:href="img/icons.svg#icon-star"></use>
+              <use xlink:href="/template/web/img/icons.svg#icon-star"></use>
             </svg>
             <svg class="reviews__star reviews__star--active">
-              <use xlink:href="img/icons.svg#icon-star"></use>
+              <use xlink:href="/template/web/img/icons.svg#icon-star"></use>
             </svg>
           </div>
         </div>
@@ -278,26 +289,62 @@
     <section class="section-cta">
       <div class="cta">
         <div class="cta__img cta__img--logo">
-          <img src="/template/web/img/logo-white.png" alt="Natours logo" class="" />
+          <img src="/template/web/img/logo-white.png" alt="NQHTours logo" class="" />
         </div>
-        <img src="img/tour-5-2.jpg" alt="" class="cta__img cta__img--1" />
-        <img src="img/tour-5-1.jpg" alt="" class="cta__img cta__img--2" />
+        <img src="${pageContext.request.contextPath}/template/upload/tour/tour-5-2.jpg" alt="" class="cta__img cta__img--1" />
+        <img src="${pageContext.request.contextPath}/template/upload/tour/tour-5-3.jpg" alt="" class="cta__img cta__img--2" />
 
         <div class="cta__content">
-          <h2 class="heading-secondary">What are you waiting for?</h2>
-          <p class="cta__text">
-            ${model.duration} days. 1 adventure. Infinite memories. Make it yours today!
-          </p>
-          <!-- <button class="btn btn--green span-all-rows"><a href="">Book tour now!</a></button> -->
-			<security:authorize access = "isAnonymous()">
-				<a href="<c:url value='/login'/>" class="btn btn--green span-all-rows">Book tour now!</a>
-			</security:authorize>
-			<security:authorize access = "hasRole('CLIENT')">
-				<%-- <c:if test="${role.contains("CLIENT")}"><a href="<c:url value='/tour/checkout?id=${model.id}'/>" class="btn btn--gr<%-- een span-all-rows">Book tour now!</a></c:if>  --%>
-				<%-- <a href="<c:url value='/tour/checkout?id=${model.id}'/>" class="btn btn--green span-all-rows">Book tour now!</a> --%>
-                <c:if test="${model.maxGroupSize == model.currentGroupSize}"><button id="" class="btn btn--green span-all-rows">Sold Out!</button></c:if>
-                <c:if test="${model.currentGroupSize < model.maxGroupSize}"><button id="btn-apply" class="btn btn--green span-all-rows">Book tour now!</button></c:if>
-			</security:authorize>
+            <%-- CHOOSE DATE--%>
+            <div>
+              <input class="form__input" id="startDatetime" style="width: 250px" type="text" value="" required name="startDates" readonly>
+            </div>
+            <%-- ADULT --%>
+            <div style="background-color: #f2f2f2;border-radius: 4px;padding: 0px 10px;position: relative;">
+              <span class="" style="font-size: 16px;vertical-align: middle;">Adult</span>
+              <span id="adultPrice" class="price-color" style="color: #ffbd00;font-size: 16px;vertical-align: middle;margin-left: 15px;display: inline-block;min-width: 100px;"> x ${model.adultPrice}</span>
+              <div class="btn-group">
+                <button type="button" class="number-button minus-adult btn-general" style="padding: 10px;border: none;">
+                  <i class="fa fa-minus"></i>
+                </button>
+                <span class="number-detail number-adult" style="font-size: 16px;padding: 14px 10px;">1</span>
+                <button type="button" class="number-button plus-adult btn-general" style="padding: 10px;border: none;">
+                  <i class="fa fa-plus"></i>
+                </button>
+              </div>
+            </div>
+            <%-- CHILDREN --%>
+            <div style="background-color: #f2f2f2;border-radius: 4px;padding: 0px 10px;position: relative;">
+              <span class="" style="font-size: 16px;vertical-align: middle;">Children</span>
+              <span id="childrenPrice" class="price-color" style="color: #ffbd00;font-size: 16px;vertical-align: middle;margin-left: 15px;display: inline-block;min-width: 100px;"> x ${model.childrenPrice}</span>
+              <div class="btn-group">
+                <button type="button" class="number-button minus-children btn-general" style="padding: 10px;border: none;">
+                  <i class="fa fa-minus"></i>
+                </button>
+                <span class="number-detail number-children" style="font-size: 16px;padding: 14px 10px;">0</span>
+                <button type="button" class="number-button plus-children btn-general" style="padding: 10px;border: none;">
+                  <i class="fa fa-plus"></i>
+                </button>
+              </div>
+            </div>
+
+            <input id="finalStartsDate" type="hidden" name="" value="">
+            <input id="adultPriceTemp" type="hidden" name="" value="${model.adultPrice}">
+            <input id="childrenPriceTemp" type="hidden" name="" value="${model.childrenPrice}">
+
+            <c:forEach var="item" items="${model.instours}">
+              <input class="hiddenStartDate" type="hidden" name="" value="${item.startDate}x/x${item.id}x/x${item.participants}">
+            </c:forEach>
+        </div>
+        <div style="display: flex;align-items: center;margin-top: 15px;">
+          <button style="display: none; margin-top: 20px; width: 250px" id="btn-sold-out" class="btn btn--yellow span-all-rows">Sold Out!</button>
+          <security:authorize access = "isAnonymous()">
+            <a style="margin-top: 20px; width: 250px" href="<c:url value='/login'/>" class="btn btn--green span-all-rows">Book tour now!</a>
+          </security:authorize>
+          <security:authorize access = "hasRole('CLIENT')">
+          <button style="margin-top: 20px; width: 250px" id="btn-book-tour" class="btn btn--green span-all-rows">Book tour now!</button>
+          </security:authorize>
+          <span id="totalPrice" style="font-size: 25px;font-weight: 400;margin: 20px 0px 0px 31px;">${model.adultPrice}</span>
         </div>
       </div>
     </section>
@@ -307,14 +354,161 @@
 	</security:authorize>
 
 	<script>
-		var btnApply = document.getElementById("btn-apply");
-		btnApply.addEventListener("click", function (event) {
-			var email = $("#emailClient").text();
-			//var data = email + " " + ${model.id};
-			// TODO: change this code using JSON
-            var data = "{ \"email\": " + "\"" + email + "\"" + ", \"tourId\": " + ${model.id} + " }";
-			check(data);
-		});
+		<%--var btnApply = document.getElementById("btn-apply");--%>
+		<%--btnApply.addEventListener("click", function (event) {--%>
+		<%--	var email = $("#emailClient").text();--%>
+		<%--	//var data = email + " " + ${model.id};--%>
+		<%--	// TODO: change this code using JSON--%>
+        <%--    var data = "{ \"email\": " + "\"" + email + "\"" + ", \"tourId\": " + ${model.id} + " }";--%>
+		<%--	check(data);--%>
+		<%--});--%>
+
+        const startDatesOfTour = document.querySelectorAll('.hiddenStartDate');
+        const datetimePickerPlugin = document.querySelector('#startDatetime');
+        const finalChoosingStartDate = document.querySelector('#finalStartsDate');
+        const maxGroupSizeTour = document.querySelector('#maxGroupSizeTour').textContent.split(' ')[0];
+        // const instoursArray = document.querySelectorAll('.hiddenInstour');
+        let instourId = [];
+        const allowDates = [];
+        const maxGroupSizePerTours = [];
+
+        const locLength = document.getElementById('map').dataset.loclength;
+        let locations = [];
+        for (let i = 0; i < locLength; i++) {
+          const address = document.getElementById('locations-' + i).dataset.address;
+          const day = document.getElementById('locations-' + i).dataset.day;
+          const latitude = document.getElementById('locations-' + i).dataset.latitude;
+          const longitude = document.getElementById('locations-' + i).dataset.longitude;
+          locations.push({address, day, latitude, longitude});
+        }
+
+        // store instour id inside array of object, with key is startDate and value is instour id.
+        startDatesOfTour.forEach((item, index) => {
+          instourId[item.value.split('x/x')[0]] = item.value.split('x/x')[1];
+          allowDates.push(item.value.split('x/x')[0]);
+          maxGroupSizePerTours[item.value.split('x/x')[0]] = item.value.split('x/x')[2];
+        });
+        console.log(instourId);
+        console.log(maxGroupSizePerTours);
+
+        jQuery('#startDatetime').datetimepicker({
+          timepicker:false,
+          format:'m/d/Y',
+          allowDates: allowDates,
+          formatDate:'m/d/Y'
+        });
+
+        $('#startDatetime').on('change', function() {
+          finalChoosingStartDate.value = instourId[datetimePickerPlugin.value];
+
+          const ticketRemain = +maxGroupSizeTour - +maxGroupSizePerTours[datetimePickerPlugin.value];
+          console.log('Con lai: ', ticketRemain);
+          console.log('InstourId: ', finalChoosingStartDate.value);
+          // $('#dateChange').html(currentInstour[0]);
+          // $("#quantity").attr({
+          //   "max" : ticket,
+          //   "min" : 1
+          // });
+          // $("#quantity").val(1);
+          // const currentPrice = 1 * $('#priceTemp').val();
+          // $('#priceTag').html(currentPrice.toLocaleString('en-US', { style: 'currency', currency: 'VND' }));
+          //
+          if (ticketRemain === 0) {
+            $('#btn-sold-out').css('display', 'block');
+            $('#book-tour').css('display', 'none');
+          } else {
+            $('#btn-sold-out').css('display', 'none');
+            $('#book-tour').css('display', 'block');
+          }
+        });
+
+        let numberAdult = 0;
+        let numberChildren = 0;
+        const numberAdultSpan = document.querySelector('.number-adult');
+        const numberChildrenSpan = document.querySelector('.number-children');
+        const adultPriceDB = $('#adultPriceTemp').val();
+        const childrenPriceDB = $('#childrenPriceTemp').val();
+
+        document.querySelector('.plus-adult').addEventListener('click', e => {
+          numberAdult += 1;
+          numberAdultSpan.textContent = numberAdult;
+          const currentPrice = calcCurrentPrice(numberAdult, adultPriceDB);
+          $('#adultPrice').html(currentPrice);
+          displayTotalPrice();
+        });
+
+        document.querySelector('.minus-adult').addEventListener('click', e => {
+          if (numberAdult !== 0) {
+            numberAdult -= 1;
+          }
+          numberAdultSpan.textContent = numberAdult;
+          const currentPrice = calcCurrentPrice(numberAdult, adultPriceDB);
+          $('#adultPrice').html(currentPrice);
+          displayTotalPrice();
+        });
+
+        document.querySelector('.plus-children').addEventListener('click', e => {
+          numberChildren += 1;
+          numberChildrenSpan.textContent = numberChildren;
+          const currentPrice = calcCurrentPrice(numberChildren, adultPriceDB);
+          $('#childrenPrice').html(currentPrice);
+          displayTotalPrice();
+        });
+
+        document.querySelector('.minus-children').addEventListener('click', e => {
+          if (numberChildren !== 0) {
+            numberChildren -= 1;
+          }
+          numberChildrenSpan.textContent = numberChildren;
+          const currentPrice = calcCurrentPrice(numberChildren, adultPriceDB);
+          $('#childrenPrice').html(currentPrice);
+          displayTotalPrice();
+        });
+
+        const calcCurrentPrice = (quantity, price) => {
+          return quantity * price;
+        };
+
+        const displayTotalPrice = () => {
+          $('#totalPrice').html((numberAdult * adultPriceDB) + (numberChildren * childrenPriceDB));
+        };
+
+        const displayMap = locations => {
+          mapboxgl.accessToken = 'pk.eyJ1IjoibGVlc3NhbmciLCJhIjoiY2ttMGI5eXB0MnJ4bDJybXB6aDc4Y3dqcyJ9.pEaqr7h0A_Vl6idlG-Dx7g';
+          const map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11',
+          });
+
+          const bounds = new mapboxgl.LngLatBounds();
+          locations.forEach(loc => {
+            const el = document.createElement('div');
+            el.className = 'marker';
+
+            const coordinates = [loc.longitude, loc.latitude];
+            new mapboxgl.Marker({
+              element: el,
+              anchor: 'bottom'
+            }).setLngLat(coordinates).addTo(map);
+
+            new mapboxgl.Popup({
+              closeOnClick: false,
+              offset: 30
+            }).setLngLat(coordinates).setHTML("Day " + loc.day + ": " + loc.address).addTo(map);
+
+            bounds.extend(coordinates);
+          });
+
+          map.fitBounds(bounds, {
+            padding: {
+              top: 200,
+              bottom: 150,
+              left: 100,
+              right: 100
+            }
+          });
+        };
+        displayMap(locations);
 		
 		/*function check(d) {
 			$.ajax({

@@ -237,6 +237,14 @@ body {
   background-color: #55c57a;
 }
 
+.btn--yellow {
+  background-color: #f39c12;
+  color: #fff;
+}
+.btn--yellow::after {
+  background-color: #f39c12;
+}
+
 .btn--small {
   padding: 1.25rem 3rem !important;
   font-size: 1.4rem !important;
@@ -740,14 +748,16 @@ body {
   z-index: 8;
 }
 .cta__content {
-  display: grid;
-  grid-template-rows: auto auto;
-  grid-template-columns: 1fr auto;
-  grid-gap: 0.7rem;
-  grid-auto-flow: column;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+  /*display: grid;*/
+  /*grid-template-rows: auto auto;*/
+  /*grid-template-columns: 1fr auto;*/
+  /*grid-gap: 0.7rem;*/
+  /*grid-auto-flow: column;*/
+  /*-webkit-box-align: center;*/
+  /*-ms-flex-align: center;*/
+  /*align-items: center;*/
+  display: flex;
+  justify-content: space-between;
 }
 .cta__text {
   font-size: 1.9rem;

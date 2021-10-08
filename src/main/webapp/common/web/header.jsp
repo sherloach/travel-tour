@@ -7,7 +7,7 @@
         <form class="nav__search">
           <button class="nav__search-btn">
             <svg>
-              <use xlink:href="<c:url value='img/icons.svg#icon-search'/>"></use>
+              <use xlink:href="/template/web/img/icons.svg##icon-search"></use>
             </svg>
           </button>
           <input
