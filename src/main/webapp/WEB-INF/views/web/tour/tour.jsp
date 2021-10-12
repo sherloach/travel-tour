@@ -302,7 +302,7 @@
             <%-- ADULT --%>
             <div style="background-color: #f2f2f2;border-radius: 4px;padding: 0px 10px;position: relative;">
               <span class="" style="font-size: 16px;vertical-align: middle;">Adult</span>
-              <span id="adultPrice" class="price-color" style="color: #ffbd00;font-size: 16px;vertical-align: middle;margin-left: 15px;display: inline-block;min-width: 100px;"> x ${model.adultPrice}</span>
+              <span id="adultPrice" class="price-color" style="color: #ffbd00;font-size: 16px;vertical-align: middle;margin-left: 15px;display: inline-block;min-width: 80px;"> x ${model.adultPrice}</span>
               <div class="btn-group">
                 <button type="button" class="number-button minus-adult btn-general" style="padding: 10px;border: none;">
                   <i class="fa fa-minus"></i>
@@ -316,7 +316,7 @@
             <%-- CHILDREN --%>
             <div style="background-color: #f2f2f2;border-radius: 4px;padding: 0px 10px;position: relative;">
               <span class="" style="font-size: 16px;vertical-align: middle;">Children</span>
-              <span id="childrenPrice" class="price-color" style="color: #ffbd00;font-size: 16px;vertical-align: middle;margin-left: 15px;display: inline-block;min-width: 100px;"> x ${model.childrenPrice}</span>
+              <span id="childrenPrice" class="price-color" style="color: #ffbd00;font-size: 16px;vertical-align: middle;margin-left: 15px;display: inline-block;min-width: 80px;"> x 0</span>
               <div class="btn-group">
                 <button type="button" class="number-button minus-children btn-general" style="padding: 10px;border: none;">
                   <i class="fa fa-minus"></i>
@@ -371,6 +371,7 @@
         let instourId = [];
         const allowDates = [];
         const maxGroupSizePerTours = [];
+        const emailClient = $("#emailClient").text();
 
         const locLength = document.getElementById('map').dataset.loclength;
         let locations = [];
@@ -395,7 +396,8 @@
           timepicker:false,
           format:'m/d/Y',
           allowDates: allowDates,
-          formatDate:'m/d/Y'
+          formatDate:'m/d/Y',
+          defaultDate: allowDates[0]
         });
 
         $('#startDatetime').on('change', function() {
@@ -403,7 +405,6 @@
 
           const ticketRemain = +maxGroupSizeTour - +maxGroupSizePerTours[datetimePickerPlugin.value];
           console.log('Con lai: ', ticketRemain);
-          console.log('InstourId: ', finalChoosingStartDate.value);
           // $('#dateChange').html(currentInstour[0]);
           // $("#quantity").attr({
           //   "max" : ticket,
@@ -422,7 +423,7 @@
           }
         });
 
-        let numberAdult = 0;
+        let numberAdult = 1;
         let numberChildren = 0;
         const numberAdultSpan = document.querySelector('.number-adult');
         const numberChildrenSpan = document.querySelector('.number-children');
@@ -450,7 +451,7 @@
         document.querySelector('.plus-children').addEventListener('click', e => {
           numberChildren += 1;
           numberChildrenSpan.textContent = numberChildren;
-          const currentPrice = calcCurrentPrice(numberChildren, adultPriceDB);
+          const currentPrice = calcCurrentPrice(numberChildren, childrenPriceDB);
           $('#childrenPrice').html(currentPrice);
           displayTotalPrice();
         });
@@ -460,9 +461,18 @@
             numberChildren -= 1;
           }
           numberChildrenSpan.textContent = numberChildren;
-          const currentPrice = calcCurrentPrice(numberChildren, adultPriceDB);
+          const currentPrice = calcCurrentPrice(numberChildren, childrenPriceDB);
           $('#childrenPrice').html(currentPrice);
           displayTotalPrice();
+        });
+
+        document.getElementById('btn-book-tour').addEventListener('click', e => {
+          console.log('adult quantity:', numberAdult);
+          console.log('children quantity:', numberChildren);
+          console.log('email:', emailClient);
+          console.log('instour ID:', finalChoosingStartDate.value);
+          window.location.href = "/tour/repayment?instourid=" + finalChoosingStartDate.value +
+                  "&email=" + emailClient + "&adultq=" + numberAdult + "&childq=" + numberChildren + "&tourid=" + ${model.id};
         });
 
         const calcCurrentPrice = (quantity, price) => {

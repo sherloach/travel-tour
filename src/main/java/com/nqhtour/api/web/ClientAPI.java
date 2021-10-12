@@ -1,8 +1,16 @@
 package com.nqhtour.api.web;
 
+import com.nqhtour.dto.BookingDTO;
 import com.nqhtour.dto.ClientTourDTO;
+import com.nqhtour.dto.TourDTO;
 import com.nqhtour.entity.TourEntity;
 import com.nqhtour.repository.TourRepository;
+import com.nqhtour.service.IBookingService;
+import com.nqhtour.service.ITourService;
+import com.stripe.Stripe;
+import com.stripe.exception.StripeException;
+import com.stripe.model.checkout.Session;
+import com.stripe.param.checkout.SessionCreateParams;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +25,19 @@ import com.nqhtour.repository.UserRepository;
 import com.nqhtour.service.IClientService;
 
 import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 @RestController(value = "ClientAPIOfWeb")
 public class ClientAPI {
 	@Autowired
 	private IClientService clientService;
+
+	@Autowired
+	private IBookingService bookingService;
+
+	@Autowired
+	private ITourService tourService;
 	
 	@Autowired
 	private UserRepository userRepository;
@@ -69,33 +84,44 @@ public class ClientAPI {
 		return true;
 	}
 
-	@PostMapping("/api/client/booking")
-	public String booking(@RequestBody String data) throws IOException, MessagingException {
-		JsonNode parent = new ObjectMapper().readTree(data);
-		String email = parent.get("email").asText();
-		String tourId = parent.get("tourId").asText();
-		String nuTickets = parent.get("nuTickets").asText();
+	@PostMapping("/api/booking")
+	public BookingDTO booking(@RequestBody BookingDTO booking) throws IOException, MessagingException {
+		return bookingService.save(booking);
+	}
 
-		ClientEntity entity = clientRepository.findOneByEmail(email);
-		if (entity == null) {
-			return "This email does not match any Client account!";
-		}
+	@GetMapping("/api/booking/checkout-session")
+	public String createSessionCheckout(@RequestParam("instourid") Long instourId, @RequestParam("clientid") Long clientId, @RequestParam("tourid") Long tourId,
+										@RequestParam("adultq") Integer adultQuantity, @RequestParam("childq") Integer childrenQuantity) throws StripeException {
+		TourDTO tourDTO = tourService.findById(tourId);
+		ClientDTO clientDTO = clientService.findById(clientId);
 
-		TourEntity tourEntity = tourRepository.findOne(Long.parseLong(tourId));
-		if (tourEntity == null) {
-			return "This Tour ID is not valid!";
-		}
+		Stripe.apiKey = "sk_test_51JOdvxDH1bc0ILeAvCCsB3MAp4z40gk7sFYmndAd8X8ce6lB7ILkM9THmKzM3Jb6zLOGvgUVYEAMsfr883Sx7DWh00aWCONBdO";
+		SessionCreateParams params =
+			SessionCreateParams.builder()
+				.addPaymentMethodType(SessionCreateParams.PaymentMethodType.CARD)
+				.setMode(SessionCreateParams.Mode.PAYMENT)
+				.setCustomerEmail(clientDTO.getEmail())
+				.setSuccessUrl("http://localhost:8080/tour/payment/success?instourid=" + instourId + "&clientid=" + clientId + "&adultq=" + adultQuantity + "&childq=" + childrenQuantity + "&paid=1")
+				.setCancelUrl("http://localhost:8080/tour?id=" + tourId)
+				.addLineItem(
+					SessionCreateParams.LineItem.builder()
+						.setQuantity(1L)
+						.setPriceData(
+							SessionCreateParams.LineItem.PriceData.builder()
+								.setCurrency("vnd")
+								.setUnitAmount(tourDTO.getAdultPrice() * adultQuantity + tourDTO.getChildrenPrice() * childrenQuantity)
+								.setProductData(
+									SessionCreateParams.LineItem.PriceData.ProductData.builder()
+										.setName(tourDTO.getName())
+										.setDescription(tourDTO.getSummary())
+										.addImage("https://www.natours.dev/img/tours/" + tourDTO.getImage())
+										.build())
+								.build())
+						.build())
+				.build();
+		Session session = Session.create(params);
 
-		// TODO: validate number of tickets bigger than maxgroupsize
-
-		Long idClient = entity.getId();
-		// Check ìf Client has booked this tour before or not?
-		boolean exist = clientService.checkBookingExist(idClient, Long.parseLong(tourId));
-		if (exist) {
-			return String.valueOf(clientService.booking(idClient, tourEntity, Integer.parseInt(nuTickets)));
-		} else {
-			return "Client paid for this tour!";
-		}
+		return session.getUrl();
 	}
 
 	@PostMapping("/api/client/tour")

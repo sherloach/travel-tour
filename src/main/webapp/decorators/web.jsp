@@ -35,6 +35,23 @@
 	<%-- DatetimePicker--%>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.css" integrity="sha512-bYPO5jmStZ9WI2602V2zaivdAnbAhtfzmxnEGh9RwtlI00I9s8ulGe4oBa5XxiC6tCITJH/QG70jswBhbLkxPw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js" integrity="sha512-AIOTidJAcHBH2G/oZv9viEGXRqDNmfdPVPYOYKGy3fti0xIplnlgMHUGfuNRzC6FkzIo0iIxgFnr9RikFxK+sw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<%--	&lt;%&ndash; Travelo Template &ndash;%&gt;--%>
+<%--	<link rel="stylesheet" href="<c:url value='/template/web/travelo/css/owl.carousel.min.css' />" />--%>
+<%--	<link rel="stylesheet" href="<c:url value='/template/web/travelo/css/magnific-popup.css' />" />--%>
+<%--	<link rel="stylesheet" href="<c:url value='/template/web/travelo/css/themify-icons.css' />" />--%>
+<%--	<link rel="stylesheet" href="<c:url value='/template/web/travelo/css/nice-select.css' />" />--%>
+<%--	<link rel="stylesheet" href="<c:url value='/template/web/travelo/css/flaticon.css' />" />--%>
+<%--	<link rel="stylesheet" href="<c:url value='/template/web/travelo/css/gijgo.css' />" />--%>
+<%--	<link rel="stylesheet" href="<c:url value='/template/web/travelo/css/animate.css' />" />--%>
+<%--	<link rel="stylesheet" href="<c:url value='/template/web/travelo/css/slick.css' />" />--%>
+<%--	<link rel="stylesheet" href="<c:url value='/template/web/travelo/css/slicknav.css' />" />--%>
+<%--	<link rel="stylesheet" href="<c:url value='/template/web/travelo/css/owl.carousel.min.css' />" />--%>
+<%--	<link rel="stylesheet" href="<c:url value='/template/web/travelo/css/owl.carousel.min.css' />" />--%>
+<%--	<link rel="stylesheet" href="<c:url value='/template/web/travelo/css/owl.carousel.min.css' />" />--%>
+<%--	<link rel="stylesheet" href="<c:url value='/template/web/travelo/css/travelo-style.css' />" />--%>
+<%--	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css">--%>
+
 </head>
 <body>
 	<!-- Navigation -->
@@ -45,6 +62,7 @@
 	<!-- Footer -->
 	<%@ include file="/common/web/footer.jsp" %>
 
+	<script src="https://js.stripe.com/v3/"></script>
 	<script>
 		function keyPressSearch(event) {
 			event.keyCode;

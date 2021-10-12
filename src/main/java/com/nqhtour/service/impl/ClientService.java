@@ -1,6 +1,8 @@
 package com.nqhtour.service.impl;
 
 import com.nqhtour.dto.ClientTourDTO;
+import com.nqhtour.entity.*;
+import com.nqhtour.repository.InstourRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -12,9 +14,6 @@ import com.nqhtour.converter.ClientConverter;
 import com.nqhtour.converter.UserConverter;
 import com.nqhtour.dto.ClientDTO;
 import com.nqhtour.dto.UserDTO;
-import com.nqhtour.entity.ClientEntity;
-import com.nqhtour.entity.TourEntity;
-import com.nqhtour.entity.UserEntity;
 import com.nqhtour.repository.ClientRepository;
 import com.nqhtour.repository.TourRepository;
 import com.nqhtour.repository.UserRepository;
@@ -41,6 +40,9 @@ public class ClientService implements IClientService {
 
 	@Autowired
 	TourRepository tourRepository;
+
+	@Autowired
+	InstourRepository instourRepository;
 
 	@Autowired
 	UserConverter userConverter;
@@ -82,22 +84,6 @@ public class ClientService implements IClientService {
 
 		entity.setUser(userEntity);
 		return clientConverter.toDTO(clientRepository.save(entity));
-	}
-
-	public boolean booking(Long idClient, TourEntity tourEntity, int nuTickets) throws MessagingException {
-		// Update current tickets available
-//		int currentGroupSize = tourEntity.getCurrentGroupSize() + nuTickets;
-//		tourEntity.setCurrentGroupSize(currentGroupSize);
-//		tourRepository.save(tourEntity);
-//
-//		ClientTourEntity clientTourEntity = new ClientTourEntity();
-//		ClientEntity clientEntity = clientRepository.findOne(idClient);
-//		clientTourEntity.setClientEntity(clientEntity);
-//		clientTourEntity.setTourEntity(tourEntity);
-//		clientTourEntity.setNuTickets(nuTickets);
-//		clientTourRepository.save(clientTourEntity);
-		//sendEmail(clientEntity.getEmail(), nuTickets, tourEntity);
-		return true;
 	}
 
 	@Override
@@ -1009,6 +995,32 @@ public class ClientService implements IClientService {
 //		tour.setCurrentGroupSize(tour.getCurrentGroupSize() - entity.getNuTickets());
 //		tourRepository.save(tour);
 //		clientTourRepository.delete(entity);
+	}
+
+	@Override
+	public boolean booking(Long idClient, Long instourId, int adultQuantity, int childrenQuantity, boolean paid) throws MessagingException {
+		// Update current tickets available
+		InstourEntity instourEntity = instourRepository.findOne(instourId);
+		int currentParticipants = instourEntity.getParticipants() + adultQuantity + childrenQuantity;
+		instourEntity.setParticipants(currentParticipants);
+		instourRepository.save(instourEntity);
+
+//		ClientTourEntity clientTourEntity = new ClientTourEntity();
+		BookingEntity bookingEntity = new BookingEntity();
+		ClientEntity clientEntity = clientRepository.findOne(idClient);
+		bookingEntity.setClient(clientEntity);
+		bookingEntity.setInstour(instourEntity);
+		bookingEntity.setAdultQuantity(adultQuantity);
+		bookingEntity.setChildrenQuantity(childrenQuantity);
+		bookingEntity.setPaid(paid);
+		bookingEntity.setStatus("PENDING");
+
+//		clientTourEntity.setClientEntity(clientEntity);
+//		clientTourEntity.setTourEntity(tourEntity);
+//		clientTourEntity.setNuTickets(nuTickets);
+//		clientTourRepository.save(clientTourEntity);
+		//sendEmail(clientEntity.getEmail(), nuTickets, tourEntity);
+		return true;
 	}
 
 }

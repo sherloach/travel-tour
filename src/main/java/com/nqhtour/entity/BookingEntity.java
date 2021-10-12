@@ -1,12 +1,14 @@
 package com.nqhtour.entity;
 
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name = "bookings")
+@EntityListeners(AuditingEntityListener.class)
 public class BookingEntity extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "instour_id")
@@ -69,14 +71,6 @@ public class BookingEntity extends BaseEntity {
 
     public void setClient(ClientEntity client) {
         this.client = client;
-    }
-
-    public Date getCreateDate() {
-        return createdDate;
-    }
-
-    public void setCreateDate(Date createdDate) {
-        this.createdDate = createdDate;
     }
 
     public boolean isPaid() {
