@@ -26,6 +26,7 @@ public class RouteService implements IRouteService {
         List<RouteEntity> entities = routeRepository.findAll(pageable).getContent();
         for (RouteEntity item : entities) {
             RouteDTO routeDTO = routeConverter.toDTO(item);
+            routeDTO.setTourQuantity(item.getTours().size());
             models.add(routeDTO);
         }
         return models;

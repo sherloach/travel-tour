@@ -6,8 +6,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.nqhtour.api.HttpAPI;
+import com.nqhtour.dto.RouteDTO;
+import com.nqhtour.service.IRouteService;
 import com.nqhtour.util.ServerName;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -28,6 +32,9 @@ public class HomeController {
 	private HttpAPI httpAPI;
 
 	@Autowired
+	private IRouteService routeService;
+
+	@Autowired
 	private ServerName serverName;
 	
 	@RequestMapping(value = "/trang-chu", method = RequestMethod.GET)
@@ -35,10 +42,14 @@ public class HomeController {
 		ModelAndView mav = new ModelAndView("/web/home");
 
 		TourDTO model = httpAPI.getTourDTO(serverName.localUrl + "/api/tours/1/9");
+		Pageable pageable = new PageRequest(0, 6);
+		RouteDTO routeDTO = new RouteDTO();
+		routeDTO.setListResult(routeService.findAll(pageable));
 
 		// TODO: show tours that have not been sold out yet:
 		// 		 - Write a tours finding func that maxGroupSize equals People
 		mav.addObject("model", model);
+		mav.addObject("routes", routeDTO.getListResult());
 		return mav;
 	}
 

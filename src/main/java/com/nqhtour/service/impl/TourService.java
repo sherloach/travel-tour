@@ -68,8 +68,17 @@ public class TourService implements ITourService {
 	public List<TourDTO> findAll(Pageable pageable) {
 		List<TourDTO> models = new ArrayList<>();
 		List<TourEntity> entities = tourRepository.findAll(pageable).getContent();
+
 		for (TourEntity item : entities) {
 			TourDTO tourDTO = tourConverter.toDTO(item);
+			List<InstourDTO> listInstour = new ArrayList<>();
+			for (InstourEntity instour : item.getInstours()) {
+				if (instour.getStatus().equals("OPEN")) {
+					InstourDTO instourDTO = instourConverter.toDTO(instour);
+					listInstour.add(instourDTO);
+				}
+			}
+			tourDTO.setInstours(listInstour);
 			models.add(tourDTO);
 		}
 
@@ -112,8 +121,10 @@ public class TourService implements ITourService {
 
 		List<InstourDTO> listInstour = new ArrayList<>();
 		for (InstourEntity item : entity.getInstours()) {
-			InstourDTO instourDTO = instourConverter.toDTO(item);
-			listInstour.add(instourDTO);
+			if (item.getStatus().equals("OPEN")) {
+				InstourDTO instourDTO = instourConverter.toDTO(item);
+				listInstour.add(instourDTO);
+			}
 		}
 		tourDTO.setInstours(listInstour);
 

@@ -1126,7 +1126,7 @@ body {
     to(#28b487)
   );
   background-image: linear-gradient(to right bottom, #7dd56f, #28b487);
-  opacity: 0.7;
+  opacity: 0.4;
 }
 .card__picture-img {
   -o-object-fit: cover;
@@ -1153,6 +1153,7 @@ body {
   font-style: italic;
   margin-top: -1rem;
   margin-bottom: 0.75rem;
+  min-height: 45px;
 }
 .card__data {
   font-size: 1.3rem;

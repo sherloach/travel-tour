@@ -41,7 +41,7 @@
                 <use xlink:href="/template/web/img/icons.svg#icon-calendar"></use>
               </svg>
               <span class="overview-box__label">Next date</span>
-              <span class="overview-box__text">${model.instours[0].startDate}</span>
+              <span class="overview-box__text">${model.instours.get(0).startDate}</span>
             </div>
             <div class="overview-box__detail">
               <svg class="overview-box__icon">
@@ -297,7 +297,7 @@
         <div class="cta__content">
             <%-- CHOOSE DATE--%>
             <div>
-              <input class="form__input" id="startDatetime" style="width: 250px" type="text" value="" required name="startDates" readonly>
+              <input class="form__input" id="startDatetime" style="width: 250px" type="text" value="${model.instours.get(0).startDate}" required name="startDates" readonly>
             </div>
             <%-- ADULT --%>
             <div style="background-color: #f2f2f2;border-radius: 4px;padding: 0px 10px;position: relative;">
@@ -354,20 +354,10 @@
 	</security:authorize>
 
 	<script>
-		<%--var btnApply = document.getElementById("btn-apply");--%>
-		<%--btnApply.addEventListener("click", function (event) {--%>
-		<%--	var email = $("#emailClient").text();--%>
-		<%--	//var data = email + " " + ${model.id};--%>
-		<%--	// TODO: change this code using JSON--%>
-        <%--    var data = "{ \"email\": " + "\"" + email + "\"" + ", \"tourId\": " + ${model.id} + " }";--%>
-		<%--	check(data);--%>
-		<%--});--%>
-
         const startDatesOfTour = document.querySelectorAll('.hiddenStartDate');
         const datetimePickerPlugin = document.querySelector('#startDatetime');
         const finalChoosingStartDate = document.querySelector('#finalStartsDate');
         const maxGroupSizeTour = document.querySelector('#maxGroupSizeTour').textContent.split(' ')[0];
-        // const instoursArray = document.querySelectorAll('.hiddenInstour');
         let instourId = [];
         const allowDates = [];
         const maxGroupSizePerTours = [];
@@ -389,15 +379,14 @@
           allowDates.push(item.value.split('x/x')[0]);
           maxGroupSizePerTours[item.value.split('x/x')[0]] = item.value.split('x/x')[2];
         });
-        console.log(instourId);
-        console.log(maxGroupSizePerTours);
+        console.log(allowDates);
+        // console.log(maxGroupSizePerTours);
 
         jQuery('#startDatetime').datetimepicker({
           timepicker:false,
           format:'m/d/Y',
           allowDates: allowDates,
-          formatDate:'m/d/Y',
-          defaultDate: allowDates[0]
+          formatDate:'m/d/Y'
         });
 
         $('#startDatetime').on('change', function() {
@@ -427,14 +416,17 @@
         let numberChildren = 0;
         const numberAdultSpan = document.querySelector('.number-adult');
         const numberChildrenSpan = document.querySelector('.number-children');
-        const adultPriceDB = $('#adultPriceTemp').val();
-        const childrenPriceDB = $('#childrenPriceTemp').val();
+        const adultPriceDB = +$('#adultPriceTemp').val();
+        const childrenPriceDB = +$('#childrenPriceTemp').val();
+        const totalPriceFirst = +adultPriceDB + +childrenPriceDB;
+        $('#adultPrice').html(adultPriceDB.toLocaleString('en-US', { style: 'currency', currency: 'VND' }));
+        $('#totalPrice').html(totalPriceFirst.toLocaleString('en-US', { style: 'currency', currency: 'VND' }));
 
         document.querySelector('.plus-adult').addEventListener('click', e => {
           numberAdult += 1;
           numberAdultSpan.textContent = numberAdult;
           const currentPrice = calcCurrentPrice(numberAdult, adultPriceDB);
-          $('#adultPrice').html(currentPrice);
+          $('#adultPrice').html(currentPrice.toLocaleString('en-US', { style: 'currency', currency: 'VND' }));
           displayTotalPrice();
         });
 
@@ -444,7 +436,7 @@
           }
           numberAdultSpan.textContent = numberAdult;
           const currentPrice = calcCurrentPrice(numberAdult, adultPriceDB);
-          $('#adultPrice').html(currentPrice);
+          $('#adultPrice').html(currentPrice.toLocaleString('en-US', { style: 'currency', currency: 'VND' }));
           displayTotalPrice();
         });
 
@@ -452,7 +444,7 @@
           numberChildren += 1;
           numberChildrenSpan.textContent = numberChildren;
           const currentPrice = calcCurrentPrice(numberChildren, childrenPriceDB);
-          $('#childrenPrice').html(currentPrice);
+          $('#childrenPrice').html(currentPrice.toLocaleString('en-US', { style: 'currency', currency: 'VND' }));
           displayTotalPrice();
         });
 
@@ -462,25 +454,29 @@
           }
           numberChildrenSpan.textContent = numberChildren;
           const currentPrice = calcCurrentPrice(numberChildren, childrenPriceDB);
-          $('#childrenPrice').html(currentPrice);
+          $('#childrenPrice').html(currentPrice.toLocaleString('en-US', { style: 'currency', currency: 'VND' }));
           displayTotalPrice();
         });
 
-        document.getElementById('btn-book-tour').addEventListener('click', e => {
-          console.log('adult quantity:', numberAdult);
-          console.log('children quantity:', numberChildren);
-          console.log('email:', emailClient);
-          console.log('instour ID:', finalChoosingStartDate.value);
-          window.location.href = "/tour/repayment?instourid=" + finalChoosingStartDate.value +
-                  "&email=" + emailClient + "&adultq=" + numberAdult + "&childq=" + numberChildren + "&tourid=" + ${model.id};
-        });
+        const btnBookTour = document.getElementById('btn-book-tour');
+        if (btnBookTour) {
+          btnBookTour.addEventListener('click', e => {
+            console.log('adult quantity:', numberAdult);
+            console.log('children quantity:', numberChildren);
+            console.log('email:', emailClient);
+            console.log('instour ID:', finalChoosingStartDate.value);
+            window.location.href = "/tour/repayment?instourid=" + finalChoosingStartDate.value +
+                    "&email=" + emailClient + "&adultq=" + numberAdult + "&childq=" + numberChildren + "&tourid=" + ${model.id};
+          });
+        }
 
         const calcCurrentPrice = (quantity, price) => {
           return quantity * price;
         };
 
         const displayTotalPrice = () => {
-          $('#totalPrice').html((numberAdult * adultPriceDB) + (numberChildren * childrenPriceDB));
+          const totalPrice = (numberAdult * adultPriceDB) + (numberChildren * childrenPriceDB);
+          $('#totalPrice').html(totalPrice.toLocaleString('en-US', { style: 'currency', currency: 'VND' }));
         };
 
         const displayMap = locations => {
