@@ -68,6 +68,19 @@
 <%--        </div>--%>
 <%--    </div>--%>
 <%--</div>--%>
+<!-- bradcam_area  -->
+<div class="bradcam_area bradcam_bg_4" style="background-image: url('/template/web/img/tours/tour-5-1.jpg');background-size: cover;background-position: center center;padding: 50px 0;background-repeat: no-repeat;position: relative;z-index: 0;">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="bradcam_text text-center">
+                    <h3 style="font-size: 80px;color: #fff;font-weight: 500;margin-bottom: 0;line-height: 90px;text-transform: capitalize;">Checkout</h3>
+                    <p style="font-size: 18px;color: #fff;font-weight: 400;text-transform: capitalize;">Confirm your information and choose a method payment</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="container">
     <div class="d-none d-sm-block mb-5 pb-4" style="padding-top: 130px;">
@@ -76,7 +89,7 @@
     </div>
     <div class="row" style="margin-top: 0;">
         <div class="col-12">
-            <h2 class="contact-title">Confirm Your Information</h2>
+            <h2 class="contact-title" style="font-size: 27px;font-weight: 600;margin-bottom: 20px;">Your Information</h2>
         </div>
         <div class="col-lg-8">
 
@@ -84,19 +97,19 @@
                 <div class="row" style="margin-top: 0;margin-bottom: 0">
                     <div class="col-sm-6" style="padding-left: 0;">
                         <div class="form-group">
-                            <input style="font-size: 1.5rem" class="form-control valid" name="name" id="name" type="text" readonly value="${client.name}" placeholder="Enter your name">
+                            <input style="border: 1px solid #e5e6e9;height: 48px;padding-left: 18px;font-size: 13px;background: transparent;" class="form-control valid" name="name" id="name" type="text" readonly value="${client.name}" placeholder="Enter your name">
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <input style="font-size: 1.5rem" class="form-control valid" name="email" id="email" type="email" readonly value="${client.email}" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'" placeholder="Email">
+                            <input style="border: 1px solid #e5e6e9;height: 48px;padding-left: 18px;font-size: 13px;background: transparent;" class="form-control valid" name="email" id="email" type="email" readonly value="${client.email}" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'" placeholder="Email">
                         </div>
                     </div>
                 </div>
                 <div class="row" style="margin-top: 0;margin-bottom: 0">
                     <div class="col-sm-6" style="padding-left: 0;">
                         <div class="form-group">
-                            <input style="font-size: 1.5rem" class="form-control valid" name="phoneNumber" id="phoneNumber" readonly type="text" value="${client.phoneNumber}" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'" placeholder="Email">
+                            <input style="border: 1px solid #e5e6e9;height: 48px;padding-left: 18px;font-size: 13px;background: transparent;" class="form-control valid" name="phoneNumber" id="phoneNumber" readonly type="text" value="${client.phoneNumber}" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter email address'" placeholder="Email">
                         </div>
                     </div>
                 </div>
@@ -116,25 +129,25 @@
             </form>
         </div>
         <div class="col-lg-3 offset-lg-1">
-            <div class="media contact-info">
-                <span class="contact-info__icon"><i class="ti-home"></i></span>
+            <div class="media contact-info" style="margin-bottom: 25px;">
+                <span class="contact-info__icon" style="margin-right: 20px;"><i style="color: #8f9195;font-size: 27px;" class="fas fa-home"></i></span>
                 <div class="media-body">
-                    <h3>Quận 1, Hồ Chí Minh.</h3>
-                    <p>DaKao, B1A 770</p>
+                    <h3 style="font-size: 16px;color: #2a2a2a;">Quận 1, Hồ Chí Minh.</h3>
+                    <p style="font-size: 16px;">DaKao, B1A 770</p>
                 </div>
             </div>
-            <div class="media contact-info">
-                <span class="contact-info__icon"><i class="ti-tablet"></i></span>
+            <div class="media contact-info" style="margin-bottom: 25px;">
+                <span class="contact-info__icon" style="margin-right: 20px;"><i style="color: #8f9195;font-size: 27px;" class="fas fa-phone-square"></i></span>
                 <div class="media-body">
-                    <h3>+1 253 565 2365</h3>
-                    <p>Mon to Fri 9am to 6pm</p>
+                    <h3 style="font-size: 16px;color: #2a2a2a;">+1 253 565 2365</h3>
+                    <p style="font-size: 16px;">Mon to Fri 9am to 6pm</p>
                 </div>
             </div>
-            <div class="media contact-info">
-                <span class="contact-info__icon"><i class="ti-email"></i></span>
+            <div class="media contact-info" style="margin-bottom: 25px;">
+                <span class="contact-info__icon" style="margin-right: 20px;"><i style="color: #8f9195;font-size: 27px;" class="fas fa-envelope-square"></i></span>
                 <div class="media-body">
-                    <h3>support@nqhtours.com</h3>
-                    <p>Send us your query anytime!</p>
+                    <h3 style="font-size: 16px;color: #2a2a2a;">support@nqhtours.com</h3>
+                    <p style="font-size: 16px;">Send us your query anytime!</p>
                 </div>
             </div>
         </div>
@@ -144,12 +157,41 @@
 <script>
     <%--var ticketAvailable = ${model.maxGroupSize - model.currentGroupSize};--%>
     <%--document.getElementById("nuticket").max = ticketAvailable;--%>
+    const displayMap = () => {
+        mapboxgl.accessToken = 'pk.eyJ1IjoibGVlc3NhbmciLCJhIjoiY2ttMGI5eXB0MnJ4bDJybXB6aDc4Y3dqcyJ9.pEaqr7h0A_Vl6idlG-Dx7g';
+        const map = new mapboxgl.Map({
+            container: 'map',
+            style: 'mapbox://styles/mapbox/streets-v11',
+            center: [106.7867, 10.8480],
+            zoom: 14
+        });
 
-    mapboxgl.accessToken = 'pk.eyJ1IjoibGVlc3NhbmciLCJhIjoiY2ttMGI5eXB0MnJ4bDJybXB6aDc4Y3dqcyJ9.pEaqr7h0A_Vl6idlG-Dx7g';
-    const map = new mapboxgl.Map({
-        container: 'map',
-        style: 'mapbox://styles/mapbox/light-v10',
-    });
+        // const bounds = new mapboxgl.LngLatBounds();
+        const el = document.createElement('div');
+        el.className = 'marker';
+
+        new mapboxgl.Marker({
+            element: el,
+            anchor: 'bottom'
+        }).setLngLat([106.7867, 10.8480]).addTo(map);
+
+        new mapboxgl.Popup({
+            closeOnClick: false,
+            offset: 30
+        }).setLngLat([106.7867, 10.8480]).setHTML("NQHTours").addTo(map);
+
+        // bounds.extend([106.7867, 10.8480]);
+        //
+        // map.fitBounds(bounds, {
+        //     padding: {
+        //         top: 200,
+        //         bottom: 150,
+        //         left: 100,
+        //         right: 100
+        //     }
+        // });
+    };
+    displayMap();
 
     document.getElementById('btnBooking').addEventListener('click', e => {
         e.preventDefault();

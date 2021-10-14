@@ -3,12 +3,9 @@ package com.nqhtour.controller.web;
 import javax.servlet.http.HttpServletRequest;
 
 import com.nqhtour.api.HttpAPI;
-import com.nqhtour.dto.BookingDTO;
-import com.nqhtour.dto.ClientDTO;
-import com.nqhtour.dto.InstourDTO;
-import com.nqhtour.service.IBookingService;
-import com.nqhtour.service.IClientService;
-import com.nqhtour.service.IInstourService;
+import com.nqhtour.dto.*;
+import com.nqhtour.service.*;
+import com.nqhtour.service.impl.RouteService;
 import com.nqhtour.util.ServerName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,9 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.nqhtour.dto.TourDTO;
-import com.nqhtour.service.ITourService;
 
 @Controller(value = "TourControllerOfWeb")
 public class TourController {
@@ -34,6 +28,12 @@ public class TourController {
 
 	@Autowired
 	private IBookingService bookingService;
+
+	@Autowired
+	private ITourService tourService;
+
+	@Autowired
+	private IRouteService routeService;
 
 	@Autowired
 	private ServerName serverName;
@@ -99,15 +99,20 @@ public class TourController {
 	}
 
 	@RequestMapping(value = "/tour/search", method = RequestMethod.GET)
-	public ModelAndView searchTour(@RequestParam("key") String key) {
+	public ModelAndView searchTour(@RequestParam(value = "id", required = false) Long routeId) {
 		ModelAndView mav = new ModelAndView("web/tour/search");
-		if (key.contains(" ")) {
-			key = key.replace(" ", "-");
-		}
-		String apiSearch = serverName.localUrl + "/api/tours/search/" + key;
-		TourDTO model = httpAPI.getTourDTO(apiSearch);
-		mav.addObject("model", model);
-		mav.addObject("key", key);
+		TourDTO tourDTO = new TourDTO();
+		tourDTO.setListResult(tourService.findAllByRouteId(routeId));
+		RouteDTO routeDTO = new RouteDTO();
+		routeDTO.setListResult(routeService.findAll());
+//		if (key.contains(" ")) {
+//			key = key.replace(" ", "-");
+//		}
+//		String apiSearch = serverName.localUrl + "/api/tours/search/" + key;
+//		TourDTO model = httpAPI.getTourDTO(apiSearch);
+//		mav.addObject("model", model);
+		mav.addObject("model", tourDTO.getListResult());
+		mav.addObject("routes", routeDTO.getListResult());
 
 		return mav;
 	}

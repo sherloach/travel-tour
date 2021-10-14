@@ -103,6 +103,12 @@ public class TourService implements ITourService {
 		List<TourEntity> entities = tourRepository.findAllByRoute(routeEntity);
 		for (TourEntity item : entities) {
 			TourDTO tourDTO = tourConverter.toDTO(item);
+			List<InstourDTO> listInstour = new ArrayList<>();
+			for (InstourEntity instour : item.getInstours()) {
+				InstourDTO instourDTO = instourConverter.toDTO(instour);
+				listInstour.add(instourDTO);
+			}
+			tourDTO.setInstours(listInstour);
 			models.add(tourDTO);
 		}
 		return models;

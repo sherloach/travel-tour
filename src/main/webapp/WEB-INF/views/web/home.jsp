@@ -109,16 +109,16 @@
 			</div>
 			<div class="row">
 				<c:forEach var="route" items="${routes}" varStatus="loop">
-					<div class="col-lg-4 col-md-6">
-						<div class="single_destination">
-							<div class="thumb">
-								<img src="/template/web/img/tours/route-${loop.index}.jpg" alt="">
-							</div>
-							<div class="content">
-								<p class="d-flex align-items-center">${route.destination} <a href="#">  ${route.tourQuantity} Tours</a> </p>
-							</div>
-						</div>
-					</div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="single_destination">
+                            <div class="thumb">
+                                <img src="/template/web/img/tours/route-${loop.index}.jpg" alt="">
+                            </div>
+                            <div class="content">
+                                <p class="d-flex align-items-center">${route.destination} <a href="<c:url value='/tour/search'/>">  ${route.tourQuantity} Tours</a> </p>
+                            </div>
+                        </div>
+                    </div>
 				</c:forEach>
 <%--				<div class="col-lg-4 col-md-6">--%>
 <%--					<div class="single_destination">--%>
