@@ -45,6 +45,16 @@
 								<div class="card-body p-0">
 									<div class="table-responsive">
 										<table class="table table-hover ">
+											<thead>
+												<tr class="no-b">
+													<th></th>
+													<th>NAME</th>
+													<th>PRICE</th>
+													<th>STATUS</th>
+													<th>DURATION</th>
+													<th></th>
+												</tr>
+											</thead>
 											<tbody>
 												<c:forEach var="item" items="${model.listResult}">
 													<tr class="no-b">

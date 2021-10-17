@@ -33,7 +33,7 @@ public class TourEntity extends BaseEntity {
 	@Column
 	private String summary;
 
-	@Column
+	@Column(columnDefinition = "TEXT")
 	private String description;
 
 	@Column(columnDefinition = "TEXT")

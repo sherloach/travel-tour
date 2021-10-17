@@ -45,27 +45,37 @@
                             <div class="card-body p-0">
                                 <div class="table-responsive">
                                     <table class="table table-hover ">
-                                        <tbody>
-                                        <c:forEach var="item" items="${model.listResult}">
-                                            <tr class="no-b">
-                                                <td class="w-10"><img src="${pageContext.request.contextPath}/template/upload/tour/${item.image}" alt=""></td>
-                                                <td> <h6>${item.name}</h6><small class="text-muted">Du Lịch Trong Nước</small> </td>
-                                                <td><fmt:formatNumber value="${item.adultPrice}" type="currency" currencySymbol=""/> VND</td>
-                                                <td><span class="badge badge-success">Published</span></td>
-                                                <td><i class="icon icon-data_usage"></i> ${item.duration} days</td>
-
-                                                <!-- Update Tour -->
-                                                <c:url var="updateTourURL" value="/admin/tour/edit">
-                                                    <c:param name="id" value="${item.id}"/>
-                                                </c:url>
-                                                <td>
-                                                    <a href='/admin/route/list/tour/instour?tour=${item.id}' class="my-btn-tour btn-fab btn-fab-sm btn-primary shadow text-white"><i class="icon-note-list"></i></a>
-                                                        <%--															<c:if test="${item.currentGroupSize == 0}">--%>
-                                                        <%--																<a href='#' onclick="warningBeforeDelete(${item.id})" class="my-btn-tour my-btn-tour-delete btn-fab btn-fab-sm btn-primary shadow text-white"><i class="icon-trash-can"></i></a>--%>
-                                                        <%--															</c:if>--%>
-                                                </td>
+                                        <thead>
+                                            <tr class="no-b my-user-list">
+                                                <th></th>
+                                                <th>NAME</th>
+                                                <th>PRICE</th>
+                                                <th>STATUS</th>
+                                                <th>DURATION</th>
+                                                <th></th>
                                             </tr>
-                                        </c:forEach>
+                                        </thead>
+                                        <tbody>
+                                            <c:forEach var="item" items="${model.listResult}">
+                                                <tr class="no-b">
+                                                    <td class="w-10"><img src="${pageContext.request.contextPath}/template/upload/tour/${item.image}" alt=""></td>
+                                                    <td> <h6>${item.name}</h6><small class="text-muted">Du Lịch Trong Nước</small> </td>
+                                                    <td><fmt:formatNumber value="${item.adultPrice}" type="currency" currencySymbol=""/> VND</td>
+                                                    <td><span class="badge badge-success">Published</span></td>
+                                                    <td><i class="icon icon-data_usage"></i> ${item.duration} days</td>
+
+                                                    <!-- Update Tour -->
+                                                    <c:url var="updateTourURL" value="/admin/tour/edit">
+                                                        <c:param name="id" value="${item.id}"/>
+                                                    </c:url>
+                                                    <td>
+                                                        <a href='/admin/route/list/tour/instour?tour=${item.id}' style="background-color: #f39c12 !important" class="my-btn-tour btn-fab btn-fab-sm btn-primary shadow text-white"><i class="icon-note-list"></i></a>
+                                                            <%--															<c:if test="${item.currentGroupSize == 0}">--%>
+                                                            <%--																<a href='#' onclick="warningBeforeDelete(${item.id})" class="my-btn-tour my-btn-tour-delete btn-fab btn-fab-sm btn-primary shadow text-white"><i class="icon-trash-can"></i></a>--%>
+                                                            <%--															</c:if>--%>
+                                                    </td>
+                                                </tr>
+                                            </c:forEach>
                                         </tbody>
                                     </table>
                                 </div>

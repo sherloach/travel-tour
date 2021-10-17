@@ -49,11 +49,12 @@
                                     <div class="table-responsive">
                                         <table class="table table-striped table-hover my-user-list-table r-0">
                                             <thead>
-                                            <tr class="no-b my-user-list">
-                                                <th>START LOCATION</th>
-                                                <th>DESTINATION</th>
-                                                <th></th>
-                                            </tr>
+                                                <tr class="no-b my-user-list">
+                                                    <th>START LOCATION</th>
+                                                    <th>DESTINATION</th>
+                                                    <th>TOURS</th>
+                                                    <th></th>
+                                                </tr>
                                             </thead>
 
                                             <tbody>
@@ -61,6 +62,7 @@
                                                 <tr>
                                                     <td style="text-align: center;">${item.startLocation}</td>
                                                     <td>${item.destination}</td>
+                                                    <td>${item.tourQuantity} Tours</td>
                                                     <td>
                                                         <a href='/admin/route/list/tour?route=${item.id}' class="my-btn-tour my-btn-tour-delete btn-fab btn-fab-sm btn-primary shadow text-white"><i class="icon-note-list"></i></a>
                                                     </td>

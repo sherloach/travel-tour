@@ -133,7 +133,7 @@
 <%--        });--%>
 <%--    </script>--%>
 
-    <div class="bradcam_area bradcam_bg_4" style="background-image: url('/template/web/img/tours/tour-1-cover.jpg.jpg');background-size: cover;background-position: center center;padding: 50px 0;background-repeat: no-repeat;position: relative;z-index: 0;">
+    <div class="bradcam_area bradcam_bg_4" style="background-image: url('/template/web/img/tours/tour-1-cover.jpg');background-size: cover;background-position: center center;padding: 50px 0;background-repeat: no-repeat;position: relative;z-index: 0;">
         <div class="container">
             <div class="row">
                 <div class="col-xl-12">

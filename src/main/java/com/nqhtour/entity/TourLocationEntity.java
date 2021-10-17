@@ -18,7 +18,7 @@ public class TourLocationEntity {
     @JoinColumn(name = "tour_id")
     private TourEntity tour;
 
-    @Column
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     @Column

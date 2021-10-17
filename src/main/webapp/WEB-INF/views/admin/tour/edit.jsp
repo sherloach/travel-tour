@@ -91,7 +91,7 @@
 							</div>
 							<div class="col-md-3 mb-3">
 								<label for="duration">Duration</label>
-								<form:input cssClass="form-control" path="duration" required="required" autocomplete="false"/>
+								<form:input cssClass="form-control" path="duration" required="required" autocomplete="off"/>
 								<div class="invalid-feedback">
 									Please provide a valid duration.
 								</div>
@@ -113,37 +113,41 @@
 							</div>
 						</div>
 
-						<a href='/admin/tour/edit/location/edit?id=${model.id}' class="my-btn-tour my-btn-tour-delete btn-fab btn-fab-sm btn-primary shadow text-white"><i class="icon-add"></i></a>
-						<div class="animated fadeInUpShort">
-							<div class="row">
-								<div class="col-md-12">
-									<div class="card no-b shadow">
-										<div class="card-body p-0">
-											<div class="table-responsive">
-												<table class="table table-hover">
-													<thead>
-														<tr class="no-b my-user-list">
-															<th>LOCATION</th>
-															<th>COORDINATES</th>
-															<th>DURATION</th>
-															<th>DESCRIPTION</th>
-														</tr>
-													</thead>
-													<tbody class="stepLocations">
-														<tr class="no-b">
-															<td style="text-align: center">LangBiang</td>
-															<td style="text-align: center"><span class="badge badge-success">123.333 - 123.333</span></td>
-															<td style="text-align: center"><i class="icon icon-data_usage"></i> 3 days</td>
-															<td style="text-align: center"><div style="white-space: nowrap;overflow: hidden;width: 234px;text-overflow: ellipsis;">days days days days days days days days days days days days days days days days days days days days days days days days days days days days days days days days</div></td>
-														</tr>
-													</tbody>
-												</table>
+						<c:if test="${model.id != null}">
+							<a href='/admin/tour/edit/location/edit?id=${model.id}' class="btn-show-more">Show more →</a>
+							<div class="animated fadeInUpShort">
+								<div class="row">
+									<div class="col-md-12">
+										<div class="card no-b shadow">
+											<div class="card-body p-0">
+												<div class="table-responsive">
+													<table class="table table-hover">
+														<thead>
+															<tr class="no-b my-user-list">
+																<th>LOCATION</th>
+																<th>COORDINATES</th>
+																<th>DAY</th>
+																<th>DESCRIPTION</th>
+															</tr>
+														</thead>
+														<tbody class="stepLocations">
+															<c:forEach var="item" items="${model.tourLocations}" varStatus="loop">
+																<tr class="no-b">
+																	<td style="text-align: center">${item.location.address}</td>
+																	<td style="text-align: center"><span class="badge badge-success">${item.location.longitude} - ${item.location.latitude}</span></td>
+																	<td style="text-align: center">${item.day}</td>
+																	<td style="text-align: center"><div style="white-space: nowrap;overflow: hidden;width: 234px;text-overflow: ellipsis;">${item.description}</div></td>
+																</tr>
+															</c:forEach>
+														</tbody>
+													</table>
+												</div>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
+						</c:if>
 						<div class="form-group">
 							<label for="description">Description</label>
 							<form:textarea cssClass="form-control p-t-40"  path="description"
@@ -185,8 +189,11 @@
 		(function () {
 			"use strict";
 			window.addEventListener("load", function () {
-				$("#price").attr({
+				$("#adultPrice").attr({
 				    "type" : "number",
+				});
+				$("#childrenPrice").attr({
+					"type" : "number",
 				});
 				$("#maxGroupSize").attr({
 				    "type" : "number",

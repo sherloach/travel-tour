@@ -99,9 +99,12 @@
                                                     <c:if test="${item.status == 'SOLDOUT'}">
                                                         <td style="text-align: center;"><span class="badge badge-warning"> ${item.status} </span></td>
                                                     </c:if>
+                                                    <td style="text-align: center;">
                                                     <c:if test="${item.participants == 0}">
-                                                        <td style="text-align: center;"><a href='#' onclick="" class="btn-fab btn-fab-sm btn-primary shadow text-white"><i class="icon-pencil"></i></a></td>
+                                                        <a href='#' onclick="" class="btn-fab btn-fab-sm btn-primary shadow text-white"><i class="icon-pencil"></i></a>
                                                     </c:if>
+                                                    <a href='#' onclick="" style="background-color: #f39c12 !important" class="btn-fab btn-fab-sm btn--yellow shadow text-white"><i class="icon-list"></i></a>
+                                                    </td>
                                                 </tr>
                                             </c:forEach>
                                         </tbody>

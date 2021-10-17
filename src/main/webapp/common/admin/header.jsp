@@ -88,9 +88,8 @@
 				<li class="header"><strong>MAIN NAVIGATION</strong></li>
 				<li class="treeview">
 					<a href="#">
-						<i class="icon icon icon-card_travel blue-text s-18"></i>
-						<span>Routes</span>
-						<span class="badge r-3 badge-primary pull-right">4</span>
+						<i class="icon icon icon-card_travel blue-text s-18"></i>Routes<i
+							class="icon icon-angle-left s-18 pull-right"></i>
 					</a>
 					<ul class="treeview-menu">
 						<li>
@@ -100,8 +99,8 @@
 					</ul>
 				</li>
 				<li class="treeview"><a href="#"> <i
-						class="icon icon icon-card_travel blue-text s-18"></i> <span>Tours</span>
-						<span class="badge r-3 badge-primary pull-right">4</span>
+						class="icon icon icon-card_travel blue-text s-18"></i>Tours<i
+						class="icon icon-angle-left s-18 pull-right"></i>
 				</a>
 					<ul class="treeview-menu">
 						<li><a
@@ -119,6 +118,24 @@
 					<li><a href="<c:url value='/admin/empl/edit'/>"><i
 							class="icon icon-add"></i>Add User</a></li>
 				</ul></li>
+				<li class="treeview"><a href="#"><i
+						class="icon icon-account_box light-green-text s-18"></i>Bookings<i
+						class="icon icon-angle-left s-18 pull-right"></i></a>
+					<ul class="treeview-menu">
+						<li><a href="<c:url value='/admin/booking/list'/>"><i
+								class="icon icon-circle-o"></i>All Bookings</a></li>
+<%--						<li><a href="<c:url value='/admin/booking/list/invoice'/>"><i--%>
+<%--								class="icon icon-add"></i>All Invoices</a></li>--%>
+					</ul></li>
+				<li class="treeview"><a href="#"><i
+						class="icon icon-account_box light-green-text s-18"></i>Reports<i
+						class="icon icon-angle-left s-18 pull-right"></i></a>
+					<ul class="treeview-menu">
+						<li><a href="<c:url value='/admin/booking/list'/>"><i
+								class="icon icon-circle-o"></i>All Bookings</a></li>
+						<li><a href="<c:url value='/admin/booking/list/invoice'/>"><i
+								class="icon icon-add"></i>All Invoices</a></li>
+					</ul></li>
 			</ul>
 		</section>
 	</aside>

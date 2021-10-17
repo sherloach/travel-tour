@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 public class BookingConverter {
     public BookingDTO toDTO(BookingEntity entity) {
         BookingDTO result = new BookingDTO();
+        result.setId(entity.getId());
         result.setAdultQuantity(entity.getAdultQuantity());
         result.setChildrenQuantity(entity.getChildrenQuantity());
         result.setStatus(entity.getStatus());
@@ -15,6 +16,8 @@ public class BookingConverter {
         result.setCreatedDate(entity.getCreatedDate());
         result.setClientId(entity.getClient().getId());
         result.setInstourId(entity.getInstour().getId());
+        result.setTourName(entity.getInstour().getTour().getName());
+        result.setClientName(entity.getClient().getName());
         if (result.getEmployeeId() != null) {
             result.setEmployeeId(entity.getEmployee().getId());
         }

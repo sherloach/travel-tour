@@ -1,7 +1,9 @@
 package com.nqhtour.dto;
 
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class BookingDTO {
     private Long id;
@@ -13,14 +15,33 @@ public class BookingDTO {
     private Long clientId;
     private Long employeeId;
     private String email;
+    private List<BookingDTO> listResult = new ArrayList<>();
     private Date createdDate;
+    private String clientName;
+    private String tourName;
 
-    public Long getId() {
-        return id;
+    public String getClientName() {
+        return clientName;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
+    }
+
+    public String getTourName() {
+        return tourName;
+    }
+
+    public void setTourName(String tourName) {
+        this.tourName = tourName;
+    }
+
+    public List<BookingDTO> getListResult() {
+        return listResult;
+    }
+
+    public void setListResult(List<BookingDTO> listResult) {
+        this.listResult = listResult;
     }
 
     public Date getCreatedDate() {
@@ -29,6 +50,14 @@ public class BookingDTO {
 
     public void setCreatedDate(Date createdDate) {
         this.createdDate = createdDate;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Integer getAdultQuantity() {

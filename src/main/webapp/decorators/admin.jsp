@@ -23,6 +23,10 @@
     <script src="<c:url value='/template/admin/sweetalert/sweetalert2.min.js' />"></script>
     <link rel="stylesheet" href="<c:url value='/template/admin/sweetalert/sweetalert2.min.css' />" />
 
+	<%-- Mapbox--%>
+	<script src='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js'></script>
+	<link href='https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.css' rel='stylesheet' />
+
 	<!-- selectize js for searching -->
 	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
@@ -58,9 +62,9 @@
 	<dec:body/>	
 
 	<!--/#app -->
-	
+
 	<script src="<c:url value='/template/admin/assets/js/app.js'/>"></script>
-	<script src="<c:url value='/template/paging/jquery.twbsPagination.js'/>" type="text/javascript"></script>	
+	<script src="<c:url value='/template/paging/jquery.twbsPagination.js'/>" type="text/javascript"></script>
 	<!--
 	--- Footer Part - Use Jquery anywhere at page.
 	--- http://writing.colin-gourlay.com/safely-using-ready-before-including-jquery/

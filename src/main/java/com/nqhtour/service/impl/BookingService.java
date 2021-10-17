@@ -63,6 +63,12 @@ public class BookingService implements IBookingService {
             bookingEntity = bookingConverter.toEntity(dto);
             ClientEntity clientEntity = clientRepository.findOne(dto.getClientId());
             InstourEntity instourEntity = instourRepository.findOne(dto.getInstourId());
+
+            // Update new participants of instour
+            int newParticipants = instourEntity.getParticipants() + bookingEntity.getAdultQuantity() + bookingEntity.getChildrenQuantity();
+            instourEntity.setParticipants(newParticipants);
+            instourRepository.save(instourEntity);
+
             bookingEntity.setClient(clientEntity);
             bookingEntity.setInstour(instourEntity);
             bookingEntity.setStatus("PENDING");

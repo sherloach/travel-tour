@@ -432,7 +432,7 @@
 
         document.querySelector('.minus-adult').addEventListener('click', e => {
           if (numberAdult > 1) {
-            numberAdult -= 1;re
+            numberAdult -= 1;
           }
           numberAdultSpan.textContent = numberAdult;
           const currentPrice = calcCurrentPrice(numberAdult, adultPriceDB);
