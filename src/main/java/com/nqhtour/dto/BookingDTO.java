@@ -19,6 +19,24 @@ public class BookingDTO {
     private Date createdDate;
     private String clientName;
     private String tourName;
+    private Long adultPrice;
+    private Long childrenPrice;
+
+    public Long getAdultPrice() {
+        return adultPrice;
+    }
+
+    public void setAdultPrice(Long adultPrice) {
+        this.adultPrice = adultPrice;
+    }
+
+    public Long getChildrenPrice() {
+        return childrenPrice;
+    }
+
+    public void setChildrenPrice(Long childrenPrice) {
+        this.childrenPrice = childrenPrice;
+    }
 
     public String getClientName() {
         return clientName;

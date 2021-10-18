@@ -18,6 +18,8 @@ public class BookingConverter {
         result.setInstourId(entity.getInstour().getId());
         result.setTourName(entity.getInstour().getTour().getName());
         result.setClientName(entity.getClient().getName());
+        result.setAdultPrice(entity.getInstour().getTour().getAdultPrice());
+        result.setChildrenPrice(entity.getInstour().getTour().getChildrenPrice());
         if (result.getEmployeeId() != null) {
             result.setEmployeeId(entity.getEmployee().getId());
         }

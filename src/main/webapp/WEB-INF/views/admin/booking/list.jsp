@@ -1,86 +1,13 @@
+<%@ page import="com.nqhtour.util.SecurityUtils" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/common/taglib.jsp"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <html>
 <head>
     <title>Bookings</title>
 </head>
 <body>
-<%--<table class="js-dynamitable     table table-bordered">--%>
-<%--    <!-- table heading -->--%>
-<%--    <thead>--%>
-<%--    <tr>--%>
-<%--        <th>Name <span class=""></span> <span class=""></span> </th>--%>
-<%--        <th>Email <span class=""></span> <span class=""></span> </th>--%>
-<%--        <th>Age <span class=""></span> <span class=""></span> </th>--%>
-<%--        <th>Account <span class=""></span> <span class=""></span> </th>--%>
-<%--        <th>Scoring <span class=""></span> <span class=""></span> </th>--%>
-<%--    </tr>--%>
-<%--    <tr>--%>
-<%--        <th> <!-- input filter -->--%>
-
-<%--            <input  class="js-filter  form-control" type="text" value="">--%>
-<%--        </th>--%>
-<%--        <th> <!-- select filter -->--%>
-
-<%--            <select class="js-filter  form-control">--%>
-<%--                <option value=""></option>--%>
-<%--                <option value="@dynamitable.com">dynamitable.com</option>--%>
-<%--                <option value="@sample.com">Sample</option>--%>
-<%--            </select>--%>
-<%--        </th>--%>
-<%--        <th><input class="js-filter  form-control" type="text" value=""></th>--%>
-<%--        <th><input class="js-filter  form-control" type="text" value=""></th>--%>
-<%--        <th><input class="js-filter  form-control" type="text" value=""></th>--%>
-<%--    </tr>--%>
-<%--    </thead>--%>
-
-<%--    <!-- table body -->--%>
-<%--    <tbody>--%>
-<%--    <tr>--%>
-<%--        <td>Freddy Krueger</td>--%>
-<%--        <td>freddy.krueger@sample.com</td>--%>
-<%--        <td class="text-right">122</td>--%>
-<%--        <td class="text-right">2300$</td>--%>
-<%--        <td class="text-right">+15</td>--%>
-<%--    </tr>--%>
-<%--    <tr>--%>
-<%--        <td>Clint Eastwood</td>--%>
-<%--        <td>clint.eastwood@sample.com</td>--%>
-<%--        <td class="text-right">62</td>--%>
-<%--        <td class="text-right">48 500$</td>--%>
-<%--        <td class="text-right">+12</td>--%>
-<%--    </tr>--%>
-<%--    <tr>--%>
-<%--        <td>Peter Parker</td>--%>
-<%--        <td>peter.parker@dynamitable.com</td>--%>
-<%--        <td class="text-right">22</td>--%>
-<%--        <td class="text-right">210$</td>--%>
-<%--        <td class="text-right">-5</td>--%>
-<%--    </tr>--%>
-<%--    <tr>--%>
-<%--        <td>Bruce Wayne</td>--%>
-<%--        <td>bruce.wayne@dynamitable.com</td>--%>
-<%--        <td class="text-right">42</td>--%>
-<%--        <td class="text-right">-8500$</td>--%>
-<%--        <td class="text-right">+2</td>--%>
-<%--    </tr>--%>
-<%--    <tr>--%>
-<%--        <td>Jackie Chan</td>--%>
-<%--        <td>jackie.chan@sample.com</td>--%>
-<%--        <td class="text-right">32</td>--%>
-<%--        <td class="text-right">-250.55$</td>--%>
-<%--        <td class="text-right">0</td>--%>
-<%--    </tr>--%>
-<%--    <tr>--%>
-<%--        <td>Bruce Lee</td>--%>
-<%--        <td>bruce.lee@sample.com</td>--%>
-<%--        <td class="text-right">32</td>--%>
-<%--        <td class="text-right">510$</td>--%>
-<%--        <td class="text-right">-7</td>--%>
-<%--    </tr>--%>
-<%--    </tbody>--%>
-<%--</table>--%>
     <div class="page has-sidebar-left height-full">
         <header class="blue accent-3 relative">
             <div class="container-fluid text-white">
@@ -154,10 +81,10 @@
 
                                             <tbody>
                                             <c:forEach var="item" items="${model}">
-                                                <c:url var="detailURL" value="/admin/booking/list/detail">
-                                                    <c:param name="bookingid" value="${item.id}"/>
-                                                </c:url>
-                                                <tr onclick="window.location = ${detailURL}">
+<%--                                                <c:url var="detailURL" value="/admin/booking/list/detail">--%>
+<%--                                                    <c:param name="bookingid" value="${item.id}"/>--%>
+<%--                                                </c:url>--%>
+                                                <tr onclick="handleRedirectToDetailBooking(${item.id})">
                                                     <td style="text-align: center">${item.id}</td>
                                                     <td>${item.clientName}</td>
                                                     <td>${item.tourName}</td>
@@ -171,22 +98,24 @@
                                                         </c:if>
                                                     </td>
                                                     <c:if test="${item.status == 'PENDING'}">
-                                                        <td style="color: #2979ff; font-weight: bold;">Pending</td>
+                                                        <td style="color: #f39c12;">Pending</td>
                                                     </c:if>
                                                     <c:if test="${item.status == 'APPROVED'}">
-                                                        <td style="color: #27ae60;font-weight: bold;">Approved</td>
+                                                        <td style="color: #27ae60;">Approved</td>
                                                     </c:if>
                                                     <c:if test="${item.status == 'CANCELED'}">
-                                                        <td style="color: #ed5564;font-weight: bold;">Canceled</td>
+                                                        <td style="color: #ed5564;">Canceled</td>
                                                     </c:if>
                                                     <td style="text-align: left">
 <%--                                                        <a href='/admin/route/list/tour?route=${item.id}' class="my-btn-tour-delete btn-fab btn-fab-sm btn-primary shadow text-white"><i class="icon-note-list"></i></a>--%>
                                                         <c:if test="${item.status == 'PENDING'}">
-                                                            <a href="#" id="btn-update-booking-status" class="btn-fab btn-fab-sm btn-primary shadow text-white"><i class="icon-edit"></i></a>
+                                                            <a href="#" id="btn-update-booking-status"
+                                                               onclick="handleModalAndSetBookingId(event, ${item.id}, ${item.adultPrice}, ${item.childrenPrice}, ${item.adultQuantity}, ${item.childrenQuantity})"
+                                                               class="btn-fab btn-fab-sm btn-primary shadow text-white"><i class="icon-edit"></i></a>
                                                         </c:if>
                                                         <c:if test="${item.status != 'CANCELED'}">
                                                             <c:if test="${item.paid == false}">
-                                                                <a href="#" style="background-color: #ed5564" id="btn-remove-paid" class="btn-fab btn-fab-sm shadow text-white"><i class="icon-trash"></i></a>
+                                                                <a href="#" style="background-color: #ed5564" onclick="warningBeforeDelete(${item.id})" id="btn-remove-paid" class="btn-fab btn-fab-sm shadow text-white"><i class="icon-trash"></i></a>
                                                             </c:if>
                                                         </c:if>
                                                     </td>
@@ -208,7 +137,8 @@
         <div class="modal-contents" style="width: 500px;">
             <div class="close">+</div>
             <form action="" style="position: relative">
-                <h2>Please provide Tax ID before confirm this booking</h2>
+                <h4>Please provide Tax ID before approve this booking</h4>
+                <br />
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label>Invoice ID</label>
@@ -225,15 +155,91 @@
         </div>
     </div>
 
+    <security:authorize access = "isAuthenticated()">
+        <p hidden id="emailEmployee"><%=SecurityUtils.getPrincipal().getFullName()%></p>
+    </security:authorize>
+
     <script src="<c:url value='/template/admin/dynamitable2/dynamitable.jquery.js'/>"></script>
     <script>
-        document.getElementById('btn-update-booking-status').addEventListener("click", function () {
-            document.querySelector('.bg-modal').style.display = "flex";
-        });
+        // document.getElementById('btn-update-booking-status').addEventListener("click", function () {
+        //     document.querySelector('.bg-modal').style.display = "flex";
+        // });
+        let currentBookingId;
+        let currentTotalPrice;
+        const emailEmployee = document.getElementById('emailEmployee').textContent;
 
         document.querySelector('.close').addEventListener("click", function () {
             document.querySelector('.bg-modal').style.display = "none";
         });
+
+        document.querySelector('#btnSaveInvoice').addEventListener('click', e => {
+            const invoiceId = $('#invoiceId').val();
+            const taxId = $('#taxId').val();
+            const data = {invoiceId, bookingId: currentBookingId, taxId, emailEmployee, totalPrice: currentTotalPrice};
+            console.log(data);
+            approveBookingAndCreateInvoice(data);
+        });
+
+        function handleModalAndSetBookingId(event, bookingId, adultPrice, childrenPrice, adultQuantity, childrenQuantity) {
+            event.stopPropagation();
+            document.querySelector('.bg-modal').style.display = "flex";
+            $('#invoiceId').val('');
+            $('#taxId').val('');
+            currentBookingId = bookingId;
+            currentTotalPrice = adultQuantity * adultPrice + childrenQuantity * childrenPrice;
+        }
+
+        function handleRedirectToDetailBooking(bookingId) {
+            window.location.href = "/admin/booking/list/detail?bookingid=" + bookingId;
+        }
+
+        function approveBookingAndCreateInvoice(data) {
+            $.ajax({
+                url: '/api/booking/invoice',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(data),
+                success: function (result) {
+                    window.location.href = "/admin/booking/list";
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        function cancelBooking(data) {
+            $.ajax({
+                url: '/api/booking/invoice/cancel',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(data),
+                success: function (result) {
+                    window.location.href = "/admin/booking/list";
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        function warningBeforeDelete(bookingId) {
+            swal({
+                title: "Are you sure?",
+                text: "You will not be able to recover this booking!",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonClass: "btn-success",
+                cancelButtonClass: "btn-danger",
+                confirmButtonText: "Delete",
+                cancelButtonText: "Cancel",
+            }).then(function(isConfirm) {
+                if (isConfirm.value === true) {
+                    const data = {bookingId, emailEmployee};
+                    cancelBooking(data);
+                }
+            });
+        }
     </script>
 </body>
 </html>

@@ -42,7 +42,7 @@ public class InvoiceService implements IInvoiceService {
     @Override
     public InvoiceDTO save(InvoiceDTO dto) {
         BookingEntity bookingEntity = bookingRepository.findOne(dto.getBookingId());
-        EmployeeEntity employeeEntity = employeeRepository.findOne(dto.getEmployeeId());
+        EmployeeEntity employeeEntity = employeeRepository.findOneByEmail(dto.getEmailEmployee());
         InvoiceEntity invoiceEntity;
         invoiceEntity = invoiceConverter.toEntity(dto);
         invoiceEntity.setEmployee(employeeEntity);

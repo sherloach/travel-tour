@@ -10,6 +10,15 @@ public class InvoiceDTO {
     private Long bookingId;
     private Long employeeId;
     private EmployeeDTO employee;
+    private String emailEmployee; // store employee email for search employee id -> save to db
+
+    public String getEmailEmployee() {
+        return emailEmployee;
+    }
+
+    public void setEmailEmployee(String emailEmployee) {
+        this.emailEmployee = emailEmployee;
+    }
 
     public String getInvoiceId() {
         return invoiceId;

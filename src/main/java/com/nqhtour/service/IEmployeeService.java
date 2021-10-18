@@ -11,6 +11,7 @@ public interface IEmployeeService {
 	int getTotalItem();
 	EmployeeDTO findById(long id);
 	String findRoleByUserId(long userID);
+	EmployeeDTO findOneByEmail(String email);
 	EmployeeDTO save(EmployeeDTO dto);
 	void delete(long id);
 }

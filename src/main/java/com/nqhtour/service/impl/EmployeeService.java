@@ -79,6 +79,12 @@ public class EmployeeService implements IEmployeeService {
 	}
 
 	@Override
+	public EmployeeDTO findOneByEmail(String email) {
+		EmployeeEntity employeeEntity = employeeRepository.findOneByEmail(email);
+		return employeeConverter.toDTO(employeeEntity);
+	}
+
+	@Override
 	public EmployeeDTO save(EmployeeDTO dto) {
 		EmployeeEntity entity = new EmployeeEntity();
 
