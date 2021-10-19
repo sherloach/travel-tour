@@ -1,6 +1,7 @@
 package com.nqhtour.service.impl;
 
 import com.nqhtour.converter.BookingConverter;
+import com.nqhtour.converter.InvoiceConverter;
 import com.nqhtour.dto.BookingDTO;
 import com.nqhtour.entity.BookingEntity;
 import com.nqhtour.entity.ClientEntity;
@@ -31,6 +32,9 @@ public class BookingService implements IBookingService {
     private InstourRepository instourRepository;
 
     @Autowired
+    private InvoiceConverter invoiceConverter;
+
+    @Autowired
     private EmployeeRepository employeeRepository;
 
     @Override
@@ -47,7 +51,13 @@ public class BookingService implements IBookingService {
 
     @Override
     public BookingDTO findById(Long id) {
-        return null;
+        BookingEntity bookingEntity = bookingRepository.findOne(id);
+        BookingDTO bookingDTO = bookingConverter.toDTO(bookingEntity);
+        if (bookingEntity.getInvoice() != null) {
+            bookingDTO.setInvoice(invoiceConverter.toDTO(bookingEntity.getInvoice()));
+        }
+
+        return bookingDTO;
     }
 
     @Override

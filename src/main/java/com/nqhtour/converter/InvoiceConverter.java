@@ -14,6 +14,7 @@ public class InvoiceConverter {
         result.setTotalPrice(entity.getTotalPrice());
         result.setBookingId(entity.getBooking().getId());
         result.setEmployeeId(entity.getEmployee().getId());
+        result.setEmployeeName(entity.getEmployee().getName());
 
         return result;
     }

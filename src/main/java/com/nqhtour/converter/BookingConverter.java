@@ -17,7 +17,11 @@ public class BookingConverter {
         result.setClientId(entity.getClient().getId());
         result.setInstourId(entity.getInstour().getId());
         result.setTourName(entity.getInstour().getTour().getName());
+        result.setImageTour(entity.getInstour().getTour().getImage());
+        result.setDestination(entity.getInstour().getTour().getRoute().getDestination());
+        result.setStartDate(entity.getInstour().getStartDate());
         result.setClientName(entity.getClient().getName());
+        result.setClientPhone(entity.getClient().getPhoneNumber());
         result.setAdultPrice(entity.getInstour().getTour().getAdultPrice());
         result.setChildrenPrice(entity.getInstour().getTour().getChildrenPrice());
         if (result.getEmployeeId() != null) {

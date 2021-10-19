@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +22,15 @@ public class BookingController {
         BookingDTO bookingDTO = new BookingDTO();
         bookingDTO.setListResult(bookingService.findAll());
         mav.addObject("model", bookingDTO.getListResult());
+
+        return mav;
+    }
+
+    @RequestMapping(value = "/admin/booking/list/detail", method = RequestMethod.GET)
+    public ModelAndView showBookingDetail(@RequestParam("bookingid") Long id) {
+        ModelAndView mav = new ModelAndView("/admin/booking/detail");
+        BookingDTO bookingDTO = bookingService.findById(id);
+        mav.addObject("model", bookingDTO);
 
         return mav;
     }

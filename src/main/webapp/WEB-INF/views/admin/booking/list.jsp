@@ -84,10 +84,10 @@
 <%--                                                <c:url var="detailURL" value="/admin/booking/list/detail">--%>
 <%--                                                    <c:param name="bookingid" value="${item.id}"/>--%>
 <%--                                                </c:url>--%>
-                                                <tr onclick="handleRedirectToDetailBooking(${item.id})">
+                                                <tr>
                                                     <td style="text-align: center">${item.id}</td>
                                                     <td>${item.clientName}</td>
-                                                    <td>${item.tourName}</td>
+                                                    <td onclick="handleRedirectToDetailBooking(${item.id})">${item.tourName}</td>
                                                     <td><fmt:formatDate type="both" dateStyle="short" timeStyle="short" pattern="MM/dd/yyyy hh:mm a" value="${item.createdDate}" /></td>
                                                     <td>
                                                         <c:if test="${item.paid == true}">

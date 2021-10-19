@@ -18,9 +18,54 @@ public class BookingDTO {
     private List<BookingDTO> listResult = new ArrayList<>();
     private Date createdDate;
     private String clientName;
+    private String clientPhone;
     private String tourName;
+    private String imageTour;
+    private String destination;
+    private String startDate;
     private Long adultPrice;
     private Long childrenPrice;
+    private InvoiceDTO invoice;
+
+    public String getClientPhone() {
+        return clientPhone;
+    }
+
+    public void setClientPhone(String clientPhone) {
+        this.clientPhone = clientPhone;
+    }
+
+    public String getImageTour() {
+        return imageTour;
+    }
+
+    public void setImageTour(String imageTour) {
+        this.imageTour = imageTour;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public InvoiceDTO getInvoice() {
+        return invoice;
+    }
+
+    public void setInvoice(InvoiceDTO invoice) {
+        this.invoice = invoice;
+    }
 
     public Long getAdultPrice() {
         return adultPrice;
