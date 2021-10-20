@@ -2,6 +2,7 @@ package com.nqhtour.service;
 
 import java.util.List;
 
+import com.nqhtour.dto.BookingDTO;
 import com.nqhtour.dto.TourLocationDTO;
 import com.nqhtour.specification.TourSpecification;
 import org.springframework.data.domain.Pageable;
@@ -13,6 +14,7 @@ public interface ITourService {
 	List<TourDTO> findAll(Pageable pageable);
 	List<TourDTO> findAll(TourSpecification tourSpecification);
 	List<TourDTO> findAllByRouteId(Long id);
+	List<BookingDTO> revenueByMonth(String month, String year);
 	int getTotalItem();
 	TourDTO findById(long id);
 	TourDTO save(TourDTO dto);

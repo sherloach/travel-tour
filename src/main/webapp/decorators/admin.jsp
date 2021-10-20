@@ -31,6 +31,9 @@
 	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
+	<%-- Datepicker--%>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.css" rel="stylesheet" />
+
 	<style>
         .loader {
             position: fixed;
@@ -65,6 +68,7 @@
 
 	<script src="<c:url value='/template/admin/assets/js/app.js'/>"></script>
 	<script src="<c:url value='/template/paging/jquery.twbsPagination.js'/>" type="text/javascript"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/js/bootstrap-datepicker.js"></script>
 	<!--
 	--- Footer Part - Use Jquery anywhere at page.
 	--- http://writing.colin-gourlay.com/safely-using-ready-before-including-jquery/

@@ -1,5 +1,6 @@
 package com.nqhtour.api.admin;
 
+import com.nqhtour.dto.BookingDTO;
 import com.nqhtour.dto.RouteDTO;
 import com.nqhtour.dto.TourLocationDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,4 +49,10 @@ public class TourAPI {
 		return "true";
 	}
 
+	@PostMapping("/api/report/revenue")
+	public BookingDTO revenueByMonth(@RequestParam("month") String month, @RequestParam("year") String year) {
+		BookingDTO bookingDTO = new BookingDTO();
+		bookingDTO.setListResult(tourService.revenueByMonth(month, year));
+		return bookingDTO;
+	}
 }

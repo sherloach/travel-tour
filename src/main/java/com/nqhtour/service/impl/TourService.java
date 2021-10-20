@@ -1,14 +1,15 @@
 package com.nqhtour.service.impl;
 
-import java.util.ArrayList;
-import java.util.Base64;
-import java.util.List;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.*;
 
 import javax.servlet.ServletContext;
 
 import com.nqhtour.converter.InstourConverter;
 import com.nqhtour.converter.LocationConverter;
 import com.nqhtour.converter.TourLocationConverter;
+import com.nqhtour.dto.BookingDTO;
 import com.nqhtour.dto.InstourDTO;
 import com.nqhtour.dto.TourLocationDTO;
 import com.nqhtour.entity.*;
@@ -112,6 +113,22 @@ public class TourService implements ITourService {
 			models.add(tourDTO);
 		}
 		return models;
+	}
+
+	@Override
+	public List<BookingDTO> revenueByMonth(String month, String year) {
+		List<Object[]> revenueMonths = tourRepository.revenueByMonth(month, year);
+		List<BookingDTO> bookingDTO = new ArrayList<>();
+		for (Object[] revenue : revenueMonths) {
+			BookingDTO b = new BookingDTO();
+			b.setTourName((String) revenue[0]);
+			b.setAdultPrice(((BigInteger) revenue[1]).longValue());
+			b.setChildrenPrice(((BigInteger) revenue[2]).longValue());
+			b.setAdultQuantity(((BigDecimal) revenue[3]).intValue());
+			b.setChildrenQuantity(((BigDecimal) revenue[4]).intValue());
+			bookingDTO.add(b);
+		}
+		return bookingDTO;
 	}
 
 	@Override

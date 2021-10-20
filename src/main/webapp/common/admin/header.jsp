@@ -88,7 +88,7 @@
 				<li class="header"><strong>MAIN NAVIGATION</strong></li>
 				<li class="treeview">
 					<a href="#">
-						<i class="icon icon icon-card_travel blue-text s-18"></i>Routes<i
+						<i class="icon icon icon-add_location blue-text s-18"></i>Routes<i
 							class="icon icon-angle-left s-18 pull-right"></i>
 					</a>
 					<ul class="treeview-menu">
@@ -119,7 +119,7 @@
 							class="icon icon-add"></i>Add User</a></li>
 				</ul></li>
 				<li class="treeview"><a href="#"><i
-						class="icon icon-account_box light-green-text s-18"></i>Bookings<i
+						class="icon icon-account_balance_wallet light-green-text s-18"></i>Bookings<i
 						class="icon icon-angle-left s-18 pull-right"></i></a>
 					<ul class="treeview-menu">
 						<li><a href="<c:url value='/admin/booking/list'/>"><i
@@ -128,13 +128,13 @@
 <%--								class="icon icon-add"></i>All Invoices</a></li>--%>
 					</ul></li>
 				<li class="treeview"><a href="#"><i
-						class="icon icon-account_box light-green-text s-18"></i>Reports<i
+						class="icon icon-area-chart light-green-text s-18"></i>Reports<i
 						class="icon icon-angle-left s-18 pull-right"></i></a>
 					<ul class="treeview-menu">
-						<li><a href="<c:url value='/admin/booking/list'/>"><i
-								class="icon icon-circle-o"></i>All Bookings</a></li>
+						<li><a href="<c:url value='/admin/report/revenue?month=10&year=2021'/>"><i
+								class="icon icon-bar-chart-o pink-text s-18"></i>Revenue By Month</a></li>
 						<li><a href="<c:url value='/admin/booking/list/invoice'/>"><i
-								class="icon icon-add"></i>All Invoices</a></li>
+								class="icon icon-bar-chart2 pink-text s-18"></i>All Invoices</a></li>
 					</ul></li>
 			</ul>
 		</section>

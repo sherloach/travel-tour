@@ -11,8 +11,9 @@ import java.util.List;
 
 public interface TourRepository extends JpaRepository<TourEntity, Long>, JpaSpecificationExecutor<TourEntity> {
     List<TourEntity> findAllByRoute(RouteEntity routeEntity);
-//    @Query(value = "call travelbooking.sp_hot_tours()", nativeQuery = true)
-//    List<TourEntity> findByHotTours();
+
+    @Query(value = "call travelbooking2.RevenueByMonth(?1,?2)", nativeQuery = true)
+    List<Object[]> revenueByMonth(String month, String year);
 //
 //    @Query(value = "call travelbooking.sp_new_tours()", nativeQuery = true)
 //    List<TourEntity> findByNewTours();
