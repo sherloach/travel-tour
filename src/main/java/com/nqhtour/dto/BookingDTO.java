@@ -26,6 +26,15 @@ public class BookingDTO {
     private Long adultPrice;
     private Long childrenPrice;
     private InvoiceDTO invoice;
+    private Long tourId;
+
+    public Long getTourId() {
+        return tourId;
+    }
+
+    public void setTourId(Long tourId) {
+        this.tourId = tourId;
+    }
 
     public String getClientPhone() {
         return clientPhone;

@@ -17,6 +17,7 @@ public class BookingConverter {
         result.setClientId(entity.getClient().getId());
         result.setInstourId(entity.getInstour().getId());
         result.setTourName(entity.getInstour().getTour().getName());
+        result.setTourId(entity.getInstour().getTour().getId());
         result.setImageTour(entity.getInstour().getTour().getImage());
         result.setDestination(entity.getInstour().getTour().getRoute().getDestination());
         result.setStartDate(entity.getInstour().getStartDate());

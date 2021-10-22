@@ -17,6 +17,15 @@ public class ClientDTO extends AbstractDTO<ClientDTO> {
 	private String role;
 	private Integer status;
 	private List<TourEntity> tours = new ArrayList<>();
+	private List<BookingDTO> bookings = new ArrayList<>();
+
+	public List<BookingDTO> getBookings() {
+		return bookings;
+	}
+
+	public void setBookings(List<BookingDTO> bookings) {
+		this.bookings = bookings;
+	}
 
 	public String getName() {
 		return name;

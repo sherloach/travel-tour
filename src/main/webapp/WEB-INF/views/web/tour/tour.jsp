@@ -119,6 +119,7 @@
     </section>
 
     <section class="section-reviews">
+<%--      <button style="padding: 5px 15px;position: absolute;right: 5px;border-radius: 5px;border: none;">Add Review</button>--%>
       <div class="reviews">
         <div class="reviews__card">
           <div class="reviews__avatar">

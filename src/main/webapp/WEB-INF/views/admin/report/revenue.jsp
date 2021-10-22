@@ -38,7 +38,7 @@
                                                 <th></th>
                                                 <th></th>
                                                 <th id="title-report" style="font-weight: 400;font-size: 25px;">REVENUE (${month}/${year})</th>
-                                                <th style="text-align: right;vertical-align: middle;"><input id="yearPicker" class="datepicker" style="width: 90px;border: 1px solid #cbcbcb;"></th>
+                                                <th style="text-align: right;vertical-align: middle;"><input id="yearPicker" class="datepicker" autocomplete="off" style="width: 90px;border: 1px solid #cbcbcb;"></th>
                                             </tr>
                                         </thead>
                                         <thead style="background-color: #27ae60;color: #ffffff;">

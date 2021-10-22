@@ -1,5 +1,7 @@
 package com.nqhtour.service.impl;
 
+import com.nqhtour.converter.BookingConverter;
+import com.nqhtour.dto.BookingDTO;
 import com.nqhtour.dto.ClientTourDTO;
 import com.nqhtour.entity.*;
 import com.nqhtour.repository.InstourRepository;
@@ -31,6 +33,9 @@ public class ClientService implements IClientService {
 
 	@Autowired
 	ClientConverter clientConverter;
+
+	@Autowired
+	BookingConverter bookingConverter;
 
 	@Autowired
 	UserService userService;
@@ -962,7 +967,14 @@ public class ClientService implements IClientService {
 	@Override
 	public ClientDTO findByEmail(String email) {
 		ClientEntity entity = clientRepository.findOneByEmail(email);
-		return clientConverter.toDTO(entity);
+		ClientDTO clientDTO = clientConverter.toDTO(entity);
+		List<BookingDTO> bookingDTOS = new ArrayList<>();
+		for (BookingEntity booking : entity.getBookings()) {
+			BookingDTO bookingDTO = bookingConverter.toDTO(booking);
+			bookingDTOS.add(bookingDTO);
+		}
+		clientDTO.setBookings(bookingDTOS);
+		return clientDTO;
 	}
 
 	@Override

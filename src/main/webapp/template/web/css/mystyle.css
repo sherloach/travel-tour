@@ -662,3 +662,110 @@ body {
     color: #000;
     font-weight: 400;
 }
+
+.blog_right_sidebar .widget_title::after {
+    content: "";
+    display: block;
+    padding-top: 15px;
+    border-bottom: 1px solid #f0e9ff;
+}
+
+.blog_right_sidebar .post_category_widget .cat-list li {
+    border-bottom: 1px solid #f0e9ff;
+    transition: all 0.3s ease 0s;
+    padding-bottom: 12px;
+    list-style: none;
+}
+
+.blog_right_sidebar .post_category_widget .cat-list li a {
+    font-size: 14px;
+    line-height: 20px;
+    color: #888888;
+}
+
+.progress-table {
+    background: #f9f9ff;
+    padding: 15px 0px 30px 0px;
+}
+
+.progress-table .table-row {
+    padding: 15px 0;
+    border-top: 1px solid #edf3fd;
+    display: flex;
+}
+
+/*REVIEW*/
+.review-container{
+    display: grid;
+    height: 100%;
+    place-items: center;
+    text-align: center;
+    position: relative;
+    width: 400px;
+    padding: 20px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.review-container .text{
+    font-size: 25px;
+    color: #666;
+    font-weight: 500;
+}
+.review-container .edit{
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    font-size: 16px;
+    color: #666;
+    font-weight: 500;
+    cursor: pointer;
+}
+.review-container .edit:hover{
+    text-decoration: underline;
+}
+.review-container .star-widget input{
+    display: none;
+}
+.star-widget label{
+    font-size: 40px;
+    color: #444;
+    padding: 10px;
+    float: right;
+    transition: all 0.2s ease;
+}
+input:not(:checked) ~ label:hover,
+input:not(:checked) ~ label:hover ~ label{
+    color: #fd4;
+}
+input:checked ~ label{
+    color: #fd4;
+}
+input#rate-5:checked ~ label{
+    color: #fe7;
+    text-shadow: 0 0 20px #952;
+}
+#rate-1:checked ~ form header:before{
+    content: "I just hate it ";
+}
+#rate-2:checked ~ form header:before{
+    content: "I don't like it ";
+}
+#rate-3:checked ~ form header:before{
+    content: "It is awesome ";
+}
+#rate-4:checked ~ form header:before{
+    content: "I just like it ";
+}
+#rate-5:checked ~ form header:before{
+    content: "I just love it ";
+}
+.star-widget label {
+    margin-bottom: 20px;
+}
+
+.btnCreateReview {
+    margin-top: 20px;
+}

@@ -36,7 +36,7 @@
 				</form>
 			</nav>
 			<div class="header__logo" style="margin-top: 14px">
-				<img src="/template/web/img/logo-white.png" alt="Natours logo" />
+				<img src="/template/web/img/logo-white.png" alt="NQH logo" />
 			</div>
 			<nav class="nav nav--user">
 				<!--<a href="#" class="nav__el">My bookings</a>
@@ -50,7 +50,7 @@
 					<a href="<c:url value='/signup'/>" class="nav__el nav__el--cta">Sign up</a>
 				</security:authorize>
 				<security:authorize access = "isAuthenticated()">
-					<a href="<c:url value='#'/>" class="nav__el">Welcome, <%=SecurityUtils.getPrincipal().getFullName()%></a>
+					<a href="<c:url value='/me/booking'/>" class="nav__el">Welcome, <%=SecurityUtils.getPrincipal().getFullName()%></a>
 					<a href="<c:url value='/logout'/>" class="nav__el nav__el--cta">Log out</a>
 				</security:authorize>
 			</nav>
@@ -84,14 +84,6 @@
 			</div>
 		</div>
 	</section>
-<%--		<div class="row pre-main">--%>
-<%--			<div class="pre-main-logo">--%>
-<%--				<img src="/template/web/img/logo-green-round.png" alt="Natours logo" style="position: relative;left: 100px;height: 170px;"/>--%>
-<%--			</div>--%>
-<%--			<div class="pre-main-text">--%>
-<%--				<p>WE PROVIDE A NICE TOURS VIETNAM AND ASIA. WITH MORE THAN 15 YEARS EXPERIENCE IN THE TRAVEL INDUSTRY, NQHTOUR IS A POPULAR TRAVEL IN VIETNAM AND AROUND THE GLOBE. YOU ARE MORE COMFORTABLE WITH PRIVATE CAR AND GUIDES AS WELL AS SUPPORT SERVICE 24 HOURS PER DAY.</p>--%>
-<%--			</div>--%>
-<%--		</div>--%>
 
 	<div class="popular_destination_area">
 		<div class="container">
@@ -115,7 +107,7 @@
                                 <img src="/template/web/img/tours/route-${loop.index}.jpg" alt="">
                             </div>
                             <div class="content">
-                                <p class="d-flex align-items-center">${route.destination} <a href="<c:url value='/tour/search'/>">  ${route.tourQuantity} Tours</a> </p>
+                                <p class="d-flex align-items-center">${route.destination} <a href="<c:url value='/tour/search?id=${route.id}'/>">  ${route.tourQuantity} Tours</a> </p>
                             </div>
                         </div>
                     </div>
