@@ -6,6 +6,8 @@
 /bin/*
 /target/*
 
+/src/main/java/com/nqhtour/constant/*
+
 # Eclipse
 .project
 .classpath
