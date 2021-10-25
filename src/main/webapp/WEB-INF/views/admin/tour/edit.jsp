@@ -32,6 +32,10 @@
 							href="<c:url value='/admin/tour/edit'/>">
 							<i class="icon icon-plus-circle"></i> Add New Tours</a>
 					</li>
+					<li><a class="nav-link"
+						   href="<c:url value='/admin/route/list/tour/instour?tour=${model.id}'/>">
+						<i class="icon icon-plus-circle"></i> Open Dates</a>
+					</li>
                 </ul>
             </div>
         </div>
@@ -133,7 +137,7 @@
 														<tbody class="stepLocations">
 															<c:forEach var="item" items="${model.tourLocations}" varStatus="loop">
 																<tr class="no-b">
-																	<td style="text-align: center">${item.location.address}</td>
+																	<td style="text-align: center"><div style="white-space: nowrap;overflow: hidden;width: 234px;text-overflow: ellipsis;">${item.location.address}</div></td>
 																	<td style="text-align: center"><span class="badge badge-success">${item.location.longitude} - ${item.location.latitude}</span></td>
 																	<td style="text-align: center">${item.day}</td>
 																	<td style="text-align: center"><div style="white-space: nowrap;overflow: hidden;width: 234px;text-overflow: ellipsis;">${item.description}</div></td>

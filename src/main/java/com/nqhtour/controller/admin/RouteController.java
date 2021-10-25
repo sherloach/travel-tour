@@ -2,12 +2,10 @@ package com.nqhtour.controller.admin;
 
 import com.nqhtour.api.HttpAPI;
 import com.nqhtour.dto.EmployeeDTO;
+import com.nqhtour.dto.InstourDTO;
 import com.nqhtour.dto.RouteDTO;
 import com.nqhtour.dto.TourDTO;
-import com.nqhtour.service.IEmployeeService;
-import com.nqhtour.service.IRouteService;
-import com.nqhtour.service.ITourService;
-import com.nqhtour.service.IUserService;
+import com.nqhtour.service.*;
 import com.nqhtour.util.MessageUtil;
 import com.nqhtour.util.ServerName;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,13 +36,10 @@ public class RouteController {
     private ITourService tourService;
 
     @Autowired
-    private IEmployeeService employeeService;
-
-    @Autowired
     private IUserService userService;
 
     @Autowired
-    private ServerName serverName;
+    private IInstourService instourService;
 
     @RequestMapping(value = "/admin/route/list", method = RequestMethod.GET)
     public ModelAndView showList(@RequestParam("page") int page, @RequestParam("limit") int limit, HttpServletRequest request) {
@@ -92,6 +87,15 @@ public class RouteController {
 
         mav.addObject("tour", tourDTO);
         mav.addObject("guides", guides.getListResult());
+
+        return mav;
+    }
+
+    @RequestMapping(value = "/admin/route/list/tour/instour/detail", method = RequestMethod.GET)
+    public ModelAndView showListParticipants(@RequestParam("id") Long instourId, HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView("/admin/instour/detailInstour");
+        InstourDTO instourDTO = instourService.findById(instourId);
+        mav.addObject("instour", instourDTO);
 
         return mav;
     }

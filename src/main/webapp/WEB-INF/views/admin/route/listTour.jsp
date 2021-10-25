@@ -46,7 +46,7 @@
                                 <div class="table-responsive">
                                     <table class="table table-hover ">
                                         <thead>
-                                            <tr class="no-b my-user-list">
+                                            <tr class="no-b">
                                                 <th></th>
                                                 <th>NAME</th>
                                                 <th>PRICE</th>
@@ -83,33 +83,12 @@
                         </div>
                     </div>
                 </div>
-<%--                <nav aria-label="Page navigation">--%>
-<%--                    <ul class="pagination" id="pagination"></ul>--%>
-<%--                    <input type="hidden" value="" id="page" name="page"/>--%>
-<%--                    <input type="hidden" value="" id="limit" name="limit"/>--%>
-<%--                </nav>--%>
             </div>
         </div>
     </form>
 </div>
 
 <script type="text/javascript">
-    <%--var totalPages = ${model.totalPage};--%>
-    <%--var currentPage = ${model.page};--%>
-    <%--$(function() {--%>
-    <%--    window.pagObj = $('#pagination').twbsPagination({--%>
-    <%--        totalPages : totalPages,--%>
-    <%--        visiblePages : 10,--%>
-    <%--        startPage: currentPage,--%>
-    <%--        onPageClick : function(event, page) { // page là trang tiếp theo--%>
-    <%--            if (currentPage != page) {--%>
-    <%--                $('#limit').val(6);--%>
-    <%--                $('#page').val(page);--%>
-    <%--                $('#formSubmit').submit();--%>
-    <%--            }--%>
-    <%--        }--%>
-    <%--    });--%>
-    <%--});--%>
 
     function warningBeforeDelete(tourID) {
         swal({

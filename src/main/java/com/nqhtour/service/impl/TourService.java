@@ -144,10 +144,12 @@ public class TourService implements ITourService {
 
 		List<InstourDTO> listInstour = new ArrayList<>();
 		for (InstourEntity item : entity.getInstours()) {
-			if (item.getStatus().equals("OPEN")) {
-				InstourDTO instourDTO = instourConverter.toDTO(item);
-				listInstour.add(instourDTO);
-			}
+			InstourDTO instourDTO = instourConverter.toDTO(item);
+			listInstour.add(instourDTO);
+//			if (item.getStatus().equals("OPEN")) {
+//				InstourDTO instourDTO = instourConverter.toDTO(item);
+//				listInstour.add(instourDTO);
+//			}
 		}
 		tourDTO.setInstours(listInstour);
 

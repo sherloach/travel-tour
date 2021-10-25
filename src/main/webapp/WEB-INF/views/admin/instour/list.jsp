@@ -100,10 +100,11 @@
                                                         <td style="text-align: center;"><span class="badge badge-warning"> ${item.status} </span></td>
                                                     </c:if>
                                                     <td style="text-align: center;">
-                                                    <c:if test="${item.participants == 0}">
-                                                        <a href='#' onclick="" class="btn-fab btn-fab-sm btn-primary shadow text-white"><i class="icon-pencil"></i></a>
-                                                    </c:if>
-                                                    <a href='#' onclick="" style="background-color: #f39c12 !important" class="btn-fab btn-fab-sm btn--yellow shadow text-white"><i class="icon-list"></i></a>
+<%--                                                    <c:if test="${item.participants == 0}">--%>
+<%--                                                        <a href='#' onclick="" class="btn-fab btn-fab-sm btn-primary shadow text-white"><i class="icon-pencil"></i></a>--%>
+<%--                                                    </c:if>--%>
+                                                    <a href='#' onclick="handleSetInputValue(${item.guideId}, '${item.startDate}', '${item.status}', ${item.id})" class="btn-fab btn-fab-sm btn-primary shadow text-white"><i class="icon-pencil"></i></a>
+                                                    <a href='/admin/route/list/tour/instour/detail?id=${item.id}' onclick="" style="background-color: #f39c12 !important" class="btn-fab btn-fab-sm btn--yellow shadow text-white"><i class="icon-list"></i></a>
                                                     </td>
                                                 </tr>
                                             </c:forEach>
@@ -158,6 +159,8 @@
     </div>
 </div>
 
+<input id="instourIdUpdated" type="hidden" value="">
+
 <script type="text/javascript">
     const startDatesInput = document.querySelector('#startDates');
     const guideInput = document.getElementById('guides');
@@ -174,12 +177,33 @@
 
     document.querySelector('#btnCreateInsTour').addEventListener('click', function () {
         const startDate = startDatesInput.value;
+        const instourId = $('#instourIdUpdated').val(); // using this id when updating.
         const guideId = guideInput.options[guideInput.selectedIndex].value;
         const status = statusInput.options[statusInput.selectedIndex].value;
-        console.log(startDate, guideId, status, tourId);
-        const data = {tourId, guideId, status, startDate};
+        console.log(instourId, startDate, guideId, status, tourId);
+        const data = {id: instourId, tourId, guideId, status, startDate};
         addInstour(data);
     });
+
+    function handleSetInputValue(guideId, startDate, status, instourId) {
+        document.querySelector('.bg-modal').style.display = "flex";
+
+        const arrGuides = guideInput.options;
+        console.log(guideId, startDate, status, instourId);
+        for (let i = 0; i < arrGuides.length; i++) {
+            if (arrGuides[i].value == guideId) {
+                $('#guides').prop('selectedIndex', i).change();
+            }
+        }
+
+        $('#instourIdUpdated').val(instourId);
+        startDatesInput.value = startDate;
+        if (status === 'OPEN') {
+            statusInput.selectedIndex = 0;
+        } else if (status === 'CLOSE') {
+            statusInput.selectedIndex = 1;
+        }
+    }
 
     function warningBeforeDelete(tourID) {
         swal({

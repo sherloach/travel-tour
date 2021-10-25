@@ -1,7 +1,10 @@
 package com.nqhtour.service.impl;
 
+import com.nqhtour.converter.BookingConverter;
 import com.nqhtour.converter.InstourConverter;
+import com.nqhtour.dto.BookingDTO;
 import com.nqhtour.dto.InstourDTO;
+import com.nqhtour.entity.BookingEntity;
 import com.nqhtour.entity.EmployeeEntity;
 import com.nqhtour.entity.InstourEntity;
 import com.nqhtour.entity.TourEntity;
@@ -30,6 +33,9 @@ public class InstourService implements IInstourService {
     @Autowired
     InstourConverter instourConverter;
 
+    @Autowired
+    BookingConverter bookingConverter;
+
     @Override
     public List<InstourDTO> findAll(Pageable pageable) {
         List<InstourDTO> models = new ArrayList<>();
@@ -49,8 +55,17 @@ public class InstourService implements IInstourService {
 
     @Override
     public InstourDTO findById(long id) {
+        InstourDTO instourDTO;
         InstourEntity instourEntity = instourRepository.findOne(id);
-        return instourConverter.toDTO(instourEntity);
+        List<BookingDTO> bookings = new ArrayList<>();
+        for (BookingEntity item : instourEntity.getTours()) {
+            BookingDTO booking = bookingConverter.toDTO(item);
+            bookings.add(booking);
+        }
+
+        instourDTO = instourConverter.toDTO(instourEntity);
+        instourDTO.setBookings(bookings);
+        return instourDTO;
     }
 
     @Override

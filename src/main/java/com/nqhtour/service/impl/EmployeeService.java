@@ -86,7 +86,7 @@ public class EmployeeService implements IEmployeeService {
 
 	@Override
 	public EmployeeDTO save(EmployeeDTO dto) {
-		EmployeeEntity entity = new EmployeeEntity();
+		EmployeeEntity entity;
 
 		// Set user data
 		UserDTO userDTO = new UserDTO();
@@ -95,13 +95,15 @@ public class EmployeeService implements IEmployeeService {
 		userDTO.setRole(dto.getRole());
 		userDTO.setStatus(1);
 		
-		UserEntity userEntity = null;
+		UserEntity userEntity;
 
-		// convert image from base64 to bytes and write image to root dir
-		String imagePath = dto.getImagePath().split(",")[1];
-		byte[] decodeBase64 = Base64.getDecoder().decode(imagePath.getBytes());
-		String uploadRootPath = context.getRealPath("template/upload");
-		uploadFileUtil.writeOrUpdate(decodeBase64, uploadRootPath, dto.getAvatar());
+		if (dto.getImagePath() != null) {
+			// convert image from base64 to bytes and write image to root dir
+			String imagePath = dto.getImagePath().split(",")[1];
+			byte[] decodeBase64 = Base64.getDecoder().decode(imagePath.getBytes());
+			String uploadRootPath = context.getRealPath("template/upload");
+			uploadFileUtil.writeOrUpdate(decodeBase64, uploadRootPath, dto.getAvatar());
+		}
 		
 		// Check email user exist or not?
 		userEntity = userRepository.findOneByUserNameAndStatus(userDTO.getUsername(), SystemConstant.ACTIVE_STATUS);

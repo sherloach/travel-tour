@@ -195,7 +195,7 @@
 
     function handleSetInputValue(index) {
         const currentLocation = document.getElementById('address-' + index).getAttribute('locationId');
-        const currentDay = document.getElementById('day-' + index).textContent.split(' ')[2];
+        const currentDay = document.getElementById('day-' + index).textContent;
         const currentDescription = document.getElementById('description-' + index).textContent;
         const arrLoc = locationSelect.options;
         console.log(currentLocation, currentDay, currentDescription);

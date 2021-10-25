@@ -31,8 +31,6 @@ public class InstourConverter {
 
     // For update
     public InstourEntity toEntity(InstourEntity oldTour, InstourDTO dto) {
-        oldTour.setCreatedBy(dto.getCreatedBy());
-        oldTour.setParticipants(dto.getParticipants());
         oldTour.setStatus(dto.getStatus());
         oldTour.setStartDate(dto.getStartDate());
 

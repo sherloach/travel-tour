@@ -97,7 +97,7 @@
                                             <div class="form-group col-6 m-0">
                                                 <label class="col-form-label s-12"><i class="icon-calendar mr-2"></i>DATE OF BIRTH</label>
                                                 <form:input path="birthday" placeholder="Select Date of Birth" cssClass="form-control r-0 light s-12 date-time-picker"
-                                                data-options="{&quot;timepicker&quot;:false, &quot;format&quot;:&quot;Y-m-d&quot;, &quot;minDate&quot;:&quot;-1999/01/10&quot;, &quot;maxDate&quot;:&quot;+1953/01/10&quot;}" type="text" required="required" readonly="true" autocomplete="off"/>
+                                                data-options="{&quot;timepicker&quot;:false, &quot;format&quot;:&quot;Y-m-d&quot;, &quot;minDate&quot;:&quot;-2020/01/02&quot;, &quot;maxDate&quot;:&quot;+1960/01/02&quot;}" type="text" required="required" readonly="true" autocomplete="off"/>
                                             <!-- , &quot;minDate&quot;:&quot;-1970/01/02&quot; -->
                                             </div>
                                         </div>
@@ -210,17 +210,6 @@
 						});
 						var id = $('#emplID').val();
 						
-						/* var formData = new FormData();
-			            var Data = $('#formSubmit').serializeArray();
-			            $.each(Data, function (i, v) {
-			                formData.append(""+v.name+"", v.value);
-			            });
-						var fileInput = document.getElementById('image');
-			            var file = fileInput.files[0];
-			            formData.append('image', file);
-
-			            var id = $('#emplID').val(); */
-						
 						if (id == "") {
 							addUser(data);
 						} else {
@@ -240,7 +229,7 @@
 					data: JSON.stringify(data),
 					dataType: 'json',
 					success: function (result) {
-						window.location.href = "${editUserURL}?id=" + result.id + "&message=insert_success";
+						window.location.href = "/admin/empl/list?page=1&limit=6";
 					},
 					error: function (error) {
 						window.location.href = "${editUserURL}?message=create_failed";
