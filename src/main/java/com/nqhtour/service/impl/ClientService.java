@@ -92,7 +92,7 @@ public class ClientService implements IClientService {
 	}
 
 	@Override
-	public String sendEmail(String email, int nuTickets, TourEntity tourEntity) throws MessagingException {
+	public String sendEmail(int adultQuantity, int childrenQuantity, Long total, int duration, String destination, String tourName, String image) throws MessagingException {
 		MimeMessage message = emailSender.createMimeMessage();
 
 		boolean multipart = true;
@@ -250,7 +250,7 @@ public class ClientService implements IClientService {
 				"  <tr>\n" +
 				"    <td class=\"v-text-align\" style=\"padding-right: 0px;padding-left: 0px;\" align=\"center\">\n" +
 				"      \n" +
-				"      <img align=\"center\" border=\"0\" src=\"https://bookingtour.herokuapp.com/template/web/img/logo-white.png\" alt=\"Image\" title=\"Image\" style=\"outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 33%;max-width: 59.4px;\" width=\"59.4\" class=\"v-src-width v-src-max-width\"/>\n" +
+				"      <img align=\"center\" border=\"0\" src=\"https://www.natours.dev/img/logo-white.png\" alt=\"Image\" title=\"Image\" style=\"outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 33%;max-width: 59.4px;\" width=\"59.4\" class=\"v-src-width v-src-max-width\"/>\n" +
 				"      \n" +
 				"    </td>\n" +
 				"  </tr>\n" +
@@ -379,7 +379,7 @@ public class ClientService implements IClientService {
 				"      <td style=\"overflow-wrap:break-word;word-break:break-word;padding:2px 40px 25px;font-family:'Open Sans',sans-serif;\" align=\"left\">\n" +
 				"        \n" +
 				"  <div class=\"v-text-align\" style=\"color: #34495e; line-height: 170%; text-align: left; word-wrap: break-word;\">\n" +
-				"    <p style=\"font-size: 14px; line-height: 170%;\">Hi " + email + ", </p>\n" +
+				"    <p style=\"font-size: 14px; line-height: 170%;\">Hi " + "forfunny000@gmail.com" + ", </p>\n" +
 				"<p style=\"font-size: 14px; line-height: 170%;\">Your tour was confirmed by NQHTour. Please find the details below:</p>\n" +
 				"  </div>\n" +
 				"\n" +
@@ -476,7 +476,7 @@ public class ClientService implements IClientService {
 				"      <td style=\"overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:'Open Sans',sans-serif;\" align=\"left\">\n" +
 				"        \n" +
 				"  <div class=\"v-text-align\" style=\"color: #615e5e; line-height: 140%; text-align: left; word-wrap: break-word;\">\n" +
-				"    <p style=\"font-size: 14px; line-height: 140%;\">" + tourEntity.getName() +"</p>\n" +
+				"    <p style=\"font-size: 14px; line-height: 140%;\">" + tourName +"</p>\n" +
 				"  </div>\n" +
 				"\n" +
 				"      </td>\n" +
@@ -499,7 +499,7 @@ public class ClientService implements IClientService {
 				"      <td style=\"overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:'Open Sans',sans-serif;\" align=\"left\">\n" +
 				"        \n" +
 				"  <div class=\"v-text-align\" style=\"color: #615e5e; line-height: 140%; text-align: right; word-wrap: break-word;\">\n" +
-				"    <p style=\"font-size: 14px; line-height: 140%;\"><span style=\"font-size: 14px; line-height: 19.6px;\">" + "1,250,000 VND" + " VND</span></p>\n" +
+				"    <p style=\"font-size: 14px; line-height: 140%;\"><span style=\"font-size: 14px; line-height: 19.6px;\">" + "3,250,000" + " VND</span></p>\n" +
 				"  </div>\n" +
 				"\n" +
 				"      </td>\n" +
@@ -534,7 +534,16 @@ public class ClientService implements IClientService {
 				"      <td style=\"overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:'Open Sans',sans-serif;\" align=\"left\">\n" +
 				"        \n" +
 				"  <div class=\"v-text-align\" style=\"color: #615e5e; line-height: 140%; text-align: left; word-wrap: break-word;\">\n" +
-				"    <p style=\"font-size: 14px; line-height: 140%;\">Tickets</p>\n" +
+				"    <p style=\"font-size: 14px; line-height: 140%;\">No.Adult</p>\n" +
+				"  </div>\n" +
+				"\n" +
+				"      </td>\n" +
+				"    </tr>\n" +
+				"    <tr>\n" +
+				"      <td style=\"overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:'Open Sans',sans-serif;\" align=\"left\">\n" +
+				"        \n" +
+				"  <div class=\"v-text-align\" style=\"color: #615e5e; line-height: 140%; text-align: left; word-wrap: break-word;\">\n" +
+				"    <p style=\"font-size: 14px; line-height: 140%;\">No.Children</p>\n" +
 				"  </div>\n" +
 				"\n" +
 				"      </td>\n" +
@@ -557,7 +566,16 @@ public class ClientService implements IClientService {
 				"      <td style=\"overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:'Open Sans',sans-serif;\" align=\"left\">\n" +
 				"        \n" +
 				"  <div class=\"v-text-align\" style=\"color: #615e5e; line-height: 140%; text-align: right; word-wrap: break-word;\">\n" +
-				"    <p style=\"font-size: 14px; line-height: 140%;\"><span style=\"font-size: 14px; line-height: 19.6px;\">x" + nuTickets + "</span></p>\n" +
+				"    <p style=\"font-size: 14px; line-height: 140%;\"><span style=\"font-size: 14px; line-height: 19.6px;\">x" + adultQuantity + "</span></p>\n" +
+				"  </div>\n" +
+				"\n" +
+				"      </td>\n" +
+				"    </tr>\n" +
+				"    <tr>\n" +
+				"      <td style=\"overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:'Open Sans',sans-serif;\" align=\"left\">\n" +
+				"        \n" +
+				"  <div class=\"v-text-align\" style=\"color: #615e5e; line-height: 140%; text-align: right; word-wrap: break-word;\">\n" +
+				"    <p style=\"font-size: 14px; line-height: 140%;\"><span style=\"font-size: 14px; line-height: 19.6px;\">x" + childrenQuantity + "</span></p>\n" +
 				"  </div>\n" +
 				"\n" +
 				"      </td>\n" +
@@ -656,7 +674,7 @@ public class ClientService implements IClientService {
 				"      <td style=\"overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:'Open Sans',sans-serif;\" align=\"left\">\n" +
 				"        \n" +
 				"  <div class=\"v-text-align\" style=\"color: #615e5e; line-height: 140%; text-align: right; word-wrap: break-word;\">\n" +
-				"    <p style=\"font-size: 14px; line-height: 140%;\"><strong><span style=\"font-size: 14px; line-height: 19.6px;\">" + "temp_total" + " VND</span></strong></p>\n" +
+				"    <p style=\"font-size: 14px; line-height: 140%;\"><strong><span style=\"font-size: 14px; line-height: 19.6px;\">" + total + " VND</span></strong></p>\n" +
 				"  </div>\n" +
 				"\n" +
 				"      </td>\n" +
@@ -776,7 +794,7 @@ public class ClientService implements IClientService {
 				"  <tr>\n" +
 				"    <td class=\"v-text-align\" style=\"padding-right: 0px;padding-left: 0px;\" align=\"center\">\n" +
 				"      \n" +
-				"      <img align=\"center\" border=\"0\" src=\"http://localhost:8080/template/upload/tour/" + tourEntity.getImage() + "\" alt=\"Image\" title=\"Image\" style=\"outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 100%;max-width: 280px;\" width=\"280\" class=\"v-src-width v-src-max-width\"/>\n" +
+				"      <img align=\"center\" border=\"0\" src=\"https://www.natours.dev/img/" + image + "\" alt=\"Image\" title=\"Image\" style=\"outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 100%;max-width: 280px;\" width=\"280\" class=\"v-src-width v-src-max-width\"/>\n" +
 				"      \n" +
 				"    </td>\n" +
 				"  </tr>\n" +
@@ -806,9 +824,9 @@ public class ClientService implements IClientService {
 				"<p dir=\"ltr\" style=\"font-size: 14px; line-height: 140%;\">&nbsp;</p>\n" +
 				"<p dir=\"ltr\" style=\"font-size: 14px; line-height: 140%;\">&nbsp;</p>\n" +
 				"<p dir=\"ltr\" style=\"font-size: 14px; line-height: 140%;\"><strong><span style=\"font-size: 14px; line-height: 19.6px;\">Details:</span></strong></p>\n" +
-				"<p style=\"font-size: 14px; line-height: 140%;\">" + "templocation" + "</p>\n" +
-				"<p style=\"font-size: 14px; line-height: 140%;\">" + "tempstartdate" + "</p>\n" +
-				"<p style=\"font-size: 14px; line-height: 140%;\">" + tourEntity.getDuration() + " days</p>\n" +
+				"<p style=\"font-size: 14px; line-height: 140%;\">" + destination + "</p>\n" +
+				"<p style=\"font-size: 14px; line-height: 140%;\">" + "10/29/2021" + "</p>\n" +
+				"<p style=\"font-size: 14px; line-height: 140%;\">" + duration + " days</p>\n" +
 				"  </div>\n" +
 				"\n" +
 				"      </td>\n" +
@@ -949,7 +967,7 @@ public class ClientService implements IClientService {
 
 		message.setContent(htmlMsg, "text/html");
 
-		helper.setTo(email);
+		helper.setTo("forfunny000@gmail.com");
 		helper.setSubject("Tour Confirmation Email");
 
 		this.emailSender.send(message);
@@ -1031,7 +1049,7 @@ public class ClientService implements IClientService {
 //		clientTourEntity.setTourEntity(tourEntity);
 //		clientTourEntity.setNuTickets(nuTickets);
 //		clientTourRepository.save(clientTourEntity);
-		//sendEmail(clientEntity.getEmail(), nuTickets, tourEntity);
+		//sendEmail(clientEntity.getEmail(), adultQuantity, childrenQuantity, );
 		return true;
 	}
 

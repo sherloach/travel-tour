@@ -17,5 +17,5 @@ public interface IClientService {
 	boolean checkBookingExist(Long idClient, Long idTour);
 	void deleteTourBooking(ClientEntity client, Long idTour);
 	boolean booking(Long idClient, Long instourId, int adultQuantity, int childrenQuantity, boolean paid) throws MessagingException;
-	String sendEmail(String email, int nuTickets, TourEntity tourEntity) throws MessagingException;
+	String sendEmail(int adultQuantity, int childrenQuantity, Long total, int duration, String destination, String tourName, String image) throws MessagingException;
 }

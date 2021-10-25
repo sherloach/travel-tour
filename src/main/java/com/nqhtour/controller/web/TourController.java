@@ -1,9 +1,11 @@
 package com.nqhtour.controller.web;
 
+import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 
 import com.nqhtour.api.HttpAPI;
 import com.nqhtour.dto.*;
+import com.nqhtour.entity.TourEntity;
 import com.nqhtour.service.*;
 import com.nqhtour.service.impl.RouteService;
 import com.nqhtour.util.ServerName;
@@ -71,7 +73,7 @@ public class TourController {
 
 	@RequestMapping(value = "/tour/payment/success", method = RequestMethod.GET)
 	public ModelAndView showSuccessPaymentPage(@RequestParam(value = "instourid") Long instourId, @RequestParam("clientid") Long clientId, @RequestParam("paid") Integer paid,
-											   @RequestParam("adultq") Integer adultQuantity, @RequestParam("childq") Integer childrenQuantity) {
+											   @RequestParam("adultq") Integer adultQuantity, @RequestParam("childq") Integer childrenQuantity, @RequestParam("tourid") Long tourid) throws MessagingException {
 		ModelAndView mav = new ModelAndView("web/tour/paymentSuccess");
 		BookingDTO bookingDTO = new BookingDTO();
 		bookingDTO.setInstourId(instourId);
@@ -84,6 +86,11 @@ public class TourController {
 			bookingDTO.setPaid(false);
 		}
 		bookingService.save(bookingDTO);
+
+		TourDTO tourDTO = tourService.findById(tourid);
+		Long total = adultQuantity * tourDTO.getAdultPrice() + childrenQuantity * tourDTO.getChildrenPrice();
+		int duration = tourDTO.getDuration();
+		clientService.sendEmail(adultQuantity, childrenQuantity, total, duration, tourDTO.getDestination(), tourDTO.getName(), tourDTO.getImage());
 
 		return mav;
 	}

@@ -98,7 +98,7 @@ public class ClientAPI {
 				.addPaymentMethodType(SessionCreateParams.PaymentMethodType.CARD)
 				.setMode(SessionCreateParams.Mode.PAYMENT)
 				.setCustomerEmail(clientDTO.getEmail())
-				.setSuccessUrl("http://localhost:8080/tour/payment/success?instourid=" + instourId + "&clientid=" + clientId + "&adultq=" + adultQuantity + "&childq=" + childrenQuantity + "&paid=1")
+				.setSuccessUrl("http://localhost:8080/tour/payment/success?instourid=" + instourId + "&clientid=" + clientId + "&adultq=" + adultQuantity + "&childq=" + childrenQuantity + "&paid=1&tourid=" + tourId)
 				.setCancelUrl("http://localhost:8080/tour?id=" + tourId)
 				.addLineItem(
 					SessionCreateParams.LineItem.builder()
