@@ -35,13 +35,13 @@
                                     <thead>
                                         <tr class="no-b">
                                             <th><span style="font-weight: bold">#INVOICE:</span> ${model.invoice.invoiceId}</th>
-                                            <th><i class="icon icon-date_range"></i><span style="font-weight: bold">DATE:</span> <fmt:formatDate type="both" dateStyle="short" timeStyle="short" pattern="MM/dd/yyyy hh:mm a" value="${model.invoice.createdDate}" /></th>
-                                            <th><i class="icon icon-user"></i><span style="font-weight: bold">EMPLOYEE:</span> ${model.invoice.employeeName}</th>
+                                            <th><i class="icon icon-date_range"></i><span style="font-weight: bold"> DATE:</span> <fmt:formatDate type="both" dateStyle="short" timeStyle="short" pattern="MM/dd/yyyy hh:mm a" value="${model.invoice.createdDate}" /></th>
+                                            <th><i class="icon icon-user"></i><span style="font-weight: bold"> EMPLOYEE:</span> ${model.invoice.employeeName}</th>
                                         </tr>
                                         <tr class="no-b">
-                                            <th><i class="icon icon-taxes"></i><span style="font-weight: bold">TAX:</span> ${model.invoice.taxId}</th>
-                                            <th><i class="icon icon-user-secret"></i><span style="font-weight: bold">CUSTOMER:</span> ${model.clientName}</th>
-                                            <th><i class="icon icon-phone_iphone"></i><span style="font-weight: bold">PHONE:</span> ${model.clientPhone}</th>
+                                            <th><i class="icon icon-taxes"></i><span style="font-weight: bold"> TAX:</span> ${model.invoice.taxId}</th>
+                                            <th><i class="icon icon-user-secret"></i><span style="font-weight: bold"> CUSTOMER:</span> ${model.clientName}</th>
+                                            <th><i class="icon icon-phone_iphone"></i><span style="font-weight: bold"> PHONE:</span> ${model.clientPhone}</th>
                                         </tr>
                                     </thead>
 <%--                                    <tbody>--%>

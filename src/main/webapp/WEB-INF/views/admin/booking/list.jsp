@@ -69,11 +69,11 @@
                                                     <th></th>
                                                 </tr>
                                                 <tr class="no-b my-user-list">
-                                                    <th style="width: 80px;">#ID</th>
+                                                    <th style="width: 40px;">#ID</th>
                                                     <th>CUSTOMER</th>
                                                     <th>TOUR NAME</th>
-                                                    <th style="width: 170px;">ORDER DATE</th>
-                                                    <th style="width: 105px;">PAYMENT</th>
+                                                    <th style="width: 140px;">ORDER DATE</th>
+                                                    <th style="width: 75px;">PAYMENT</th>
                                                     <th>STATUS</th>
                                                     <th>CONTROL</th>
                                                 </tr>
@@ -81,9 +81,6 @@
 
                                             <tbody>
                                             <c:forEach var="item" items="${model}">
-<%--                                                <c:url var="detailURL" value="/admin/booking/list/detail">--%>
-<%--                                                    <c:param name="bookingid" value="${item.id}"/>--%>
-<%--                                                </c:url>--%>
                                                 <tr>
                                                     <td style="text-align: center">${item.id}</td>
                                                     <td>${item.clientName}</td>

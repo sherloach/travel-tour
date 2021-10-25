@@ -67,21 +67,21 @@
             </div>
             <div class="col-lg-3 offset-lg-1">
                 <div class="media contact-info" style="margin-bottom: 25px;">
-                    <span class="contact-info__icon" style="margin-right: 20px;"><i style="color: #8f9195;font-size: 27px;" class="fas fa-home"></i></span>
+                    <span class="contact-info__icon" style="margin-right: 20px;"><i style="color: #8f9195;font-size: 27px;" class="fa fa-home"></i></span>
                     <div class="media-body">
                         <h3 style="font-size: 16px;color: #2a2a2a;">Quận 1, Hồ Chí Minh.</h3>
                         <p style="font-size: 16px;">DaKao, B1A 770</p>
                     </div>
                 </div>
                 <div class="media contact-info" style="margin-bottom: 25px;">
-                    <span class="contact-info__icon" style="margin-right: 20px;"><i style="color: #8f9195;font-size: 27px;" class="fas fa-phone-square"></i></span>
+                    <span class="contact-info__icon" style="margin-right: 20px;"><i style="color: #8f9195;font-size: 27px;" class="fa fa-phone-square"></i></span>
                     <div class="media-body">
                         <h3 style="font-size: 16px;color: #2a2a2a;">+1 253 565 2365</h3>
                         <p style="font-size: 16px;">Mon to Fri 9am to 6pm</p>
                     </div>
                 </div>
                 <div class="media contact-info" style="margin-bottom: 25px;">
-                    <span class="contact-info__icon" style="margin-right: 20px;"><i style="color: #8f9195;font-size: 27px;" class="fas fa-envelope-square"></i></span>
+                    <span class="contact-info__icon" style="margin-right: 20px;"><i style="color: #8f9195;font-size: 27px;" class="fa fa-envelope-square"></i></span>
                     <div class="media-body">
                         <h3 style="font-size: 16px;color: #2a2a2a;">support@nqhtours.com</h3>
                         <p style="font-size: 16px;">Send us your query anytime!</p>

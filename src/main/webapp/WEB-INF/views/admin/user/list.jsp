@@ -47,7 +47,7 @@
 						<div class="row my-3">
 							<div class="col-md-12">
 								<div class="card r-0 shadow">
-									<div class="table-responsive">
+									<div class="table-responsive" style="overflow-x: initial;">
 										<table class="table table-striped table-hover my-user-list-table r-0">
 											<thead>
 												<tr class="no-b my-user-list">
@@ -129,11 +129,6 @@
 				</div>
 			</div>
 		</form>
-
-		<!--Add New Message Fab Button-->
-		<a href="panel-page-users-create.html"
-			class="btn-fab btn-fab-md fab-right fab-right-bottom-fixed shadow btn-primary"><i
-			class="icon-add"></i></a>
 	</div>
 
 	<script type="text/javascript">

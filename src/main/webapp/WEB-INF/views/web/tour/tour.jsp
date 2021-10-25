@@ -421,7 +421,7 @@
         const childrenPriceDB = +$('#childrenPriceTemp').val();
         const totalPriceFirst = +adultPriceDB + +childrenPriceDB;
         $('#adultPrice').html(adultPriceDB.toLocaleString('en-US', { style: 'currency', currency: 'VND' }));
-        $('#totalPrice').html(totalPriceFirst.toLocaleString('en-US', { style: 'currency', currency: 'VND' }));
+        $('#totalPrice').html(adultPriceDB.toLocaleString('en-US', { style: 'currency', currency: 'VND' }));
 
         document.querySelector('.plus-adult').addEventListener('click', e => {
           numberAdult += 1;

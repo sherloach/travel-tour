@@ -154,63 +154,6 @@ $(document).ready(function () {
             filterAction();
             
             return this;
-        }; 
-        
-        /**********************************************
-         * dynamitable.addSorter(selector, order)
-         *
-         * add soter event on element inside the table heading
-         *
-         * - selector (string) : selector of the element that trigger the event
-         * - order (string) :  sorting order [asc, desc]
-         *
-         * return dynamitable
-         **********************************************/
-        this.addSorter = function addSorter(selector, order) {
-
-            $(dynamitable).find(selector).each(function() {
-                var $this = $(this);
-                
-                var index = dynamitableCore.getIndex($this.parent('td, th'));
-                
-                $this.on('click', function() { dynamitable.sorter(index, order); });
-            });
-            
-            return this;
-        }; 
-    
-        /**********************************************
-         * dynamitable.sorter(index, order)
-         *
-         * - index (integer): index of the colum to sorter
-         * - order (string)  : sorting order [asc, desc]
-         *
-         * return dynamitable
-         **********************************************/
-        this.sorter = function sorter(index, order) {
-
-           dynamitableCore.getBody().append(dynamitableCore.getRows().detach().sort(function(row_a, row_b) {
-
-                var value_a = dynamitableCore.getValue(index, $(row_a));
-                var value_b = dynamitableCore.getValue(index, $(row_b));
-                
-                var order_desc = ('desc' === order) ? true : false;
-                
-                // numeric order mode
-                if(value_a.replace(/[^\d-]/g, '') !== '' && value_b.replace(/[^\d-]/g, '') !== '') {
-                    value_a = parseFloat(value_a.replace(/[^\d,.-+]/g, ''));
-                    value_b = parseFloat(value_b.replace(/[^\d,.-+]/g, ''));
-                }
-                
-                if(value_a === value_b) {
-                    return 0;
-                }
-
-                return (value_a > value_b) ? order_desc ? 1 : -1 : order_desc ? -1 : 1;
-
-            }));
-            
-            return this;
         };
           
         return this;
@@ -223,8 +166,6 @@ $(document).ready(function () {
     
         $(this).dynamitable()
             .addFilter('.js-filter')
-            .addSorter('.js-sorter-asc', 'asc')
-            .addSorter('.js-sorter-desc', 'desc')
         ;
     });
 });
