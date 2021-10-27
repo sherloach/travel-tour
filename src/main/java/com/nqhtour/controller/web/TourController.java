@@ -44,7 +44,9 @@ public class TourController {
 	public ModelAndView showTour(@RequestParam("id") Long id, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("web/tour/tour");
 		TourDTO model = httpAPI.getTourDTO(serverName.localUrl + "/api/tours/" + id);
+		int[] arrStars = {1,2,3,4,5};
 		mav.addObject("model", model);
+		mav.addObject("arrayStars", arrStars);
 
 		return mav;
 	}

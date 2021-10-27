@@ -6,12 +6,8 @@ import java.util.*;
 
 import javax.servlet.ServletContext;
 
-import com.nqhtour.converter.InstourConverter;
-import com.nqhtour.converter.LocationConverter;
-import com.nqhtour.converter.TourLocationConverter;
-import com.nqhtour.dto.BookingDTO;
-import com.nqhtour.dto.InstourDTO;
-import com.nqhtour.dto.TourLocationDTO;
+import com.nqhtour.converter.*;
+import com.nqhtour.dto.*;
 import com.nqhtour.entity.*;
 import com.nqhtour.repository.LocationRepository;
 import com.nqhtour.repository.RouteRepository;
@@ -23,8 +19,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.nqhtour.controller.admin.TourController;
-import com.nqhtour.converter.TourConverter;
-import com.nqhtour.dto.TourDTO;
 import com.nqhtour.repository.TourRepository;
 import com.nqhtour.service.ITourService;
 import com.nqhtour.util.StringUtil;
@@ -41,6 +35,9 @@ public class TourService implements ITourService {
 
 	@Autowired
 	private InstourConverter instourConverter;
+
+	@Autowired
+	private ReviewConverter reviewConverter;
 
 	@Autowired
 	private LocationConverter locationConverter;
@@ -160,6 +157,13 @@ public class TourService implements ITourService {
 			listTourLocation.add(tourLocationDTO);
 		}
 		tourDTO.setTourLocations(listTourLocation);
+
+		List<ReviewDTO> listReview = new ArrayList<>();
+		for (ReviewEntity item : entity.getReviews()) {
+			ReviewDTO reviewDTO = reviewConverter.toDTO(item);
+			listReview.add(reviewDTO);
+		}
+		tourDTO.setReviews(listReview);
 
 		return tourDTO;
 	}

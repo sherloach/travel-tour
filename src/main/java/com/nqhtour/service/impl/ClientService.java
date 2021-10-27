@@ -794,7 +794,7 @@ public class ClientService implements IClientService {
 				"  <tr>\n" +
 				"    <td class=\"v-text-align\" style=\"padding-right: 0px;padding-left: 0px;\" align=\"center\">\n" +
 				"      \n" +
-				"      <img align=\"center\" border=\"0\" src=\"https://www.natours.dev/img/" + image + "\" alt=\"Image\" title=\"Image\" style=\"outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 100%;max-width: 280px;\" width=\"280\" class=\"v-src-width v-src-max-width\"/>\n" +
+				"      <img align=\"center\" border=\"0\" src=\"https://www.natours.dev/img/tours/" + image + "\" alt=\"Image\" title=\"Image\" style=\"outline: none;text-decoration: none;-ms-interpolation-mode: bicubic;clear: both;display: inline-block !important;border: none;height: auto;float: none;width: 100%;max-width: 280px;\" width=\"280\" class=\"v-src-width v-src-max-width\"/>\n" +
 				"      \n" +
 				"    </td>\n" +
 				"  </tr>\n" +

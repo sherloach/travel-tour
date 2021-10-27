@@ -10,7 +10,7 @@ public class InstourDTO extends AbstractDTO<InstourDTO> {
     private String status;
     private Long guideId;
     private Long tourId;
-    private List<BookingDTO> bookings = new ArrayList<>();
+    private List<BookingDTO> bookings;
 
     public List<BookingDTO> getBookings() {
         return bookings;

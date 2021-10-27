@@ -12,6 +12,7 @@ public class ReviewConverter {
         result.setReview(entity.getReview());
         result.setRating(entity.getRating());
         result.setClientId(entity.getClient().getId());
+        result.setClientName(entity.getClient().getName());
         result.setTourId(entity.getTour().getId());
         result.setCreatedDate(entity.getCreatedDate());
 

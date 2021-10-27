@@ -26,8 +26,17 @@ public class TourDTO extends AbstractDTO<TourDTO> {
 	private Long routeId;
 	private List<InstourDTO> instours;
 	private List<TourLocationDTO> tourLocations;
+	private List<ReviewDTO> reviews;
 	private String startLocation;
 	private String destination;
+
+	public List<ReviewDTO> getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(List<ReviewDTO> reviews) {
+		this.reviews = reviews;
+	}
 
 	public String getStartLocation() {
 		return startLocation;

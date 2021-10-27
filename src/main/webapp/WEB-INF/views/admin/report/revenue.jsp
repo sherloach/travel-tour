@@ -26,6 +26,77 @@
             </div>
         </header>
         <div class="container-fluid animatedParent animateOnce my-3">
+            <div class="tab-content pb-3" id="v-pills-tabContent">
+                <!-- Today Tab Start-->
+                <div class="tab-pane animated fadeInUpShort show active" id="v-pills-1">
+                    <div class="col-md-12">
+                        <div class="card no-b my-3 shadow2">
+                            <div class="card-header white no-b d-flex justify-content-between">
+                                <h4>Monthly ${month}, ${year}</h4>
+                            </div>
+                            <div class="card-body pb-5 pl-5 pr-5">
+                                <div class="tab-content">
+                                    <div class="tab-pane fade show active" id="w8-tab1" role="tabpanel" aria-labelledby="w8-tab1">
+                                        <div class="my-2" style="height: 400px">
+                                            <canvas
+                                                    data-chart="bar"
+                                                    data-dataset="[[
+                                                        <c:forEach var="item" items="${revenues}">
+                                                            ${item.adultQuantity},
+                                                        </c:forEach>
+                                                        ],[
+                                                        <c:forEach var="item" items="${revenues}">
+                                                            ${item.childrenQuantity},
+                                                        </c:forEach>
+                                                        ]]"
+                                                    data-labels="[
+                                                        <c:forEach var="item" items="${revenues}">
+                                                            '${item.tourName}',
+                                                        </c:forEach>
+                                                        ]"
+                                                    data-dataset-options="[
+                                                        {
+                                                            label: 'Adult',
+                                                            backgroundColor: '#7986cb',
+                                                            borderWidth: 0,
+                                                        },
+                                                        {
+                                                             label: 'Children',
+                                                             backgroundColor: '#88e2ff',
+                                                             borderWidth: 0,
+                                                         }
+                                                        ]"
+                                                    data-options="{
+                                                          legend: { display: true,},
+                                                          scales: {
+                                                               xAxes: [{
+                                                                    stacked: true,
+                                                                     barThickness:25,
+                                                                     gridLines: {
+                                                                        zeroLineColor: 'rgba(255,255,255,0.1)',
+                                                                         color: 'rgba(255,255,255,0.1)',
+                                                                         display: false,},
+                                                                     }],
+                                                               yAxes: [{
+                                                                    stacked: true,
+                                                                         gridLines: {
+                                                                            zeroLineColor: 'rgba(255,255,255,0.1)',
+                                                                            color: 'rgba(255,255,255,0.1)',
+                                                                        }
+                                                               }]
+                                                          }
+                                                    }"
+                                            >
+                                            </canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="animated fadeInUpShort">
                 <div class="row">
                     <div class="col-md-12">

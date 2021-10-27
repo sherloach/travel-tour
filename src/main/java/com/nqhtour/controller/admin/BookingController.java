@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller(value = "BookingControllerOfAdmin")
 public class BookingController {
@@ -44,6 +46,7 @@ public class BookingController {
         ModelAndView mav = new ModelAndView("/admin/report/revenue");
         BookingDTO bookingDTO = new BookingDTO();
         bookingDTO.setListResult(tourService.revenueByMonth(month, year));
+
         mav.addObject("revenues", bookingDTO.getListResult());
         mav.addObject("month", month);
         mav.addObject("year", year);

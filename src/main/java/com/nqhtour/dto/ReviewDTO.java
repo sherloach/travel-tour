@@ -11,7 +11,16 @@ public class ReviewDTO {
     private Date createdDate;
     private Long clientId;
     private Long tourId;
+    private String clientName;
     private List<ReviewDTO> listResult = new ArrayList<>();
+
+    public String getClientName() {
+        return clientName;
+    }
+
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
+    }
 
     public String getReview() {
         return review;
