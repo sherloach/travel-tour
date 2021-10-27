@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.nqhtour.util.SecurityUtils"%>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>  
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -234,7 +235,7 @@
 
 			  	<div class="card__footer">
 					<p>
-						<span class="card__footer-value"><fmt:formatNumber value="${item.adultPrice}" type="currency" currencyCode="VND" /></span>
+						<span class="card__footer-value"><fmt:formatNumber value="${item.adultPrice}" type="currency"/> ₫</span>
 <%--						<span class="card__footer-text">per person</span>--%>
 					</p>
 					<p class="card__ratings">

@@ -251,4 +251,25 @@ public class TourService implements ITourService {
 //		}
 		return models;
 	}
+
+	@Override
+	public List<TourDTO> searchTourByFilter(Long routeId, Long minPrice, Long maxPrice, String startDate) {
+		List<TourDTO> models = new ArrayList<>();
+		List<TourEntity> entities = tourRepository.searchTourByFilter(routeId, minPrice, maxPrice, startDate);
+
+		for (TourEntity item : entities) {
+			TourDTO tourDTO = tourConverter.toDTO(item);
+			List<InstourDTO> listInstour = new ArrayList<>();
+			for (InstourEntity instour : item.getInstours()) {
+				if (instour.getStatus().equals("OPEN")) {
+					InstourDTO instourDTO = instourConverter.toDTO(instour);
+					listInstour.add(instourDTO);
+				}
+			}
+			tourDTO.setInstours(listInstour);
+			models.add(tourDTO);
+		}
+
+		return models;
+	}
 }

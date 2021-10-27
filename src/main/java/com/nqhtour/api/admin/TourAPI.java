@@ -1,12 +1,9 @@
 package com.nqhtour.api.admin;
 
-import com.nqhtour.dto.BookingDTO;
-import com.nqhtour.dto.RouteDTO;
-import com.nqhtour.dto.TourLocationDTO;
+import com.nqhtour.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.nqhtour.dto.TourDTO;
 import com.nqhtour.service.ITourService;
 
 import java.io.IOException;
@@ -54,5 +51,12 @@ public class TourAPI {
 		BookingDTO bookingDTO = new BookingDTO();
 		bookingDTO.setListResult(tourService.revenueByMonth(month, year));
 		return bookingDTO;
+	}
+
+	@PostMapping("/api/tour/search")
+	public TourDTO searchTourByFilter(@RequestBody SearchTourDTO search) {
+		TourDTO tourDTO = new TourDTO();
+		tourDTO.setListResult(tourService.searchTourByFilter(search.getRouteId(), search.getMinPrice(), search.getMaxPrice(), search.getStartDate()));
+		return tourDTO;
 	}
 }

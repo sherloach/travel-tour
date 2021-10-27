@@ -627,7 +627,7 @@ body {
 }
 
 .boxed-btn4 {
-    background: #FF4A52;
+    background: #55c57a;
     color: #fff;
     display: inline-block;
     padding: 13px 39px;
@@ -645,6 +645,15 @@ body {
     -o-transition: 0.3s;
     transition: 0.3s;
     cursor: pointer;
+}
+
+.filter_result_wrap .range_slider_wrap .ui-state-default, .filter_result_wrap .range_slider_wrap .ui-widget-content .ui-state-default {
+    border: 2px solid #FF4A52;
+    background: #fff;
+    font-weight: normal;
+    width: 14px;
+    height: 16px;
+    border-radius: 5px;
 }
 
 .filter_result_wrap .filter_inner .nice-select .option {

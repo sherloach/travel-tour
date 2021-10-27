@@ -60,7 +60,7 @@
 													<tr class="no-b">
 														<td class="w-10"><img src="${pageContext.request.contextPath}/template/upload/tour/${item.image}" alt=""></td>
 														<td> <h6>${item.name}</h6><small class="text-muted">Du Lịch Trong Nước</small> </td>
-														<td><fmt:formatNumber value="${item.adultPrice}" type="currency" currencySymbol=""/> VND</td>
+														<td><fmt:formatNumber value="${item.adultPrice}" type="currency" currencySymbol=""/> ₫</td>
 														<td><span class="badge badge-success">Published</span></td>
 														<td><i class="icon icon-data_usage"></i> ${item.duration} days</td>
 

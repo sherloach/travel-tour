@@ -108,18 +108,25 @@ public class TourController {
 	}
 
 	@RequestMapping(value = "/tour/search", method = RequestMethod.GET)
-	public ModelAndView searchTour(@RequestParam(value = "id", required = false) Long routeId) {
+	public ModelAndView searchTour(@RequestParam(required = false) Long id,
+								   @RequestParam(required = false) Long min,
+								   @RequestParam(required = false) Long max,
+								   @RequestParam(required = false) String startdate) {
 		ModelAndView mav = new ModelAndView("web/tour/search");
-		TourDTO tourDTO = new TourDTO();
-		tourDTO.setListResult(tourService.findAllByRouteId(routeId));
 		RouteDTO routeDTO = new RouteDTO();
 		routeDTO.setListResult(routeService.findAll());
-//		if (key.contains(" ")) {
-//			key = key.replace(" ", "-");
-//		}
-//		String apiSearch = serverName.localUrl + "/api/tours/search/" + key;
-//		TourDTO model = httpAPI.getTourDTO(apiSearch);
-//		mav.addObject("model", model);
+
+		TourDTO tourDTO = new TourDTO();
+
+		// Not search, show all tour available in specific route.
+		if (min == null && max == null && startdate == null) {
+			tourDTO.setListResult(tourService.findAllByRouteId(id));
+		} else {
+			if (startdate == "") startdate = null;
+			if (id == null) id = null;
+			tourDTO.setListResult(tourService.searchTourByFilter(id, min, max, startdate));
+		}
+
 		mav.addObject("model", tourDTO.getListResult());
 		mav.addObject("routes", routeDTO.getListResult());
 

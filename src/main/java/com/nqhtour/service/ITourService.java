@@ -3,6 +3,7 @@ package com.nqhtour.service;
 import java.util.List;
 
 import com.nqhtour.dto.BookingDTO;
+import com.nqhtour.dto.SearchTourDTO;
 import com.nqhtour.dto.TourLocationDTO;
 import com.nqhtour.specification.TourSpecification;
 import org.springframework.data.domain.Pageable;
@@ -23,4 +24,5 @@ public interface ITourService {
 	List<TourDTO> findHotTours();
 	List<TourDTO> findNewTours();
 	List<TourDTO> getTopTourByMoney(String month,String year);
+	List<TourDTO> searchTourByFilter(Long routeId, Long minPrice, Long maxPrice, String startDate);
 }
