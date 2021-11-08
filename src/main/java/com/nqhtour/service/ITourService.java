@@ -16,6 +16,7 @@ public interface ITourService {
 	List<TourDTO> findAll(TourSpecification tourSpecification);
 	List<TourDTO> findAllByRouteId(Long id);
 	List<BookingDTO> revenueByMonth(String month, String year);
+	List<BookingDTO> numberTicketByMonth(String month, String year, Long routeId);
 	int getTotalItem();
 	TourDTO findById(long id);
 	TourDTO save(TourDTO dto);

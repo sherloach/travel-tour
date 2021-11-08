@@ -96,7 +96,7 @@
                                                     <c:if test="${item.status == 'CLOSE'}">
                                                         <td style="text-align: center;"><span class="badge badge-danger"> ${item.status} </span></td>
                                                     </c:if>
-                                                    <c:if test="${item.status == 'SOLDOUT'}">
+                                                    <c:if test="${item.status == 'COMPLETED'}">
                                                         <td style="text-align: center;"><span class="badge badge-warning"> ${item.status} </span></td>
                                                     </c:if>
                                                     <td style="text-align: center;">
@@ -148,6 +148,7 @@
                     <select class="custom-select my-1 mr-sm-2 form-control r-0 light s-12" id="status">
                         <option value="OPEN" selected="selected">OPEN</option>
                         <option value="CLOSE">CLOSE</option>
+                        <option value="COMPLETED">COMPLETED</option>
                     </select>
                     <div class="invalid-feedback">Please choose a status. </div>
                 </div>
@@ -202,6 +203,8 @@
             statusInput.selectedIndex = 0;
         } else if (status === 'CLOSE') {
             statusInput.selectedIndex = 1;
+        } else if (status === 'COMPLETED') {
+            statusInput.selectedIndex = 2;
         }
     }
 

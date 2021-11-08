@@ -129,6 +129,20 @@ public class TourService implements ITourService {
 	}
 
 	@Override
+	public List<BookingDTO> numberTicketByMonth(String month, String year, Long routeId) {
+		List<Object[]> numberTickets = tourRepository.numberTicketByMonth(month, year, routeId);
+		List<BookingDTO> bookingDTO = new ArrayList<>();
+		for (Object[] numberTicket : numberTickets) {
+			BookingDTO b = new BookingDTO();
+			b.setTourName((String) numberTicket[0]);
+			b.setAdultQuantity(((BigDecimal) numberTicket[1]).intValue());
+			b.setChildrenQuantity(((BigDecimal) numberTicket[2]).intValue());
+			bookingDTO.add(b);
+		}
+		return bookingDTO;
+	}
+
+	@Override
 	public int getTotalItem() {
 		return (int) tourRepository.count();
 	}

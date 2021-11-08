@@ -155,12 +155,6 @@
                 console.log(monthYear);
                 window.location.href = '/admin/report/revenue?month=' + monthYear[0] + '&year=' + monthYear[1];
             });
-
-            const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-
-            const transferNumberToMonth = (numberMonth) => {
-                return months[numberMonth - 1];
-            };
         });
     </script>
 </body>

@@ -8,6 +8,7 @@ import com.nqhtour.entity.BookingEntity;
 import com.nqhtour.entity.EmployeeEntity;
 import com.nqhtour.entity.InstourEntity;
 import com.nqhtour.entity.TourEntity;
+import com.nqhtour.repository.BookingRepository;
 import com.nqhtour.repository.EmployeeRepository;
 import com.nqhtour.repository.InstourRepository;
 import com.nqhtour.repository.TourRepository;
@@ -29,6 +30,9 @@ public class InstourService implements IInstourService {
 
     @Autowired
     EmployeeRepository employeeRepository;
+
+    @Autowired
+    BookingRepository bookingRepository;
 
     @Autowired
     InstourConverter instourConverter;
@@ -78,6 +82,10 @@ public class InstourService implements IInstourService {
         if (dto.getId() != null) {
             InstourEntity oldInstour = instourRepository.findOne(dto.getId());
             instourEntity = instourConverter.toEntity(oldInstour, dto);
+
+            if (dto.getStatus().equals("COMPLETED")) {
+                bookingRepository.completeStatus(oldInstour.getId());
+            }
         } else {
             instourEntity = instourConverter.toEntity(dto);
             instourEntity.setParticipants(0);

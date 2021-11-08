@@ -69,6 +69,9 @@
                                                         <c:if test="${item.status == 'CANCELED'}">
                                                             <td style="color: #ed5564;">Canceled</td>
                                                         </c:if>
+                                                        <c:if test="${item.status == 'COMPLETED'}">
+                                                            <td style="color: #0f59a5;">Completed</td>
+                                                        </c:if>
                                                     </tr>
                                                 </c:forEach>
                                             </tbody>

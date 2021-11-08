@@ -133,7 +133,7 @@
 					<ul class="treeview-menu">
 						<li><a href="<c:url value='/admin/report/revenue?month=10&year=2021'/>"><i
 								class="icon icon-bar-chart-o pink-text s-18"></i>Revenue By Month</a></li>
-						<li><a href="<c:url value='/admin/booking/list/invoice'/>"><i
+						<li><a href="<c:url value='/admin/report/quantity?month=10&year=2021&routeid=1'/>"><i
 								class="icon icon-bar-chart2 pink-text s-18"></i>All Invoices</a></li>
 					</ul></li>
 			</ul>

@@ -15,6 +15,9 @@ public interface TourRepository extends JpaRepository<TourEntity, Long>, JpaSpec
     @Query(value = "call travelbooking2.RevenueByMonth(?1,?2)", nativeQuery = true)
     List<Object[]> revenueByMonth(String month, String year);
 
+    @Query(value = "call travelbooking2.NumberTicketByMonth(?1,?2,?3)", nativeQuery = true)
+    List<Object[]> numberTicketByMonth(String month, String year, Long routeId);
+
     @Query(value = "call travelbooking2.search_tour(?1,?2,?3,?4)", nativeQuery = true)
     List<TourEntity> searchTourByFilter(Long routeId, Long minPrice, Long maxPrice, String startDate);
 //

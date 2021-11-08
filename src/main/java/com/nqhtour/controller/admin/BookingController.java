@@ -1,7 +1,9 @@
 package com.nqhtour.controller.admin;
 
 import com.nqhtour.dto.BookingDTO;
+import com.nqhtour.dto.RouteDTO;
 import com.nqhtour.service.IBookingService;
+import com.nqhtour.service.IRouteService;
 import com.nqhtour.service.ITourService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,9 @@ public class BookingController {
 
     @Autowired
     private ITourService tourService;
+
+    @Autowired
+    private IRouteService routeService;
 
     @RequestMapping(value = "/admin/booking/list", method = RequestMethod.GET)
     public ModelAndView showList() {
@@ -48,6 +53,22 @@ public class BookingController {
         bookingDTO.setListResult(tourService.revenueByMonth(month, year));
 
         mav.addObject("revenues", bookingDTO.getListResult());
+        mav.addObject("month", month);
+        mav.addObject("year", year);
+
+        return mav;
+    }
+
+    @RequestMapping(value = "/admin/report/quantity", method = RequestMethod.GET)
+    public ModelAndView showNumberTicketReport(@RequestParam("month") String month, @RequestParam("year") String year, @RequestParam("routeid") Long routeId) {
+        ModelAndView mav = new ModelAndView("/admin/report/quantity");
+        BookingDTO bookingDTO = new BookingDTO();
+        bookingDTO.setListResult(tourService.numberTicketByMonth(month, year, routeId));
+        RouteDTO routeDTO = new RouteDTO();
+        routeDTO.setListResult(routeService.findAll());
+
+        mav.addObject("routes", routeDTO.getListResult());
+        mav.addObject("numberTickets", bookingDTO.getListResult());
         mav.addObject("month", month);
         mav.addObject("year", year);
 
