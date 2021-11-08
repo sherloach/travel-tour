@@ -77,11 +77,15 @@ public class TourController {
 	public ModelAndView showSuccessPaymentPage(@RequestParam(value = "instourid") Long instourId, @RequestParam("clientid") Long clientId, @RequestParam("paid") Integer paid,
 											   @RequestParam("adultq") Integer adultQuantity, @RequestParam("childq") Integer childrenQuantity, @RequestParam("tourid") Long tourid) throws MessagingException {
 		ModelAndView mav = new ModelAndView("web/tour/paymentSuccess");
+		TourDTO tourDTO = tourService.findById(tourid);
+
 		BookingDTO bookingDTO = new BookingDTO();
 		bookingDTO.setInstourId(instourId);
 		bookingDTO.setClientId(clientId);
 		bookingDTO.setAdultQuantity(adultQuantity);
 		bookingDTO.setChildrenQuantity(childrenQuantity);
+		bookingDTO.setAdultPrice(tourDTO.getAdultPrice());
+		bookingDTO.setChildrenPrice(tourDTO.getChildrenPrice());
 		if (paid == 1) {
 			bookingDTO.setPaid(true);
 		} else {
@@ -89,7 +93,6 @@ public class TourController {
 		}
 		bookingService.save(bookingDTO);
 
-		TourDTO tourDTO = tourService.findById(tourid);
 		Long total = adultQuantity * tourDTO.getAdultPrice() + childrenQuantity * tourDTO.getChildrenPrice();
 		int duration = tourDTO.getDuration();
 		clientService.sendEmail(adultQuantity, childrenQuantity, total, duration, tourDTO.getDestination(), tourDTO.getName(), tourDTO.getImage());

@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.nqhtour.util.SecurityUtils"%>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>  
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
@@ -40,12 +39,6 @@
 				<img src="/template/web/img/logo-white.png" alt="NQH logo" />
 			</div>
 			<nav class="nav nav--user">
-				<!--<a href="#" class="nav__el">My bookings</a>
-				<a href="#" class="nav__el">
-					<img src="img/user.jpg" alt="User photo" class="nav__user-img" />
-					<span>QuangHoa</span>
-				</a>-->
-
 				<security:authorize access = "isAnonymous()">
 					<a href="<c:url value='/login'/>" class="nav__el">Log in</a>
 					<a href="<c:url value='/signup'/>" class="nav__el nav__el--cta">Sign up</a>
@@ -113,66 +106,10 @@
                         </div>
                     </div>
 				</c:forEach>
-<%--				<div class="col-lg-4 col-md-6">--%>
-<%--					<div class="single_destination">--%>
-<%--						<div class="thumb">--%>
-<%--							<img src="/template/web/img/tours/tour-5-1.jpg" alt="">--%>
-<%--						</div>--%>
-<%--						<div class="content">--%>
-<%--							<p class="d-flex align-items-center">Brazil <a href="travel_destination.html">  03 Places</a> </p>--%>
-
-<%--						</div>--%>
-<%--					</div>--%>
-<%--				</div>--%>
-<%--				<div class="col-lg-4 col-md-6">--%>
-<%--					<div class="single_destination">--%>
-<%--						<div class="thumb">--%>
-<%--							<img src="/template/web/img/tours/tour-5-1.jpg" alt="">--%>
-<%--						</div>--%>
-<%--						<div class="content">--%>
-<%--							<p class="d-flex align-items-center">America <a href="travel_destination.html">  10 Places</a> </p>--%>
-
-<%--						</div>--%>
-<%--					</div>--%>
-<%--				</div>--%>
-<%--				<div class="col-lg-4 col-md-6">--%>
-<%--					<div class="single_destination">--%>
-<%--						<div class="thumb">--%>
-<%--							<img src="/template/web/img/tours/tour-5-1.jpg" alt="">--%>
-<%--						</div>--%>
-<%--						<div class="content">--%>
-<%--							<p class="d-flex align-items-center">Nepal <a href="travel_destination.html">  02 Places</a> </p>--%>
-
-<%--						</div>--%>
-<%--					</div>--%>
-<%--				</div>--%>
-<%--				<div class="col-lg-4 col-md-6">--%>
-<%--					<div class="single_destination">--%>
-<%--						<div class="thumb">--%>
-<%--							<img src="/template/web/img/tours/tour-5-1.jpg" alt="">--%>
-<%--						</div>--%>
-<%--						<div class="content">--%>
-<%--							<p class="d-flex align-items-center">Maldives <a href="travel_destination.html">  02 Places</a> </p>--%>
-
-<%--						</div>--%>
-<%--					</div>--%>
-<%--				</div>--%>
-<%--				<div class="col-lg-4 col-md-6">--%>
-<%--					<div class="single_destination">--%>
-<%--						<div class="thumb">--%>
-<%--							<img src="/template/web/img/tours/tour-5-1.jpg" alt="">--%>
-<%--						</div>--%>
-<%--						<div class="content">--%>
-<%--							<p class="d-flex align-items-center">Indonesia <a href="travel_destination.html">  05 Places</a> </p>--%>
-
-<%--						</div>--%>
-<%--					</div>--%>
-<%--				</div>--%>
 			</div>
 		</div>
 	</div>
 
-    <!-- <section class="overview"> -->
     <main class="main">
 		<div class="justify-content-center" style="display: flex; flex-wrap: wrap;padding-bottom: 10rem">
 			<div class="col-lg-6">
@@ -235,8 +172,7 @@
 
 			  	<div class="card__footer">
 					<p>
-						<span class="card__footer-value"><fmt:formatNumber value="${item.adultPrice}" type="currency"/> ₫</span>
-<%--						<span class="card__footer-text">per person</span>--%>
+						<span class="card__footer-value"><fmt:formatNumber value="${item.adultPrice}" type="currency" currencySymbol=""/> ₫</span>
 					</p>
 					<p class="card__ratings">
 						<span class="card__footer-value">${item.ratingsAverage}/5</span>

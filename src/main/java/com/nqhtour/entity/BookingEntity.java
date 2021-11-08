@@ -32,6 +32,12 @@ public class BookingEntity extends BaseEntity {
     private Integer childrenQuantity;
 
     @Column
+    private Long adultPrice;
+
+    @Column
+    private Long childrenPrice;
+
+    @Column
     private String status;
 
     @ManyToOne
@@ -40,6 +46,22 @@ public class BookingEntity extends BaseEntity {
 
     @OneToOne(mappedBy = "booking")
     private InvoiceEntity invoice;
+
+    public Long getAdultPrice() {
+        return adultPrice;
+    }
+
+    public void setAdultPrice(Long adultPrice) {
+        this.adultPrice = adultPrice;
+    }
+
+    public Long getChildrenPrice() {
+        return childrenPrice;
+    }
+
+    public void setChildrenPrice(Long childrenPrice) {
+        this.childrenPrice = childrenPrice;
+    }
 
     public Date getCreatedDate() {
         return createdDate;

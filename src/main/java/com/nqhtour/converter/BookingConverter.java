@@ -38,6 +38,8 @@ public class BookingConverter {
         result.setChildrenQuantity(dto.getChildrenQuantity());
         result.setPaid(dto.getPaid());
         result.setCreatedDate(dto.getCreatedDate());
+        result.setChildrenPrice(dto.getChildrenPrice());
+        result.setAdultPrice(dto.getAdultPrice());
 
         return result;
     }

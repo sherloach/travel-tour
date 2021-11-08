@@ -119,7 +119,7 @@
 
                                     <div class="card__footer">
                                         <p>
-                                            <span class="card__footer-value"><fmt:formatNumber value="${item.adultPrice}" type="currency" /> ₫</span>
+                                            <span class="card__footer-value"><fmt:formatNumber value="${item.adultPrice}" type="currency" currencySymbol=""/> ₫</span>
                                         </p>
                                         <p class="card__ratings">
                                             <span class="card__footer-value">${item.ratingsAverage}/5</span>

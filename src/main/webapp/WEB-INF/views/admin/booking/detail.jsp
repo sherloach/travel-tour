@@ -44,15 +44,6 @@
                                             <th><i class="icon icon-phone_iphone"></i><span style="font-weight: bold"> PHONE:</span> ${model.clientPhone}</th>
                                         </tr>
                                     </thead>
-<%--                                    <tbody>--%>
-<%--                                        <tr class="no-b">--%>
-<%--                                            <td><i class="icon icon-data_usage"></i> ${model.invoice.invoiceId}</td>--%>
-<%--                                            <td><i class="icon icon-add_location"></i> ${model.invoice.createdDate} </td>--%>
-<%--                                            <td><i class="icon icon-data_usage"></i> ${model.invoice.taxId}</td>--%>
-<%--                                            <td><i class="icon icon-data_usage"></i> ${model.clientName}</td>--%>
-<%--                                            <td><i class="icon icon-add_location"></i> ${model.invoice.employeeName}</td>--%>
-<%--                                        </tr>--%>
-<%--                                    </tbody>--%>
                                 </table>
                             </div>
                         </div>
@@ -89,7 +80,7 @@
                                                 <td>x${model.adultQuantity}</td>
                                                 <td>x${model.childrenQuantity}</td>
                                                 <c:if test="${model.invoice != null}">
-                                                    <td><fmt:formatNumber value="${model.invoice.totalPrice}" type="currency" currencySymbol=""/> VND</td>
+                                                    <td><fmt:formatNumber value="${model.invoice.totalPrice}" type="currency" currencySymbol=""/> ₫</td>
                                                 </c:if>
                                             </tr>
                                         </tbody>
