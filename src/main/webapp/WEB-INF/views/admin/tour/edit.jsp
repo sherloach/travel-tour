@@ -113,7 +113,7 @@
 						<div class="row">
 							<div class="col-md-5 mb-3">
 								<label>Image</label>
-								<input id="uploadImage" name="file" type="file"/>
+								<input id="uploadImage" name="file" type="file" accept="image/*"/>
 							</div>
 						</div>
 
@@ -193,19 +193,68 @@
 		(function () {
 			"use strict";
 			window.addEventListener("load", function () {
+			    const price_max = 50000000;
+			    const price_min = 100000;
+
 				$("#adultPrice").attr({
 				    "type" : "number",
-				});
+                    "max" : price_max,
+                    "min" : price_min
+                });
 				$("#childrenPrice").attr({
 					"type" : "number",
+                    "max" : price_max,
+                    "min" : price_min
 				});
 				$("#maxGroupSize").attr({
 				    "type" : "number",
+                    "max" : 50,
+                    "min" : 1
 				});
 				$("#duration").attr({
 				    "type" : "number",
+                    "max" : 30,
+                    "min" : 1
 				});
-				
+
+                $("#adultPrice").focusout(function() {
+                    if ($("#adultPrice").val() > price_max) {
+                        $("#adultPrice").val(price_max);
+                    } else if ($("#adultPrice").val() < price_min) {
+                        $("#adultPrice").val(price_min);
+                    }
+                });
+
+                $("#childrenPrice").focusout(function() {
+                    if ($("#childrenPrice").val() > price_max) {
+                        $("#childrenPrice").val($("#adultPrice").val() * 0.7);
+                    } else if ($("#childrenPrice").val() > $("#adultPrice").val()) {
+                        $("#childrenPrice").val($("#adultPrice").val() * 0.7);
+                    } else if ($("#childrenPrice").val() < price_min) {
+                        $("#childrenPrice").val(price_min);
+                    }
+                });
+
+                $("#childrenPrice").focusin(function() {
+                    $("#childrenPrice").val($("#adultPrice").val() * 0.7);
+                });
+
+                $("#maxGroupSize").focusout(function() {
+                    if ($("#maxGroupSize").val() > 50) {
+                        $("#maxGroupSize").val(50);
+                    } else if ($("#maxGroupSize").val() < 1) {
+                        $("#maxGroupSize").val(1);
+                    }
+                });
+
+                $("#duration").focusout(function() {
+                    if ($("#duration").val() > 30) {
+                        $("#duration").val(30);
+                    } else if ($("#duration").val() < 1) {
+                        $("#duration").val(1);
+                    }
+                });
+
 				var form = document.getElementById("formSubmit");
 				var btnPublish = document.getElementById("btnAddOrUpdateTour");
 
@@ -213,6 +262,7 @@
 				var fileInput = document.getElementById('uploadImage');
 				$('#uploadImage').change(function() {
 					var files = fileInput.files[0];
+					console.log(files);
 					if (files) {
 						var reader = new FileReader();
 						reader.onload = function(e) {
@@ -290,55 +340,6 @@
 				}
 			}, false);
 		}());
-		
-		/* $('#btnAddOrUpdateTour').click(function (e) {
-			event.preventDefault();
-			var data = {};
-			var formData = $('#formSubmit').serializeArray();
-			$.each(formData, function (i, v) {
-				data[""+v.name+""] = v.value;
-            });
-			var id = $('#tourID').val();
-			
-			if (id == "") {
-				addTour(data);
-			} else {
-				updateTour(data);
-			}
-
-			function addTour(data) {
-				$.ajax({
-					url: '${tourAPI}',
-		            type: 'POST',
-		            contentType: 'application/json',
-		            data: JSON.stringify(data),
-		            dataType: 'json',
-		            success: function (result) {
-		            	window.location.href = "${tourURL}?page=1&limit=2";
-		            },
-		            error: function (error) {
-		            	window.location.href = "${tourURL}?page=1&limit=2";
-		            }
-		        });
-			}
-		});
-		
-
-		function updateTour(data) {
-			$.ajax({
-	            url: '${tourAPI}',
-	            type: 'PUT',
-	            contentType: 'application/json',
-	            data: JSON.stringify(data),
-	            dataType: 'json',
-	            success: function (result) {
-	                window.location.href = "${tourURL}?page=1&limit=2";
-	            },
-	            error: function (error) {
-					window.location.href = "${tourURL}?page=1&limit=2";
-	            }
-	        });
-		} */
 	</script>
 </body>
 </html>

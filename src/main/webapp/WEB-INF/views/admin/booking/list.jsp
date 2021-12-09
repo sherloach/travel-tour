@@ -103,6 +103,9 @@
                                                     <c:if test="${item.status == 'CANCELED'}">
                                                         <td style="color: #ed5564;">Canceled</td>
                                                     </c:if>
+                                                    <c:if test="${item.status == 'COMPLETED'}">
+                                                        <td style="color: #0f59a5;">Completed</td>
+                                                    </c:if>
                                                     <td style="text-align: left">
 <%--                                                        <a href='/admin/route/list/tour?route=${item.id}' class="my-btn-tour-delete btn-fab btn-fab-sm btn-primary shadow text-white"><i class="icon-note-list"></i></a>--%>
                                                         <c:if test="${item.status == 'PENDING'}">
@@ -164,6 +167,12 @@
         let currentBookingId;
         let currentTotalPrice;
         const emailEmployee = document.getElementById('emailEmployee').textContent;
+
+        window.addEventListener("load", function () {
+            $("#taxId").keypress(function (e) {
+                if (String.fromCharCode(e.keyCode).match(/[^0-9]/g)) return false;
+            });
+        });
 
         document.querySelector('.close').addEventListener("click", function () {
             document.querySelector('.bg-modal').style.display = "none";

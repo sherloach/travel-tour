@@ -43,7 +43,8 @@ public class TourController {
 	@RequestMapping(value = "/tour", method = RequestMethod.GET)
 	public ModelAndView showTour(@RequestParam("id") Long id, HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("web/tour/tour");
-		TourDTO model = httpAPI.getTourDTO(serverName.localUrl + "/api/tours/" + id);
+//		TourDTO model = httpAPI.getTourDTO(serverName.localUrl + "/api/tours/" + id);
+		TourDTO model = tourService.findByIdInTourPage(id);
 		int[] arrStars = {1,2,3,4,5};
 		mav.addObject("model", model);
 		mav.addObject("arrayStars", arrStars);
@@ -93,9 +94,9 @@ public class TourController {
 		}
 		bookingService.save(bookingDTO);
 
-		Long total = adultQuantity * tourDTO.getAdultPrice() + childrenQuantity * tourDTO.getChildrenPrice();
-		int duration = tourDTO.getDuration();
-		clientService.sendEmail(adultQuantity, childrenQuantity, total, duration, tourDTO.getDestination(), tourDTO.getName(), tourDTO.getImage());
+//		Long total = adultQuantity * tourDTO.getAdultPrice() + childrenQuantity * tourDTO.getChildrenPrice();
+//		int duration = tourDTO.getDuration();
+//		clientService.sendEmail(adultQuantity, childrenQuantity, total, duration, tourDTO.getDestination(), tourDTO.getName(), tourDTO.getImage());
 
 		return mav;
 	}

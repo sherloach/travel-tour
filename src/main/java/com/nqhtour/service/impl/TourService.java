@@ -183,6 +183,39 @@ public class TourService implements ITourService {
 	}
 
 	@Override
+	public TourDTO findByIdInTourPage(long id) {
+		TourDTO tourDTO;
+		TourEntity entity = tourRepository.findOne(id);
+		tourDTO = tourConverter.toDTO(entity);
+
+		List<InstourDTO> listInstour = new ArrayList<>();
+		for (InstourEntity item : entity.getInstours()) {
+			if (item.getStatus().equals("OPEN")) {
+				InstourDTO instourDTO = instourConverter.toDTO(item);
+				listInstour.add(instourDTO);
+			}
+		}
+		tourDTO.setInstours(listInstour);
+
+		List<TourLocationDTO> listTourLocation = new ArrayList<>();
+		for (TourLocationEntity item : entity.getLocations()) {
+			TourLocationDTO tourLocationDTO = tourLocationConverter.toDTO(item);
+			tourLocationDTO.setLocation(locationConverter.toDTO(item.getLocation()));
+			listTourLocation.add(tourLocationDTO);
+		}
+		tourDTO.setTourLocations(listTourLocation);
+
+		List<ReviewDTO> listReview = new ArrayList<>();
+		for (ReviewEntity item : entity.getReviews()) {
+			ReviewDTO reviewDTO = reviewConverter.toDTO(item);
+			listReview.add(reviewDTO);
+		}
+		tourDTO.setReviews(listReview);
+
+		return tourDTO;
+	}
+
+	@Override
 	public TourDTO save(TourDTO dto) {
 		TourEntity tourEntity;
 

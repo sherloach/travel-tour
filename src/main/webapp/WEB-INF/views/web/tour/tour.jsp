@@ -228,6 +228,10 @@
         const allowDates = [];
         const maxGroupSizePerTours = [];
         const emailClient = $("#emailClient").text();
+        let ticketRemain = 0;
+        let totalTickets = 1;
+        let numberAdult = 1;
+        let numberChildren = 0;
 
         const locLength = document.getElementById('map').dataset.loclength;
         let locations = [];
@@ -258,7 +262,7 @@
         $('#startDatetime').on('change', function() {
           finalChoosingStartDate.value = instourId[datetimePickerPlugin.value];
 
-          const ticketRemain = +maxGroupSizeTour - +maxGroupSizePerTours[datetimePickerPlugin.value];
+          ticketRemain = +maxGroupSizeTour - +maxGroupSizePerTours[datetimePickerPlugin.value];
           console.log('Con lai: ', ticketRemain);
           // $('#dateChange').html(currentInstour[0]);
           // $("#quantity").attr({
@@ -269,6 +273,18 @@
           // const currentPrice = 1 * $('#priceTemp').val();
           // $('#priceTag').html(currentPrice.toLocaleString('en-US', { style: 'currency', currency: 'VND' }));
           //
+          totalTickets = 1;
+          numberAdultSpan.textContent = 1;
+          numberChildrenSpan.textContent = 0;
+          numberAdult = 1;
+          numberChildren = 0;
+
+          const temp1 = calcCurrentPrice(numberAdult, adultPriceDB);
+          $('#adultPrice').html(temp1.toLocaleString('en-US', { style: 'currency', currency: 'VND' }));
+          const temp2 = calcCurrentPrice(numberChildren, childrenPriceDB);
+          $('#childrenPrice').html(temp2.toLocaleString('en-US', { style: 'currency', currency: 'VND' }));
+          displayTotalPrice();
+
           if (ticketRemain === 0) {
             $('#btn-sold-out').css('display', 'block');
             $('#book-tour').css('display', 'none');
@@ -278,8 +294,6 @@
           }
         });
 
-        let numberAdult = 1;
-        let numberChildren = 0;
         const numberAdultSpan = document.querySelector('.number-adult');
         const numberChildrenSpan = document.querySelector('.number-children');
         const adultPriceDB = +$('#adultPriceTemp').val();
@@ -289,16 +303,20 @@
         $('#totalPrice').html(adultPriceDB.toLocaleString('en-US', { style: 'currency', currency: 'VND' }));
 
         document.querySelector('.plus-adult').addEventListener('click', e => {
-          numberAdult += 1;
-          numberAdultSpan.textContent = numberAdult;
-          const currentPrice = calcCurrentPrice(numberAdult, adultPriceDB);
-          $('#adultPrice').html(currentPrice.toLocaleString('en-US', { style: 'currency', currency: 'VND' }));
-          displayTotalPrice();
+          totalTickets += 1;
+          if (totalTickets <= ticketRemain) {
+            numberAdult += 1;
+            numberAdultSpan.textContent = numberAdult;
+            const currentPrice = calcCurrentPrice(numberAdult, adultPriceDB);
+            $('#adultPrice').html(currentPrice.toLocaleString('en-US', { style: 'currency', currency: 'VND' }));
+            displayTotalPrice();
+          }
         });
 
         document.querySelector('.minus-adult').addEventListener('click', e => {
           if (numberAdult > 1) {
             numberAdult -= 1;
+            totalTickets -= 1;
           }
           numberAdultSpan.textContent = numberAdult;
           const currentPrice = calcCurrentPrice(numberAdult, adultPriceDB);
@@ -307,16 +325,20 @@
         });
 
         document.querySelector('.plus-children').addEventListener('click', e => {
-          numberChildren += 1;
-          numberChildrenSpan.textContent = numberChildren;
-          const currentPrice = calcCurrentPrice(numberChildren, childrenPriceDB);
-          $('#childrenPrice').html(currentPrice.toLocaleString('en-US', { style: 'currency', currency: 'VND' }));
-          displayTotalPrice();
+          totalTickets += 1;
+          if (totalTickets <= ticketRemain) {
+            numberChildren += 1;
+            numberChildrenSpan.textContent = numberChildren;
+            const currentPrice = calcCurrentPrice(numberChildren, childrenPriceDB);
+            $('#childrenPrice').html(currentPrice.toLocaleString('en-US', { style: 'currency', currency: 'VND' }));
+            displayTotalPrice();
+          }
         });
 
         document.querySelector('.minus-children').addEventListener('click', e => {
           if (numberChildren !== 0) {
             numberChildren -= 1;
+            totalTickets -= 1;
           }
           numberChildrenSpan.textContent = numberChildren;
           const currentPrice = calcCurrentPrice(numberChildren, childrenPriceDB);

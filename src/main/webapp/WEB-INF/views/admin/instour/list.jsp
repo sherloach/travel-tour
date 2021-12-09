@@ -103,8 +103,12 @@
 <%--                                                    <c:if test="${item.participants == 0}">--%>
 <%--                                                        <a href='#' onclick="" class="btn-fab btn-fab-sm btn-primary shadow text-white"><i class="icon-pencil"></i></a>--%>
 <%--                                                    </c:if>--%>
-                                                    <a href='#' onclick="handleSetInputValue(${item.guideId}, '${item.startDate}', '${item.status}', ${item.id})" class="btn-fab btn-fab-sm btn-primary shadow text-white"><i class="icon-pencil"></i></a>
-                                                    <a href='/admin/route/list/tour/instour/detail?id=${item.id}' onclick="" style="background-color: #f39c12 !important" class="btn-fab btn-fab-sm btn--yellow shadow text-white"><i class="icon-list"></i></a>
+                                                        <c:if test="${item.status != 'COMPLETED'}">
+                                                            <a href='#' onclick="handleSetInputValue(${item.guideId}, '${item.startDate}', '${item.status}', ${item.id})" class="btn-fab btn-fab-sm btn-primary shadow text-white"><i class="icon-pencil"></i></a>
+                                                        </c:if>
+                                                        <c:if test="${item.participants != 0}">
+                                                            <a href='/admin/route/list/tour/instour/detail?id=${item.id}' onclick="" style="background-color: #f39c12 !important" class="btn-fab btn-fab-sm btn--yellow shadow text-white"><i class="icon-list"></i></a>
+                                                        </c:if>
                                                     </td>
                                                 </tr>
                                             </c:forEach>
@@ -170,10 +174,12 @@
 
     document.getElementById('btnAddInstour').addEventListener("click", function () {
         document.querySelector('.bg-modal').style.display = "flex";
+        $('#status').prop('disabled', 'disabled');
     });
 
     document.querySelector('.close').addEventListener("click", function () {
         document.querySelector('.bg-modal').style.display = "none";
+        $('#status').prop('disabled', false);
     });
 
     document.querySelector('#btnCreateInsTour').addEventListener('click', function () {
@@ -184,6 +190,7 @@
         console.log(instourId, startDate, guideId, status, tourId);
         const data = {id: instourId, tourId, guideId, status, startDate};
         addInstour(data);
+        $('#status').prop('disabled', false);
     });
 
     function handleSetInputValue(guideId, startDate, status, instourId) {

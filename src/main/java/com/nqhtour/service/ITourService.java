@@ -19,6 +19,7 @@ public interface ITourService {
 	List<BookingDTO> numberTicketByMonth(String month, String year, Long routeId);
 	int getTotalItem();
 	TourDTO findById(long id);
+	TourDTO findByIdInTourPage(long id);
 	TourDTO save(TourDTO dto);
 	TourLocationDTO save(TourLocationDTO dto);
 	void delete(long id);

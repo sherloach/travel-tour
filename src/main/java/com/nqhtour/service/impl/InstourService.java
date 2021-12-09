@@ -83,13 +83,14 @@ public class InstourService implements IInstourService {
             InstourEntity oldInstour = instourRepository.findOne(dto.getId());
             instourEntity = instourConverter.toEntity(oldInstour, dto);
 
+            // Update status of bookings with instour_id to 'completed'
             if (dto.getStatus().equals("COMPLETED")) {
                 bookingRepository.completeStatus(oldInstour.getId());
             }
         } else {
             instourEntity = instourConverter.toEntity(dto);
             instourEntity.setParticipants(0);
-//            instourEntity.setStatus("OPEN");
+            instourEntity.setStatus("OPEN");
         }
 
         instourEntity.setGuide(guide);

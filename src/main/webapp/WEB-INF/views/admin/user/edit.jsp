@@ -103,7 +103,7 @@
                                         </div>
                                     </div>
 										<div class="col-md-3 offset-md-1" style="margin-left: 2rem;">
-											<input id="uploadImage" name="file" type="file" <c:if test="${not empty model.avatar}">value="${model.avatar}"</c:if>/>
+											<input id="uploadImage" name="file" type="file" accept="image/*" <c:if test="${not empty model.avatar}">value="${model.avatar}"</c:if>/>
 											<div class="" id="fileUpload" style="border: 2px dashed #e1d8ee; border-radius: 24px; margin-top: 5px; min-height: 128px;"> 
 												<div class="dz-default dz-message">
 													<%-- <c:if test="${empty model.avatar}"><span>image of user</span></c:if> --%>

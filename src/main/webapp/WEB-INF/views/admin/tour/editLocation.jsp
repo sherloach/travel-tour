@@ -290,7 +290,7 @@
                 editorElement.parentNode.classList.add("is-valid");
             }
 
-            if (document.querySelector('#btnSaveOrUpdateTourLocation').checkValidity() == true) {
+            if (document.querySelector('#formSubmit').checkValidity() == true) {
                 event.stopPropagation();
 
                 event.preventDefault();
